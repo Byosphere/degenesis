@@ -46,6 +46,10 @@ export default class ViewInventoryPage extends Component<Props, State> {
         const armors = char.inventory.filter(item => item.type === 1);
         const equipment = char.inventory.filter(item => item.type === 2);
         const items = char.inventory.filter(item => item.type === 3);
+        let totalWeight = 0;
+        char.inventory.forEach((item: Item) => {
+            totalWeight += item.weight;
+        });
 
         return (
             <div style={{ margin: '5px' }}>
@@ -57,7 +61,7 @@ export default class ViewInventoryPage extends Component<Props, State> {
                             </Avatar>
                         }
                         title={T.translate('generic.bagof') + ' ' + char.name}
-                        subheader='Poids total : 56g'
+                        subheader={T.translate('generic.totalweight') + ' : ' + totalWeight + 'g'}
                         action={
                             <Chip
                                 label={
@@ -70,7 +74,7 @@ export default class ViewInventoryPage extends Component<Props, State> {
                         }
                     />
                 </Card>
-                <Card style={{ marginTop: '1px' }}>
+                <Card style={{ marginTop: '5px' }}>
                     <CardContent>
                         <List subheader={<ListSubheader>{T.translate('generic.weapons')}</ListSubheader>} >
                             {!weapons.length && <this.Empty />}
@@ -114,6 +118,19 @@ export default class ViewInventoryPage extends Component<Props, State> {
             T.translate('generic.techname') + ' ' + T.translate('generic.tech.' + item.tech);
 
         const itemKey = type * 10000 + key;
+        let degatsText = '';
+        let defenseText = '';
+        let titleText = '';
+        if (item.degats) {
+            const force = this.props.char.attributes[0].skills[2].value;
+            const degats = Math.ceil(eval(item.degats.replace('F', force.toString())));
+            degatsText = T.translate('generic.attack') + ' : ' + degats + ' ' + T.translate('generic.dices') + ' (' + item.degats + ')';
+
+        } else if (item.defense) {
+            defenseText = T.translate('generic.defense') + ' : ' + item.defense + ' ' + T.translate('generic.dices');
+        } else if (item.title) {
+            titleText = item.title;
+        }
 
         return (
             <React.Fragment key={itemKey}>
@@ -129,7 +146,9 @@ export default class ViewInventoryPage extends Component<Props, State> {
                     <ListItem>
                         <ListItemText
                             style={{ margin: '0px 16px 6px 16px' }}
-                            primary={T.translate('generic.weapons')}
+                            primary={
+                                degatsText || defenseText || titleText
+                            }
                             secondary={item.desc}
                         />
                     </ListItem>

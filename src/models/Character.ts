@@ -12,7 +12,7 @@ export interface Attribute {
 }
 
 export interface Skill {
-    id: string;
+    id: number;
     value: number;
 }
 
@@ -28,8 +28,9 @@ export interface Item {
     desc: string;
     weight: number;
     tech: number;
-    defense: number;
-    degats: string;
+    defense?: number;
+    degats?: string;
+    title?: string;
 }
 
 export interface Note {
@@ -42,8 +43,8 @@ export default interface Character {
     age: number;
     rang: number;
     sex: number;
-    size: string;
-    weight: string;
+    size: number;
+    weight: number;
     money: number;
     culture: number;
     culte: number;

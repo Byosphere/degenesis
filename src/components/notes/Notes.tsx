@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Character from '../../models/Character';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 import { Card, CardContent, TextField, MobileStepper, Button, CardActions } from '@material-ui/core';
 import T from 'i18n-react';
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
@@ -30,11 +30,14 @@ export default class Notes extends Component<Props, State> {
     public render() {
         const { char, tab } = this.props;
         const { activeStep } = this.state;
+
+        if (!char) return <Redirect to='/' />;
+
         const notes = char.notes;
 
         return (
             <Card style={{
-                height: 'calc(100% - 10px',
+                height: 'calc(100% - 10px)',
                 margin: '5px',
                 position: 'relative',
                 display: 'flex',

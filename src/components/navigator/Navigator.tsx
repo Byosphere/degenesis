@@ -11,7 +11,7 @@ class Navigator extends Component<RouteComponentProps, {}> {
     public handleChange = (event: React.ChangeEvent<{}>, value: any) => {
         switch (value) {
             case 0:
-                this.props.history.push('/');
+                this.props.history.push('/stats');
                 break;
             case 1:
                 this.props.history.push('/inventory');
@@ -23,7 +23,7 @@ class Navigator extends Component<RouteComponentProps, {}> {
                 this.props.history.push('/notes');
                 break;
             default:
-                this.props.history.push('/');
+                this.props.history.push('/stats');
         }
     }
 
@@ -47,7 +47,7 @@ class Navigator extends Component<RouteComponentProps, {}> {
 
     private getLocationValue(path: string): number {
         switch (path) {
-            case '/':
+            case '/stats':
                 return 0;
             case '/inventory':
                 return 1;

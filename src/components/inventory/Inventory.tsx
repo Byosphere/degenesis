@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Character from '../../models/Character';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import ViewInventoryPage from './ViewInventoryPage';
 import EditInventoryPage from './EditInventoryPage';
@@ -18,6 +18,8 @@ export default class Inventory extends Component<Props, {}> {
 
     public render() {
         const { char } = this.props;
+
+        if (!char) return <Redirect to='/' />;
 
         return (
             <SwipeableViews

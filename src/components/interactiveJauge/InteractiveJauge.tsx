@@ -12,6 +12,18 @@ interface Props {
 
 export default class InteractiveJauge extends Component<Props, {}> {
 
+    public handleAdd = (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (this.props.currentValue + 1 <= this.props.maximum && this.props.onChange) {
+            this.props.onChange(this.props.currentValue + 1);
+        }
+    }
+
+    public handleRemove = (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (this.props.currentValue - 1 >= 0 && this.props.onChange) {
+            this.props.onChange(this.props.currentValue - 1);
+        }
+    }
+
     public render() {
 
         const { label, jaungeHeight, currentValue, maximum } = this.props;
@@ -30,10 +42,10 @@ export default class InteractiveJauge extends Component<Props, {}> {
                             marginRight: '10px'
                         }}
                     />
-                    <IconButton style={{ padding: '5px' }}>
+                    <IconButton style={{ padding: '5px' }} onClick={this.handleRemove} disabled={currentValue === 0}>
                         <RemoveCircle fontSize="small" color='primary' />
                     </IconButton>
-                    <IconButton style={{ padding: '5px' }}>
+                    <IconButton style={{ padding: '5px' }} onClick={this.handleAdd} disabled={currentValue === maximum}>
                         <AddCircle fontSize="small" color='secondary' />
                     </IconButton>
                 </div>

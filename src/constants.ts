@@ -1,3 +1,5 @@
+export const GENERIC_POTENTIALS = 13;
+
 export const CULTES = [
     'anabaptiste',
     'anubien',
@@ -59,11 +61,167 @@ export const ATTRIBUTES = [
 ];
 
 export const SKILLS = [
-
+    [
+        'athletisme',
+        'corpsacorps',
+        'force',
+        'lutte',
+        'resistance',
+        'vigueur'
+    ],
+    [
+        'projectiles',
+        'artisanat',
+        'dexterite',
+        'furtivite',
+        'mobilite',
+        'navigation'
+    ],
+    [
+        'art',
+        'commandement',
+        'consideration',
+        'expression',
+        'negociation',
+        'seduction'
+    ],
+    [
+        'concentration',
+        'artefacts',
+        'legendes',
+        'medecine',
+        'science',
+        'technologie'
+    ],
+    [
+        'domination',
+        'foi',
+        'reactivite',
+        'ruse',
+        'tromperie',
+        'volonte'
+    ],
+    [
+        'dressage',
+        'empathie',
+        'orientation',
+        'perception',
+        'pulsions',
+        'survie'
+    ]
 ];
 
 export const POTENTIALS = [
-    'test'
+    [
+        'sangdupecheur',
+        'coupdeboutoir',
+        'pneuma',
+        'royaumedesemanations',
+        'porteflambeau',
+        'zelote'
+    ],
+    [
+        'festindammout',
+        'nombrildenefertoum',
+        'oeildhorus',
+        'pitiedanubis',
+        'sommeildesekhmet',
+        'regarddudestin'
+    ],
+    [
+        'tapis',
+        'cartededestinee',
+        'niddecorbeau',
+        'miroir',
+        'sombreaugure',
+        '1000facons'
+    ],
+    [
+        'cauchemar',
+        'lamentation',
+        'alias',
+        'soleildeminuit',
+        'elu',
+        'insinuateur'
+    ],
+    [
+        'tesla',
+        'nova',
+        'culdesac',
+        'memoirefractale',
+        'telechargement',
+        'chargement'
+    ],
+    [],
+    [
+        'vindicte',
+        'rat',
+        'duracuire',
+        'nitro',
+        'cochontruffier',
+        'darwin'
+    ],
+    [
+        'revanchedulion',
+        'sangancestral',
+        'epreuveduheros',
+        'riredelahyene',
+        'courseduchien',
+        'proiedessimba'
+    ],
+    [
+        'doctrineassaut',
+        'doctrinebouclier',
+        'doctrineinfiltration',
+        'doctrinemarcheforcee',
+        'doctrinediscipline',
+        'doctrinemorale'
+    ],
+    [
+        'coleredejehammet',
+        'toisondaries',
+        'invocationdejehammet',
+        'maledictiondesiconides',
+        'benedictiondesiconides',
+        'oracle'
+    ],
+    [
+        'fiatlux',
+        'rouleaucompresseur',
+        'coupdemarteau',
+        'visagedejanus',
+        'lynchage',
+        'tonnerredacier'
+    ],
+    [
+        'partdulion',
+        'tireurdelite',
+        'inspiration',
+        'neufvies',
+        'regardbienveillant',
+        'rouedelafortune'
+    ],
+    [
+        'dilacerateur',
+        'phalange',
+        'preservalis',
+        'dernier bastion',
+        'enseignementkranzler',
+        'ultimeadieu'
+    ],
+    [
+        'appeldelether',
+        'ascetisme',
+        'capourraitetrepire',
+        'cuirdelephant',
+        'deplacerdesmontagnes',
+        'eclairdegenie',
+        'inflexible',
+        'marathon',
+        'mathematicien',
+        'sensdudanger',
+        'souplesse'
+    ]
 ];
 
 export const SEX = [

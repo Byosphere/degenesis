@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { RouteComponentProps } from 'react-router-dom';
-import Character, { } from '../../models/Character';
+import { RouteComponentProps, Redirect } from 'react-router-dom';
+import Character from '../../models/Character';
 import SwipeableViews from 'react-swipeable-views';
 import ViewStatsPage from './ViewStatsPage';
 import EditStatsPage from './EditStatsPage';
@@ -8,6 +8,7 @@ import EditStatsPage from './EditStatsPage';
 interface ownProps {
     char: Character;
     onTabChange: (value: any) => void;
+    onCharChange: (char: Character) => void;
     tab: number;
 }
 
@@ -18,6 +19,7 @@ export default class Stats extends Component<Props, {}> {
     public render() {
 
         const { char } = this.props;
+        if (!char) return <Redirect to='/' />;
 
         return (
             <SwipeableViews
@@ -25,8 +27,8 @@ export default class Stats extends Component<Props, {}> {
                 onChangeIndex={this.props.onTabChange}
                 style={{ height: '100%' }}
             >
-                <ViewStatsPage char={char} />
-                <EditStatsPage char={char} />
+                <ViewStatsPage onCharChange={this.props.onCharChange} char={char} />
+                <EditStatsPage onCharChange={this.props.onCharChange} char={char} />
             </SwipeableViews>
         );
     }

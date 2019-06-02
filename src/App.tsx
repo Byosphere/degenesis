@@ -9,9 +9,13 @@ import Potentials from './components/potentials/Potentials';
 import Navigator from './components/navigator/Navigator';
 import Character from './models/Character';
 import char from './data/data.json';
+import char2 from './data/data1.json';
+import char3 from './data/data2.json';
+import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 
 interface State {
-    character: Character;
+    characters: Character[];
+    selectedCharacter: Character;
     tabValue: number;
 }
 
@@ -25,7 +29,8 @@ class App extends Component<Props, State> {
         super(props);
 
         this.state = {
-            character: char,
+            characters: [char, char2, char3],
+            selectedCharacter: null,
             tabValue: 0
         };
     }
@@ -34,44 +39,63 @@ class App extends Component<Props, State> {
         this.setState({ tabValue: value });
     }
 
+    public handleCharChange = (char: Character) => {
+        this.setState({ selectedCharacter: char });
+    }
+
     public render() {
+
+        const { tabValue, selectedCharacter, characters } = this.state;
+
         return (
             <div className="App">
                 <Router >
-                    <Header onToggleTab={this.handleTabChange} tab={this.state.tabValue} />
+                    {selectedCharacter && <Header
+                        onToggleTab={this.handleTabChange}
+                        onChangeChar={this.handleCharChange}
+                        tab={tabValue}
+                    />}
                     <div className="app-content">
                         <Switch>
-                            <Route path="/" exact render={
+                            <Route path="/stats" exact render={
                                 props => <Stats {...props}
-                                    char={this.state.character}
-                                    tab={this.state.tabValue}
+                                    char={selectedCharacter}
+                                    tab={tabValue}
                                     onTabChange={this.handleTabChange}
+                                    onCharChange={this.handleCharChange}
                                 />
                             } />
                             <Route path="/inventory" render={
                                 props => <Inventory {...props}
-                                    char={this.state.character}
-                                    tab={this.state.tabValue}
+                                    char={selectedCharacter}
+                                    tab={tabValue}
                                     onTabChange={this.handleTabChange}
                                 />
                             } />
                             <Route path="/potentials" render={
                                 props => <Potentials {...props}
-                                    char={this.state.character}
-                                    tab={this.state.tabValue}
+                                    char={selectedCharacter}
+                                    tab={tabValue}
                                     onTabChange={this.handleTabChange}
                                 />
                             } />
                             <Route path="/notes" render={
                                 props => <Notes {...props}
-                                    char={this.state.character}
-                                    tab={this.state.tabValue}
+                                    char={selectedCharacter}
+                                    tab={tabValue}
                                     onTabChange={this.handleTabChange}
+                                />
+                            } />
+                            <Route path='/' render={
+                                props => <CharacterBuilder
+                                    characters={characters}
+                                    selectedCharacter={selectedCharacter}
+                                    onChangeChar={this.handleCharChange}
                                 />
                             } />
                         </Switch>
                     </div>
-                    <Navigator />
+                    {selectedCharacter && <Navigator />}
                 </Router >
             </div>
         );

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Character, { Potential } from '../../models/Character';
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Typography } from '@material-ui/core';
-import { POTENTIALS } from '../../constants';
+import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
 import T from 'i18n-react';
 import { ExpandMore } from '@material-ui/icons';
 import AttributeJauge from '../attributeJauge/AttributeJauge';
@@ -26,11 +26,18 @@ export default class ViewPotentialsPage extends Component<Props, {}>{
                         <ExpansionPanelSummary
                             expandIcon={<ExpandMore />}
                         >
-                            <AttributeJauge potential attribute value={potential.level} label={T.translate('potentials.' + POTENTIALS[potential.id] + '.name') as string} />
+                            <AttributeJauge
+                                potential
+                                attribute
+                                value={potential.level}
+                                label={
+                                    T.translate('potentials.' + POTENTIALS[GENERIC_POTENTIALS][potential.id] + '.name') as string
+                                }
+                            />
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
                             <Typography variant='body1'>
-                                {T.translate('potentials.' + POTENTIALS[potential.id] + '.desc')}
+                                {T.translate('potentials.' + POTENTIALS[GENERIC_POTENTIALS][potential.id] + '.desc')}
                             </Typography>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
@@ -43,11 +50,18 @@ export default class ViewPotentialsPage extends Component<Props, {}>{
                         <ExpansionPanelSummary
                             expandIcon={<ExpandMore />}
                         >
-                            <AttributeJauge potential attribute value={potential.level} label={T.translate('potentials.' + POTENTIALS[potential.id] + '.name') as string} />
+                            <AttributeJauge
+                                potential
+                                attribute
+                                value={potential.level}
+                                label={
+                                    T.translate('potentials.' + POTENTIALS[char.culte][potential.id] + '.name') as string
+                                }
+                            />
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
                             <Typography variant='body1'>
-                                {T.translate('potentials.' + POTENTIALS[potential.id] + '.desc')}
+                                {T.translate('potentials.' + POTENTIALS[char.culte][potential.id] + '.desc')}
                             </Typography>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>

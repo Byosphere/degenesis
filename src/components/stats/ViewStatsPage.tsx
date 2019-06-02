@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, IconButton, Chip, Snackbar } from '@material-ui/core';
-import { CULTES, CULTURES, CONCEPTS, RANGS, ATTRIBUTES, SEX } from '../../constants';
+import { CULTES, CULTURES, CONCEPTS, RANGS, ATTRIBUTES, SEX, SKILLS } from '../../constants';
 import { ExpandMore, ExpandLess, OfflineBolt, OfflineBoltOutlined } from '@material-ui/icons';
 import Character, { Attribute, Skill } from '../../models/Character';
 import AttributeJauge from '../attributeJauge/AttributeJauge';
@@ -9,6 +9,7 @@ import InteractiveJauge from '../interactiveJauge/InteractiveJauge';
 
 interface Props {
     char: Character;
+    onCharChange: (char: Character) => void;
 }
 
 interface State {
@@ -33,12 +34,20 @@ export default class ViewStatsPage extends Component<Props, State> {
         this.setState({ expanded: !this.state.expanded });
     }
 
-    public handleTrauma = () => {
-        // TODO
+    public handleTrauma = (index: number) => {
+        let char = this.props.char;
+        char.trauma.actuel = index;
+        this.props.onCharChange(char);
     }
 
     public handleRollDice(): void {
         this.setState({ open: true });
+    }
+
+    public handleChange(field: string, value: number): void {
+        let char: any = this.props.char;
+        char[field].actuel = value;
+        this.props.onCharChange(char);
     }
 
     public render() {
@@ -49,7 +58,6 @@ export default class ViewStatsPage extends Component<Props, State> {
             <div style={{ margin: '5px' }}>
                 <Card>
                     <CardMedia
-
                         image={"/images/cultes/" + CULTES[char.culte] + ".jpg"}
                         title="Paella dish"
                         style={{ height: '100px' }}
@@ -65,7 +73,7 @@ export default class ViewStatsPage extends Component<Props, State> {
                             T.translate('concepts.' + CONCEPTS[char.concept])
                         }
                         action={
-                            <Chip label={T.translate('rang.' + RANGS[char.culte][char.rang])} variant="outlined" />
+                            <Chip label={T.translate('rangs.' + RANGS[char.culte][char.rang])} variant="outlined" />
                         }
                     />
                     <CardContent style={{ paddingBottom: '0px' }}>
@@ -91,22 +99,25 @@ export default class ViewStatsPage extends Component<Props, State> {
                             </IconButton>
                         </CardContent>}
                 </Card>
-                <Card style={{ marginTop: '1px' }}>
+                <Card style={{ margin: '5px 0' }}>
                     <CardContent>
                         <InteractiveJauge
                             label={T.translate('generic.life') as string}
                             currentValue={char.blessures.actuel}
                             maximum={char.blessures.total}
+                            onChange={(newValue) => this.handleChange('blessures', newValue)}
                         />
                         <InteractiveJauge
                             label={T.translate('generic.ego') as string}
                             currentValue={char.ego.actuel}
                             maximum={char.ego.total}
+                            onChange={(newValue) => this.handleChange('ego', newValue)}
                         />
                         <InteractiveJauge
                             label={T.translate('generic.sporulation') as string}
                             currentValue={char.sporulation.actuel}
                             maximum={char.sporulation.total}
+                            onChange={(newValue) => this.handleChange('sporulation', newValue)}
                         />
                     </CardContent>
                 </Card>
@@ -126,7 +137,7 @@ export default class ViewStatsPage extends Component<Props, State> {
                             {att.skills.map((skill: Skill) => (
                                 <AttributeJauge
                                     key={skill.id}
-                                    label={T.translate('skills.' + skill.id) as string}
+                                    label={T.translate('skills.' + SKILLS[att.id][skill.id]) as string}
                                     value={skill.value}
                                     onRollDice={() => this.handleRollDice()}
                                 />
@@ -145,12 +156,13 @@ export default class ViewStatsPage extends Component<Props, State> {
         )
     }
 
+
     private displayTrauma(): JSX.Element[] {
         const charTrauma = this.props.char.trauma;
         let trauma = [];
         for (let i = 1; i <= charTrauma.total; i++) {
             trauma.push(
-                <IconButton key={i} style={{ padding: '6px' }} onClick={this.handleTrauma}>
+                <IconButton key={i} style={{ padding: '6px' }} onClick={() => this.handleTrauma(i)}>
                     {i <= charTrauma.actuel ? <OfflineBolt /> : <OfflineBoltOutlined />}
                 </IconButton>
             );
