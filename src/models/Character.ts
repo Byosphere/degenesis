@@ -6,7 +6,7 @@ export interface Jauge {
 }
 
 export interface Attribute {
-    id: string;
+    id: number;
     base: number;
     skills: Skill[];
 }
@@ -23,7 +23,18 @@ export interface Potential {
 }
 
 export interface Item {
+    name: string;
+    type: number;
+    desc: string;
+    weight: number;
+    tech: number;
+    defense: number;
+    degats: string;
+}
 
+export interface Note {
+    date: string;
+    text: string;
 }
 
 export default interface Character {
@@ -45,4 +56,5 @@ export default interface Character {
     attributes: Attribute[];
     potentials: Potential[];
     inventory: Item[];
+    notes: Note[];
 }

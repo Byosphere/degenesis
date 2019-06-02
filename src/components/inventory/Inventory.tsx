@@ -23,7 +23,7 @@ export default class Inventory extends Component<Props, {}> {
             <SwipeableViews
                 index={this.props.tab}
                 onChangeIndex={this.props.onTabChange}
-                style={{ height: 'calc(100% - 48px)' }}
+                style={{ height: '100%' }}
             >
                 <ViewInventoryPage char={char} />
                 <EditInventoryPage char={char} />

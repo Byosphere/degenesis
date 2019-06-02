@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { Attribute } from '../../models/Character';
 import { FormGroup, Checkbox, Typography, IconButton } from '@material-ui/core';
 import { LooksOne, LooksOneOutlined, LooksTwo, LooksTwoOutlined, Looks6Outlined, Looks3Outlined, Looks3, Looks4Outlined, Looks4, Looks5Outlined, Looks5, Looks6, Casino } from '@material-ui/icons';
-import T from 'i18n-react';
 
 interface Props {
     label: string;
     value: number;
     attribute?: boolean;
     potential?: boolean;
+    onRollDice?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 interface State {
@@ -92,8 +91,8 @@ export default class AttributeJauge extends Component<Props, State> {
                         checked={this.props.value === 6}
                     />}
                 </div>
-                {!this.props.attribute && <IconButton>
-                    <Casino color='primary' />
+                {!this.props.attribute && <IconButton onClick={this.props.onRollDice}>
+                    <Casino color='secondary' />
                 </IconButton>}
             </FormGroup>
         )

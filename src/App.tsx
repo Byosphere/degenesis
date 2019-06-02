@@ -6,12 +6,9 @@ import Stats from './components/stats/Stats';
 import Inventory from './components/inventory/Inventory';
 import Notes from './components/notes/Notes';
 import Potentials from './components/potentials/Potentials';
-import Documents from './components/documents/Documents';
 import Navigator from './components/navigator/Navigator';
 import Character from './models/Character';
 import char from './data/data.json';
-import { AppBar, Tabs, Tab } from '@material-ui/core';
-import T from 'i18n-react';
 
 interface State {
     character: Character;
@@ -41,20 +38,8 @@ class App extends Component<Props, State> {
         return (
             <div className="App">
                 <Router >
-                    <Header />
+                    <Header onToggleTab={this.handleTabChange} tab={this.state.tabValue} />
                     <div className="app-content">
-                        <AppBar position="static" color="default">
-                            <Tabs
-                                value={this.state.tabValue}
-                                indicatorColor="primary"
-                                textColor="primary"
-                                variant="fullWidth"
-                                onChange={(event, value) => this.handleTabChange(value)}
-                            >
-                                <Tab label={T.translate('generic.view')} />
-                                <Tab label={T.translate('generic.edit')} />
-                            </Tabs>
-                        </AppBar>
                         <Switch>
                             <Route path="/" exact render={
                                 props => <Stats {...props}
@@ -77,8 +62,13 @@ class App extends Component<Props, State> {
                                     onTabChange={this.handleTabChange}
                                 />
                             } />
-                            <Route path="/notes" component={Notes} />
-                            <Route path="/documents" component={Documents} />
+                            <Route path="/notes" render={
+                                props => <Notes {...props}
+                                    char={this.state.character}
+                                    tab={this.state.tabValue}
+                                    onTabChange={this.handleTabChange}
+                                />
+                            } />
                         </Switch>
                     </div>
                     <Navigator />

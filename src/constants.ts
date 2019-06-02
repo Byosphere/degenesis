@@ -49,6 +49,19 @@ export const CONCEPTS = [
     'voyageur'
 ];
 
+export const ATTRIBUTES = [
+    'physique',
+    'agilite',
+    'charisme',
+    'intellect',
+    'psyche',
+    'instinct',
+];
+
+export const SKILLS = [
+
+];
+
 export const POTENTIALS = [
     'test'
 ];
@@ -76,7 +89,7 @@ export const RANGS = [
         'initie',
         'enchanteur',
         'embaumeur',
-        'prophete',
+        'prophetedesames',
         'guerisseur',
         'hecateen',
         'faucille',
@@ -179,7 +192,7 @@ export const RANGS = [
         'ingenieur',
         'approvisionneur',
         'subalterne',
-        'officier',
+        'officiersup',
         'commandant'
     ],
     [
@@ -236,7 +249,7 @@ export const RANGS = [
         'recrue',
         'aidesoignant',
         'fambulancier',
-        'medecin',
+        'medecinterrain',
         'hygieniste',
         'chirurgien',
         'epigeneticien',

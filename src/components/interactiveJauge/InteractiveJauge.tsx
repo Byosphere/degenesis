@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Typography, LinearProgress, IconButton } from '@material-ui/core';
-import { PlusOne, Remove, RemoveCircle, AddCircle } from '@material-ui/icons';
+import { RemoveCircle, AddCircle } from '@material-ui/icons';
 
 interface Props {
     label: string;

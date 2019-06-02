@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Divider, CardActions, IconButton, Chip } from '@material-ui/core';
-import { CULTES, CULTURES, CONCEPTS, RANGS } from '../../constants';
+import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, IconButton, Chip, Snackbar } from '@material-ui/core';
+import { CULTES, CULTURES, CONCEPTS, RANGS, ATTRIBUTES, SEX } from '../../constants';
 import { ExpandMore, ExpandLess, OfflineBolt, OfflineBoltOutlined } from '@material-ui/icons';
 import Character, { Attribute, Skill } from '../../models/Character';
 import AttributeJauge from '../attributeJauge/AttributeJauge';
@@ -12,7 +12,8 @@ interface Props {
 }
 
 interface State {
-    expanded: boolean
+    expanded: boolean;
+    open: boolean;
 }
 
 export default class ViewStatsPage extends Component<Props, State> {
@@ -23,7 +24,8 @@ export default class ViewStatsPage extends Component<Props, State> {
         super(props);
 
         this.state = {
-            expanded: false
+            expanded: false,
+            open: false
         }
     }
 
@@ -31,10 +33,13 @@ export default class ViewStatsPage extends Component<Props, State> {
         this.setState({ expanded: !this.state.expanded });
     }
 
-    public handleTrauma = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-
+    public handleTrauma = () => {
+        // TODO
     }
 
+    public handleRollDice(): void {
+        this.setState({ open: true });
+    }
 
     public render() {
 
@@ -53,7 +58,7 @@ export default class ViewStatsPage extends Component<Props, State> {
                         avatar={
                             <Avatar alt={CULTURES[char.culture]} src={"/images/cultures/" + CULTURES[char.culture] + ".jpg"} />
                         }
-                        title={char.name}
+                        title={char.name + ' (' + T.translate('sex.' + SEX[char.sex]) + ')'}
                         subheader={
                             T.translate('cultes.' + CULTES[char.culte]) + ' - ' +
                             T.translate('cultures.' + CULTURES[char.culture]) + ' - ' +
@@ -110,19 +115,35 @@ export default class ViewStatsPage extends Component<Props, State> {
                         <ExpansionPanelSummary
                             expandIcon={<ExpandMore />}
                         >
-                            <AttributeJauge label={T.translate('attributes.' + att.id) as string} value={att.base} attribute />
+                            <AttributeJauge
+                                label={T.translate('attributes.' + ATTRIBUTES[att.id]) as string}
+                                value={att.base}
+                                attribute
+                                onRollDice={() => this.handleRollDice()}
+                            />
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
                             {att.skills.map((skill: Skill) => (
-                                <AttributeJauge key={skill.id} label={T.translate('skills.' + skill.id) as string} value={skill.value} />
+                                <AttributeJauge
+                                    key={skill.id}
+                                    label={T.translate('skills.' + skill.id) as string}
+                                    value={skill.value}
+                                    onRollDice={() => this.handleRollDice()}
+                                />
                             ))}
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                 ))}
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    open={this.state.open}
+                    autoHideDuration={6000}
+                    onClose={() => this.setState({ open: false })}
+                    message={<span id="message-id">Test de Force : 4 5 6 4 2 1</span>}
+                />
             </div>
         )
     }
-
 
     private displayTrauma(): JSX.Element[] {
         const charTrauma = this.props.char.trauma;

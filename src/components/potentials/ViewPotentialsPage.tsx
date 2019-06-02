@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Character, { Potential } from '../../models/Character';
-import { Card, CardHeader, Avatar, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Typography } from '@material-ui/core';
-import { CULTURES, CULTES, CONCEPTS, POTENTIALS } from '../../constants';
+import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Typography } from '@material-ui/core';
+import { POTENTIALS } from '../../constants';
 import T from 'i18n-react';
 import { ExpandMore } from '@material-ui/icons';
 import AttributeJauge from '../attributeJauge/AttributeJauge';

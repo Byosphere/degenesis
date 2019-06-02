@@ -1,14 +1,14 @@
 {
     "name": "Esmeralda",
     "age": 24,
-    "rang": 0,
-    "sex": 0,
+    "rang": 4,
+    "sex": 1,
     "size": "1m68",
     "weight": "60kg",
     "money": 1254,
-    "culture": 1,
-    "culte": 1,
-    "concept": 1,
+    "culture": 4,
+    "culte": 5,
+    "concept": 2,
     "story": "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.",
     "ego": {
         "id": "ego",
@@ -32,7 +32,7 @@
     },
     "attributes": [
         {
-            "id": "physique",
+            "id": 0,
             "base": 1,
             "skills": [
                 {
@@ -50,7 +50,7 @@
             ]
         },
         {
-            "id": "agilite",
+            "id": 1,
             "base": 1,
             "skills": [
                 {
@@ -68,7 +68,7 @@
             ]
         },
         {
-            "id": "charisme",
+            "id": 2,
             "base": 1,
             "skills": [
                 {
@@ -86,7 +86,7 @@
             ]
         },
         {
-            "id": "intellect",
+            "id": 3,
             "base": 1,
             "skills": [
                 {
@@ -104,7 +104,7 @@
             ]
         },
         {
-            "id": "psyche",
+            "id": 4,
             "base": 1,
             "skills": [
                 {
@@ -122,7 +122,7 @@
             ]
         },
         {
-            "id": "instinct",
+            "id": 5,
             "base": 1,
             "skills": [
                 {
@@ -162,5 +162,39 @@
             "type": 1
         }
     ],
-    "inventory": []
+    "inventory": [
+        {
+            "name": "Épée de légende",
+            "type": 0,
+            "desc": "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre",
+            "weight": 21,
+            "tech": 1,
+            "defense": 15,
+            "degats": "2+F/2"
+        },
+        {
+            "name": "Pistolet de légende",
+            "type": 0,
+            "desc": "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre",
+            "weight": 21,
+            "tech": 3,
+            "defense": 15,
+            "degats": "2+F/2"
+        },
+        {
+            "name": "Lettre de Recombination Group",
+            "type": 3,
+            "desc": "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre",
+            "weight": 50,
+            "tech": 1,
+            "defense": 0,
+            "degats": ""
+        }
+    ],
+    "notes": [
+        {
+            "date": "",
+            "text": "kdsqd klqsjld k"
+        }
+    ]
 }
