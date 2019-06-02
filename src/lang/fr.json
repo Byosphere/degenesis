@@ -1,0 +1,80 @@
+{
+    "generic": {
+        "view": "Visualiser",
+        "edit": "Modifier",
+        "life": "Blessures superficielles",
+        "ego": "Ego",
+        "trauma": "Traumatismes",
+        "potentialof": "Potentiels de ",
+        "potential0": "Potentiels générique",
+        "potential1": "Potentiels de Culte"
+    },
+    "navigator": {
+        "stats": "Etat",
+        "inventory": "Inventaire",
+        "notes": "Notes",
+        "potentials": "Potentiels",
+        "documents": "Documents"
+    },
+    "cultes": {
+        "anabaptiste": "Anabaptiste",
+        "anubien": "Anubien",
+        "apocalyptique": "Apocalyptique",
+        "Blafard": "Blafard",
+        "chroniqueur": "Chroniqueur",
+        "claniste": "Claniste",
+        "ferrailleur": "Ferrailleur",
+        "fleau": "Fléau",
+        "hellvetique": "Hellvétique",
+        "jehammetan": "Jéhammetan",
+        "juge": "Juge",
+        "neolybien": "Néolybien",
+        "spitalier": "Spitalier"
+    },
+    "cultures": {
+        "afrika": "Afrika",
+        "balkhan": "Balkhan",
+        "borca": "Borca",
+        "franka": "Franka",
+        "hybrispanie": "Hybrispanie",
+        "pollen": "Pollen",
+        "Purgare": "Purgare"
+    },
+    "concepts": {
+        "abomination": "Abomination",
+        "aventurier": "Aventurier",
+        "chef": "Chef",
+        "chercheur": "Chercheur",
+        "conquerant": "Conquérent",
+        "createur": "Créateur",
+        "destructeur": "Destructeur",
+        "disciple": "Disciple",
+        "elu": "Élu",
+        "ermite": "Ermite",
+        "fanatique": "Fanatique",
+        "heretique": "Hérétique",
+        "martyr": "Martyr",
+        "mediateur": "Médiateur",
+        "mentor": "Mentor",
+        "profanateur": "Profanateur",
+        "protecteur": "Protecteur",
+        "soigneur": "Soigneur",
+        "traditionnaliste": "Traditionnaliste",
+        "vertueux": "Vertueux",
+        "visionnaire": "Visionnaire",
+        "voyageur": "Voyageur"
+    },
+    "attributes": {
+        "physique": "Physique",
+        "agilite": "Agilité",
+        "charisme": "Charisme",
+        "intellect": "Intellect",
+        "psyche": "Psyché",
+        "instinct": "Instinct"
+    },
+    "skills": {
+        "athletisme": "Athlétisme",
+        "corpsacorps": "Corps à Corps",
+        "force": "Force"
+    }
+}
