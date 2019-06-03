@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Character, { Item } from '../../models/Character';
-import { Card, IconButton, CardContent, List, ListSubheader, ListItem, ListItemText, ListItemSecondaryAction, Divider, Collapse, CardHeader, Avatar, Chip, Typography } from '@material-ui/core';
+import { Card, IconButton, CardContent, List, ListSubheader, ListItem, ListItemText, ListItemSecondaryAction, Divider, Collapse, CardHeader, Avatar, Typography } from '@material-ui/core';
 import T from 'i18n-react';
 import { ExpandMore, ExpandLess, CardTravel } from '@material-ui/icons';
 

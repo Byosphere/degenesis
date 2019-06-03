@@ -34,7 +34,7 @@ export default class AttributeEditor extends Component<Props, State> {
             attribute.base = value;
         }
         this.setState({ attribute });
-        if (value !== NaN && value <= 6 && value >= 0)
+        if (!isNaN(value) && value <= 6 && value >= 0)
             this.props.onChange(this.state.attribute.id, skillId, value);
     }
 

@@ -12,6 +12,7 @@ import char from './data/data.json';
 import char2 from './data/data1.json';
 import char3 from './data/data2.json';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
+import Home from './components/home/Home';
 
 interface State {
     characters: Character[];
@@ -30,7 +31,7 @@ class App extends Component<Props, State> {
 
         this.state = {
             characters: [char, char2, char3],
-            selectedCharacter: char,
+            selectedCharacter: null,
             tabValue: 0
         };
     }
@@ -50,13 +51,21 @@ class App extends Component<Props, State> {
         return (
             <div className="App">
                 <Router >
-                    {selectedCharacter && <Header
+                    <Header
                         onToggleTab={this.handleTabChange}
                         onChangeChar={this.handleCharChange}
                         tab={tabValue}
-                    />}
+                        displayTabs={Boolean(selectedCharacter)}
+                    />
                     <div className="app-content">
                         <Switch>
+                            <Route path="/create" exact render={
+                                props => <CharacterBuilder {...props}
+                                    characters={characters}
+                                    selectedCharacter={selectedCharacter}
+                                    onChangeChar={this.handleCharChange}
+                                />
+                            } />
                             <Route path="/stats" exact render={
                                 props => <Stats {...props}
                                     char={selectedCharacter}
@@ -87,7 +96,7 @@ class App extends Component<Props, State> {
                                 />
                             } />
                             <Route path='/' render={
-                                props => <CharacterBuilder
+                                props => <Home {...props}
                                     characters={characters}
                                     selectedCharacter={selectedCharacter}
                                     onChangeChar={this.handleCharChange}

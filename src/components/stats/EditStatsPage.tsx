@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import Character, { Attribute } from '../../models/Character';
-import { Card, CardContent, TextField, FormControl, InputLabel, Select, MenuItem, Input, InputAdornment, CardActions, Button, Typography, Fab, Zoom } from '@material-ui/core';
+import { Card, CardContent, TextField, FormControl, InputLabel, Select, MenuItem, Input, InputAdornment, Typography, Fab, Zoom } from '@material-ui/core';
 import T from 'i18n-react';
-import { SEX, CULTES, CULTURES, CONCEPTS, RANGS } from '../../constants';
+import { SEX, RANGS } from '../../constants';
 import AttributeEditor from '../attributeEditor/AttributeEditor';
-import { SettingsBackupRestore, Save } from '@material-ui/icons';
+import { Save } from '@material-ui/icons';
 
 interface Props {
     char: Character;
@@ -179,64 +179,6 @@ export default class EditStatsPage extends Component<Props, State> {
                             />
                         </div>
                         <FormControl fullWidth margin='dense'>
-                            <InputLabel shrink htmlFor="culture">
-                                {T.translate('generic.culture')}
-                            </InputLabel>
-                            <Select
-                                input={<Input name="culture" fullWidth />}
-                                fullWidth
-                                value={char.culture}
-                                onChange={this.handleChange}
-                                error={char.culture < 0}
-                                disabled
-                            >
-                                {CULTURES.map((text, key) => (
-                                    <MenuItem key={key} value={key}>
-                                        {T.translate('cultures.' + text)}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <FormControl fullWidth margin='dense'>
-                            <InputLabel shrink htmlFor="culte">
-                                {T.translate('generic.culte')}
-                            </InputLabel>
-                            <Select
-                                input={<Input name="culte" fullWidth />}
-                                fullWidth
-                                value={char.culte}
-                                onChange={this.handleChange}
-                                error={char.culte < 0}
-                                disabled
-                            >
-                                {CULTES.map((text, key) => (
-                                    <MenuItem key={key} value={key}>
-                                        {T.translate('cultes.' + text)}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <FormControl fullWidth margin='dense'>
-                            <InputLabel shrink htmlFor="concept">
-                                {T.translate('generic.concept')}
-                            </InputLabel>
-                            <Select
-                                input={<Input name="concept" fullWidth />}
-                                fullWidth
-                                value={char.concept}
-                                disabled
-                                onChange={this.handleChange}
-                                error={char.concept < 0}
-                                required
-                            >
-                                {CONCEPTS.map((text, key) => (
-                                    <MenuItem key={key} value={key}>
-                                        {T.translate('concepts.' + text)}
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
-                        <FormControl fullWidth margin='dense'>
                             <InputLabel shrink htmlFor="rang">
                                 {T.translate('generic.rang')}
                             </InputLabel>
@@ -256,72 +198,6 @@ export default class EditStatsPage extends Component<Props, State> {
                                 ))}
                             </Select>
                         </FormControl>
-                        <div style={{ display: 'flex' }}>
-                            <TextField
-                                name="blessures"
-                                label={T.translate('generic.blessures')}
-                                margin="dense"
-                                type='number'
-                                style={{ flex: 1, marginRight: '8px' }}
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                inputProps={{
-                                    max: 24
-                                }}
-                                value={char.blessures.total}
-                                onChange={this.handleJaugeChange}
-                                required
-                            />
-                            <TextField
-                                name="sporulation"
-                                label={T.translate('generic.sporulation')}
-                                margin="dense"
-                                type='number'
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                inputProps={{
-                                    max: 24
-                                }}
-                                style={{ flex: 1, margin: '8px' }}
-                                value={char.sporulation.total}
-                                onChange={this.handleJaugeChange}
-                                required
-                            />
-                            <TextField
-                                name="trauma"
-                                label={T.translate('generic.trauma')}
-                                margin="dense"
-                                type='number'
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                inputProps={{
-                                    max: 8
-                                }}
-                                style={{ flex: 1, margin: '8px' }}
-                                value={char.trauma.total}
-                                onChange={this.handleJaugeChange}
-                                required
-                            />
-                            <TextField
-                                name="ego"
-                                label={T.translate('generic.ego')}
-                                margin="dense"
-                                type='number'
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                inputProps={{
-                                    max: 24
-                                }}
-                                style={{ flex: 1, marginLeft: '8px' }}
-                                value={char.ego.total}
-                                onChange={this.handleJaugeChange}
-                                required
-                            />
-                        </div>
                         <TextField
                             name="story"
                             label={T.translate('generic.story')}

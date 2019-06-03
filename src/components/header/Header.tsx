@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
-import { AppBar, Toolbar, Typography, IconButton, Tabs, Tab, Tooltip } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, Tabs, Tab } from '@material-ui/core';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import T from 'i18n-react';
-import { RateReview, SpeakerNotes, PowerSettingsNew } from '@material-ui/icons';
+import { RateReview, SpeakerNotes, ViewQuilt, ArrowBack } from '@material-ui/icons';
 import Character from '../../models/Character';
 
 interface OwnProps {
     tab: number;
     onToggleTab: (value: number) => void;
     onChangeChar: (char: Character) => void;
+    displayTabs: boolean;
 }
 
 interface State {
@@ -31,35 +32,57 @@ class Header extends Component<Props, State> {
         this.props.onToggleTab(value);
     }
 
-    public handleChangeChar = (event: React.MouseEvent<HTMLButtonElement>) => {
+    public handleChangeChar = () => {
         this.props.onChangeChar(null);
     }
+
+    public handleBack = () => {
+        this.props.onChangeChar(null);
+        this.props.history.push('/');
+    }
+
 
     public render() {
         return (
             <AppBar position="relative" elevation={4}>
                 <Toolbar>
-                    <IconButton edge="start">
+                    {this.getSecondaryAction()}
+                    <Typography variant='body1' component='h1' style={{ flexGrow: 1 }}>
+                        {'Degenesis - ' + this.getPageTitle()}
+                    </Typography>
+                    {this.props.displayTabs && <IconButton>
                         {this.props.tab === 0 &&
                             <SpeakerNotes style={{ color: '#fff' }} />}
                         {this.props.tab === 1 &&
                             <RateReview style={{ color: '#fff' }} />}
-                    </IconButton>
-                    <Typography variant='body1' component='h1' style={{ flexGrow: 1 }}>
-                        {'Degenesis App - ' + this.getPageTitle()}
-                    </Typography>
-                    <Tooltip title={T.translate('generic.changechar')}>
-                        <IconButton color="inherit" onClick={this.handleChangeChar}>
-                            <PowerSettingsNew />
-                        </IconButton>
-                    </Tooltip>
+                    </IconButton>}
+                    {!this.props.displayTabs && <IconButton>
+                        <ViewQuilt style={{ color: '#fff' }} />
+                    </IconButton>}
                 </Toolbar>
-                <Tabs value={this.props.tab} variant='fullWidth' onChange={this.handleTabChange}>
+                {this.props.displayTabs && <Tabs value={this.props.tab} variant='fullWidth' onChange={this.handleTabChange}>
                     <Tab label={T.translate('generic.view')} />
                     <Tab label={T.translate('generic.edit')} />
-                </Tabs>
+                </Tabs>}
             </AppBar>
         );
+    }
+
+    private getSecondaryAction(): JSX.Element {
+        switch (this.props.location.pathname) {
+            case '/stats':
+            case '/inventory':
+            case '/potentials':
+            case '/notes':
+            case '/create':
+                return (
+                    <IconButton edge="start" color="inherit" onClick={this.handleBack}>
+                        <ArrowBack />
+                    </IconButton>
+                );
+            default:
+                return null;
+        }
     }
 
     private getPageTitle(): string {
@@ -72,6 +95,8 @@ class Header extends Component<Props, State> {
                 return T.translate('navigator.potentials') as string;
             case '/notes':
                 return T.translate('navigator.notes') as string;
+            case '/create':
+                return T.translate('navigator.create') as string;
             default:
                 return T.translate('navigator.home') as string;
         }

@@ -1,6 +1,7 @@
 export const GENERIC_POTENTIALS = 13;
 
 export const CULTES = [
+    '',
     'anabaptiste',
     'anubien',
     'apocalyptique',
@@ -17,6 +18,7 @@ export const CULTES = [
 ];
 
 export const CULTURES = [
+    '',
     'afrika',
     'balkhan',
     'borca',
@@ -27,6 +29,7 @@ export const CULTURES = [
 ];
 
 export const CONCEPTS = [
+    '',
     'abomination',
     'aventurier',
     'chef',
@@ -52,6 +55,7 @@ export const CONCEPTS = [
 ];
 
 export const ATTRIBUTES = [
+    '',
     'physique',
     'agilite',
     'charisme',
@@ -61,6 +65,7 @@ export const ATTRIBUTES = [
 ];
 
 export const SKILLS = [
+    null,
     [
         'athletisme',
         'corpsacorps',
@@ -112,6 +117,7 @@ export const SKILLS = [
 ];
 
 export const POTENTIALS = [
+    null,
     [
         'sangdupecheur',
         'coupdeboutoir',
@@ -225,12 +231,14 @@ export const POTENTIALS = [
 ];
 
 export const SEX = [
+    '',
     'male',
     'female',
     'hermaphrodite'
 ];
 
 export const RANGS = [
+    null,
     [
         'ravi',
         'ascete',

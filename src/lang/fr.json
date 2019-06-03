@@ -49,14 +49,33 @@
         "w": "Kg",
         "y": "ans",
         "attributesedit": "Modifier les attributs",
-        "characteredit": "Modifier le personnage"
+        "characteredit": "Modifier le personnage",
+        "charactercreate": "Création de personnage",
+        "none": "_Aucun_",
+        "create": "Créer"
     },
     "navigator": {
         "stats": "Status",
         "inventory": "Inventaire",
         "notes": "Notes",
         "potentials": "Potentiels",
-        "home": "Accueil"
+        "home": "Accueil",
+        "create": "Créer"
+    },
+    "create": {
+        "who": "Choix des caractéristiques de base",
+        "culture": {
+            "title": "Choix d'une Culture"
+        },
+        "culte": {
+            "title": "Choix d'un Culte"
+        },
+        "concept": {
+            "title": "Choix d'un Concept"
+        },
+        "attributes": "Répartition des Attributs",
+        "potentials": "Choix des Potentiels",
+        "lasttouch": "Touches finales"
     },
     "cultes": {
         "anabaptiste": "Anabaptiste",
