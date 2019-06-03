@@ -155,75 +155,75 @@
     "potentials": {
         "sangdupecheur": {
             "name": "Sang du pècheur",
-            "desc": ""
+            "desc": "*Condition* : _Pulsions_ \n Si l'anabaptiste a subit plus de 50% de dégâts en traumatismes, plus rien ne peut affecter ses points d'égo. Ce potentiel n'a qu'un niveau et ne peut être amélioré."
         },
         "coupdeboutoir": {
             "name": "Coup de boutoir",
-            "desc": ""
+            "desc": "Le jet d'attaque se fait avec -5Dés mais l'Anabaptiste ajoute 1Dé pour chaque niveau de potentiel. Si l'attaque réussit, l'adversaire tombe au sol inanimé. Si elle échoue, l'Anabaptiste chute et ne peut effectuer d'action pour le round suivant."
         },
         "pneuma": {
             "name": "Pneuma",
-            "desc": ""
+            "desc": "*Condition* : _Concentration_ \n Si l'Anabaptiste inflige une blessure avec au moins (5 - niveau de potentiels) déclencheurs, il récupère aussitôt."
         },
         "royaumedesemanations": {
             "name": "Royaume des Émanations",
-            "desc": ""
+            "desc": "Si l'Anabaptiste se défend contre un phénomène pyschonaute, il peut lancer les dés nécessaires à l'action un nombre de fois égal à son niveau de potentiel + 1 et choisir le lancer le plus réussi."
         },
         "porteflambeau": {
             "name": "Porte Flambeau",
-            "desc": ""
+            "desc": "*Condition* : au moins _Élyséen_  ou _Fureur_ \n Pour tout évenement lié aux Psychonautes, il obtient un déclencheur supplémentaire par niveau de potentiel à INS+Perception."
         },
         "zelote": {
             "name": "Zélote",
-            "desc": ""
+            "desc": "Une fois par mois, l'Anabaptiste peut retirer un Traumatisme par niveau de potentiel. Une longue méditation est nécessaire (plusieurs heures)."
         },
         "festindammout": {
             "name": "Le festin d'Ammout",
-            "desc": ""
+            "desc": "*Condition* : _Pulsions_ \n Si une attaque obtient au moins 2 déclencheurs, l'Anubien peut choisir d'entrer en frénésie. Cela a pour effet d'ajouter 1Dé par niveau de potentiel à toutes les attaques portées mais empêche toute défense. Afin de rester dans cet état, l'Anubien doit continuer à attaquer à chaque round et obtenir au moins 2 déclencheurs."
         },
         "nombrildenefertoum": {
-            "name": "Nombril de Nefertoum",
-            "desc": ""
+            "name": "Le nombril de Néfertoum",
+            "desc": "L'Anubien développe une résistence contre les Psychovores. Chaque niveau de potentiel diminue de 1 les effets de Sporulation."
         },
         "oeildhorus": {
             "name": "Oeil d'Horus",
-            "desc": ""
+            "desc": "L'Anubien peut percevoir un Psychvore à distance. Plus le niveau de potentiel est élevé, plus il peut le ressentir de loin. (1 : 100m, 2: 1km, 3: 10km). De plus, il obtient un délencheur supplémentaire pour chaque attaque contre un Psychovore."
         },
         "pitiedanubis": {
             "name": "Pitié d'Anubis",
-            "desc": ""
+            "desc": "Si le nombre de traumatismes de l'Anubien atteint son maximum, il peut ressusciter. Si cela se passe pendant un combat, ses adversaires doivent effectuer un jet de PSY+Foi/Volonté pour savoir s'il continuent à se battre. (Usage Unique)"
         },
         "sommeildesekhmet": {
             "name": "Sommeil de Sekhmet",
-            "desc": ""
+            "desc": "L'Anubien entre en stase. Il apparaît comme mort et ne peut rien subir. La durée de cet effet peut durer le niveau de potentiel en jours plus 1."
         },
         "regarddudestin": {
             "name": "Regard du destin",
-            "desc": ""
+            "desc": "Utilisable une fois par mois, l'Anubien peut scruter l'avenir. Ce phénomène se déroule pendant une durée limitée en fonction du niveau de potentiel (1: quelques secondes, 2: quelques minutes, 3: quelques heures)."
         },
         "tapis": {
             "name": "Tapis",
-            "desc": ""
+            "desc": "L'Apocalyptique peut renoncer à lancer certains de ses dés de défense (maximum deux fois le niveau de potentiel). S'il parvient à se défendre, son prochain jet d'attaque lui donne un nombre de déclencheurs égal à celui des dés inutilisé."
         },
         "cartededestinee": {
             "name": "Carte de destinée",
-            "desc": ""
+            "desc": "*Condition* : _Foi_ et _Corneille_ ou _Albatros_ ou _Busard_ \n L'Apocalyptique peut tenter de lire son destin dans les cartes. Des bribes d'évènements futurs peuvent être interpretés. La véracité de l'interprétation des cartes dépend de son niveau de potentiel."
         },
         "niddecorbeau": {
             "name": "Nid de Corbeau",
-            "desc": ""
+            "desc": "*Condition* : _Pulsions_ \n L'Apocalyptique peut dépenser un point d'égo par dé ajouté à n'importe quelle action. Le maximum de dés ajoutés est égal au niveau de potentiel."
         },
         "miroir": {
             "name": "Miroir",
-            "desc": ""
+            "desc": "*Condition* : _Concentration_ \n A chaque réussite d'une défense complète, l'Apocalyptique gagne un déclencheur pour une défense contre cet ennemi. Le nombre de déclencheur supplémentaire maximum par ennemi est égal au niveau de potentiel."
         },
         "sombreaugure": {
             "name": "Sombre Augure",
-            "desc": ""
+            "desc": "Sombre Augure est une attaque mentale, l'Apocalyptique effectue un jet de PSY+Domination. plus 1Dé par niveau de potentiel. L'adversaire peut se défender avec PSY+Foi (volonté = immunisé). Si l'Apocalyptique réussi cette attaque, l'ennemi reçoit un malus global de déclencheurs égal au niveau de potentiel."
         },
         "1000facons": {
             "name": "1000 façons",
-            "desc": ""
+            "desc": "*Condition* : _Corps à Corps_ \n Lors d'une attaque à main nue, chaque déclencheur d'une attaque diminue la défense de l'adversaire de 1Dé. Le nombre maximum de déclencheurs est égal au niveau de potentiel."
         },
         "cauchemar": {
             "name": "Cauchemar",
@@ -330,12 +330,30 @@
             "name": "Doctrine : Morale",
             "desc": "En sous nombre, l'Hellvétique obtient 1Dé en défense par niveau de potentiel."
         },
-        "coleredejehammet": {},
-        "toisondaries": {},
-        "invocationdejehammet": {},
-        "maledictiondesiconides": {},
-        "benedictiondesiconides": {},
-        "oracle": {},
+        "coleredejehammet": {
+            "name": "Colère de Jéhammet",
+            "desc": "Pour chaque attaque porté à un ennemi souhaitant objectivement faire le mal, le Jéhammetan obtient 1Dé d'attaque supplémentaire par niveau de potentiel et si l'attaque réussi, il récupère un point d'égo."
+        },
+        "toisondaries": {
+            "name": "Toison d'Ariès",
+            "desc": "*Condition* : _Arianoi_ \n Pendant une heure, le Jéhammetan peut incarner Ariès. Toutes ses compétences de CHA passent à 0 mais il ne peut plus perdre de points d'égo. Le rituel demande 15 minutes de préparations."
+        },
+        "invocationdejehammet": {
+            "name": "Invocation de Jéhammet",
+            "desc": "Le Jéhammetan doit effectuer un jet de CHA+Art en ayant 1Dé en plus pour chaque niveau de potentiel. En cas de réussite, toutes les manipulations psychiques sont annulées."
+        },
+        "maledictiondesiconides": {
+            "name": "Malédiction des Icônides",
+            "desc": "*Condition* : _Icônide_ ou _Oracle_\n Il s'agit d'une attaque mentale effectuée avec PSY+Foi/Volonté plus 1Dé par niveau de potentiel. En cas de réussite, tous les ennemis sont maudits et subissent le nombre de déclencheurs en moins pour toute action. Ce malus est réduit de 1 à chaque tour (ne fonctionne que sur des humains et une fois par combat)."
+        },
+        "benedictiondesiconides": {
+            "name": "Bénédiction des Icônides",
+            "desc": "*Condition* : _Icônide_ ou _Oracle_\n Une journée par mois, un présage bénéfique peut être aperçu. Il donne un bonus de 1Dé par niveau de potentiel à toute sles actions de la journée."
+        },
+        "oracle": {
+            "name": "Oracle",
+            "desc": "*Condition* : _Oracle_ \n La personne exhaltée par l'Oracle obtient 1Dé supplémentaire par niveau de potentiel à l'action prophétisée par l'Oracle."
+        },
         "fiatlux": {
             "name": "Fiat Lux",
             "desc": "Contre des malfrats et des Apocalyptiques, le juge obtient 1Dé supplémentaire en défense et défense mentale par niveau de potentiel."
@@ -532,7 +550,7 @@
         "berger": "Berger",
         "isaaki": "Isaaki",
         "bienfait": "Bienfait",
-        "iconide": "Iconide",
+        "iconide": "Icônide",
         "prophete": "Prophète",
         "hagari": "Hagari",
         "dalila": "Dalila",
