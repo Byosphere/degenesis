@@ -7,6 +7,7 @@ import T from 'i18n-react';
 import fr from './lang/fr.json';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import { CssBaseline } from '@material-ui/core';
 
 const theme = createMuiTheme({
     palette: {
@@ -23,6 +24,7 @@ T.setTexts(fr);
 
 ReactDOM.render(
     <ThemeProvider theme={theme}>
+        <CssBaseline />
         <App />
     </ThemeProvider>,
     document.getElementById('root')

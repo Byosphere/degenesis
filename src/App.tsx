@@ -30,7 +30,7 @@ class App extends Component<Props, State> {
 
         this.state = {
             characters: [char, char2, char3],
-            selectedCharacter: null,
+            selectedCharacter: char,
             tabValue: 0
         };
     }

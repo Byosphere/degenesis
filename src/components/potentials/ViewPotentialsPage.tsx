@@ -18,7 +18,7 @@ export default class ViewPotentialsPage extends Component<Props, {}>{
 
         return (
             <div style={{ margin: '5px' }}>
-                <Typography variant='subtitle1' component='p' style={{ opacity: 0.6, margin: '8px 16px' }}>
+                <Typography variant='subtitle1' component='p' className="card-overtitle">
                     {T.translate('generic.potential0')}
                 </Typography>
                 {char.potentials.filter(p => p.type === 0).map((potential: Potential) => (

@@ -28,7 +28,7 @@ export default class Stats extends Component<Props, {}> {
                 style={{ height: '100%' }}
             >
                 <ViewStatsPage onCharChange={this.props.onCharChange} char={char} />
-                <EditStatsPage onCharChange={this.props.onCharChange} char={char} />
+                <EditStatsPage onCharChange={this.props.onCharChange} char={char} visible={this.props.tab === 1} />
             </SwipeableViews>
         );
     }

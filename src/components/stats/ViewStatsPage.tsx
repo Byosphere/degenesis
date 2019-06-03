@@ -76,7 +76,14 @@ export default class ViewStatsPage extends Component<Props, State> {
                             <Chip label={T.translate('rangs.' + RANGS[char.culte][char.rang])} variant="outlined" />
                         }
                     />
-                    <CardContent style={{ paddingBottom: '0px' }}>
+                    <CardContent style={{ padding: '0px 16px' }}>
+                        <Typography variant="caption" component='p'>
+                            {
+                                char.size + ' ' + T.translate('generic.s') + ' | ' +
+                                char.weight + ' ' + T.translate('generic.w') + ' | ' +
+                                char.age + ' ' + T.translate('generic.y')
+                            }
+                        </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             {char.story.length > this.STORY_LENGTH && !this.state.expanded ?
                                 char.story.substr(0, 200) + '[...]' :

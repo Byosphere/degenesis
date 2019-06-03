@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import Character from '../../models/Character';
-import { Card, CardContent, TextField, FormControl, InputLabel, Select, MenuItem, Input, InputAdornment, CardActions, Button, Typography } from '@material-ui/core';
+import Character, { Attribute } from '../../models/Character';
+import { Card, CardContent, TextField, FormControl, InputLabel, Select, MenuItem, Input, InputAdornment, CardActions, Button, Typography, Fab, Zoom } from '@material-ui/core';
 import T from 'i18n-react';
 import { SEX, CULTES, CULTURES, CONCEPTS, RANGS } from '../../constants';
+import AttributeEditor from '../attributeEditor/AttributeEditor';
+import { SettingsBackupRestore, Save } from '@material-ui/icons';
 
 interface Props {
     char: Character;
     onCharChange: (char: Character) => void;
+    visible: boolean;
 }
 
 interface State {
@@ -39,7 +42,20 @@ export default class EditStatsPage extends Component<Props, State> {
     }
 
     public handleJaugeChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>) => {
+        let char: any = this.state.char;
+        char[event.target.name].total = event.target.value;
+        this.setState({ char, pristine: false });
+    }
 
+    public handleAttributeChange = (attributeId: number, skillId: number, value: number) => {
+        const attr: Attribute = this.state.char.attributes.find(attribute => attributeId === attribute.id);
+        if (attr && skillId) {
+            let skill = attr.skills.find(skill => skill.id === skillId);
+            skill.value = value;
+        } else if (attr) {
+            attr.base = value;
+        }
+        this.setState({ char: { ...this.state.char }, pristine: false });
     }
 
     public handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -59,21 +75,29 @@ export default class EditStatsPage extends Component<Props, State> {
         const { char, pristine } = this.state;
 
         return (
-            <div style={{ margin: '5px' }}>
+            <div style={{ margin: '5px', position: 'relative' }}>
+                <Typography variant='subtitle1' component='p' className="card-overtitle">
+                    {T.translate('generic.characteredit')}
+                </Typography>
                 <Card>
-                    <CardActions style={{ justifyContent: 'space-between' }}>
-                        <Typography style={{ marginLeft: '8px' }}>
-                            {T.translate('generic.editmode')}
-                        </Typography>
-                        <div>
-                            <Button color='primary' disabled={pristine} onClick={this.handleCancel}>
-                                {T.translate('generic.cancel')}
-                            </Button>
-                            <Button color="secondary" disabled={pristine} onClick={this.handleSave}>
-                                {T.translate('generic.save')}
-                            </Button>
-                        </div>
-                    </CardActions>
+                    <Zoom
+                        in={this.props.visible && !pristine}
+                        timeout={400}
+                        style={{
+                            transitionDelay: `${this.props.visible && !pristine ? 100 : 0}ms`,
+                        }}
+                        unmountOnExit
+                    ><Fab
+                        style={{ position: 'fixed', bottom: '12px', zIndex: 100, marginLeft: 'calc(50% - 90px)', opacity: 0.85 }}
+                        color="secondary"
+                        aria-label={T.translate('generic.save').toString()}
+                        variant="extended"
+                        onClick={this.handleSave}
+                    >
+                            <Save style={{ marginRight: '5px' }} />
+                            {T.translate('generic.save')}
+                        </Fab>
+                    </Zoom>
                     <CardContent>
                         <TextField
                             name='name'
@@ -164,7 +188,7 @@ export default class EditStatsPage extends Component<Props, State> {
                                 value={char.culture}
                                 onChange={this.handleChange}
                                 error={char.culture < 0}
-                                required
+                                disabled
                             >
                                 {CULTURES.map((text, key) => (
                                     <MenuItem key={key} value={key}>
@@ -183,7 +207,7 @@ export default class EditStatsPage extends Component<Props, State> {
                                 value={char.culte}
                                 onChange={this.handleChange}
                                 error={char.culte < 0}
-                                required
+                                disabled
                             >
                                 {CULTES.map((text, key) => (
                                     <MenuItem key={key} value={key}>
@@ -200,7 +224,7 @@ export default class EditStatsPage extends Component<Props, State> {
                                 input={<Input name="concept" fullWidth />}
                                 fullWidth
                                 value={char.concept}
-                                disabled={char.culte < 0}
+                                disabled
                                 onChange={this.handleChange}
                                 error={char.concept < 0}
                                 required
@@ -316,6 +340,16 @@ export default class EditStatsPage extends Component<Props, State> {
                         />
                     </CardContent>
                 </Card>
+                <Typography variant='subtitle1' component='p' className="card-overtitle">
+                    {T.translate('generic.attributesedit')}
+                </Typography>
+                {char.attributes.map((attribute, key) => (
+                    <AttributeEditor
+                        key={key}
+                        attribute={attribute}
+                        onChange={this.handleAttributeChange}
+                    />
+                ))}
             </div>
         );
     }

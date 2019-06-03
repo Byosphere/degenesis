@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Character, { Item } from '../../models/Character';
-import { Card, IconButton, CardContent, List, ListSubheader, ListItem, ListItemText, ListItemSecondaryAction, Divider, Collapse, CardHeader, Avatar, Chip } from '@material-ui/core';
+import { Card, IconButton, CardContent, List, ListSubheader, ListItem, ListItemText, ListItemSecondaryAction, Divider, Collapse, CardHeader, Avatar, Chip, Typography } from '@material-ui/core';
 import T from 'i18n-react';
-import { ExpandMore, ExpandLess, Shop, Money } from '@material-ui/icons';
+import { ExpandMore, ExpandLess, CardTravel } from '@material-ui/icons';
 
 interface Props {
     char: Character;
@@ -53,28 +53,19 @@ export default class ViewInventoryPage extends Component<Props, State> {
 
         return (
             <div style={{ margin: '5px' }}>
+                <Typography variant='subtitle1' component='p' className="card-overtitle">
+                    {T.translate('generic.bagof', { who: char.name })}
+                </Typography>
                 <Card>
                     <CardHeader
                         avatar={
-                            <Avatar>
-                                <Shop />
+                            <Avatar style={{ background: '#d50000' }}>
+                                <CardTravel />
                             </Avatar>
                         }
-                        title={T.translate('generic.bagof') + ' ' + char.name}
-                        subheader={T.translate('generic.totalweight') + ' : ' + totalWeight + 'g'}
-                        action={
-                            <Chip
-                                label={
-                                    <span>
-                                        {char.money + ' '}<i style={{ opacity: 0.6 }}> {T.translate('generic.money')}</i>
-                                    </span>}
-                                variant="outlined"
-                                icon={<Money style={{ marginRight: '0' }} />}
-                            />
-                        }
+                        title={T.translate('generic.money', { money: char.money })}
+                        subheader={T.translate('generic.totalweight', { weight: totalWeight })}
                     />
-                </Card>
-                <Card style={{ marginTop: '5px' }}>
                     <CardContent>
                         <List subheader={<ListSubheader>{T.translate('generic.weapons')}</ListSubheader>} >
                             {!weapons.length && <this.Empty />}

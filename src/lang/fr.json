@@ -6,15 +6,14 @@
         "ego": "Ego",
         "trauma": "Traumatismes",
         "sporulation": "Sporulations",
-        "potentialof": "Potentiels de ",
         "potential0": "Potentiels génériques",
         "potential1": "Potentiels de Culte",
         "weapons": "Armes",
         "armors": "Armures",
         "equipment": "Équipement",
         "items": "Objets clés",
-        "bagof": "Inventaire de",
-        "money": "L.d.C.",
+        "bagof": "Inventaire de {who}",
+        "money": "*{money}* lettres de Change",
         "save": "Sauvegarder",
         "tech": {
             "1": "I",
@@ -44,7 +43,13 @@
         "attack": "Attaque",
         "defense": "Défense",
         "dices": "Dés",
-        "totalweight": "Poids total"
+        "totalweight": "Poids total {weight}g",
+        "incorrectvalue": "Valeur incorrecte.",
+        "s": "cm",
+        "w": "Kg",
+        "y": "ans",
+        "attributesedit": "Modifier les attributs",
+        "characteredit": "Modifier le personnage"
     },
     "navigator": {
         "stats": "Status",
@@ -446,7 +451,8 @@
             "desc": "Donne un déclencheur supplémentaire par niveau de potentiel pour toute confrontation avec un adversaire infesté par les spores."
         },
         "ascetisme": {
-            "Ascetisme": "Le personnage peut survivre longuement avec très peu de nourriture et d'eau. Sa résistance augmente avec son niveau de potentiel."
+            "name": "Ascétisme",
+            "desc": "Le personnage peut survivre longuement avec très peu de nourriture et d'eau. Sa résistance augmente avec son niveau de potentiel."
         },
         "capourraitetrepire": {
             "name": "Ca pourrait être pire !",
