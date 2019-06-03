@@ -227,13 +227,28 @@
         },
         "cauchemar": {
             "name": "Cauchemar",
-            "desc": ""
+            "desc": "Le Blafard confronte son adversaire avec AGI+Furtivité contre INS+Perception. En cas de réussite, la prochaine attaque du Blafard ne peut être esquivée. Chaque niveau de potentiel ajoute 1 au nombre de dés du jet AGI+Furtivité"
         },
-        "lamentation": {},
-        "alias": {},
-        "soleildeminuit": {},
-        "elu": {},
-        "insinuateur": {},
+        "lamentation": {
+            "name": "Lamentation",
+            "desc": "*Condition* : _Pulsions_ \n Le Blafard pousse un hurlement et effectue un jet de INS+Pulsions plus 1Dé par niveau de potentiel. L'ensemble des adversaires et alliés qui échouent au test de resistance mental sont immobilisés pour le prochain tour."
+        },
+        "alias": {
+            "name": "Alias",
+            "desc": "Ce potentiel permet à un Blafard de se faire passer pour un habitant de la surface. Il obtient 1Dé supplémentaire par niveau de potentiel pour un jet en PSY+Tromperie."
+        },
+        "soleildeminuit": {
+            "name": "Soleil de Minuit",
+            "desc": "*Condition* : _Concentration_ \n Tous les malus dus à de mauvaises conditions visuelles, cécité, obscurité sont réduits de 1 déclencheur par niveau de potentiel."
+        },
+        "elu": {
+            "name": "Élu",
+            "desc": "*Condition* : _Halo_ \n "
+        },
+        "insinuateur": {
+            "name": "Insinuateur",
+            "desc": "*Condition* : _Démagogue_ \n Si le Blafard arrive à proximité d'un adversaire sans se faire voir (AGI+Furtivité), il peut influencer sa victime en lui murmurant à l'oreille discrêtement (CHA+Négociation). Le niveau de potentiel augmente les déclencheurs de ce jet de deux par niveau de potentiel."
+        },
         "tesla": {
             "name": "Tesla",
             "desc": "Immunité à l'électricité, et 1Dé supplémentaire par niveau de potentiel à la défense."
@@ -427,18 +442,48 @@
             "desc": "Si un allier subit un traumatisme, le Spitalier obtient 1Dé de plus par niveau de potentiel à son attaque et à sa défense pour le round suivant"
         },
         "appeldelether": {
-            "name": ""
+            "name": "Appel de l'éther",
+            "desc": "Donne un déclencheur supplémentaire par niveau de potentiel pour toute confrontation avec un adversaire infesté par les spores."
         },
-        "ascetisme": {},
-        "capourraitetrepire": {},
-        "cuirdelephant": {},
-        "deplacerdesmontagnes": {},
-        "eclairdegenie": {},
-        "inflexible": {},
-        "marathon": {},
-        "mathematicien": {},
-        "sensdudanger": {},
-        "souplesse": {}
+        "ascetisme": {
+            "Ascetisme": "Le personnage peut survivre longuement avec très peu de nourriture et d'eau. Sa résistance augmente avec son niveau de potentiel."
+        },
+        "capourraitetrepire": {
+            "name": "Ca pourrait être pire !",
+            "desc": "Une fois par mois, le nombre de Traumatisme peut être réduit du niveau de potentiel."
+        },
+        "cuirdelephant": {
+            "name": "Cuir d'éléphant",
+            "desc": "Confère un déclencheur par niveau de potentiel pour toute défense. Diminue en contrepartie de 1 déclencheur à tout jet en CHA+Séduction."
+        },
+        "deplacerdesmontagnes": {
+            "name": "Déplacer des Montagnes",
+            "desc": "Dans une situation désespérée, le personnage obtient un déclencheur supplémentaire par niveau de potentiel pour tout action lui permettant de s'en sortir. (Utilisable une fois par semaine)."
+        },
+        "eclairdegenie": {
+            "name": "Éclair de génie",
+            "desc": "Une fois par jour, le personnage obtient un bonus de 1Dé par niveau de potentiel à un test en INT."
+        },
+        "inflexible": {
+            "name": "Inflexible",
+            "desc": "*Condition* : _Volonté_ \n Une fois par combat, le personnage peut contrer une attaque mentale avec un déclencheur supplémentaire pour chaque niveau de potentiel."
+        },
+        "marathon": {
+            "name": "Marathon",
+            "desc": "Le personnage obtient un déclencheur supplémentaire par niveau de potentiel à tous les tests de PHY+Vigueur liés à la course."
+        },
+        "mathematicien": {
+            "name": "Mathématicien",
+            "desc": "Le personnage obtient un déclencheur supplémentaire par niveau de potentiel à tous les tests pouvant être résolus par les mathématiques ou la logique."
+        },
+        "sensdudanger": {
+            "name": "Sens du danger",
+            "desc": "Le personnage obtient un déclencheur supplémentaire par niveau de potentiel à tous les tests de surprise (INS+Perception)."
+        },
+        "souplesse": {
+            "name": "Souplesse",
+            "desc": "Si un adversaire agrippe le personne ou le ligote. Il obtient un déclencheur supplémentaire par niveau de potentiel à toute tentative pour se libérer"
+        }
     },
     "rangs": {
         "ravi": "Ravi",
