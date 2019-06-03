@@ -123,6 +123,7 @@ export default class ViewInventoryPage extends Component<Props, State> {
         let titleText = '';
         if (item.degats) {
             const force = this.props.char.attributes[0].skills[2].value;
+            // eslint-disable-next-line
             const degats = Math.ceil(eval(item.degats.replace('F', force.toString())));
             degatsText = T.translate('generic.attack') + ' : ' + degats + ' ' + T.translate('generic.dices') + ' (' + item.degats + ')';
 

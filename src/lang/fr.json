@@ -178,71 +178,212 @@
             "desc": ""
         },
         "festindammout": {
-            "name": "Festin d'Ammout",
+            "name": "Le festin d'Ammout",
             "desc": ""
         },
         "nombrildenefertoum": {
             "name": "Nombril de Nefertoum",
             "desc": ""
         },
-        "oeildhorus": {},
-        "pitiedanubis": {},
-        "sommeildesekhmet": {},
-        "regarddudestin": {},
-        "tapis": {},
-        "cartededestinee": {},
-        "niddecorbeau": {},
-        "miroir": {},
-        "sombreaugure": {},
-        "1000facons": {},
-        "cauchemar": {},
+        "oeildhorus": {
+            "name": "Oeil d'Horus",
+            "desc": ""
+        },
+        "pitiedanubis": {
+            "name": "Pitié d'Anubis",
+            "desc": ""
+        },
+        "sommeildesekhmet": {
+            "name": "Sommeil de Sekhmet",
+            "desc": ""
+        },
+        "regarddudestin": {
+            "name": "Regard du destin",
+            "desc": ""
+        },
+        "tapis": {
+            "name": "Tapis",
+            "desc": ""
+        },
+        "cartededestinee": {
+            "name": "Carte de destinée",
+            "desc": ""
+        },
+        "niddecorbeau": {
+            "name": "Nid de Corbeau",
+            "desc": ""
+        },
+        "miroir": {
+            "name": "Miroir",
+            "desc": ""
+        },
+        "sombreaugure": {
+            "name": "Sombre Augure",
+            "desc": ""
+        },
+        "1000facons": {
+            "name": "1000 façons",
+            "desc": ""
+        },
+        "cauchemar": {
+            "name": "Cauchemar",
+            "desc": ""
+        },
         "lamentation": {},
         "alias": {},
         "soleildeminuit": {},
         "elu": {},
         "insinuateur": {},
-        "tesla": {},
-        "nova": {},
-        "culdesac": {},
-        "memoirefractale": {},
-        "telechargement": {},
-        "chargement": {},
-        "vindicte": {},
-        "rat": {},
-        "duracuire": {},
-        "nitro": {},
-        "cochontruffier": {},
-        "darwin": {},
-        "revanchedulion": {},
-        "sangancestral": {},
-        "epreuveduheros": {},
-        "riredelahyene": {},
-        "courseduchien": {},
-        "proiedessimba": {},
-        "doctrineassaut": {},
-        "doctrinebouclier": {},
-        "doctrineinfiltration": {},
-        "doctrinemarcheforcee": {},
-        "doctrinediscipline": {},
-        "doctrinemorale": {},
+        "tesla": {
+            "name": "Tesla",
+            "desc": "Immunité à l'électricité, et 1Dé supplémentaire par niveau de potentiel à la défense."
+        },
+        "nova": {
+            "name": "Nova",
+            "desc": "*Condition* : _Pulsions_ \n Le Chroniqueur peut tenter un jet de dés en INT+Technologie (5). Chaque niveau de potentiel réduit la difficulté de 1. Son attaque touche alors tous les ennemis à proximité. En cas d'échec, l'attaque touche aussi tous les alliés."
+        },
+        "culdesac": {
+            "name": "Cul de Sac",
+            "desc": "*Condition* : _Occulteur_ \n Si la victime n'a aucune issue pour fuir, le Chroniqueur obtient un bonus d'attaque et de défense égal à son niveau de potentiel."
+        },
+        "memoirefractale": {
+            "name": "Mémoire Fractale",
+            "desc": "*Condition* : _Concentration_ \n A chaque jet en INT, il obtient en permanence autant de déclencheurs supplémentaires que son niveau de potentiel."
+        },
+        "telechargement": {
+            "name": "Téléchargement",
+            "desc": "Lorsqu'une victime est ligotée et interrogée, le chroniqueur obtient un déclencheur supplémentaire par niveau de potentiel et 1Dé en plus à chaque lancé en PSY+Domination."
+        },
+        "chargement": {
+            "name": "Chargement",
+            "desc": "*Condition* : _Paradigme_ ou _Aiguille_ \n le chroniqueur obtient un déclencheur supplémentaire pour chaque niveau de potentiel pour les lancers de type : PSY+Domination, CHA+Commandement et CHA+Séduction."
+        },
+        "vindicte": {
+            "name": "Vindicte",
+            "desc": "Le Ferailleur peut influencer une foule en faisant un jet de CHA+Commandement. Un nombre de dés égal au niveau de potentiel est ajouté au lancer."
+        },
+        "rat": {
+            "name": "Rat",
+            "desc": "Le Ferailleur obtient un bonus de dés égal au niveau de potentiel pour chaque lancer en PSY+Ruse."
+        },
+        "duracuire": {
+            "name": "Dur à cuire",
+            "desc": "Le Ferrailleur doté de ce potentiel a une peau plus solide que les autres. Il a un bonus naturel en défense égal au niveau de potentiel."
+        },
+        "nitro": {
+            "name": "Nitro",
+            "desc": "*Condition* : _Pulsions_ \n Le Ferrailleur peut céder à sa colère explosive lors du premier round de combat, ce qui confère 1Dé supplémentaire par potentiel à son attaque."
+        },
+        "cochontruffier": {
+            "name": "Cochon Truffier",
+            "desc": "Le Ferrailleur obtient un bonus d'1Dé supplémentaire par niveau de potentiel à INS+Perception quand il cherche des objets ou des pièges."
+        },
+        "darwin": {
+            "name": "Darwin",
+            "desc": "Dans une situation apparamment désespérée, le Ferrailleur obtient un bonus de 1Dé par niveau de potentiel à la compétence qui lui permettra de se sortir de ce mauvais pas."
+        },
+        "revanchedulion": {
+            "name": "Revanche du Lion",
+            "desc": "*Condition* : _Pulsions_ \n Pour chaque attaque portée à un Fléau, son adversaire subit des dégâts en retour, limité au niveau de ce potentiel."
+        },
+        "sangancestral": {
+            "name": "Sang Ancestral",
+            "desc": ""
+        },
+        "epreuveduheros": {
+            "name": "L'épreuve du Héros",
+            "desc": "Quand il combat un ennemi de force supérieure, le Fléau a toujours l'initiative."
+        },
+        "riredelahyene": {
+            "name": "Le rire de la Hyène",
+            "desc": "Le Fléau obtient 1Dé d'attaque supplémentaire par niveau de potentiel à sa première attaque dans un combat."
+        },
+        "courseduchien": {
+            "name": "La course du chien sauvage",
+            "desc": "Lorsqu'un Fléau poursuit un ennemi, il obtient 1Dé supplémentaire par niveau de potentiel à chaque action visant à atteindre cet ennemi."
+        },
+        "proiedessimba": {
+            "name": "La proie des Simba",
+            "desc": "*Condition* : _Concentration_ \n Le Fléau peut choisir un adversaire durant un combat. En cas de jet de défense contre une attaque de celui-ci, un nombre de dés égal au niveau de potentiel est ajouté au lancer."
+        },
+        "doctrineassaut": {
+            "name": "Doctrine : Assaut",
+            "desc": "*Condition* : _Pulsions_ \n Lors du début d'un combat, l'Hellvétique peut utiliser Assaut ce qui lui donne deux déclencheurs supplémentaires à sa première attaque et tous ses alliés qui attaqueront après lui au premier round auront 1dé par niveau de potentiel en plus à leur attaque."
+        },
+        "doctrinebouclier": {
+            "name": "Doctrine : Bouclier",
+            "desc": "L'Hellvétique peut choisir à tout moment de dévier une attaque ciblant quelqu'un d'autre vers lui en faisant un jet de dés PSY+Réactivité (4 en corps à corps, 6 à distance). Chaque niveau de potentiel ajoute 1dé à ce jet."
+        },
+        "doctrineinfiltration": {
+            "name": "Doctrine : Infiltration",
+            "desc": "L'Hellvétique obtient 1dé en plus par niveau de potentiel à tous les tests de tromperie (CHA et PSY)."
+        },
+        "doctrinemarcheforcee": {
+            "name": "Doctrine : Marche forcée",
+            "desc": "L'Hellvétique peut transporter des choses plus lourdes sans être entravé dans ses mouvements."
+        },
+        "doctrinediscipline": {
+            "name": "Doctrine : Discipline",
+            "desc": "*Condition* : _Concentration_ \n A chaque fois qu'il attaque ou défend, l'Hellvétique peut transformer en point d'égo un nombre de déclencheurs inférieur ou égal au niveau de ce potentiel."
+        },
+        "doctrinemorale": {
+            "name": "Doctrine : Morale",
+            "desc": "En sous nombre, l'Hellvétique obtient 1Dé en défense par niveau de potentiel."
+        },
         "coleredejehammet": {},
         "toisondaries": {},
         "invocationdejehammet": {},
         "maledictiondesiconides": {},
         "benedictiondesiconides": {},
         "oracle": {},
-        "fiatlux": {},
-        "rouleaucompresseur": {},
-        "coupdemarteau": {},
-        "visagedejanus": {},
-        "lynchage": {},
-        "tonnerredacier": {},
-        "partdulion": {},
-        "tireurdelite": {},
-        "inspiration": {},
-        "neufvies": {},
-        "regardbienveillant": {},
-        "rouedelafortune": {},
+        "fiatlux": {
+            "name": "Fiat Lux",
+            "desc": "Contre des malfrats et des Apocalyptiques, le juge obtient 1Dé supplémentaire en défense et défense mentale par niveau de potentiel."
+        },
+        "rouleaucompresseur": {
+            "name": "Rouleau Compresseur",
+            "desc": "Le jusge se rue sur son ennemi. Il effectue un jet de PHY+Force auquel s'ajoute son niveau de potentiel en dés. S'il réussit, son adversaire s'écroule au sol et reste immobilisé pendant un round (utilisable une fois par combat)."
+        },
+        "coupdemarteau": {
+            "name": "Coup de Marteau",
+            "desc": ""
+        },
+        "visagedejanus": {
+            "name": "Visage de Janus",
+            "desc": "Le juge peut choisir de lire dans son adversaire. Il effectue un jet INS+Empathie contre un jet PSY+volonté/foi de l'ennemi. En cars de victoire, le Juge obtient 1Dé par niveau de potentiel à n'importe quelle attaque ou défense contre cet adversaire jusqu'à la fin du combat."
+        },
+        "lynchage": {
+            "name": "Lynchage",
+            "desc": "Un juge doté de ce potentiel peut rallier une foule à sa cause. Il obtient 1Dé supplémentaire à CHA+Commandement pour chaque niveau de potentiel."
+        },
+        "tonnerredacier": {
+            "name": "Tonnerre d'acier",
+            "desc": "*Condition* : _Marteau équipé_ \n Lors de l'utilisation de ce coup, tous les déclencheurs obtenus pendant une attaque au marteau comptent double mais la défense du Juge est réduite de 3 (moins le niveau de potentiel) dés pour le prochain round."
+        },
+        "partdulion": {
+            "name": "La part du Lion",
+            "desc": "Lors de chaque négociation marchande, le Néloybien reçoit autant de déclencheurs supplémentaires que son niveau de potentiel."
+        },
+        "tireurdelite": {
+            "name": "Tireur d'Élite",
+            "desc": "*Condition* : _Pulsions_ \n Pendant un combat, le Néolybien prend un round pour viser un adversaire avec son arme à feu, puis au round suivant un nombre de marqueurs égal au niveau de potentiels est ajouté à l'attaque."
+        },
+        "inspiration": {
+            "name": "Inspiration",
+            "desc": "En dépensant un point d'égo, le Néolybien peut galvaniser l'action d'un allié, ce dernier obtiendra 1Dé supplémentaire par niveau de potentiel à sa prochaine action (si celle-ci est en accord avec le Néolybien)."
+        },
+        "neufvies": {
+            "name": "Neuf vies",
+            "desc": "Pour chaque action risquée, le Néolybien peut obtenir 1Dé supplémentaire par niveau de potentiel au coup d'un point d'égo."
+        },
+        "regardbienveillant": {
+            "name": "Regard bienveillant",
+            "desc": "Chaque fois qu'un Néolybien engage une discussion ou une négociation avec un non-Néolybien, il obtient 1Dé supplémentaire par niveau de potentiel à tous ses tests de Charisme, cependant ses compétences de psyché subissent un malus de 3Dés durant la discussion ou cet effet est utilisé."
+        },
+        "rouedelafortune": {
+            "name": "Roue de la Fortune",
+            "desc": "Avant un jet d'attaque ou de défense, le Néolybien détermine combien de dés"
+        },
         "dilacerateur": {
             "name": "Dilacérateur",
             "desc": "Lors d'un coup à l'aide d'un dilacérateur, si l'attaque possède au moins deux déclencheurs, le Spitalier obtient un bonus de 1D par niveau de potentiel en défense et en attaque"
@@ -251,11 +392,25 @@
             "name": "Phalange",
             "desc": ""
         },
-        "preservalis": {},
-        "dernier bastion": {},
-        "enseignementkranzler": {},
-        "ultimeadieu": {},
-        "appeldelether": {},
+        "preservalis": {
+            "name": "Preservalis",
+            "desc": "*Condition* : _Préserviste_"
+        },
+        "dernier bastion": {
+            "name": "Dernier bastion",
+            "desc": "Pour chaque attaque contre des Psychonautes, le Spitalier gagne un déclencheur supplémentaire par niveau de potentiel."
+        },
+        "enseignementkranzler": {
+            "name": "Enseignement de Kranzler",
+            "desc": "*Condition* : _Concentration_"
+        },
+        "ultimeadieu": {
+            "name": "L'ultime adieu",
+            "desc": "Si un allier subit un traumatisme, le Spitalier obtient 1Dé de plus par niveau de potentiel à son attaque et à sa défense pour le round suivant"
+        },
+        "appeldelether": {
+            "name": ""
+        },
         "ascetisme": {},
         "capourraitetrepire": {},
         "cuirdelephant": {},
