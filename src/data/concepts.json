@@ -1,0 +1,419 @@
+[
+    {
+        "name": "abomination",
+        "bonus": [
+            {
+                "name": "psyche",
+                "bonusAttribute": true,
+                "skills": [
+                    "domination"
+                ]
+            },
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "resistance"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "aventurier",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": true,
+                "skills": []
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "mobilite"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "orientation"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "chef",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "ruse"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": true,
+                "skills": [
+                    "commandement"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "chercheur",
+        "bonus": [
+            {
+                "name": "intellect",
+                "bonusAttribute": true,
+                "skills": [
+                    "science",
+                    "artefacts"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "conquerant",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": true,
+                "skills": [
+                    "force",
+                    "resistance"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "createur",
+        "bonus": [
+            {
+                "name": "agilite",
+                "bonusAttribute": true,
+                "skills": []
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "art"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "technologie"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "destructeur",
+        "bonus": [
+            {
+                "name": "instinct",
+                "bonusAttribute": true,
+                "skills": []
+            },
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "vigueur",
+                    "force"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "disciple",
+        "bonus": [
+            {
+                "name": "charisme",
+                "bonusAttribute": true,
+                "skills": []
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "perception",
+                    "empathie"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "elu",
+        "bonus": [
+            {
+                "name": "charisme",
+                "bonusAttribute": true,
+                "skills": [
+                    "expression",
+                    "commandement"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "ermite",
+        "bonus": [
+            {
+                "name": "instinct",
+                "bonusAttribute": true,
+                "skills": [
+                    "survie"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "furtivite"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "fanatique",
+        "bonus": [
+            {
+                "name": "instinct",
+                "bonusAttribute": true,
+                "skills": []
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "foi",
+                    "volonte",
+                    "reactivite"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "heretique",
+        "bonus": [
+            {
+                "name": "psyche",
+                "bonusAttribute": true,
+                "skills": [
+                    "ruse"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "expression"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "martyr",
+        "bonus": [
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "foi",
+                    "volonte"
+                ]
+            },
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "resistance"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "mediateur",
+        "bonus": [
+            {
+                "name": "psyche",
+                "bonusAttribute": true,
+                "skills": []
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "perception"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "negociation"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "mentor",
+        "bonus": [
+            {
+                "name": "intellect",
+                "bonusAttribute": true,
+                "skills": [
+                    "legendes"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "commandement"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "profanateur",
+        "bonus": [
+            {
+                "name": "psyche",
+                "bonusAttribute": true,
+                "skills": [
+                    "tromperie",
+                    "domination"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "protecteur",
+        "bonus": [
+            {
+                "name": "psyche",
+                "bonusAttribute": true,
+                "skills": []
+            },
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "vigueur",
+                    "resistance"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "soigneur",
+        "bonus": [
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "medecine"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": true,
+                "skills": [
+                    "artisanat"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "traditionnaliste",
+        "bonus": [
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "legendes"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "consideration"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": true,
+                "skills": []
+            }
+        ]
+    },
+    {
+        "name": "vertueux",
+        "bonus": [
+            {
+                "name": "intellect",
+                "bonusAttribute": true,
+                "skills": []
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "ruse"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "negociation"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "visionnaire",
+        "bonus": [
+            {
+                "name": "charisme",
+                "bonusAttribute": true,
+                "skills": [
+                    "seduction"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "ruse"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "voyageur",
+        "bonus": [
+            {
+                "name": "instinct",
+                "bonusAttribute": true,
+                "skills": [
+                    "orientation"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "legences"
+                ]
+            }
+        ]
+    }
+]

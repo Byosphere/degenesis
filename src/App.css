@@ -1,4 +1,7 @@
-.App, html, body, #root {
+.App,
+html,
+body,
+#root {
   height: 100%;
 }
 
@@ -22,11 +25,11 @@
   height: 100%;
 }
 
-.react-swipeable-view-container>div {
+.react-swipeable-view-container > div {
   min-height: 100%;
 }
 
-.textfield-fullheight>div {
+.textfield-fullheight > div {
   height: 100%;
 }
 
@@ -38,4 +41,10 @@
 p.card-overtitle {
   opacity: 0.6;
   margin: 8px 16px;
+}
+
+.create-step-label > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

@@ -9,11 +9,13 @@ export interface Attribute {
     id: number;
     base: number;
     skills: Skill[];
+    bonusMax?: number;
 }
 
 export interface Skill {
     id: number;
     value: number;
+    bonusMax?: number;
 }
 
 export interface Potential {

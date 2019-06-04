@@ -58,19 +58,19 @@ export default class ViewStatsPage extends Component<Props, State> {
             <div style={{ margin: '5px' }}>
                 <Card>
                     <CardMedia
-                        image={"/images/cultes/" + CULTES[char.culte] + ".jpg"}
+                        image={"/images/cultes/" + CULTES[char.culte].name + ".jpg"}
                         title="Paella dish"
                         style={{ height: '100px' }}
                     />
                     <CardHeader
                         avatar={
-                            <Avatar alt={CULTURES[char.culture]} src={"/images/cultures/" + CULTURES[char.culture] + ".jpg"} />
+                            <Avatar alt={CULTURES[char.culture].name} src={"/images/cultures/" + CULTURES[char.culture].name + ".jpg"} />
                         }
                         title={char.name + ' (' + T.translate('sex.' + SEX[char.sex]) + ')'}
                         subheader={
-                            T.translate('cultes.' + CULTES[char.culte]) + ' - ' +
-                            T.translate('cultures.' + CULTURES[char.culture]) + ' - ' +
-                            T.translate('concepts.' + CONCEPTS[char.concept])
+                            T.translate('cultes.' + CULTES[char.culte].name) + ' - ' +
+                            T.translate('cultures.' + CULTURES[char.culture].name) + ' - ' +
+                            T.translate('concepts.' + CONCEPTS[char.concept].name)
                         }
                         action={
                             <Chip label={T.translate('rangs.' + RANGS[char.culte][char.rang])} variant="outlined" />
@@ -134,7 +134,7 @@ export default class ViewStatsPage extends Component<Props, State> {
                             expandIcon={<ExpandMore />}
                         >
                             <AttributeJauge
-                                label={T.translate('attributes.' + ATTRIBUTES[att.id]) as string}
+                                label={T.translate('attributes.' + ATTRIBUTES[att.id] + '.name') as string}
                                 value={att.base}
                                 attribute
                                 onRollDice={() => this.handleRollDice()}

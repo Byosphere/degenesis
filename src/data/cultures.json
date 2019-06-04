@@ -1,0 +1,241 @@
+[
+    {
+        "name": "afrika",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": true,
+                "skills": [
+                    "athletisme",
+                    "lutte"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": true,
+                "skills": [
+                    "medecine"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "expression"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "reactivite"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "balkhans",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": true,
+                "skills": [
+                    "force",
+                    "lutte"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": true,
+                "skills": [
+                    "reactivite"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "commandement"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "empathie"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "borca",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "resistance"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "artefacts",
+                    "technologie"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": true,
+                "skills": [
+                    "artisanat"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": true,
+                "skills": [
+                    "survie"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "franka",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "vigueur"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "furtivite"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": true,
+                "skills": [
+                    "negociation"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "foi",
+                    "volonte",
+                    "tromperie"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": true,
+                "skills": []
+            }
+        ]
+    },
+    {
+        "name": "hybrispanie",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "corpsacorps"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": true,
+                "skills": [
+                    "furtivite",
+                    "mobilite"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": true,
+                "skills": [
+                    "medecine"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "orientation"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "pollen",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": true,
+                "skills": [
+                    "corpsacorps",
+                    "vigueur"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "legendes"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": true,
+                "skills": [
+                    "empathie",
+                    "survie"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "purgare",
+        "bonus": [
+            {
+                "name": "charisme",
+                "bonusAttribute": true,
+                "skills": [
+                    "consideration"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "legendes"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": true,
+                "skills": [
+                    "domination",
+                    "foi",
+                    "volonte"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "dressage"
+                ]
+            }
+        ]
+    }
+]

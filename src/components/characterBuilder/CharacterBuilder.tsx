@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { Card, Stepper, Step, StepLabel, StepContent, Typography, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, Button, Grid, CardMedia, CardContent, List, ListItem, ListItemIcon, Checkbox, ListItemText, ListSubheader } from '@material-ui/core';
+import { Card, Stepper, Step, StepLabel, StepContent, Typography, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, Button, Grid, CardMedia, CardContent, List, ListItem, ListItemIcon, Checkbox, ListItemText, ListSubheader, Chip } from '@material-ui/core';
 import Character from '../../models/Character';
 import { Redirect } from 'react-router-dom';
 import T from 'i18n-react';
 import { CULTURES, CULTES, CONCEPTS, SEX, POTENTIALS, GENERIC_POTENTIALS, MONEY } from '../../constants';
-import { Money, DonutSmall } from '@material-ui/icons';
+import { DonutSmall, Done } from '@material-ui/icons';
+import { Culture, Culte, Concept } from '../../models/Data';
 
 interface Props {
     characters: Character[];
@@ -23,7 +24,7 @@ export default class CharacterBuilder extends Component<Props, State> {
         super(props);
 
         this.state = {
-            activeStep: 2,
+            activeStep: 0,
             newCharacter: {
                 potentials: [],
                 attributes: [],
@@ -87,7 +88,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                 <Card style={{ flex: 1, display: "flex", flexDirection: "column", overflowY: 'auto', minHeight: 'calc(100% - 46px)' }}>
                     <Stepper activeStep={activeStep} orientation="vertical">
                         <Step>
-                            <StepLabel>{T.translate('create.who')}</StepLabel>
+                            {this.displayLabel(T.translate('create.who').toString(), newCharacter.name, 0)}
                             <StepContent>
                                 <TextField
                                     name='name'
@@ -179,7 +180,12 @@ export default class CharacterBuilder extends Component<Props, State> {
                             </StepContent>
                         </Step>
                         <Step>
-                            <StepLabel>{T.translate('create.culture.title')}</StepLabel>
+                            {this.displayLabel(
+                                T.translate('create.culture.title').toString(),
+                                (typeof newCharacter.culture === 'number') ?
+                                    T.translate('cultures.' + CULTURES[newCharacter.culture].name).toString() : '',
+                                1
+                            )}
                             <StepContent>
                                 <FormControl fullWidth margin='dense'>
                                     <InputLabel shrink htmlFor="culture">
@@ -188,40 +194,48 @@ export default class CharacterBuilder extends Component<Props, State> {
                                     <Select
                                         input={<Input name="culture" fullWidth />}
                                         fullWidth
-                                        value={newCharacter.culture || ''}
+                                        value={isNaN(newCharacter.culture) ? '' : newCharacter.culture}
                                         onChange={this.handleChange}
                                     >
-                                        {CULTURES.map((text, key) => (
+                                        <MenuItem value={''}>
+                                            {T.translate('generic.none')}
+                                        </MenuItem>
+                                        {CULTURES.map((culture: Culture, key) => (
                                             <MenuItem key={key} value={key}>
-                                                {text ? T.translate('cultures.' + text) : T.translate('generic.none')}
+                                                {T.translate('cultures.' + culture.name)}
                                             </MenuItem>
                                         ))}
                                     </Select>
                                 </FormControl>
-                                {newCharacter.culture && <div style={{ margin: '16px 0' }}>
+                                {typeof newCharacter.culture === 'number' && <div style={{ margin: '16px 0' }}>
                                     <Grid container spacing={2} alignItems='center'>
                                         <Grid item xs={6}>
                                             <Typography variant="overline">
-                                                {T.translate('cultures.' + CULTURES[newCharacter.culture])}
+                                                {T.translate('cultures.' + CULTURES[newCharacter.culture].name)}
                                             </Typography>
                                             <Typography variant="body2">
-                                                {T.translate('create.culture.' + CULTURES[newCharacter.culture])}
+                                                {T.translate('create.culture.' + CULTURES[newCharacter.culture].name)}
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6}>
                                             <CardMedia
-                                                image={"/images/cultures/" + CULTURES[newCharacter.culture] + ".jpg"}
-                                                title={CULTURES[newCharacter.culture]}
+                                                image={"/images/cultures/" + CULTURES[newCharacter.culture].name + ".jpg"}
+                                                title={CULTURES[newCharacter.culture].name}
                                                 style={{ height: '100px' }}
                                             />
                                         </Grid>
                                     </Grid>
                                 </div>}
-                                {this.displayControls(!newCharacter.culture, true)}
+                                {this.displayControls(typeof newCharacter.culture !== 'number', true)}
                             </StepContent>
                         </Step>
                         <Step>
-                            <StepLabel>{T.translate('create.culte.title')}</StepLabel>
+                            {this.displayLabel(
+                                T.translate('create.culte.title').toString(),
+                                (typeof newCharacter.culte === 'number') ?
+                                    T.translate('cultes.' + CULTES[newCharacter.culte].name).toString() : '',
+                                2
+                            )}
                             <StepContent>
                                 <FormControl fullWidth margin='dense'>
                                     <InputLabel shrink htmlFor="culte">
@@ -230,20 +244,23 @@ export default class CharacterBuilder extends Component<Props, State> {
                                     <Select
                                         input={<Input name="culte" fullWidth />}
                                         fullWidth
-                                        value={newCharacter.culte || ''}
+                                        value={isNaN(newCharacter.culte) ? '' : newCharacter.culte}
                                         onChange={this.handleChange}
                                     >
-                                        {CULTES.map((text, key) => (
+                                        <MenuItem value={''}>
+                                            {T.translate('generic.none')}
+                                        </MenuItem>
+                                        {CULTES.map((culte: Culte, key: number) => (
                                             <MenuItem key={key} value={key}>
-                                                {text ? T.translate('cultes.' + text) : T.translate('generic.none')}
+                                                {T.translate('cultes.' + culte.name)}
                                             </MenuItem>
                                         ))}
                                     </Select>
                                 </FormControl>
-                                {newCharacter.culte && <div style={{ margin: '16px 0' }}>
+                                {typeof newCharacter.culte === 'number' && <div style={{ margin: '16px 0' }}>
                                     <CardMedia
-                                        image={"/images/cultes/" + CULTES[newCharacter.culte] + ".jpg"}
-                                        title={CULTES[newCharacter.culte]}
+                                        image={"/images/cultes/" + CULTES[newCharacter.culte].name + ".jpg"}
+                                        title={CULTES[newCharacter.culte].name}
                                         style={{ height: '100px' }}
                                     />
                                     <CardContent>
@@ -252,15 +269,20 @@ export default class CharacterBuilder extends Component<Props, State> {
                                             {T.translate('generic.money', { money: MONEY[newCharacter.culte] * 2 })}
                                         </Typography>
                                         <Typography variant="body2">
-                                            {T.translate('create.culte.' + CULTES[newCharacter.culte])}
+                                            {T.translate('create.culte.' + CULTES[newCharacter.culte].name)}
                                         </Typography>
                                     </CardContent>
                                 </div>}
-                                {this.displayControls(!newCharacter.culte, true)}
+                                {this.displayControls(typeof newCharacter.culte !== 'number', true)}
                             </StepContent>
                         </Step>
                         <Step>
-                            <StepLabel>{T.translate('create.concept.title')}</StepLabel>
+                            {this.displayLabel(
+                                T.translate('create.concept.title').toString(),
+                                (typeof newCharacter.concept === 'number') ?
+                                    T.translate('concepts.' + CONCEPTS[newCharacter.concept].name).toString() : '',
+                                3
+                            )}
                             <StepContent>
                                 <FormControl fullWidth margin='dense'>
                                     <InputLabel shrink htmlFor="concept">
@@ -269,22 +291,25 @@ export default class CharacterBuilder extends Component<Props, State> {
                                     <Select
                                         input={<Input name="concept" fullWidth />}
                                         fullWidth
-                                        value={newCharacter.concept || ''}
+                                        value={isNaN(newCharacter.concept) ? '' : newCharacter.concept}
                                         onChange={this.handleChange}
                                     >
-                                        {CONCEPTS.map((text, key) => (
+                                        <MenuItem value={''}>
+                                            {T.translate('generic.none')}
+                                        </MenuItem>
+                                        {CONCEPTS.map((concept: Concept, key) => (
                                             <MenuItem key={key} value={key}>
-                                                {text ? T.translate('concepts.' + text) : T.translate('generic.none')}
+                                                {T.translate('concepts.' + concept.name)}
                                             </MenuItem>
                                         ))}
                                     </Select>
                                 </FormControl>
-                                {newCharacter.concept && <CardContent>
+                                {typeof newCharacter.concept === 'number' && <CardContent>
                                     <Typography variant="body2">
-                                        {T.translate('create.concept.' + CONCEPTS[newCharacter.concept])}
+                                        {T.translate('create.concept.' + CONCEPTS[newCharacter.concept].name)}
                                     </Typography>
                                 </CardContent>}
-                                {this.displayControls(!newCharacter.concept, true)}
+                                {this.displayControls(typeof newCharacter.concept !== 'number', true)}
                             </StepContent>
                         </Step>
                         <Step>
@@ -294,7 +319,17 @@ export default class CharacterBuilder extends Component<Props, State> {
                             </StepContent>
                         </Step>
                         <Step>
-                            <StepLabel>{T.translate('create.potentials')}</StepLabel>
+                            <StepLabel>{T.translate('create.selectattributes')}</StepLabel>
+                            <StepContent>
+                                {this.displayControls(false, true)}
+                            </StepContent>
+                        </Step>
+                        <Step>
+                            {this.displayLabel(
+                                T.translate('create.potentials').toString(),
+                                T.translate('generic.selectedpotentials').toString(),
+                                6
+                            )}
                             {newCharacter.culte && <StepContent>
                                 <List
                                     dense
@@ -384,6 +419,20 @@ export default class CharacterBuilder extends Component<Props, State> {
                     </Stepper>
                 </Card>
             </div>
+        );
+    }
+
+    private displayLabel(title: string, validElement: string, currentStep: number): JSX.Element {
+        return (
+            <StepLabel classes={{ labelContainer: 'create-step-label' }}>
+                {title}
+                {this.state.activeStep >= currentStep + 1 &&
+                    <Chip
+                        label={validElement}
+                        color="secondary"
+                        icon={<Done />}
+                    />}
+            </StepLabel>
         );
     }
 

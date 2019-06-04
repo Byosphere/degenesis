@@ -52,7 +52,8 @@
         "characteredit": "Modifier le personnage",
         "charactercreate": "Création de personnage",
         "none": "_Aucun_",
-        "create": "Créer"
+        "create": "Créer",
+        "selectedpotentials": "Potentiels choisis"
     },
     "navigator": {
         "stats": "Status",
@@ -74,7 +75,8 @@
         "concept": {
             "title": "Choix d'un Concept"
         },
-        "attributes": "Répartition des Attributs",
+        "selectattributes": "Répartition des Attributs",
+        "attributes": "Choix des Attributs",
         "potentials": "Choix des Potentiels",
         "lasttouch": "Touches finales"
     },
@@ -95,7 +97,7 @@
     },
     "cultures": {
         "afrika": "Afrika",
-        "balkhan": "Balkhan",
+        "balkhans": "Balkhans",
         "borca": "Borca",
         "franka": "Franka",
         "hybrispanie": "Hybrispanie",
@@ -127,12 +129,30 @@
         "voyageur": "Voyageur"
     },
     "attributes": {
-        "physique": "Physique",
-        "agilite": "Agilité",
-        "charisme": "Charisme",
-        "intellect": "Intellect",
-        "psyche": "Psyché",
-        "instinct": "Instinct"
+        "physique": {
+            "name": "Physique",
+            "short": "PHY"
+        },
+        "agilite": {
+            "name": "Agilité",
+            "short": "AGI"
+        },
+        "charisme": {
+            "name": "Charisme",
+            "short": "CHA"
+        },
+        "intellect": {
+            "name": "Intellect",
+            "short": "INT"
+        },
+        "psyche": {
+            "name": "Psyché",
+            "short": "PSY"
+        },
+        "instinct": {
+            "name": "Instinct",
+            "short": "INS"
+        }
     },
     "skills": {
         "athletisme": "Athlétisme",

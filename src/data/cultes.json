@@ -1,0 +1,442 @@
+[
+    {
+        "name": "anabaptiste",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "corpsacorps",
+                    "force"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "legendes"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "mobilite"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "foi",
+                    "volonte"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "anubien",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "resistance"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "commandement"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "medecine",
+                    "legendes"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "foi",
+                    "volonte"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "apocalyptique",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "athletisme"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "dexterite"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "seduction",
+                    "art"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "ruse"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "blafard",
+        "bonus": [
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "projectiles",
+                    "furtivite"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "ruse"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "technologie"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "perception"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "chroniqueur",
+        "bonus": [
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "artisanat"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "negociation"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "technologie",
+                    "artefacts"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "tromperie"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "claniste",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "vigueur",
+                    "corpsacorps"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "surive",
+                    "dressage"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "artisanat"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "ferrailleur",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "athletisme",
+                    "resistance"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "artisanat"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "survie"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "artefacts"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "fleau",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "athletisme",
+                    "force",
+                    "vigueur"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "mobilite"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "reactivite"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "hellvetique",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "force",
+                    "vigueur"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "commandement"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "projectiles"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "reactivite"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "jehammetan",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "corpsacorps"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "artisanat"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "foi",
+                    "volonte"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "art"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "dressage"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "juge",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "corpsacorps"
+                ]
+            },
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "navigation",
+                    "projectiles"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "consideration"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "domination"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "neolybien",
+        "bonus": [
+            {
+                "name": "agilite",
+                "bonusAttribute": false,
+                "skills": [
+                    "projectiles"
+                ]
+            },
+            {
+                "name": "charisme",
+                "bonusAttribute": false,
+                "skills": [
+                    "consideration",
+                    "negociation"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "ruse"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "empathie"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "spitalier",
+        "bonus": [
+            {
+                "name": "physique",
+                "bonusAttribute": false,
+                "skills": [
+                    "resistance"
+                ]
+            },
+            {
+                "name": "intellect",
+                "bonusAttribute": false,
+                "skills": [
+                    "medecine",
+                    "science"
+                ]
+            },
+            {
+                "name": "psyche",
+                "bonusAttribute": false,
+                "skills": [
+                    "foi",
+                    "volonte"
+                ]
+            },
+            {
+                "name": "instinct",
+                "bonusAttribute": false,
+                "skills": [
+                    "perception"
+                ]
+            }
+        ]
+    }
+]

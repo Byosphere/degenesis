@@ -68,9 +68,9 @@ export default class Home extends Component<Props, State> {
                                     style={{ background: 'rgba(255, 255, 255, 0.3)', marginRight: '50px' }}
                                     primary={char.name}
                                     secondary={
-                                        T.translate('cultes.' + CULTES[char.culte]) + ' - ' +
-                                        T.translate('cultures.' + CULTURES[char.culture]) + ' - ' +
-                                        T.translate('concepts.' + CONCEPTS[char.concept])
+                                        T.translate('cultes.' + CULTES[char.culte].name) + ' - ' +
+                                        T.translate('cultures.' + CULTURES[char.culture].name) + ' - ' +
+                                        T.translate('concepts.' + CONCEPTS[char.concept].name)
                                     }
                                 />
                             </ListItem>

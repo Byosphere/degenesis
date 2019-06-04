@@ -1,24 +1,15 @@
+import { Culte, Culture, Concept } from "./models/Data";
+import cultes from "./data/cultes.json";
+import cultures from "./data/cultures.json";
+import concepts from "./data/concepts.json";
+
 export const GENERIC_POTENTIALS = 14;
 
-export const CULTES = [
-    '',
-    'anabaptiste',
-    'anubien',
-    'apocalyptique',
-    'blafard',
-    'chroniqueur',
-    'claniste',
-    'ferrailleur',
-    'fleau',
-    'hellvetique',
-    'jehammetan',
-    'juge',
-    'neolybien',
-    'spitalier'
-];
+export const CULTES: Culte[] = cultes;
+export const CULTURES: Culture[] = cultures;
+export const CONCEPTS: Concept[] = concepts;
 
 export const MONEY = [
-    0,
     50,
     100,
     200,
@@ -34,45 +25,7 @@ export const MONEY = [
     100
 ];
 
-export const CULTURES = [
-    '',
-    'afrika',
-    'balkhan',
-    'borca',
-    'franka',
-    'hybrispanie',
-    'pollen',
-    'purgare'
-];
-
-export const CONCEPTS = [
-    '',
-    'abomination',
-    'aventurier',
-    'chef',
-    'chercheur',
-    'conquerant',
-    'createur',
-    'destructeur',
-    'disciple',
-    'elu',
-    'ermite',
-    'fanatique',
-    'heretique',
-    'martyr',
-    'mediateur',
-    'mentor',
-    'profanateur',
-    'protecteur',
-    'soigneur',
-    'traditionnaliste',
-    'vertueux',
-    'visionnaire',
-    'voyageur'
-];
-
 export const ATTRIBUTES = [
-    '',
     'physique',
     'agilite',
     'charisme',
@@ -82,7 +35,6 @@ export const ATTRIBUTES = [
 ];
 
 export const SKILLS = [
-    null,
     [
         'athletisme',
         'corpsacorps',
@@ -255,7 +207,6 @@ export const SEX = [
 ];
 
 export const RANGS = [
-    null,
     [
         'ravi',
         'ascete',
