@@ -13,7 +13,7 @@
         "equipment": "Équipement",
         "items": "Objets clés",
         "bagof": "Inventaire de {who}",
-        "money": "*{money}* lettres de Change",
+        "money": "{money} lettres de Change",
         "save": "Sauvegarder",
         "tech": {
             "1": "I",
@@ -68,7 +68,8 @@
             "title": "Choix d'une Culture"
         },
         "culte": {
-            "title": "Choix d'un Culte"
+            "title": "Choix d'un Culte",
+            "claniste": "Le claniste est un méchant pas beau bla bla truc machin"
         },
         "concept": {
             "title": "Choix d'un Concept"

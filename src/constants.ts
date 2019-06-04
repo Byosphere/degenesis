@@ -1,4 +1,4 @@
-export const GENERIC_POTENTIALS = 13;
+export const GENERIC_POTENTIALS = 14;
 
 export const CULTES = [
     '',
@@ -15,6 +15,23 @@ export const CULTES = [
     'juge',
     'neolybien',
     'spitalier'
+];
+
+export const MONEY = [
+    0,
+    50,
+    100,
+    200,
+    50,
+    128,
+    50,
+    50,
+    100,
+    50,
+    100,
+    50,
+    1000,
+    100
 ];
 
 export const CULTURES = [

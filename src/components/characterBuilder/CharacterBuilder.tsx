@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { Card, Stepper, Step, StepLabel, StepContent, Typography, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, Button, Grid, CardMedia, CardContent } from '@material-ui/core';
+import { Card, Stepper, Step, StepLabel, StepContent, Typography, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, Button, Grid, CardMedia, CardContent, List, ListItem, ListItemIcon, Checkbox, ListItemText, ListSubheader } from '@material-ui/core';
 import Character from '../../models/Character';
 import { Redirect } from 'react-router-dom';
 import T from 'i18n-react';
-import { CULTURES, CULTES, CONCEPTS, SEX } from '../../constants';
+import { CULTURES, CULTES, CONCEPTS, SEX, POTENTIALS, GENERIC_POTENTIALS, MONEY } from '../../constants';
+import { Money, DonutSmall } from '@material-ui/icons';
 
 interface Props {
     characters: Character[];
     selectedCharacter: Character;
-    onChangeChar: (char: Character) => void;
+    createCharacter: (char: Character) => void;
 }
 
 interface State {
@@ -22,13 +23,13 @@ export default class CharacterBuilder extends Component<Props, State> {
         super(props);
 
         this.state = {
-            activeStep: 0,
-            newCharacter: {}
+            activeStep: 2,
+            newCharacter: {
+                potentials: [],
+                attributes: [],
+                notes: []
+            },
         };
-    }
-
-    public selectCharacter(key: number): void {
-        this.props.onChangeChar(this.props.characters[key]);
     }
 
     public handleChange = (event: any) => {
@@ -46,7 +47,31 @@ export default class CharacterBuilder extends Component<Props, State> {
     }
 
     public handleCreate = (event: React.MouseEvent<HTMLButtonElement>) => {
-        // TODO
+        let character = this.state.newCharacter;
+        character.money = MONEY[character.culte] * 2;
+        character.ego = { id: "ego", actuel: 0, total: 0 };
+        character.sporulation = { id: "sporulation", actuel: 0, total: 0 };
+        character.blessures = { id: "blessures", actuel: 0, total: 0 };
+        character.trauma = { id: "trauma", actuel: 0, total: 0 };
+    }
+
+    public handleAttributeChange = (attributeId: number, skillId: number, value: number) => {
+
+    }
+
+    public handleToggle = (id: number, type: number) => {
+        let newCharacter: any = this.state.newCharacter;
+        let index = newCharacter.potentials.findIndex(p => p.id === id && p.type === type);
+        if (index === -1 && newCharacter.potentials.length !== 2) {
+            newCharacter.potentials.push({
+                id,
+                type,
+                level: 1
+            });
+        } else if (index !== -1) {
+            newCharacter.potentials.splice(index, 1);
+        }
+        this.setState({ newCharacter });
     }
 
     public render() {
@@ -55,11 +80,11 @@ export default class CharacterBuilder extends Component<Props, State> {
         const { activeStep, newCharacter } = this.state;
 
         return (
-            <div style={{ margin: '5px' }}>
+            <div style={{ margin: '5px', flex: 1 }}>
                 <Typography variant='subtitle1' component='p' className="card-overtitle">
                     {T.translate('generic.charactercreate')}
                 </Typography>
-                <Card style={{ flex: 1, display: "flex", flexDirection: "column", overflowY: 'auto' }}>
+                <Card style={{ flex: 1, display: "flex", flexDirection: "column", overflowY: 'auto', minHeight: 'calc(100% - 46px)' }}>
                     <Stepper activeStep={activeStep} orientation="vertical">
                         <Step>
                             <StepLabel>{T.translate('create.who')}</StepLabel>
@@ -222,6 +247,10 @@ export default class CharacterBuilder extends Component<Props, State> {
                                         style={{ height: '100px' }}
                                     />
                                     <CardContent>
+                                        <Typography variant='body2' style={{ display: 'flex', alignItems: 'center', fontStyle: 'italic' }}>
+                                            <DonutSmall fontSize='small' style={{ marginRight: '5px' }} />
+                                            {T.translate('generic.money', { money: MONEY[newCharacter.culte] * 2 })}
+                                        </Typography>
                                         <Typography variant="body2">
                                             {T.translate('create.culte.' + CULTES[newCharacter.culte])}
                                         </Typography>
@@ -261,19 +290,95 @@ export default class CharacterBuilder extends Component<Props, State> {
                         <Step>
                             <StepLabel>{T.translate('create.attributes')}</StepLabel>
                             <StepContent>
-
+                                {this.displayControls(false, true)}
                             </StepContent>
                         </Step>
                         <Step>
                             <StepLabel>{T.translate('create.potentials')}</StepLabel>
-                            <StepContent>
-
-                            </StepContent>
+                            {newCharacter.culte && <StepContent>
+                                <List
+                                    dense
+                                    component="div"
+                                    role="list"
+                                    subheader={
+                                        <ListSubheader component="div" id="nested-list-subheader">
+                                            {T.translate('generic.potential1')}
+                                        </ListSubheader>
+                                    }
+                                >
+                                    {POTENTIALS[newCharacter.culte].map((potential: string, key: number) => (
+                                        < ListItem
+                                            key={'c' + key}
+                                            role="listitem"
+                                            button
+                                            onClick={() => this.handleToggle(key, 1)}
+                                        >
+                                            <ListItemIcon>
+                                                <Checkbox
+                                                    disableRipple
+                                                    tabIndex={-1}
+                                                    checked={Boolean(newCharacter.potentials.find(p => p.id === key && p.type === 1))}
+                                                />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={T.translate('potentials.' + potential + '.name')}
+                                                secondary={T.translate('potentials.' + potential + '.desc')}
+                                            />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                                <List
+                                    dense
+                                    component="div"
+                                    role="list"
+                                    subheader={
+                                        <ListSubheader component="div" id="nested-list-subheader">
+                                            {T.translate('generic.potential0')}
+                                        </ListSubheader>
+                                    } >
+                                    {POTENTIALS[GENERIC_POTENTIALS].map((potential: string, key: number) => (
+                                        < ListItem
+                                            key={'g' + key}
+                                            role="listitem"
+                                            button
+                                            onClick={() => this.handleToggle(key, 0)}
+                                        >
+                                            <ListItemIcon>
+                                                <Checkbox
+                                                    disableRipple
+                                                    tabIndex={-1}
+                                                    checked={Boolean(newCharacter.potentials.find(p => p.id === key && p.type === 0))}
+                                                />
+                                            </ListItemIcon>
+                                            <ListItemText
+                                                primary={T.translate('potentials.' + potential + '.name')}
+                                                secondary={T.translate('potentials.' + potential + '.desc')}
+                                            />
+                                        </ListItem>
+                                    ))}
+                                </List>
+                                {this.displayControls(!newCharacter.potentials || newCharacter.potentials.length !== 2, true)}
+                            </StepContent>}
                         </Step>
                         <Step>
                             <StepLabel>{T.translate('create.lasttouch')}</StepLabel>
                             <StepContent>
-
+                                <TextField
+                                    name="story"
+                                    label={T.translate('generic.story')}
+                                    margin="dense"
+                                    type='text'
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                    multiline
+                                    fullWidth
+                                    rows={15}
+                                    rowsMax={30}
+                                    value={newCharacter.story}
+                                    onChange={this.handleChange}
+                                />
+                                {this.displayControls(false, true, true)}
                             </StepContent>
                         </Step>
                     </Stepper>
@@ -282,9 +387,9 @@ export default class CharacterBuilder extends Component<Props, State> {
         );
     }
 
-    private displayControls(enableNext: boolean, enablePrev: boolean, isLast?: boolean): JSX.Element {
+    private displayControls(disableNext: boolean, enablePrev: boolean, isLast?: boolean): JSX.Element {
         return (
-            <div>
+            <div style={{ display: 'flex', justifyContent: "space-between" }}>
                 {enablePrev && <Button
                     style={{ marginTop: '16px' }}
                     color='primary'
@@ -297,7 +402,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                     variant='contained'
                     color='secondary'
                     onClick={isLast ? this.handleCreate : this.handleNext}
-                    disabled={enableNext}
+                    disabled={disableNext}
                 >
                     {isLast ? T.translate('generic.create') : T.translate('generic.next')}
                 </Button>

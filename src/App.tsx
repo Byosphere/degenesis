@@ -43,6 +43,12 @@ class App extends Component<Props, State> {
     public handleCharChange = (char: Character) => {
         this.setState({ selectedCharacter: char });
     }
+    
+    public handleCreateCharacter = (char: Character) => {
+        let characters = this.state.characters;
+        characters.push(char);
+        this.setState({ characters, selectedCharacter: char });
+    }
 
     public render() {
 
@@ -63,7 +69,7 @@ class App extends Component<Props, State> {
                                 props => <CharacterBuilder {...props}
                                     characters={characters}
                                     selectedCharacter={selectedCharacter}
-                                    onChangeChar={this.handleCharChange}
+                                    createCharacter={this.handleCreateCharacter}
                                 />
                             } />
                             <Route path="/stats" exact render={
