@@ -23,7 +23,7 @@ export default class EditStatsPage extends Component<Props, State> {
         super(props);
 
         this.state = {
-            char: JSON.parse(JSON.stringify(this.props.char)),
+            char: this.props.char.clone(),
             pristine: true
         }
     }
@@ -55,7 +55,7 @@ export default class EditStatsPage extends Component<Props, State> {
         } else if (attr) {
             attr.base = value;
         }
-        this.setState({ char: { ...this.state.char }, pristine: false });
+        this.setState({ char: this.state.char, pristine: false });
     }
 
     public handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {

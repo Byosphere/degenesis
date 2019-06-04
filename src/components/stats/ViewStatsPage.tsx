@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, IconButton, Chip, Snackbar } from '@material-ui/core';
 import { CULTES, CULTURES, CONCEPTS, RANGS, ATTRIBUTES, SEX, SKILLS } from '../../constants';
-import { ExpandMore, ExpandLess, OfflineBolt, OfflineBoltOutlined } from '@material-ui/icons';
+import { ExpandMore, ExpandLess, OfflineBolt, OfflineBoltOutlined, Clear } from '@material-ui/icons';
 import Character, { Attribute, Skill } from '../../models/Character';
 import AttributeJauge from '../attributeJauge/AttributeJauge';
 import T from 'i18n-react';
@@ -36,7 +36,7 @@ export default class ViewStatsPage extends Component<Props, State> {
 
     public handleTrauma = (index: number) => {
         let char = this.props.char;
-        char.trauma.actuel = index;
+        char.trauma = index;
         this.props.onCharChange(char);
     }
 
@@ -44,9 +44,9 @@ export default class ViewStatsPage extends Component<Props, State> {
         this.setState({ open: true });
     }
 
-    public handleChange(field: string, value: number): void {
+    public handleChange = (field: string, value: number) => {
         let char: any = this.props.char;
-        char[field].actuel = value;
+        char[field] = value;
         this.props.onCharChange(char);
     }
 
@@ -95,7 +95,7 @@ export default class ViewStatsPage extends Component<Props, State> {
                         <CardContent style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '16px' }}>
                             <div>
                                 <Typography component='div' variant='caption'>
-                                    {T.translate('generic.trauma') + ' (' + char.trauma.actuel + '/' + char.trauma.total + ') :'}
+                                    {T.translate('generic.trauma') + ' (' + char.trauma + '/' + char.traumaMax + ') :'}
                                 </Typography>
                                 <div style={{ marginTop: '-4px' }}>
                                     {this.displayTrauma()}
@@ -109,22 +109,22 @@ export default class ViewStatsPage extends Component<Props, State> {
                 <Card style={{ margin: '5px 0' }}>
                     <CardContent>
                         <InteractiveJauge
-                            label={T.translate('generic.life') as string}
-                            currentValue={char.blessures.actuel}
-                            maximum={char.blessures.total}
-                            onChange={(newValue) => this.handleChange('blessures', newValue)}
+                            label='blessures'
+                            currentValue={char.blessures}
+                            maximum={char.blessuresMax}
+                            onChange={this.handleChange}
                         />
                         <InteractiveJauge
-                            label={T.translate('generic.ego') as string}
-                            currentValue={char.ego.actuel}
-                            maximum={char.ego.total}
-                            onChange={(newValue) => this.handleChange('ego', newValue)}
+                            label='ego'
+                            currentValue={char.ego}
+                            maximum={char.egoMax}
+                            onChange={this.handleChange}
                         />
                         <InteractiveJauge
-                            label={T.translate('generic.sporulation') as string}
-                            currentValue={char.sporulation.actuel}
-                            maximum={char.sporulation.total}
-                            onChange={(newValue) => this.handleChange('sporulation', newValue)}
+                            label='sporulation'
+                            currentValue={char.sporulation}
+                            maximum={char.sporulationMax}
+                            onChange={this.handleChange}
                         />
                     </CardContent>
                 </Card>
@@ -137,7 +137,6 @@ export default class ViewStatsPage extends Component<Props, State> {
                                 label={T.translate('attributes.' + ATTRIBUTES[att.id] + '.name') as string}
                                 value={att.base}
                                 attribute
-                                onRollDice={() => this.handleRollDice()}
                             />
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
@@ -146,7 +145,6 @@ export default class ViewStatsPage extends Component<Props, State> {
                                     key={skill.id}
                                     label={T.translate('skills.' + SKILLS[att.id][skill.id]) as string}
                                     value={skill.value}
-                                    onRollDice={() => this.handleRollDice()}
                                 />
                             ))}
                         </ExpansionPanelDetails>
@@ -165,12 +163,17 @@ export default class ViewStatsPage extends Component<Props, State> {
 
 
     private displayTrauma(): JSX.Element[] {
-        const charTrauma = this.props.char.trauma;
+        const traumaMax = this.props.char.traumaMax;
         let trauma = [];
-        for (let i = 1; i <= charTrauma.total; i++) {
+        trauma.push(
+            <IconButton key={0} style={{ padding: '6px' }} onClick={() => this.handleTrauma(0)}>
+                <Clear />
+            </IconButton>
+        )
+        for (let i = 1; i <= traumaMax; i++) {
             trauma.push(
                 <IconButton key={i} style={{ padding: '6px' }} onClick={() => this.handleTrauma(i)}>
-                    {i <= charTrauma.actuel ? <OfflineBolt /> : <OfflineBoltOutlined />}
+                    {i <= this.props.char.trauma ? <OfflineBolt /> : <OfflineBoltOutlined />}
                 </IconButton>
             );
         }

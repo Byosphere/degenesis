@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Card, Stepper, Step, StepLabel, StepContent, Typography, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, Button, Grid, CardMedia, CardContent, List, ListItem, ListItemIcon, Checkbox, ListItemText, ListSubheader, Chip } from '@material-ui/core';
+import { Card, Stepper, Step, StepLabel, StepContent, Typography, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, Button, Grid, CardMedia, CardContent, List, ListItem, ListItemIcon, Checkbox, ListItemText, ListSubheader, Chip, Divider } from '@material-ui/core';
 import Character from '../../models/Character';
 import { Redirect } from 'react-router-dom';
 import T from 'i18n-react';
 import { CULTURES, CULTES, CONCEPTS, SEX, POTENTIALS, GENERIC_POTENTIALS, MONEY } from '../../constants';
-import { DonutSmall, Done } from '@material-ui/icons';
+import { DonutSmall, Done, KeyboardArrowRight } from '@material-ui/icons';
 import { Culture, Culte, Concept } from '../../models/Data';
 
 interface Props {
@@ -25,11 +25,7 @@ export default class CharacterBuilder extends Component<Props, State> {
 
         this.state = {
             activeStep: 0,
-            newCharacter: {
-                potentials: [],
-                attributes: [],
-                notes: []
-            },
+            newCharacter: new Character()
         };
     }
 
@@ -73,6 +69,13 @@ export default class CharacterBuilder extends Component<Props, State> {
             newCharacter.potentials.splice(index, 1);
         }
         this.setState({ newCharacter });
+    }
+
+    public handleSelectAttribute(field: string, value: string): void {
+        let newCharacter: any = this.state.newCharacter;
+        newCharacter[field] = value;
+        this.setState({ newCharacter });
+
     }
 
     public render() {
@@ -313,9 +316,45 @@ export default class CharacterBuilder extends Component<Props, State> {
                             </StepContent>
                         </Step>
                         <Step>
-                            <StepLabel>{T.translate('create.attributes')}</StepLabel>
+                            {this.displayLabel(
+                                T.translate('create.attributes').toString(),
+                                T.translate('skills.' + newCharacter.belief) + ' | ' + T.translate('skills.' + newCharacter.behavior),
+                                4
+                            )}
                             <StepContent>
-                                {this.displayControls(false, true)}
+                                <div style={{ margin: '10px 0', display: 'flex', alignItems: 'center' }}>
+                                    <KeyboardArrowRight />
+                                    <Chip
+                                        color={newCharacter.belief === 'foi' ? 'secondary' : 'default'}
+                                        label={'(' + T.translate('attributes.psyche.short') + ') ' + T.translate('skills.foi')}
+                                        style={{ marginRight: '5px' }}
+                                        onClick={() => this.handleSelectAttribute('belief', 'foi')}
+                                    />
+                                    <Chip
+                                        color={newCharacter.belief === 'volonte' ? 'secondary' : 'default'}
+                                        label={'(' + T.translate('attributes.psyche.short') + ') ' + T.translate('skills.volonte')}
+                                        onClick={() => this.handleSelectAttribute('belief', 'volonte')}
+                                    />
+                                </div>
+                                <Typography variant='body2'>{newCharacter.belief ? T.translate('create.' + newCharacter.belief) : ''}</Typography>
+                                <Divider variant="middle" style={{ margin: '16px 0' }} />
+                                <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+                                    <KeyboardArrowRight />
+                                    <Chip
+                                        color={newCharacter.behavior === 'concentration' ? 'secondary' : 'default'}
+                                        label={'(' + T.translate('attributes.intellect.short') + ') ' + T.translate('skills.concentration')}
+                                        style={{ marginRight: '5px' }}
+                                        onClick={() => this.handleSelectAttribute('behavior', 'concentration')}
+
+                                    />
+                                    <Chip
+                                        color={newCharacter.behavior === 'pulsions' ? 'secondary' : 'default'}
+                                        label={'(' + T.translate('attributes.instinct.short') + ') ' + T.translate('skills.pulsions')}
+                                        onClick={() => this.handleSelectAttribute('behavior', 'pulsions')}
+                                    />
+                                </div>
+                                <Typography variant='body2'>{newCharacter.behavior ? T.translate('create.' + newCharacter.behavior) : ''}</Typography>
+                                {this.displayControls(!newCharacter.behavior || !newCharacter.belief, true)}
                             </StepContent>
                         </Step>
                         <Step>
@@ -398,6 +437,54 @@ export default class CharacterBuilder extends Component<Props, State> {
                         <Step>
                             <StepLabel>{T.translate('create.lasttouch')}</StepLabel>
                             <StepContent>
+                                <div style={{ display: 'flex' }}>
+                                    <TextField
+                                        label={T.translate('generic.life')}
+                                        margin="dense"
+                                        type='text'
+                                        style={{ flex: 1, marginRight: '8px' }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={newCharacter.story}
+                                        disabled
+                                    />
+                                    <TextField
+                                        label={T.translate('generic.ego')}
+                                        margin="dense"
+                                        type='text'
+                                        style={{ flex: 1, marginLeft: '8px' }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={newCharacter.story}
+                                        disabled
+                                    />
+                                </div>
+                                <div style={{ display: 'flex' }}>
+                                    <TextField
+                                        label={T.translate('generic.sporulation')}
+                                        margin="dense"
+                                        type='text'
+                                        style={{ flex: 1, marginRight: '8px' }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={newCharacter.story}
+                                        disabled
+                                    />
+                                    <TextField
+                                        label={T.translate('generic.trauma')}
+                                        margin="dense"
+                                        type='text'
+                                        style={{ flex: 1, marginLeft: '8px' }}
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                        value={newCharacter.story}
+                                        disabled
+                                    />
+                                </div>
                                 <TextField
                                     name="story"
                                     label={T.translate('generic.story')}

@@ -9,27 +9,13 @@
     "culture": 5,
     "culte": 1,
     "concept": 14,
+    "belief": "foi",
+    "behavior": "concentration",
     "story": "Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression. Le Lorem Ipsum est le faux texte standard de l'imprimerie depuis les années 1500, quand un imprimeur anonyme assembla ensemble des morceaux de texte pour réaliser un livre spécimen de polices de texte. Il n'a pas fait que survivre cinq siècles, mais s'est aussi adapté à la bureautique informatique, sans que son contenu n'en soit modifié. Il a été popularisé dans les années 1960 grâce à la vente de feuilles Letraset contenant des passages du Lorem Ipsum, et, plus récemment, par son inclusion dans des applications de mise en page de texte, comme Aldus PageMaker.",
-    "ego": {
-        "id": "ego",
-        "actuel": 0,
-        "total": 5
-    },
-    "sporulation": {
-        "id": "sporulation",
-        "actuel": 0,
-        "total": 8
-    },
-    "blessures": {
-        "id": "blessures",
-        "actuel": 3,
-        "total": 13
-    },
-    "trauma": {
-        "id": "trauma",
-        "actuel": 1,
-        "total": 6
-    },
+    "ego": 0,
+    "sporulation": 0,
+    "blessures": 0,
+    "trauma": 0,
     "attributes": [
         {
             "id": 0,

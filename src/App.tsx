@@ -30,7 +30,7 @@ class App extends Component<Props, State> {
         super(props);
 
         this.state = {
-            characters: [char, char2, char3],
+            characters: [new Character(char), new Character(char2), new Character(char3)],
             selectedCharacter: null,
             tabValue: 0
         };
@@ -43,7 +43,7 @@ class App extends Component<Props, State> {
     public handleCharChange = (char: Character) => {
         this.setState({ selectedCharacter: char });
     }
-    
+
     public handleCreateCharacter = (char: Character) => {
         let characters = this.state.characters;
         characters.push(char);

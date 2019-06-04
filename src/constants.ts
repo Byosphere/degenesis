@@ -4,6 +4,8 @@ import cultures from "./data/cultures.json";
 import concepts from "./data/concepts.json";
 
 export const GENERIC_POTENTIALS = 13;
+export const BASE_ATTRIBUTES = 10;
+export const BASE_SKILLS = 28;
 
 export const CULTES: Culte[] = cultes;
 export const CULTURES: Culture[] = cultures;

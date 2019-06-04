@@ -78,7 +78,11 @@
         "selectattributes": "Répartition des Attributs",
         "attributes": "Choix des Attributs",
         "potentials": "Choix des Potentiels",
-        "lasttouch": "Touches finales"
+        "lasttouch": "Touches finales",
+        "foi": "La *foi* donne au personnage une croyance en un ou des être(s) supérieur(s) qui le guide et l'influence dans son jugement.",
+        "volonte": "La *volonté* du personnage lui permet de croire en lui et en ses actes. Il est seul maître de son esprit.",
+        "concentration": "Le personnage va préférer la réflexion et la *concentration* avant d'agir. Il sait généralement contrôler ses émotions.",
+        "pulsions": "Les *pulsions* du personnages lui permettent d'agir vite et parfois sans réfléchir à une situation. Pour le meilleur ou pour le pire."
     },
     "cultes": {
         "anabaptiste": "Anabaptiste",

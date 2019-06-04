@@ -53,7 +53,7 @@ export default class Home extends Component<Props, State> {
                                 key={key}
                                 button
                                 style={{
-                                    backgroundImage: 'url(/images/cultes/' + CULTES[char.culte] + '.jpg)',
+                                    backgroundImage: 'url(/images/cultes/' + CULTES[char.culte].name + '.jpg)',
                                     backgroundSize: 'cover',
                                     backgroundRepeat: 'no-repeat',
                                     backgroundPosition: '160px center',
@@ -62,7 +62,7 @@ export default class Home extends Component<Props, State> {
                                 onClick={() => this.selectCharacter(key)}
                             >
                                 <ListItemAvatar>
-                                    <Avatar alt={char.name} src={"/images/cultures/" + CULTURES[char.culture] + ".jpg"} />
+                                    <Avatar alt={char.name} src={"/images/cultures/" + CULTURES[char.culture].name + ".jpg"} />
                                 </ListItemAvatar>
                                 <ListItemText
                                     style={{ background: 'rgba(255, 255, 255, 0.3)', marginRight: '50px' }}
