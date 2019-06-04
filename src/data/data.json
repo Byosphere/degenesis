@@ -32,6 +32,36 @@
     },
     "attributes": [
         {
+            "id": 0,
+            "base": 1,
+            "skills": [
+                {
+                    "id": 0,
+                    "value": 2
+                },
+                {
+                    "id": 1,
+                    "value": 4
+                },
+                {
+                    "id": 2,
+                    "value": 1
+                },
+                {
+                    "id": 3,
+                    "value": 2
+                },
+                {
+                    "id": 4,
+                    "value": 4
+                },
+                {
+                    "id": 5,
+                    "value": 1
+                }
+            ]
+        },
+        {
             "id": 1,
             "base": 1,
             "skills": [
@@ -153,36 +183,6 @@
         },
         {
             "id": 5,
-            "base": 1,
-            "skills": [
-                {
-                    "id": 0,
-                    "value": 2
-                },
-                {
-                    "id": 1,
-                    "value": 4
-                },
-                {
-                    "id": 2,
-                    "value": 1
-                },
-                {
-                    "id": 3,
-                    "value": 2
-                },
-                {
-                    "id": 4,
-                    "value": 4
-                },
-                {
-                    "id": 5,
-                    "value": 1
-                }
-            ]
-        },
-        {
-            "id": 6,
             "base": 1,
             "skills": [
                 {

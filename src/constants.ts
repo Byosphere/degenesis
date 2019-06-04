@@ -86,7 +86,6 @@ export const SKILLS = [
 ];
 
 export const POTENTIALS = [
-    null,
     [
         'sangdupecheur',
         'coupdeboutoir',
