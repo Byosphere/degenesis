@@ -3,7 +3,7 @@ import cultes from "./data/cultes.json";
 import cultures from "./data/cultures.json";
 import concepts from "./data/concepts.json";
 
-export const GENERIC_POTENTIALS = 14;
+export const GENERIC_POTENTIALS = 13;
 
 export const CULTES: Culte[] = cultes;
 export const CULTURES: Culture[] = cultures;
