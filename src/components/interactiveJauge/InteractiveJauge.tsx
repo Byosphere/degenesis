@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Typography, LinearProgress, IconButton } from '@material-ui/core';
-import { RemoveCircle, AddCircle } from '@material-ui/icons';
+import { Typography, IconButton } from '@material-ui/core';
+import { RemoveCircle, AddCircle, TurnedIn, TurnedInNot } from '@material-ui/icons';
 import T from 'i18n-react';
 
 interface Props {
@@ -8,7 +8,6 @@ interface Props {
     currentValue: number;
     maximum: number;
     onChange?: (field: string, newValue: number) => void;
-    jaungeHeight?: number;
 }
 
 export default class InteractiveJauge extends Component<Props, {}> {
@@ -27,27 +26,28 @@ export default class InteractiveJauge extends Component<Props, {}> {
 
     public render() {
 
-        const { label, jaungeHeight, currentValue, maximum } = this.props;
-        const value = (maximum - currentValue) * 100 / maximum;
+        const { label, currentValue, maximum } = this.props;
+
+        let icons: JSX.Element[] = [];
+        for (let i = 1; i <= maximum; i++) {
+            const icon = i <= currentValue ? <TurnedIn key={i} color='inherit' /> : <TurnedInNot key={i} color='inherit' />
+            icons.push(icon);
+        }
 
         return (
-            <div>
-                <Typography variant='caption'>{T.translate('generic.' + label) + ' (' + currentValue + ') :'}</Typography>
-                <div style={{ display: 'flex', alignItems: 'center', marginTop: '-14px' }}>
-                    <LinearProgress
-                        variant="determinate"
-                        value={value}
-                        style={{
-                            height: jaungeHeight ? jaungeHeight + 'px' : '5px',
-                            width: 'calc(100% - 70px)',
-                            marginRight: '10px'
-                        }}
-                    />
+            <div style={{ marginBottom: '5px', display: 'flex', justifyContent: 'space-between' }}>
+                <div>
+                    <Typography variant='caption'>{T.translate('generic.' + label) + ' (' + currentValue + ') :'}</Typography>
+                    <div style={{ color: 'rgb(68, 68, 68)' }}>
+                        {icons}
+                    </div>
+                </div>
+                <div style={{ display: 'flex' }}>
                     <IconButton style={{ padding: '5px' }} onClick={this.handleRemove} disabled={currentValue === 0}>
-                        <RemoveCircle fontSize="small" color='primary' />
+                        <RemoveCircle color='primary' />
                     </IconButton>
                     <IconButton style={{ padding: '5px' }} onClick={this.handleAdd} disabled={currentValue === maximum}>
-                        <AddCircle fontSize="small" color='secondary' />
+                        <AddCircle color='secondary' />
                     </IconButton>
                 </div>
             </div>

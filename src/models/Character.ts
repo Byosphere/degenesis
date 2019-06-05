@@ -1,3 +1,5 @@
+import { SKILLS } from "../constants";
+
 export interface Attribute {
     id: number;
     base: number;
@@ -107,22 +109,55 @@ export default class Character implements ICharacter {
 
     get sporulationMax(): number {
         // PSY + foi/volonté * 2
-        return 5;
+        const psyche = this.attributes.find((attr: Attribute) => attr.id === 4);
+        if (psyche) {
+            const foiVolonte = psyche.skills.find((skill: Skill) => SKILLS[4][skill.id] === this.belief);
+            return foiVolonte ? psyche.base + (foiVolonte.value * 2) : 0;
+        } else {
+            return 0;
+        }
     }
 
     get egoMax(): number {
         // INT + concentration/pulsions * 2
-        return 5;
+
+        if (this.behavior === 'concentration') {
+            const intellect = this.attributes.find((attr: Attribute) => attr.id === 3);
+            if (intellect) {
+                const concentration = intellect.skills.find((skill: Skill) => SKILLS[3][skill.id] === this.behavior);
+                return concentration ? intellect.base + (concentration.value * 2) : 0;
+            } else {
+                return 0;
+            }
+        } else if (this.behavior === 'concentration') {
+            const instinct = this.attributes.find((attr: Attribute) => attr.id === 5);
+            if (instinct) {
+                const pulsions = instinct.skills.find((skill: Skill) => SKILLS[5][skill.id] === this.behavior);
+                return pulsions ? instinct.base + (pulsions.value * 2) : 0;
+            } else {
+                return 0;
+            }
+        } else {
+            return 0;
+        }
     }
 
     get blessuresMax(): number {
         // PHY + resistance * 2
-        return 5;
+        const physique = this.attributes.find((attr: Attribute) => attr.id === 0);
+        if (physique) {
+            const resistance = physique.skills.find((skill: Skill) => SKILLS[0][skill.id] === 'resistance');
+            return resistance ? physique.base + (resistance.value * 2) : 0;
+        } else {
+            return 0;
+        }
     }
 
     get traumaMax(): number {
         // PHY + PSY
-        return 5;
+        const physique = this.attributes.find((attr: Attribute) => attr.id === 0);
+        const psyche = this.attributes.find((attr: Attribute) => attr.id === 4);
+        return physique && psyche ? physique.base + psyche.base : 0;
     }
 
     public clone(): Character {

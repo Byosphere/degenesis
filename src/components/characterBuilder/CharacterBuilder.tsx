@@ -446,7 +446,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
-                                        value={newCharacter.story}
+                                        value={newCharacter.blessuresMax}
                                         disabled
                                     />
                                     <TextField
@@ -457,7 +457,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
-                                        value={newCharacter.story}
+                                        value={newCharacter.egoMax}
                                         disabled
                                     />
                                 </div>
@@ -470,7 +470,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
-                                        value={newCharacter.story}
+                                        value={newCharacter.sporulationMax}
                                         disabled
                                     />
                                     <TextField
@@ -481,7 +481,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
-                                        value={newCharacter.story}
+                                        value={newCharacter.traumaMax}
                                         disabled
                                     />
                                 </div>
