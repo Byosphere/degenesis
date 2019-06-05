@@ -128,6 +128,7 @@ export default class ViewStatsPage extends Component<Props, State> {
                         />
                     </CardContent>
                 </Card>
+                <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.attributes')}</Typography>
                 {char.attributes.map((att: Attribute) => (
                     <ExpansionPanel key={att.id}>
                         <ExpansionPanelSummary

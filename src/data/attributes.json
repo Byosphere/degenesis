@@ -1,0 +1,188 @@
+[
+    {
+        "id": 0,
+        "name": "physique",
+        "base": 0,
+        "skills": [
+            {
+                "id": 0,
+                "value": 0
+            },
+            {
+                "id": 1,
+                "value": 0
+            },
+            {
+                "id": 2,
+                "value": 0
+            },
+            {
+                "id": 3,
+                "value": 0
+            },
+            {
+                "id": 4,
+                "value": 0
+            },
+            {
+                "id": 5,
+                "value": 0
+            }
+        ]
+    },
+    {
+        "id": 1,
+        "name": "agilite",
+        "base": 0,
+        "skills": [
+            {
+                "id": 0,
+                "value": 0
+            },
+            {
+                "id": 1,
+                "value": 0
+            },
+            {
+                "id": 2,
+                "value": 0
+            },
+            {
+                "id": 3,
+                "value": 0
+            },
+            {
+                "id": 4,
+                "value": 0
+            },
+            {
+                "id": 5,
+                "value": 0
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "name": "charisme",
+        "base": 0,
+        "skills": [
+            {
+                "id": 0,
+                "value": 0
+            },
+            {
+                "id": 1,
+                "value": 0
+            },
+            {
+                "id": 2,
+                "value": 0
+            },
+            {
+                "id": 3,
+                "value": 0
+            },
+            {
+                "id": 4,
+                "value": 0
+            },
+            {
+                "id": 5,
+                "value": 0
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "name": "intellect",
+        "base": 0,
+        "skills": [
+            {
+                "id": 0,
+                "value": 0
+            },
+            {
+                "id": 1,
+                "value": 0
+            },
+            {
+                "id": 2,
+                "value": 0
+            },
+            {
+                "id": 3,
+                "value": 0
+            },
+            {
+                "id": 4,
+                "value": 0
+            },
+            {
+                "id": 5,
+                "value": 0
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "name": "psyche",
+        "base": 0,
+        "skills": [
+            {
+                "id": 0,
+                "value": 0
+            },
+            {
+                "id": 1,
+                "value": 0
+            },
+            {
+                "id": 2,
+                "value": 0
+            },
+            {
+                "id": 3,
+                "value": 0
+            },
+            {
+                "id": 4,
+                "value": 0
+            },
+            {
+                "id": 5,
+                "value": 0
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "name": "instinct",
+        "base": 0,
+        "skills": [
+            {
+                "id": 0,
+                "value": 0
+            },
+            {
+                "id": 1,
+                "value": 0
+            },
+            {
+                "id": 2,
+                "value": 0
+            },
+            {
+                "id": 3,
+                "value": 0
+            },
+            {
+                "id": 4,
+                "value": 0
+            },
+            {
+                "id": 5,
+                "value": 0
+            }
+        ]
+    }
+]

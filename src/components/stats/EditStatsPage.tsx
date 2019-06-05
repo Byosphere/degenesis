@@ -58,13 +58,6 @@ export default class EditStatsPage extends Component<Props, State> {
         this.setState({ char: this.state.char, pristine: false });
     }
 
-    public handleCancel = (event: React.MouseEvent<HTMLButtonElement>) => {
-        this.setState({
-            char: JSON.parse(JSON.stringify(this.props.char)),
-            pristine: true
-        });
-    }
-
     public handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
         this.props.onCharChange(this.state.char);
         this.setState({ pristine: true });
@@ -185,7 +178,6 @@ export default class EditStatsPage extends Component<Props, State> {
                             <Select
                                 input={<Input name="rang" fullWidth />}
                                 fullWidth
-                                disabled={char.culte < 0}
                                 value={char.rang}
                                 onChange={this.handleChange}
                                 error={char.rang < 0}

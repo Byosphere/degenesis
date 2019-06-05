@@ -75,8 +75,16 @@
         "concept": {
             "title": "Choix d'un Concept"
         },
+        "bonus": {
+            "value": "(bonus : {num})",
+            "attributes": "Attribut(s) bonus :",
+            "skills": "Compétences bonus :"
+        },
+        "attributesLeft": "Il vous reste {num} point à répartir dans les attributs.",
+        "skillsLeft": "Il vous reste {num} point à répartir dans les compétences.",
         "selectattributes": "Répartition des Attributs",
-        "attributes": "Choix des Attributs",
+        "selectskills": "Répartitions des Compétences",
+        "attributes": "Choix des Attributs particuliers",
         "potentials": "Choix des Potentiels",
         "lasttouch": "Touches finales",
         "foi": "La *foi* donne au personnage une croyance en un ou des être(s) supérieur(s) qui le guide et l'influence dans son jugement.",
@@ -135,27 +143,33 @@
     "attributes": {
         "physique": {
             "name": "Physique",
-            "short": "PHY"
+            "short": "PHY",
+            "desc": ""
         },
         "agilite": {
             "name": "Agilité",
-            "short": "AGI"
+            "short": "AGI",
+            "desc": ""
         },
         "charisme": {
             "name": "Charisme",
-            "short": "CHA"
+            "short": "CHA",
+            "desc": ""
         },
         "intellect": {
             "name": "Intellect",
-            "short": "INT"
+            "short": "INT",
+            "desc": ""
         },
         "psyche": {
             "name": "Psyché",
-            "short": "PSY"
+            "short": "PSY",
+            "desc": ""
         },
         "instinct": {
             "name": "Instinct",
-            "short": "INS"
+            "short": "INS",
+            "desc": ""
         }
     },
     "skills": {

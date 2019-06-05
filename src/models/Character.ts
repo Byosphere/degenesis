@@ -1,7 +1,9 @@
 import { SKILLS } from "../constants";
+import baseAttributes from '../data/attributes.json';
 
 export interface Attribute {
     id: number;
+    name: string;
     base: number;
     skills: Skill[];
     bonusMax?: number;
@@ -60,6 +62,7 @@ export interface ICharacter {
 }
 
 export default class Character implements ICharacter {
+
     name: string;
     age: number;
     rang: number;
@@ -67,9 +70,9 @@ export default class Character implements ICharacter {
     size: number;
     weight: number;
     money: number;
-    culture: number;
-    culte: number;
-    concept: number;
+    _culture: number;
+    _culte: number;
+    _concept: number;
     story: string;
     ego: number;
     sporulation: number;
@@ -91,13 +94,13 @@ export default class Character implements ICharacter {
         this.size = size;
         this.weight = weight;
         this.money = money;
-        this.culte = culte;
-        this.culture = culture;
-        this.concept = concept;
+        this._culte = culte;
+        this._culture = culture;
+        this._concept = concept;
         this.story = story;
         this.belief = belief;
         this.behavior = behavior;
-        this.attributes = attributes || [];
+        this.attributes = attributes || baseAttributes;
         this.potentials = potentials || [];
         this.inventory = inventory || [];
         this.notes = notes || [];
@@ -105,6 +108,34 @@ export default class Character implements ICharacter {
         this.sporulation = sporulation || 0;
         this.blessures = blessures || 0;
         this.trauma = trauma || 0;
+
+    }
+
+    set culte(id: number) {
+        this._updateAttributes();
+        this._culte = id;
+    }
+
+    get culte(): number {
+        return this._culte;
+    }
+
+    set culture(id: number) {
+        this._updateAttributes();
+        this._culture = id;
+    }
+
+    get culture(): number {
+        return this._culture;
+    }
+
+    set concept(id: number) {
+        this._updateAttributes();
+        this._concept = id;
+    }
+
+    get concept(): number {
+        return this._concept;
     }
 
     get sporulationMax(): number {
@@ -161,6 +192,20 @@ export default class Character implements ICharacter {
     }
 
     public clone(): Character {
-        return new Character(JSON.parse(JSON.stringify(this)));
+        return new Character({
+            culte: this._culte,
+            culture: this._culture,
+            concept: this._concept,
+            ...JSON.parse(JSON.stringify(this))
+        });
+    }
+
+    public addToMaxAttr(name: string) {
+        let attribute = this.attributes.find(attr => attr.name === name);
+        if (attribute) attribute.bonusMax++;
+    }
+
+    private _updateAttributes() {
+        // TODO vérifier les valeures de culture, culte concept, et mettre à jour les valeurs bonus
     }
 }

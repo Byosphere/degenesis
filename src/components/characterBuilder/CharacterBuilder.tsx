@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
-import { Card, Stepper, Step, StepLabel, StepContent, Typography, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, Button, Grid, CardMedia, CardContent, List, ListItem, ListItemIcon, Checkbox, ListItemText, ListSubheader, Chip, Divider } from '@material-ui/core';
+import { Card, Stepper, Step, StepLabel, StepContent, Typography, Button, Chip } from '@material-ui/core';
 import Character from '../../models/Character';
 import { Redirect } from 'react-router-dom';
 import T from 'i18n-react';
-import { CULTURES, CULTES, CONCEPTS, SEX, POTENTIALS, GENERIC_POTENTIALS, MONEY } from '../../constants';
-import { DonutSmall, Done, KeyboardArrowRight } from '@material-ui/icons';
-import { Culture, Culte, Concept } from '../../models/Data';
+import { CULTURES, CULTES, CONCEPTS, MONEY, BASE_SKILLS, BASE_ATTRIBUTES } from '../../constants';
+import { Done } from '@material-ui/icons';
+import StepWho from './StepWho';
+import StepCulture from './StepCulture';
+import StepCulte from './StepCulte';
+import StepConcept from './StepConcept';
+import StepAttributes from './StepAttributes';
+import StepSkills from './StepSkills';
+import StepBelief from './StepBelief';
+import StepPotentials from './StepPotentials';
+import StepLast from './StepLast';
 
 interface Props {
     characters: Character[];
@@ -16,6 +24,8 @@ interface Props {
 interface State {
     activeStep: number;
     newCharacter: any;
+    attributePoints: number;
+    skillPoints: number;
 }
 
 export default class CharacterBuilder extends Component<Props, State> {
@@ -25,7 +35,9 @@ export default class CharacterBuilder extends Component<Props, State> {
 
         this.state = {
             activeStep: 0,
-            newCharacter: new Character()
+            newCharacter: new Character(),
+            attributePoints: BASE_ATTRIBUTES,
+            skillPoints: BASE_SKILLS
         };
     }
 
@@ -53,7 +65,8 @@ export default class CharacterBuilder extends Component<Props, State> {
     }
 
     public handleAttributeChange = (attributeId: number, skillId: number, value: number) => {
-
+        console.log(attributeId, skillId, value);
+        // TODO
     }
 
     public handleToggle = (id: number, type: number) => {
@@ -71,17 +84,16 @@ export default class CharacterBuilder extends Component<Props, State> {
         this.setState({ newCharacter });
     }
 
-    public handleSelectAttribute(field: string, value: string): void {
+    public handleSelectAttribute = (field: string, value: string) => {
         let newCharacter: any = this.state.newCharacter;
         newCharacter[field] = value;
         this.setState({ newCharacter });
-
     }
 
     public render() {
 
         if (this.props.selectedCharacter) return <Redirect to='/stats' />
-        const { activeStep, newCharacter } = this.state;
+        const { activeStep, newCharacter, attributePoints, skillPoints } = this.state;
 
         return (
             <div style={{ margin: '5px', flex: 1 }}>
@@ -93,93 +105,18 @@ export default class CharacterBuilder extends Component<Props, State> {
                         <Step>
                             {this.displayLabel(T.translate('create.who').toString(), newCharacter.name, 0)}
                             <StepContent>
-                                <TextField
-                                    name='name'
-                                    label={T.translate('generic.name')}
-                                    margin="dense"
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    fullWidth
-                                    value={newCharacter.name || ''}
+                                <StepWho
+                                    newCharacter={newCharacter}
                                     onChange={this.handleChange}
-                                    required
+                                    buttons={this.displayControls(
+                                        !newCharacter.name ||
+                                        !newCharacter.age ||
+                                        !newCharacter.sex ||
+                                        !newCharacter.weight ||
+                                        !newCharacter.size,
+                                        false
+                                    )}
                                 />
-                                <div style={{ display: 'flex' }}>
-                                    <TextField
-                                        name='age'
-                                        label={T.translate('generic.age')}
-                                        margin="dense"
-                                        type='number'
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        style={{ flex: 1, marginRight: '8px' }}
-                                        value={newCharacter.age || ''}
-                                        onChange={this.handleChange}
-                                        required
-                                    />
-                                    <FormControl margin='dense' style={{ flex: 1, marginLeft: '8px' }}>
-                                        <InputLabel shrink htmlFor="sex">
-                                            {T.translate('generic.sex')}
-                                        </InputLabel>
-                                        <Select
-                                            input={<Input name="sex" />}
-                                            value={newCharacter.sex || ''}
-                                            onChange={this.handleChange}
-                                            required
-                                        >
-                                            {SEX.map((text, key) => (
-                                                <MenuItem key={key} value={key}>
-                                                    {text ? T.translate('sex.' + text) : T.translate('generic.none')}
-                                                </MenuItem>
-                                            ))}
-                                        </Select>
-                                    </FormControl>
-                                </div>
-                                <div style={{ display: 'flex' }}>
-                                    <TextField
-                                        name='weight'
-                                        label="Poids"
-                                        margin="dense"
-                                        type='number'
-                                        InputProps={{
-                                            endAdornment: <InputAdornment position="end">Kg</InputAdornment>
-                                        }}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        style={{ flex: 1, marginRight: '8px' }}
-                                        value={newCharacter.weight || ''}
-                                        onChange={this.handleChange}
-                                        required
-
-                                    />
-                                    <TextField
-                                        name='size'
-                                        label="Taille"
-                                        margin="dense"
-                                        type='number'
-                                        InputProps={{
-                                            endAdornment: <InputAdornment position="end">cm</InputAdornment>
-                                        }}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        style={{ flex: 1, marginLeft: '8px' }}
-                                        value={newCharacter.size || ''}
-                                        onChange={this.handleChange}
-                                        required
-                                    />
-                                </div>
-                                {this.displayControls(
-                                    !newCharacter.name ||
-                                    !newCharacter.age ||
-                                    !newCharacter.sex ||
-                                    !newCharacter.weight ||
-                                    !newCharacter.size,
-                                    false
-                                )}
                             </StepContent>
                         </Step>
                         <Step>
@@ -190,46 +127,11 @@ export default class CharacterBuilder extends Component<Props, State> {
                                 1
                             )}
                             <StepContent>
-                                <FormControl fullWidth margin='dense'>
-                                    <InputLabel shrink htmlFor="culture">
-                                        {T.translate('generic.culture')}
-                                    </InputLabel>
-                                    <Select
-                                        input={<Input name="culture" fullWidth />}
-                                        fullWidth
-                                        value={isNaN(newCharacter.culture) ? '' : newCharacter.culture}
-                                        onChange={this.handleChange}
-                                    >
-                                        <MenuItem value={''}>
-                                            {T.translate('generic.none')}
-                                        </MenuItem>
-                                        {CULTURES.map((culture: Culture, key) => (
-                                            <MenuItem key={key} value={key}>
-                                                {T.translate('cultures.' + culture.name)}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                                {typeof newCharacter.culture === 'number' && <div style={{ margin: '16px 0' }}>
-                                    <Grid container spacing={2} alignItems='center'>
-                                        <Grid item xs={6}>
-                                            <Typography variant="overline">
-                                                {T.translate('cultures.' + CULTURES[newCharacter.culture].name)}
-                                            </Typography>
-                                            <Typography variant="body2">
-                                                {T.translate('create.culture.' + CULTURES[newCharacter.culture].name)}
-                                            </Typography>
-                                        </Grid>
-                                        <Grid item xs={6}>
-                                            <CardMedia
-                                                image={"/images/cultures/" + CULTURES[newCharacter.culture].name + ".jpg"}
-                                                title={CULTURES[newCharacter.culture].name}
-                                                style={{ height: '100px' }}
-                                            />
-                                        </Grid>
-                                    </Grid>
-                                </div>}
-                                {this.displayControls(typeof newCharacter.culture !== 'number', true)}
+                                <StepCulture
+                                    newCharacter={newCharacter}
+                                    onChange={this.handleChange}
+                                    buttons={this.displayControls(typeof newCharacter.culture !== 'number', true)}
+                                />
                             </StepContent>
                         </Step>
                         <Step>
@@ -240,43 +142,11 @@ export default class CharacterBuilder extends Component<Props, State> {
                                 2
                             )}
                             <StepContent>
-                                <FormControl fullWidth margin='dense'>
-                                    <InputLabel shrink htmlFor="culte">
-                                        {T.translate('generic.culte')}
-                                    </InputLabel>
-                                    <Select
-                                        input={<Input name="culte" fullWidth />}
-                                        fullWidth
-                                        value={isNaN(newCharacter.culte) ? '' : newCharacter.culte}
-                                        onChange={this.handleChange}
-                                    >
-                                        <MenuItem value={''}>
-                                            {T.translate('generic.none')}
-                                        </MenuItem>
-                                        {CULTES.map((culte: Culte, key: number) => (
-                                            <MenuItem key={key} value={key}>
-                                                {T.translate('cultes.' + culte.name)}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                                {typeof newCharacter.culte === 'number' && <div style={{ margin: '16px 0' }}>
-                                    <CardMedia
-                                        image={"/images/cultes/" + CULTES[newCharacter.culte].name + ".jpg"}
-                                        title={CULTES[newCharacter.culte].name}
-                                        style={{ height: '100px' }}
-                                    />
-                                    <CardContent>
-                                        <Typography variant='body2' style={{ display: 'flex', alignItems: 'center', fontStyle: 'italic' }}>
-                                            <DonutSmall fontSize='small' style={{ marginRight: '5px' }} />
-                                            {T.translate('generic.money', { money: MONEY[newCharacter.culte] * 2 })}
-                                        </Typography>
-                                        <Typography variant="body2">
-                                            {T.translate('create.culte.' + CULTES[newCharacter.culte].name)}
-                                        </Typography>
-                                    </CardContent>
-                                </div>}
-                                {this.displayControls(typeof newCharacter.culte !== 'number', true)}
+                                <StepCulte
+                                    newCharacter={newCharacter}
+                                    onChange={this.handleChange}
+                                    buttons={this.displayControls(typeof newCharacter.culte !== 'number', true)}
+                                />
                             </StepContent>
                         </Step>
                         <Step>
@@ -287,32 +157,11 @@ export default class CharacterBuilder extends Component<Props, State> {
                                 3
                             )}
                             <StepContent>
-                                <FormControl fullWidth margin='dense'>
-                                    <InputLabel shrink htmlFor="concept">
-                                        {T.translate('generic.concept')}
-                                    </InputLabel>
-                                    <Select
-                                        input={<Input name="concept" fullWidth />}
-                                        fullWidth
-                                        value={isNaN(newCharacter.concept) ? '' : newCharacter.concept}
-                                        onChange={this.handleChange}
-                                    >
-                                        <MenuItem value={''}>
-                                            {T.translate('generic.none')}
-                                        </MenuItem>
-                                        {CONCEPTS.map((concept: Concept, key) => (
-                                            <MenuItem key={key} value={key}>
-                                                {T.translate('concepts.' + concept.name)}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                                {typeof newCharacter.concept === 'number' && <CardContent>
-                                    <Typography variant="body2">
-                                        {T.translate('create.concept.' + CONCEPTS[newCharacter.concept].name)}
-                                    </Typography>
-                                </CardContent>}
-                                {this.displayControls(typeof newCharacter.concept !== 'number', true)}
+                                <StepConcept
+                                    newCharacter={newCharacter}
+                                    onChange={this.handleChange}
+                                    buttons={this.displayControls(typeof newCharacter.concept !== 'number', true)}
+                                />
                             </StepContent>
                         </Step>
                         <Step>
@@ -322,185 +171,65 @@ export default class CharacterBuilder extends Component<Props, State> {
                                 4
                             )}
                             <StepContent>
-                                <div style={{ margin: '10px 0', display: 'flex', alignItems: 'center' }}>
-                                    <KeyboardArrowRight />
-                                    <Chip
-                                        color={newCharacter.belief === 'foi' ? 'secondary' : 'default'}
-                                        label={'(' + T.translate('attributes.psyche.short') + ') ' + T.translate('skills.foi')}
-                                        style={{ marginRight: '5px' }}
-                                        onClick={() => this.handleSelectAttribute('belief', 'foi')}
-                                    />
-                                    <Chip
-                                        color={newCharacter.belief === 'volonte' ? 'secondary' : 'default'}
-                                        label={'(' + T.translate('attributes.psyche.short') + ') ' + T.translate('skills.volonte')}
-                                        onClick={() => this.handleSelectAttribute('belief', 'volonte')}
-                                    />
-                                </div>
-                                <Typography variant='body2'>{newCharacter.belief ? T.translate('create.' + newCharacter.belief) : ''}</Typography>
-                                <Divider variant="middle" style={{ margin: '16px 0' }} />
-                                <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
-                                    <KeyboardArrowRight />
-                                    <Chip
-                                        color={newCharacter.behavior === 'concentration' ? 'secondary' : 'default'}
-                                        label={'(' + T.translate('attributes.intellect.short') + ') ' + T.translate('skills.concentration')}
-                                        style={{ marginRight: '5px' }}
-                                        onClick={() => this.handleSelectAttribute('behavior', 'concentration')}
-
-                                    />
-                                    <Chip
-                                        color={newCharacter.behavior === 'pulsions' ? 'secondary' : 'default'}
-                                        label={'(' + T.translate('attributes.instinct.short') + ') ' + T.translate('skills.pulsions')}
-                                        onClick={() => this.handleSelectAttribute('behavior', 'pulsions')}
-                                    />
-                                </div>
-                                <Typography variant='body2'>{newCharacter.behavior ? T.translate('create.' + newCharacter.behavior) : ''}</Typography>
-                                {this.displayControls(!newCharacter.behavior || !newCharacter.belief, true)}
+                                <StepBelief
+                                    newCharacter={newCharacter}
+                                    onChange={this.handleSelectAttribute}
+                                    buttons={this.displayControls(!newCharacter.behavior || !newCharacter.belief, true)}
+                                />
                             </StepContent>
                         </Step>
                         <Step>
-                            <StepLabel>{T.translate('create.selectattributes')}</StepLabel>
+                            {this.displayLabel(
+                                T.translate('create.selectattributes').toString(),
+                                T.translate('create.').toString(),
+                                5
+                            )}
                             <StepContent>
-                                {this.displayControls(false, true)}
+                                <StepAttributes
+                                    newCharacter={newCharacter}
+                                    attributePoints={attributePoints}
+                                    onChange={this.handleAttributeChange}
+                                    buttons={this.displayControls(attributePoints !== 0, true)}
+                                />
+                            </StepContent>
+                        </Step>
+                        <Step>
+                            {this.displayLabel(
+                                T.translate('create.selectskills').toString(),
+                                T.translate('create.').toString(),
+                                6
+                            )}
+                            <StepContent>
+                                <StepSkills
+                                    newCharacter={newCharacter}
+                                    skillPoints={skillPoints}
+                                    onChange={this.handleAttributeChange}
+                                    buttons={this.displayControls(skillPoints !== 0, true)}
+                                />
                             </StepContent>
                         </Step>
                         <Step>
                             {this.displayLabel(
                                 T.translate('create.potentials').toString(),
                                 T.translate('generic.selectedpotentials').toString(),
-                                6
+                                7
                             )}
                             {newCharacter.culte && <StepContent>
-                                <List
-                                    dense
-                                    component="div"
-                                    role="list"
-                                    subheader={
-                                        <ListSubheader component="div" id="nested-list-subheader">
-                                            {T.translate('generic.potential1')}
-                                        </ListSubheader>
-                                    }
-                                >
-                                    {POTENTIALS[newCharacter.culte].map((potential: string, key: number) => (
-                                        < ListItem
-                                            key={'c' + key}
-                                            role="listitem"
-                                            button
-                                            onClick={() => this.handleToggle(key, 1)}
-                                        >
-                                            <ListItemIcon>
-                                                <Checkbox
-                                                    disableRipple
-                                                    tabIndex={-1}
-                                                    checked={Boolean(newCharacter.potentials.find(p => p.id === key && p.type === 1))}
-                                                />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={T.translate('potentials.' + potential + '.name')}
-                                                secondary={T.translate('potentials.' + potential + '.desc')}
-                                            />
-                                        </ListItem>
-                                    ))}
-                                </List>
-                                <List
-                                    dense
-                                    component="div"
-                                    role="list"
-                                    subheader={
-                                        <ListSubheader component="div" id="nested-list-subheader">
-                                            {T.translate('generic.potential0')}
-                                        </ListSubheader>
-                                    } >
-                                    {POTENTIALS[GENERIC_POTENTIALS].map((potential: string, key: number) => (
-                                        < ListItem
-                                            key={'g' + key}
-                                            role="listitem"
-                                            button
-                                            onClick={() => this.handleToggle(key, 0)}
-                                        >
-                                            <ListItemIcon>
-                                                <Checkbox
-                                                    disableRipple
-                                                    tabIndex={-1}
-                                                    checked={Boolean(newCharacter.potentials.find(p => p.id === key && p.type === 0))}
-                                                />
-                                            </ListItemIcon>
-                                            <ListItemText
-                                                primary={T.translate('potentials.' + potential + '.name')}
-                                                secondary={T.translate('potentials.' + potential + '.desc')}
-                                            />
-                                        </ListItem>
-                                    ))}
-                                </List>
-                                {this.displayControls(!newCharacter.potentials || newCharacter.potentials.length !== 2, true)}
+                                <StepPotentials
+                                    newCharacter={newCharacter}
+                                    onToggle={this.handleToggle}
+                                    buttons={this.displayControls(!newCharacter.potentials || newCharacter.potentials.length !== 2, true)}
+                                />
                             </StepContent>}
                         </Step>
                         <Step>
                             <StepLabel>{T.translate('create.lasttouch')}</StepLabel>
                             <StepContent>
-                                <div style={{ display: 'flex' }}>
-                                    <TextField
-                                        label={T.translate('generic.life')}
-                                        margin="dense"
-                                        type='text'
-                                        style={{ flex: 1, marginRight: '8px' }}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        value={newCharacter.blessuresMax}
-                                        disabled
-                                    />
-                                    <TextField
-                                        label={T.translate('generic.ego')}
-                                        margin="dense"
-                                        type='text'
-                                        style={{ flex: 1, marginLeft: '8px' }}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        value={newCharacter.egoMax}
-                                        disabled
-                                    />
-                                </div>
-                                <div style={{ display: 'flex' }}>
-                                    <TextField
-                                        label={T.translate('generic.sporulation')}
-                                        margin="dense"
-                                        type='text'
-                                        style={{ flex: 1, marginRight: '8px' }}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        value={newCharacter.sporulationMax}
-                                        disabled
-                                    />
-                                    <TextField
-                                        label={T.translate('generic.trauma')}
-                                        margin="dense"
-                                        type='text'
-                                        style={{ flex: 1, marginLeft: '8px' }}
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        value={newCharacter.traumaMax}
-                                        disabled
-                                    />
-                                </div>
-                                <TextField
-                                    name="story"
-                                    label={T.translate('generic.story')}
-                                    margin="dense"
-                                    type='text'
-                                    InputLabelProps={{
-                                        shrink: true,
-                                    }}
-                                    multiline
-                                    fullWidth
-                                    rows={15}
-                                    rowsMax={30}
-                                    value={newCharacter.story}
+                                <StepLast
+                                    newCharacter={newCharacter}
                                     onChange={this.handleChange}
+                                    buttons={this.displayControls(false, true, true)}
                                 />
-                                {this.displayControls(false, true, true)}
                             </StepContent>
                         </Step>
                     </Stepper>
