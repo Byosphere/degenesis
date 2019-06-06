@@ -16,15 +16,20 @@ interface Props {
 export default class AttributeRepartitor extends Component<Props, {}> {
 
     public handleChange = (value: number) => {
-        if (!this.props.disabled)
-            this.props.onChange(this.props.attributeId, this.props.skillId, value);
+        if (!this.props.disabled) {
+            if (isNaN(this.props.skillId) && value >= 1) {
+                this.props.onChange(this.props.attributeId, this.props.skillId, value);
+            } else if (!isNaN(this.props.skillId)) {
+                this.props.onChange(this.props.attributeId, this.props.skillId, value);
+            }
+        }
     }
 
     public render() {
 
-        const { attributeId, value, bonusMax, skillId, onChange, disabled } = this.props;
+        const { attributeId, value, bonusMax, skillId, disabled } = this.props;
         const isSkill = !isNaN(skillId);
-        const valueMax = 2 + bonusMax;
+        const valueMax = (isSkill ? 2 : 3) + bonusMax;
 
         return (
             <ListItem dense disabled={disabled}>
@@ -35,7 +40,7 @@ export default class AttributeRepartitor extends Component<Props, {}> {
                                 {isSkill && T.translate('skills.' + SKILLS[attributeId][skillId])}
                                 {!isSkill && T.translate('attributes.' + ATTRIBUTES[attributeId] + '.name')}
                             </span>
-                            <div>
+                            <div style={{ display: 'flex' }}>
                                 {[0, 1, 2, 3, 4, 5, 6].map((index: number) => (
                                     <span key={index} onClick={() => this.handleChange(index)}>
                                         {this.getIconFromNumber(index, value, valueMax)}
@@ -61,7 +66,7 @@ export default class AttributeRepartitor extends Component<Props, {}> {
             case 2:
                 return selected ? <LooksTwo /> : <LooksTwoOutlined />;
             case 3:
-                return selected ? <Looks3 color='secondary' /> : <Looks3Outlined color='secondary' />;
+                return selected ? <Looks3 color={isNaN(this.props.skillId) ? 'inherit' : 'secondary'} /> : <Looks3Outlined color={isNaN(this.props.skillId) ? 'inherit' : 'secondary'} />;
             case 4:
                 return selected ? <Looks4 color='secondary' /> : <Looks4Outlined color='secondary' />;
             case 5:

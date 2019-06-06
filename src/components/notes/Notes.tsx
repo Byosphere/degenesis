@@ -76,7 +76,7 @@ export default class Notes extends Component<Props, State> {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        value={notes[activeStep].text}
+                        value={notes[activeStep] ? notes[activeStep].text : ''}
                     />
                 </CardContent>
                 <CardActions >

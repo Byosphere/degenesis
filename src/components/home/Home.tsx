@@ -9,7 +9,7 @@ import { CULTURES, CULTES, CONCEPTS } from '../../constants';
 interface ownProps {
     characters: Character[];
     selectedCharacter: Character;
-    onChangeChar: (char: Character) => void;
+    onChangeChar: (char: Character, save: boolean) => void;
 }
 
 interface State { }
@@ -18,8 +18,8 @@ type Props = ownProps & RouteComponentProps;
 
 export default class Home extends Component<Props, State> {
 
-    public selectCharacter(key: number): void {
-        this.props.onChangeChar(this.props.characters[key]);
+    public selectCharacter(char: Character): void {
+        this.props.onChangeChar(char, false);
     }
 
     public handleCreate = () => {
@@ -48,7 +48,7 @@ export default class Home extends Component<Props, State> {
                         }
                         style={{ height: 'calc(100% - 64px)', overflowY: 'auto' }}
                     >
-                        {this.props.characters.map((char: Character, key: number) => (
+                        {this.props.characters.filter(char => char !== null).map((char: Character, key: number) => (
                             <ListItem
                                 key={key}
                                 button
@@ -59,7 +59,7 @@ export default class Home extends Component<Props, State> {
                                     backgroundPosition: '160px center',
                                     margin: '5px 0'
                                 }}
-                                onClick={() => this.selectCharacter(key)}
+                                onClick={() => this.selectCharacter(char)}
                             >
                                 <ListItemAvatar>
                                     <Avatar alt={char.name} src={"/images/cultures/" + CULTURES[char.culture].name + ".jpg"} />

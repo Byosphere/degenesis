@@ -8,7 +8,7 @@ import EditStatsPage from './EditStatsPage';
 interface ownProps {
     char: Character;
     onTabChange: (value: any) => void;
-    onCharChange: (char: Character) => void;
+    onCharChange: (char: Character, save: boolean) => void;
     tab: number;
 }
 

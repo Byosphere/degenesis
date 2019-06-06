@@ -8,7 +8,7 @@ import Character from '../../models/Character';
 interface OwnProps {
     tab: number;
     onToggleTab: (value: number) => void;
-    onChangeChar: (char: Character) => void;
+    onChangeChar: (char: Character, save: boolean) => void;
     displayTabs: boolean;
 }
 
@@ -33,11 +33,11 @@ class Header extends Component<Props, State> {
     }
 
     public handleChangeChar = () => {
-        this.props.onChangeChar(null);
+        this.props.onChangeChar(null, false);
     }
 
     public handleBack = () => {
-        this.props.onChangeChar(null);
+        this.props.onChangeChar(null, false);
         this.props.history.push('/');
     }
 

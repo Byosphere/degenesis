@@ -58,7 +58,7 @@ export default class AttributeEditor extends Component<Props, State> {
                                 InputProps={{
                                     startAdornment: <InputAdornment position="start">{T.translate('attributes.' + ATTRIBUTES[attribute.id]) + ':'}</InputAdornment>,
                                 }}
-                                value={attribute.base || ''}
+                                value={attribute.base || 0}
                                 onChange={(evt: React.ChangeEvent<HTMLInputElement>) => this.handleChange(evt)}
                                 error={attribute.base > 6 || attribute.base < 0}
                                 helperText={attribute.base > 6 || attribute.base < 0 ? T.translate('generic.incorrectvalue') : ''}
@@ -77,7 +77,7 @@ export default class AttributeEditor extends Component<Props, State> {
                                     InputProps={{
                                         startAdornment: <InputAdornment position="start">{T.translate('skills.' + SKILLS[attribute.id][skill.id]) + ':'}</InputAdornment>,
                                     }}
-                                    value={skill.value || ''}
+                                    value={skill.value || 0}
                                     onChange={(evt: React.ChangeEvent<HTMLInputElement>) => this.handleChange(evt, skill.id)}
                                     helperText={skill.value > 6 || skill.value < 0 ? T.translate('generic.incorrectvalue') : ''}
                                     error={skill.value > 6 || skill.value < 0}

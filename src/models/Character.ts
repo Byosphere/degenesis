@@ -63,6 +63,7 @@ export interface ICharacter {
 
 export default class Character implements ICharacter {
 
+    id: number;
     name: string;
     age: number;
     rang: number;
@@ -86,10 +87,11 @@ export default class Character implements ICharacter {
     behavior: string;
 
     public constructor(data: any = {}) {
-        const { name, age, ego, sporulation, trauma, blessures, rang, sex, size, weight, money, culte, culture, concept, story, belief, behavior, attributes, potentials, inventory, notes } = data;
+        const { id, name, age, ego, sporulation, trauma, blessures, rang, sex, size, weight, money, culte, culture, concept, story, belief, behavior, attributes, potentials, inventory, notes } = data;
+        this.id = id || 0;
         this.name = name || '';
         this.age = age;
-        this.rang = rang;
+        this.rang = rang || 0;
         this.sex = sex;
         this.size = size;
         this.weight = weight;
@@ -100,7 +102,7 @@ export default class Character implements ICharacter {
         this.story = story;
         this.belief = belief;
         this.behavior = behavior;
-        this.attributes = attributes || baseAttributes;
+        this.attributes = attributes || JSON.parse(JSON.stringify(baseAttributes));
         this.potentials = potentials || [];
         this.inventory = inventory || [];
         this.notes = notes || [];
@@ -108,6 +110,7 @@ export default class Character implements ICharacter {
         this.sporulation = sporulation || 0;
         this.blessures = blessures || 0;
         this.trauma = trauma || 0;
+        this._resetAttributeBonus();
 
     }
 
@@ -143,7 +146,7 @@ export default class Character implements ICharacter {
         const psyche = this.attributes.find((attr: Attribute) => attr.id === 4);
         if (psyche) {
             const foiVolonte = psyche.skills.find((skill: Skill) => SKILLS[4][skill.id] === this.belief);
-            return foiVolonte ? psyche.base + (foiVolonte.value * 2) : 0;
+            return foiVolonte ? (psyche.base + foiVolonte.value) * 2 : 0;
         } else {
             return 0;
         }
@@ -156,15 +159,15 @@ export default class Character implements ICharacter {
             const intellect = this.attributes.find((attr: Attribute) => attr.id === 3);
             if (intellect) {
                 const concentration = intellect.skills.find((skill: Skill) => SKILLS[3][skill.id] === this.behavior);
-                return concentration ? intellect.base + (concentration.value * 2) : 0;
+                return concentration ? (intellect.base + concentration.value) * 2 : 0;
             } else {
                 return 0;
             }
-        } else if (this.behavior === 'concentration') {
+        } else if (this.behavior === 'pulsions') {
             const instinct = this.attributes.find((attr: Attribute) => attr.id === 5);
             if (instinct) {
                 const pulsions = instinct.skills.find((skill: Skill) => SKILLS[5][skill.id] === this.behavior);
-                return pulsions ? instinct.base + (pulsions.value * 2) : 0;
+                return pulsions ? (instinct.base + pulsions.value) * 2 : 0;
             } else {
                 return 0;
             }
@@ -178,7 +181,7 @@ export default class Character implements ICharacter {
         const physique = this.attributes.find((attr: Attribute) => attr.id === 0);
         if (physique) {
             const resistance = physique.skills.find((skill: Skill) => SKILLS[0][skill.id] === 'resistance');
-            return resistance ? physique.base + (resistance.value * 2) : 0;
+            return resistance ? (physique.base + resistance.value) * 2 : 0;
         } else {
             return 0;
         }
@@ -205,8 +208,34 @@ export default class Character implements ICharacter {
         if (attribute) attribute.bonusMax++;
     }
 
+    public toObject() {
+        return {
+            id: this.id,
+            name: this.name,
+            age: this.age,
+            rang: this.rang,
+            sex: this.sex,
+            size: this.size,
+            weight: this.weight,
+            money: this.money,
+            culture: this._culture,
+            culte: this._culte,
+            concept: this._concept,
+            story: this.story,
+            ego: this.ego,
+            sporulation: this.sporulation,
+            blessures: this.blessures,
+            trauma: this.trauma,
+            attributes: this.attributes,
+            potentials: this.potentials,
+            inventory: this.inventory,
+            notes: this.notes,
+            belief: this.belief,
+            behavior: this.behavior
+        };
+    }
+
     private _updateAttributes() {
-        // TODO vérifier les valeures de culture, culte concept, et mettre à jour les valeurs bonus
         this._resetAttributeBonus();
         if (!isNaN(this._culture)) {
             let currentCulture = CULTURES[this._culture];
@@ -227,6 +256,7 @@ export default class Character implements ICharacter {
     private _resetAttributeBonus() {
         this.attributes.forEach((attr: Attribute) => {
             attr.bonusMax = 0;
+            if (attr.base === 0) attr.base = 1;
             attr.skills.forEach((skill) => {
                 skill.bonusMax = 0;
             });

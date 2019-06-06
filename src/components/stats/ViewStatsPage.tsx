@@ -9,7 +9,7 @@ import InteractiveJauge from '../interactiveJauge/InteractiveJauge';
 
 interface Props {
     char: Character;
-    onCharChange: (char: Character) => void;
+    onCharChange: (char: Character, save: boolean) => void;
 }
 
 interface State {
@@ -37,7 +37,7 @@ export default class ViewStatsPage extends Component<Props, State> {
     public handleTrauma = (index: number) => {
         let char = this.props.char;
         char.trauma = index;
-        this.props.onCharChange(char);
+        this.props.onCharChange(char, true);
     }
 
     public handleRollDice(): void {
@@ -47,7 +47,7 @@ export default class ViewStatsPage extends Component<Props, State> {
     public handleChange = (field: string, value: number) => {
         let char: any = this.props.char;
         char[field] = value;
-        this.props.onCharChange(char);
+        this.props.onCharChange(char, true);
     }
 
     public render() {
@@ -76,7 +76,7 @@ export default class ViewStatsPage extends Component<Props, State> {
                             <Chip label={T.translate('rangs.' + RANGS[char.culte][char.rang])} variant="outlined" />
                         }
                     />
-                    <CardContent style={{ padding: '0px 16px' }}>
+                    <CardContent>
                         <Typography variant="caption" component='p'>
                             {
                                 char.size + ' ' + T.translate('generic.s') + ' | ' +

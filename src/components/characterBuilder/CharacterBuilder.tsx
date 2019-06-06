@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Card, Stepper, Step, StepLabel, StepContent, Typography, Button, Chip } from '@material-ui/core';
 import Character from '../../models/Character';
-import { Redirect } from 'react-router-dom';
+import { Redirect, RouteComponentProps } from 'react-router-dom';
 import T from 'i18n-react';
 import { CULTURES, CULTES, CONCEPTS, MONEY, BASE_SKILLS, BASE_ATTRIBUTES } from '../../constants';
 import { Done } from '@material-ui/icons';
@@ -15,11 +15,13 @@ import StepBelief from './StepBelief';
 import StepPotentials from './StepPotentials';
 import StepLast from './StepLast';
 
-interface Props {
+interface OwnProps {
     characters: Character[];
     selectedCharacter: Character;
     createCharacter: (char: Character) => void;
 }
+
+type Props = OwnProps & RouteComponentProps;
 
 interface State {
     activeStep: number;
@@ -34,7 +36,7 @@ export default class CharacterBuilder extends Component<Props, State> {
         super(props);
 
         this.state = {
-            activeStep: 5,
+            activeStep: 0,
             newCharacter: new Character(),
             attributePoints: BASE_ATTRIBUTES,
             skillPoints: BASE_SKILLS
@@ -58,10 +60,8 @@ export default class CharacterBuilder extends Component<Props, State> {
     public handleCreate = (event: React.MouseEvent<HTMLButtonElement>) => {
         let character = this.state.newCharacter;
         character.money = MONEY[character.culte] * 2;
-        character.ego = { id: "ego", actuel: 0, total: 0 };
-        character.sporulation = { id: "sporulation", actuel: 0, total: 0 };
-        character.blessures = { id: "blessures", actuel: 0, total: 0 };
-        character.trauma = { id: "trauma", actuel: 0, total: 0 };
+        this.props.createCharacter(character);
+        this.props.history.push('/');
     }
 
     public handleAttributeChange = (attributeId: number, skillId: number, value: number) => {
@@ -199,7 +199,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                         <Step>
                             {this.displayLabel(
                                 T.translate('create.selectattributes').toString(),
-                                T.translate('create.').toString(),
+                                T.translate('create.selectedattributes').toString(),
                                 5
                             )}
                             <StepContent>
@@ -214,7 +214,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                         <Step>
                             {this.displayLabel(
                                 T.translate('create.selectskills').toString(),
-                                T.translate('create.').toString(),
+                                T.translate('create.selectedskills').toString(),
                                 6
                             )}
                             <StepContent>

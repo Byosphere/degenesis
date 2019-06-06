@@ -8,7 +8,7 @@ import { Save } from '@material-ui/icons';
 
 interface Props {
     char: Character;
-    onCharChange: (char: Character) => void;
+    onCharChange: (char: Character, save: boolean) => void;
     visible: boolean;
 }
 
@@ -31,13 +31,6 @@ export default class EditStatsPage extends Component<Props, State> {
     public handleChange = (event: any) => {
         let char: any = this.state.char;
         char[event.target.name] = event.target.value;
-        switch (event.target.name) {
-            case 'culte':
-                // TODO
-                break;
-            default:
-                break;
-        }
         this.setState({ char, pristine: false });
     }
 
@@ -59,7 +52,7 @@ export default class EditStatsPage extends Component<Props, State> {
     }
 
     public handleSave = (event: React.MouseEvent<HTMLButtonElement>) => {
-        this.props.onCharChange(this.state.char);
+        this.props.onCharChange(this.state.char, true);
         this.setState({ pristine: true });
     }
 

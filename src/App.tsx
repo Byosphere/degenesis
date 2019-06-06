@@ -8,11 +8,9 @@ import Notes from './components/notes/Notes';
 import Potentials from './components/potentials/Potentials';
 import Navigator from './components/navigator/Navigator';
 import Character from './models/Character';
-import char from './data/data.json';
-import char2 from './data/data1.json';
-import char3 from './data/data2.json';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import Home from './components/home/Home';
+import { getCharacters, storeCharacter } from './utils/StorageManager';
 
 interface State {
     characters: Character[];
@@ -30,7 +28,7 @@ class App extends Component<Props, State> {
         super(props);
 
         this.state = {
-            characters: [new Character(char), new Character(char2), new Character(char3)],
+            characters: getCharacters(),
             selectedCharacter: null,
             tabValue: 0
         };
@@ -40,14 +38,16 @@ class App extends Component<Props, State> {
         this.setState({ tabValue: value });
     }
 
-    public handleCharChange = (char: Character) => {
+    public handleCharChange = (char: Character, save: boolean) => {
         this.setState({ selectedCharacter: char });
+        if (char && save) storeCharacter(char);
     }
 
     public handleCreateCharacter = (char: Character) => {
-        let characters = this.state.characters;
-        characters.push(char);
-        this.setState({ characters, selectedCharacter: char });
+        storeCharacter(char);
+        this.setState({
+            characters: getCharacters()
+        });
     }
 
     public render() {
@@ -56,7 +56,7 @@ class App extends Component<Props, State> {
 
         return (
             <div className="App">
-                <Router >
+                <Router>
                     <Header
                         onToggleTab={this.handleTabChange}
                         onChangeChar={this.handleCharChange}

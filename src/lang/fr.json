@@ -53,7 +53,8 @@
         "charactercreate": "Création de personnage",
         "none": "_Aucun_",
         "create": "Créer",
-        "selectedpotentials": "Potentiels choisis"
+        "selectedpotentials": "Potentiels choisis",
+        "attributes": "Attributs"
     },
     "navigator": {
         "stats": "Status",
@@ -87,6 +88,8 @@
         "attributes": "Choix des Attributs particuliers",
         "potentials": "Choix des Potentiels",
         "lasttouch": "Touches finales",
+        "selectedskills": "Compétences choisies",
+        "selectedattributes": "Attributs choisis",
         "foi": "La *foi* donne au personnage une croyance en un ou des être(s) supérieur(s) qui le guide et l'influence dans son jugement.",
         "volonte": "La *volonté* du personnage lui permet de croire en lui et en ses actes. Il est seul maître de son esprit.",
         "concentration": "Le personnage va préférer la réflexion et la *concentration* avant d'agir. Il sait généralement contrôler ses émotions.",
@@ -121,7 +124,7 @@
         "aventurier": "Aventurier",
         "chef": "Chef",
         "chercheur": "Chercheur",
-        "conquerant": "Conquérent",
+        "conquerant": "Conquérant",
         "createur": "Créateur",
         "destructeur": "Destructeur",
         "disciple": "Disciple",

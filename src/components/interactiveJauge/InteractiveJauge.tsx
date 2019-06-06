@@ -30,7 +30,7 @@ export default class InteractiveJauge extends Component<Props, {}> {
 
         let icons: JSX.Element[] = [];
         for (let i = 1; i <= maximum; i++) {
-            const icon = i <= currentValue ? <TurnedIn key={i} color='inherit' /> : <TurnedInNot key={i} color='inherit' />
+            const icon = i <= currentValue ? <TurnedIn style={{ margin: '0 -2px' }} key={i} color='inherit' /> : <TurnedInNot style={{ margin: '0 -2px' }} key={i} color='inherit' />
             icons.push(icon);
         }
 

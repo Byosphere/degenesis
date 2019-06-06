@@ -46,7 +46,7 @@
         "name": "chef",
         "bonus": [
             {
-                "name": "physique",
+                "name": "psyche",
                 "bonusAttribute": false,
                 "skills": [
                     "ruse"
