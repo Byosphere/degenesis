@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { ListItem, ListItemText } from '@material-ui/core';
-import { LooksOne, LooksTwo, Looks3, Looks4, Looks5, Looks6, LooksOneOutlined, LooksTwoOutlined, Looks3Outlined, Looks4Outlined, Looks5Outlined, Looks6Outlined } from '@material-ui/icons';
+import { LooksOne, LooksTwo, Looks3, Looks4, Looks5, Looks6, LooksOneOutlined, LooksTwoOutlined, Looks3Outlined, Looks4Outlined, Looks5Outlined, Looks6Outlined, Backspace, BackspaceOutlined } from '@material-ui/icons';
 import T from 'i18n-react';
 import { SKILLS, ATTRIBUTES } from '../../constants';
 
@@ -10,38 +10,39 @@ interface Props {
     value: number;
     bonusMax: number;
     onChange: (attributeId: number, skillId: number, value: number) => void;
+    disabled?: boolean;
 }
 
 export default class AttributeRepartitor extends Component<Props, {}> {
 
     public handleChange = (value: number) => {
-        this.props.onChange(this.props.attributeId, this.props.skillId, value);
+        if (!this.props.disabled)
+            this.props.onChange(this.props.attributeId, this.props.skillId, value);
     }
 
     public render() {
 
-        const { attributeId, value, bonusMax, skillId, onChange } = this.props;
+        const { attributeId, value, bonusMax, skillId, onChange, disabled } = this.props;
         const isSkill = !isNaN(skillId);
         const valueMax = 2 + bonusMax;
 
         return (
-            <ListItem dense>
+            <ListItem dense disabled={disabled}>
                 <ListItemText
                     primary={
-                        <React.Fragment>
+                        <span style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <span>
                                 {isSkill && T.translate('skills.' + SKILLS[attributeId][skillId])}
                                 {!isSkill && T.translate('attributes.' + ATTRIBUTES[attributeId] + '.name')}
-                                {' ' + T.translate('create.bonus.value', { num: bonusMax })}
                             </span>
-                            <div style={{ margin: '6px 0' }}>
-                                {[1, 2, 3, 4, 5, 6].map((index: number) => (
+                            <div>
+                                {[0, 1, 2, 3, 4, 5, 6].map((index: number) => (
                                     <span key={index} onClick={() => this.handleChange(index)}>
                                         {this.getIconFromNumber(index, value, valueMax)}
                                     </span>
                                 ))}
                             </div>
-                        </React.Fragment>
+                        </span>
                     }
                 />
             </ListItem>
@@ -53,6 +54,8 @@ export default class AttributeRepartitor extends Component<Props, {}> {
         if (index > valueMax) return null;
         const selected = currentValue >= index;
         switch (index) {
+            case 0:
+                return currentValue === 0 ? <Backspace /> : <BackspaceOutlined />;
             case 1:
                 return selected ? <LooksOne /> : <LooksOneOutlined />;
             case 2:

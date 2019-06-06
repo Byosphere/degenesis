@@ -1,4 +1,4 @@
-import { SKILLS } from "../constants";
+import { SKILLS, CULTES, CULTURES, CONCEPTS, ATTRIBUTES } from "../constants";
 import baseAttributes from '../data/attributes.json';
 
 export interface Attribute {
@@ -112,8 +112,8 @@ export default class Character implements ICharacter {
     }
 
     set culte(id: number) {
-        this._updateAttributes();
         this._culte = id;
+        this._updateAttributes();
     }
 
     get culte(): number {
@@ -121,8 +121,8 @@ export default class Character implements ICharacter {
     }
 
     set culture(id: number) {
-        this._updateAttributes();
         this._culture = id;
+        this._updateAttributes();
     }
 
     get culture(): number {
@@ -130,8 +130,8 @@ export default class Character implements ICharacter {
     }
 
     set concept(id: number) {
-        this._updateAttributes();
         this._concept = id;
+        this._updateAttributes();
     }
 
     get concept(): number {
@@ -207,5 +207,42 @@ export default class Character implements ICharacter {
 
     private _updateAttributes() {
         // TODO vérifier les valeures de culture, culte concept, et mettre à jour les valeurs bonus
+        this._resetAttributeBonus();
+        if (!isNaN(this._culture)) {
+            let currentCulture = CULTURES[this._culture];
+            this._incrementBonus(currentCulture.bonus);
+        }
+
+        if (!isNaN(this._culte)) {
+            let currentCulte = CULTES[this._culte];
+            this._incrementBonus(currentCulte.bonus);
+        }
+
+        if (!isNaN(this._concept)) {
+            let currentConcept = CONCEPTS[this._concept];
+            this._incrementBonus(currentConcept.bonus);
+        }
+    }
+
+    private _resetAttributeBonus() {
+        this.attributes.forEach((attr: Attribute) => {
+            attr.bonusMax = 0;
+            attr.skills.forEach((skill) => {
+                skill.bonusMax = 0;
+            });
+        });
+    }
+
+    private _incrementBonus(array: any[]) {
+        array.forEach((attr) => {
+            let charAttribute = this.attributes[ATTRIBUTES.indexOf(attr.name)];
+            if (attr.bonusAttribute) {
+                charAttribute.bonusMax++;
+            }
+            attr.skills.forEach((skill: string) => {
+                let charSkill = charAttribute.skills[SKILLS[charAttribute.id].indexOf(skill)];
+                charSkill.bonusMax++;
+            });
+        });
     }
 }

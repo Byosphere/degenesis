@@ -34,7 +34,7 @@ export default class CharacterBuilder extends Component<Props, State> {
         super(props);
 
         this.state = {
-            activeStep: 0,
+            activeStep: 5,
             newCharacter: new Character(),
             attributePoints: BASE_ATTRIBUTES,
             skillPoints: BASE_SKILLS
@@ -65,8 +65,26 @@ export default class CharacterBuilder extends Component<Props, State> {
     }
 
     public handleAttributeChange = (attributeId: number, skillId: number, value: number) => {
-        console.log(attributeId, skillId, value);
-        // TODO
+        let character: Character = this.state.newCharacter;
+        let attributePoints = this.state.attributePoints;
+        let skillPoints = this.state.skillPoints;
+        let attribute = character.attributes[attributeId];
+
+        if (isNaN(skillId)) {
+            let remainingValue = attributePoints + attribute.base - value;
+            if (remainingValue >= 0) {
+                attributePoints = remainingValue;
+                attribute.base = value;
+            }
+        } else {
+            let remainingValue = skillPoints + attribute.skills[skillId].value - value;
+            if (remainingValue >= 0) {
+                skillPoints = remainingValue;
+                attribute.skills[skillId].value = value;
+            }
+        }
+
+        this.setState({ newCharacter: character, attributePoints, skillPoints });
     }
 
     public handleToggle = (id: number, type: number) => {

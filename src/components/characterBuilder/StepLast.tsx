@@ -18,7 +18,7 @@ export default class StepLast extends Component<Props, {}> {
             <React.Fragment>
                 <div style={{ display: 'flex' }}>
                     <TextField
-                        label={T.translate('generic.life')}
+                        label={T.translate('generic.blessures')}
                         margin="dense"
                         type='text'
                         style={{ flex: 1, marginRight: '8px' }}
