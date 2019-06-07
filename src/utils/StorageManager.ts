@@ -8,9 +8,10 @@ export function storeCharacter(character: Character) {
             storage.characters[character.id] = character.toObject();
         } else {
             let id = 1;
-            while (storage.characters[id] !== null) {
+            while (storage.characters[id]) {
                 id++;
             }
+            character.id = id;
             storage.characters[id] = character.toObject();
         }
 

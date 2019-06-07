@@ -186,7 +186,7 @@
                 "name": "instinct",
                 "bonusAttribute": false,
                 "skills": [
-                    "surive",
+                    "survie",
                     "dressage"
                 ]
             },
@@ -194,7 +194,7 @@
                 "name": "intellect",
                 "bonusAttribute": false,
                 "skills": [
-                    "artisanat"
+                    "legendes"
                 ]
             }
         ]

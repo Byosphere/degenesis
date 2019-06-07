@@ -36,8 +36,10 @@ export default class ViewStatsPage extends Component<Props, State> {
 
     public handleTrauma = (index: number) => {
         let char = this.props.char;
-        char.trauma = index;
-        this.props.onCharChange(char, true);
+        if (char.trauma !== index) {
+            char.trauma = index;
+            this.props.onCharChange(char, true);
+        }
     }
 
     public handleRollDice(): void {
@@ -93,18 +95,20 @@ export default class ViewStatsPage extends Component<Props, State> {
                     </CardContent>
                     {char.story.length > this.STORY_LENGTH &&
                         <CardContent style={{ display: 'flex', justifyContent: 'space-between', paddingBottom: '16px' }}>
-                            <div>
-                                <Typography component='div' variant='caption'>
-                                    {T.translate('generic.trauma') + ' (' + char.trauma + '/' + char.traumaMax + ') :'}
-                                </Typography>
-                                <div style={{ marginTop: '-4px' }}>
-                                    {this.displayTrauma()}
-                                </div>
-                            </div>
                             <IconButton onClick={this.handleExpand}>
                                 {this.state.expanded ? <ExpandLess /> : <ExpandMore />}
                             </IconButton>
                         </CardContent>}
+                    <CardContent>
+                        <div>
+                            <Typography component='div' variant='caption'>
+                                {T.translate('generic.trauma') + ' (' + char.trauma + '/' + char.traumaMax + ') :'}
+                            </Typography>
+                            <div style={{ marginTop: '-4px' }}>
+                                {this.displayTrauma()}
+                            </div>
+                        </div>
+                    </CardContent>
                 </Card>
                 <Card style={{ margin: '5px 0' }}>
                     <CardContent>

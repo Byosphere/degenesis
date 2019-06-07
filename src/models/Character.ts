@@ -239,17 +239,17 @@ export default class Character implements ICharacter {
         this._resetAttributeBonus();
         if (!isNaN(this._culture)) {
             let currentCulture = CULTURES[this._culture];
-            this._incrementBonus(currentCulture.bonus);
+            if (currentCulture) this._incrementBonus(currentCulture.bonus);
         }
 
         if (!isNaN(this._culte)) {
             let currentCulte = CULTES[this._culte];
-            this._incrementBonus(currentCulte.bonus);
+            if (currentCulte) this._incrementBonus(currentCulte.bonus);
         }
 
         if (!isNaN(this._concept)) {
             let currentConcept = CONCEPTS[this._concept];
-            this._incrementBonus(currentConcept.bonus);
+            if (currentConcept) this._incrementBonus(currentConcept.bonus);
         }
     }
 
@@ -271,7 +271,10 @@ export default class Character implements ICharacter {
             }
             attr.skills.forEach((skill: string) => {
                 let charSkill = charAttribute.skills[SKILLS[charAttribute.id].indexOf(skill)];
-                charSkill.bonusMax++;
+                if (charSkill)
+                    charSkill.bonusMax++;
+                else
+                    console.log('error : "' + skill + '" inconnu dans ' + SKILLS[charAttribute.id]);
             });
         });
     }
