@@ -17,6 +17,9 @@ export default class StepBelief extends Component<Props, {}> {
 
         return (
             <React.Fragment>
+                <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+                    {T.translate('create.beliefdesc', { who: newCharacter.name })}
+                </Typography>
                 <div style={{ margin: '10px 0', display: 'flex', alignItems: 'center' }}>
                     <KeyboardArrowRight />
                     <Chip

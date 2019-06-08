@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from './components/header/Header';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch, HashRouter } from "react-router-dom";
 import Stats from './components/stats/Stats';
 import Inventory from './components/inventory/Inventory';
 import Notes from './components/notes/Notes';
@@ -10,27 +10,25 @@ import Navigator from './components/navigator/Navigator';
 import Character from './models/Character';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import Home from './components/home/Home';
-import { getCharacters, storeCharacter } from './utils/StorageManager';
+import { getCharacters, storeCharacter, deleteCharacter } from './utils/StorageManager';
 
 interface State {
     characters: Character[];
-    selectedCharacter: Character;
     tabValue: number;
+    headerTitle: string;
+    displayTabs: boolean;
 }
 
-interface Props {
+class App extends Component<{}, State> {
 
-}
-
-class App extends Component<Props, State> {
-
-    constructor(props: Props) {
+    constructor(props: any) {
         super(props);
 
         this.state = {
             characters: getCharacters(),
-            selectedCharacter: null,
-            tabValue: 0
+            tabValue: 0,
+            headerTitle: '',
+            displayTabs: false
         };
     }
 
@@ -39,7 +37,7 @@ class App extends Component<Props, State> {
     }
 
     public handleCharChange = (char: Character, save: boolean) => {
-        this.setState({ selectedCharacter: char });
+        this.forceUpdate();
         if (char && save) storeCharacter(char);
     }
 
@@ -50,68 +48,80 @@ class App extends Component<Props, State> {
         });
     }
 
+    public handleDeleteChar = (charId: number) => {
+        deleteCharacter(charId);
+        this.setState({
+            characters: getCharacters()
+        });
+    }
+
+    public setHeader = (title: string) => {
+        this.setState({ headerTitle: title });
+    }
+
     public render() {
 
-        const { tabValue, selectedCharacter, characters } = this.state;
+        const { tabValue, characters } = this.state;
 
         return (
             <div className="App">
-                <Router>
+                <HashRouter basename='/'>
                     <Header
                         onToggleTab={this.handleTabChange}
-                        onChangeChar={this.handleCharChange}
                         tab={tabValue}
-                        displayTabs={Boolean(selectedCharacter)}
+                        displayTabs={this.state.displayTabs}
+                        title={this.state.headerTitle}
                     />
                     <div className="app-content">
                         <Switch>
+                            <Route path='/' exact render={
+                                props => <Home {...props}
+                                    characters={characters}
+                                    setHeader={this.setHeader}
+                                    deleteChar={this.handleDeleteChar}
+                                />
+                            } />
                             <Route path="/create" exact render={
                                 props => <CharacterBuilder {...props}
                                     characters={characters}
-                                    selectedCharacter={selectedCharacter}
                                     createCharacter={this.handleCreateCharacter}
+                                    setHeader={this.setHeader}
                                 />
                             } />
-                            <Route path="/stats" exact render={
+                            <Route path="/stats/:id" render={
                                 props => <Stats {...props}
-                                    char={selectedCharacter}
+                                    characters={characters}
                                     tab={tabValue}
                                     onTabChange={this.handleTabChange}
                                     onCharChange={this.handleCharChange}
+                                    setHeader={this.setHeader}
                                 />
                             } />
                             <Route path="/inventory" render={
                                 props => <Inventory {...props}
-                                    char={selectedCharacter}
+                                    char={null}
                                     tab={tabValue}
                                     onTabChange={this.handleTabChange}
                                 />
                             } />
                             <Route path="/potentials" render={
                                 props => <Potentials {...props}
-                                    char={selectedCharacter}
+                                    char={null}
                                     tab={tabValue}
                                     onTabChange={this.handleTabChange}
                                 />
                             } />
                             <Route path="/notes" render={
                                 props => <Notes {...props}
-                                    char={selectedCharacter}
+                                    char={null}
                                     tab={tabValue}
                                     onTabChange={this.handleTabChange}
-                                />
-                            } />
-                            <Route path='/' render={
-                                props => <Home {...props}
-                                    characters={characters}
-                                    selectedCharacter={selectedCharacter}
                                     onChangeChar={this.handleCharChange}
                                 />
                             } />
                         </Switch>
                     </div>
-                    {selectedCharacter && <Navigator />}
-                </Router >
+                </HashRouter >
             </div>
         );
     }

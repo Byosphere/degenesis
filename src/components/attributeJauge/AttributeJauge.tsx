@@ -40,7 +40,7 @@ export default class AttributeJauge extends Component<Props, State> {
                     {this.props.label}
                 </Typography>
                 <div style={{
-                    borderRight: this.props.attribute ? '' : '1px solid',
+                    // borderRight: this.props.attribute ? '' : '1px solid',
                     paddingRight: this.props.attribute ? '20px' : '12px',
                     flex: 1,
                     display: 'flex',
@@ -59,9 +59,9 @@ export default class AttributeJauge extends Component<Props, State> {
                         </React.Fragment>
                     }
                 </div>
-                {!this.props.attribute && <IconButton onClick={this.props.onRollDice}>
+                {/* {!this.props.attribute && <IconButton onClick={this.props.onRollDice}>
                     <Casino color='secondary' />
-                </IconButton>}
+                </IconButton>} */}
             </FormGroup>
         )
     }

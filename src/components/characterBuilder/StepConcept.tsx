@@ -19,6 +19,9 @@ export default class StepConcept extends Component<Props, {}> {
 
         return (
             <React.Fragment>
+                <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+                    {T.translate('create.conceptdesc', { who: newCharacter.name })}
+                </Typography>
                 <FormControl fullWidth margin='dense'>
                     <InputLabel shrink htmlFor="concept">
                         {T.translate('generic.concept')}

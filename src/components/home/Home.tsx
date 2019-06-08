@@ -1,40 +1,95 @@
 import React, { Component } from 'react'
-import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, ListItemAvatar, Avatar } from '@material-ui/core';
+import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, ListItemAvatar, Avatar, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core';
 import Character from '../../models/Character';
 import { Redirect, RouteComponentProps } from 'react-router-dom';
-import { Add } from '@material-ui/icons';
+import { Add, Delete } from '@material-ui/icons';
 import T from 'i18n-react';
 import { CULTURES, CULTES, CONCEPTS } from '../../constants';
+import CharacterItem from './CharacterItem';
+import SwipeableViews from 'react-swipeable-views';
+import { deleteCharacter } from '../../utils/StorageManager';
 
 interface ownProps {
     characters: Character[];
-    selectedCharacter: Character;
-    onChangeChar: (char: Character, save: boolean) => void;
+    setHeader: (title: string) => void;
+    deleteChar: (charId: number) => void;
 }
 
-interface State { }
+interface State {
+    tabs: number[];
+    open: boolean;
+    selectedChar: Character;
+    selectedIndex: number;
+}
 
 type Props = ownProps & RouteComponentProps;
 
 export default class Home extends Component<Props, State> {
 
-    public selectCharacter(char: Character): void {
-        this.props.onChangeChar(char, false);
+    public constructor(props: Props) {
+        super(props);
+
+        this.state = {
+            tabs: [],
+            open: false,
+            selectedChar: null,
+            selectedIndex: -1
+        }
+    }
+
+    public componentDidMount() {
+        this.props.setHeader(T.translate('navigator.home') as string);
+    }
+
+    public selectCharacter = (charId: number) => {
+        this.props.history.push('/stats/' + charId);
     }
 
     public handleCreate = () => {
         this.props.history.push('/create');
     }
 
+    public onTabChange = (index: number, key: number, char: Character) => {
+        let tabs = this.state.tabs;
+        tabs[key] = index;
+        this.setState({
+            tabs,
+            open: true,
+            selectedChar: char,
+            selectedIndex: key
+        });
+    }
+
+    public handleClose = (event: React.MouseEvent<any>) => {
+        let tabs = this.state.tabs;
+        tabs[this.state.selectedIndex] = 0;
+        this.setState({
+            open: false,
+            selectedChar: null,
+            selectedIndex: -1,
+            tabs
+        });
+    }
+
+    public handleDelete = (event: React.MouseEvent<any>) => {
+        let id = this.state.selectedChar.id;
+        let tabs = this.state.tabs;
+        tabs[this.state.selectedIndex] = 0;
+        this.setState({
+            open: false,
+            selectedChar: null,
+            selectedIndex: -1,
+            tabs
+        });
+        this.props.deleteChar(id);
+    }
+
     public render() {
-
-        if (this.props.selectedCharacter) return <Redirect to='/stats' />
-
         return (
-            <Card style={{ flex: 1, margin: '5px', display: "flex", flexDirection: "column" }}>
+            <Card style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                 <CardMedia
-                    image="/images/logo.png"
-                    title="Paella dish"
+                    image="images/logo.png"
+                    title="logo"
                     style={{ height: '200px' }}
                 />
                 <CardContent style={{ flex: 1, height: 'calc(100% - 300px)' }} >
@@ -48,32 +103,21 @@ export default class Home extends Component<Props, State> {
                         }
                         style={{ height: 'calc(100% - 64px)', overflowY: 'auto' }}
                     >
-                        {this.props.characters.filter(char => char !== null).map((char: Character, key: number) => (
-                            <ListItem
+                        {this.props.characters.map((char: Character, key: number) => (
+                            <SwipeableViews
                                 key={key}
-                                button
-                                style={{
-                                    backgroundImage: 'url(/images/cultes/' + CULTES[char.culte].name + '.jpg)',
-                                    backgroundSize: 'cover',
-                                    backgroundRepeat: 'no-repeat',
-                                    backgroundPosition: '160px center',
-                                    margin: '5px 0'
-                                }}
-                                onClick={() => this.selectCharacter(char)}
+                                index={this.state.tabs[key]}
+                                onChangeIndex={(index) => this.onTabChange(index, key, char)}
+                                resistance
                             >
-                                <ListItemAvatar>
-                                    <Avatar alt={char.name} src={"/images/cultures/" + CULTURES[char.culture].name + ".jpg"} />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    style={{ background: 'rgba(255, 255, 255, 0.3)', marginRight: '50px' }}
-                                    primary={char.name}
-                                    secondary={
-                                        T.translate('cultes.' + CULTES[char.culte].name) + ' - ' +
-                                        T.translate('cultures.' + CULTURES[char.culture].name) + ' - ' +
-                                        T.translate('concepts.' + CONCEPTS[char.concept].name)
-                                    }
-                                />
-                            </ListItem>
+                                <CharacterItem char={char} onSelectCharacter={this.selectCharacter} />
+                                <ListItem style={{ background: '#F44336', margin: '5px 0', height: 'calc(100% - 10px)', color: 'white' }}>
+                                    <ListItemIcon>
+                                        <Delete style={{ color: 'white' }} />
+                                    </ListItemIcon>
+                                    <ListItemText primary={T.translate('generic.delete')} />
+                                </ListItem>
+                            </SwipeableViews>
                         ))}
                     </List>
                     <Divider />
@@ -89,7 +133,26 @@ export default class Home extends Component<Props, State> {
                         </ListItem>
                     </List>
                 </CardContent>
+                <Dialog
+                    open={this.state.open}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">
+                        {T.translate('generic.confirmdelete', { who: this.state.selectedChar ? this.state.selectedChar.name : '' })}
+                    </DialogTitle>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            {T.translate('generic.no')}
+                        </Button>
+                        <Button onClick={this.handleDelete} autoFocus color='secondary'>
+                            {T.translate('generic.yes')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </Card>
         );
     }
+
 }

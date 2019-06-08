@@ -32,11 +32,6 @@ export interface Item {
     title?: string;
 }
 
-export interface Note {
-    date: string;
-    text: string;
-}
-
 export interface ICharacter {
     name: string;
     age: number;
@@ -56,7 +51,7 @@ export interface ICharacter {
     attributes: Attribute[];
     potentials: Potential[];
     inventory: Item[];
-    notes: Note[];
+    notes: string[];
     belief: string;
     behavior: string;
 }
@@ -82,7 +77,7 @@ export default class Character implements ICharacter {
     attributes: Attribute[];
     potentials: Potential[];
     inventory: Item[];
-    notes: Note[];
+    notes: string[];
     belief: string;
     behavior: string;
 

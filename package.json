@@ -2,6 +2,7 @@
   "name": "degenesis",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@material-ui/core": "^4.0.1",
     "@material-ui/icons": "^4.0.1",
@@ -20,10 +21,12 @@
     "typescript": "3.5.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "npm run remove:www && react-scripts start",
+    "build": "npm run remove:www && react-scripts build",
+    "build:cordova": "npm run remove:www && react-scripts build && move build www",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "remove:www": "if exist www rd /s /q www"
   },
   "eslintConfig": {
     "extends": "react-app"

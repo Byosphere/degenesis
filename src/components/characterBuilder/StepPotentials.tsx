@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Character from '../../models/Character';
 import T from 'i18n-react';
-import { List, ListSubheader, ListItem, ListItemIcon, Checkbox, ListItemText } from '@material-ui/core';
+import { List, ListSubheader, ListItem, ListItemIcon, Checkbox, ListItemText, Typography } from '@material-ui/core';
 import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
 
 interface Props {
@@ -17,6 +17,7 @@ export default class StepPotentials extends Component<Props, {}> {
 
         return (
             <React.Fragment>
+                <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>{T.translate('create.potentialsdesc')}</Typography>
                 <List
                     dense
                     component="div"

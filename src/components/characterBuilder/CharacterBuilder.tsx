@@ -17,8 +17,8 @@ import StepLast from './StepLast';
 
 interface OwnProps {
     characters: Character[];
-    selectedCharacter: Character;
     createCharacter: (char: Character) => void;
+    setHeader: (title: string) => void;
 }
 
 type Props = OwnProps & RouteComponentProps;
@@ -43,6 +43,10 @@ export default class CharacterBuilder extends Component<Props, State> {
         };
     }
 
+    public componentDidMount() {
+        this.props.setHeader(T.translate('generic.charactercreate') as string);
+    }
+
     public handleChange = (event: any) => {
         let newCharacter: any = this.state.newCharacter;
         newCharacter[event.target.name] = event.target.value;
@@ -62,6 +66,10 @@ export default class CharacterBuilder extends Component<Props, State> {
         character.money = MONEY[character.culte] * 2;
         this.props.createCharacter(character);
         this.props.history.push('/');
+    }
+
+    public handleReset = () => {
+        // TODO
     }
 
     public handleAttributeChange = (attributeId: number, skillId: number, value: number) => {
@@ -110,14 +118,10 @@ export default class CharacterBuilder extends Component<Props, State> {
 
     public render() {
 
-        if (this.props.selectedCharacter) return <Redirect to='/stats' />
         const { activeStep, newCharacter, attributePoints, skillPoints } = this.state;
 
         return (
             <div style={{ margin: '5px', flex: 1 }}>
-                <Typography variant='subtitle1' component='p' className="card-overtitle">
-                    {T.translate('generic.charactercreate')}
-                </Typography>
                 <Card style={{ flex: 1, display: "flex", flexDirection: "column", overflowY: 'auto', minHeight: 'calc(100% - 46px)' }}>
                     <Stepper activeStep={activeStep} orientation="vertical">
                         <Step>
@@ -223,6 +227,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                                     skillPoints={skillPoints}
                                     onChange={this.handleAttributeChange}
                                     buttons={this.displayControls(skillPoints !== 0, true)}
+                                    onReset={this.handleReset}
                                 />
                             </StepContent>
                         </Step>

@@ -9,6 +9,7 @@ interface ownProps {
     char: Character;
     onTabChange: (value: any) => void;
     tab: number;
+    onChangeChar: (char: Character, save: boolean) => void;
 }
 
 type Props = ownProps & RouteComponentProps;
@@ -25,6 +26,17 @@ export default class Notes extends Component<Props, State> {
         this.state = {
             activeStep: 0
         }
+    }
+
+    public handleChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>) => {
+        let char = this.props.char;
+        char.notes[this.state.activeStep] = event.target.value;
+        console.log(this.props);
+        this.props.onChangeChar(char, false);
+    }
+
+    public handleSave = () => {
+        this.props.onChangeChar(this.props.char, true);
     }
 
     public render() {
@@ -76,11 +88,12 @@ export default class Notes extends Component<Props, State> {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        value={notes[activeStep] ? notes[activeStep].text : ''}
+                        value={notes[activeStep] ? notes[activeStep] : ''}
+                        onChange={this.handleChange}
                     />
                 </CardContent>
                 <CardActions >
-                    {tab === 1 && <Button disabled={activeStep === 5}>
+                    {tab === 1 && <Button disabled={activeStep === 5} onClick={this.handleSave}>
                         {T.translate('generic.save')}
                     </Button>}
                 </CardActions>

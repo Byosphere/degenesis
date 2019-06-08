@@ -19,6 +19,9 @@ export default class StepCulture extends Component<Props, {}> {
 
         return (
             <React.Fragment>
+                <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+                    {T.translate('create.culturedesc', { who: newCharacter.name })}
+                </Typography>
                 <FormControl fullWidth margin='dense'>
                     <InputLabel shrink htmlFor="culture">
                         {T.translate('generic.culture')}
@@ -73,7 +76,7 @@ export default class StepCulture extends Component<Props, {}> {
                         </Grid>
                         <Grid item xs={6}>
                             <CardMedia
-                                image={"/images/cultures/" + CULTURES[newCharacter.culture].name + ".jpg"}
+                                image={"images/cultures/" + CULTURES[newCharacter.culture].name + ".jpg"}
                                 title={CULTURES[newCharacter.culture].name}
                                 style={{ height: '100px' }}
                             />

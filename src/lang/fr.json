@@ -2,6 +2,7 @@
     "generic": {
         "view": "Visualiser",
         "edit": "Modifier",
+        "reset": "Recommencer",
         "life": "Blessures superficielles",
         "ego": "Ego",
         "trauma": "Traumatismes",
@@ -28,7 +29,7 @@
         "empty": "Liste vide",
         "next": "Suivant",
         "prev": "Précédent",
-        "name": "Nom du personnage",
+        "name": "Nom",
         "age": "Âge",
         "sex": "Sexe",
         "culte": "Culte",
@@ -54,7 +55,11 @@
         "none": "_Aucun_",
         "create": "Créer",
         "selectedpotentials": "Potentiels choisis",
-        "attributes": "Attributs"
+        "attributes": "Attributs",
+        "yes": "Oui",
+        "no": "Non",
+        "delete": "Supprimer",
+        "confirmdelete": "Êtes-vous sûr de vouloir supprimer _{who}_ ?"
     },
     "navigator": {
         "stats": "Status",
@@ -66,30 +71,36 @@
     },
     "create": {
         "who": "Choix des caractéristiques de base",
+        "whodesc": "Commencez par définir les traits physiques de votre personnage.",
         "culture": {
             "title": "Choix d'une Culture"
         },
+        "culturedesc": "Indiquez le lieu de naissance de _{who}_.",
         "culte": {
             "title": "Choix d'un Culte",
             "claniste": "Le claniste est un méchant pas beau bla bla truc machin"
         },
+        "cultedesc": "Indiquez le culte auquel _{who}_ appartient.",
         "concept": {
             "title": "Choix d'un Concept"
         },
+        "conceptdesc": "Indiquez le concept qui guide _{who}_.",
         "bonus": {
             "value": "(bonus : {num})",
             "attributes": "Attribut(s) bonus :",
             "skills": "Compétences bonus :"
         },
         "attributesLeft": "Il vous reste {num} point à répartir dans les attributs.",
-        "skillsLeft": "Il vous reste {num} point à répartir dans les compétences.",
+        "skillsLeft": "{num} points restant à utiliser.",
         "selectattributes": "Répartition des Attributs",
         "selectskills": "Répartitions des Compétences",
         "attributes": "Choix des Attributs particuliers",
+        "beliefdesc": "Certains attributs sont exclusifs. Choisissez ceux qui définissent le mieux _{who}_.",
         "potentials": "Choix des Potentiels",
         "lasttouch": "Touches finales",
         "selectedskills": "Compétences choisies",
         "selectedattributes": "Attributs choisis",
+        "skillsdesc": "Répartissez les 28 points de base dans les six catégories.",
         "foi": "La *foi* donne au personnage une croyance en un ou des être(s) supérieur(s) qui le guide et l'influence dans son jugement.",
         "volonte": "La *volonté* du personnage lui permet de croire en lui et en ses actes. Il est seul maître de son esprit.",
         "concentration": "Le personnage va préférer la réflexion et la *concentration* avant d'agir. Il sait généralement contrôler ses émotions.",

@@ -19,6 +19,9 @@ export default class StepCulte extends Component<Props, {}> {
 
         return (
             <React.Fragment>
+                <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+                    {T.translate('create.cultedesc', { who: newCharacter.name })}
+                </Typography>
                 <FormControl fullWidth margin='dense'>
                     <InputLabel shrink htmlFor="culte">
                         {T.translate('generic.culte')}
@@ -41,7 +44,7 @@ export default class StepCulte extends Component<Props, {}> {
                 </FormControl>
                 {typeof newCharacter.culte === 'number' && <div style={{ margin: '16px 0' }}>
                     <CardMedia
-                        image={"/images/cultes/" + CULTES[newCharacter.culte].name + ".jpg"}
+                        image={"images/cultes/" + CULTES[newCharacter.culte].name + ".jpg"}
                         title={CULTES[newCharacter.culte].name}
                         style={{ height: '100px' }}
                     />

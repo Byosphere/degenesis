@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import Character, { Skill } from '../../models/Character';
 import T from 'i18n-react';
-import { Typography, List, ListSubheader } from '@material-ui/core';
+import { Typography, List, ListSubheader, Snackbar, Button } from '@material-ui/core';
 import { SKILLS, ATTRIBUTES } from '../../constants';
 import AttributeRepartitor from '../attributeRepartitor/AttributeRepartitor';
+import { Warning } from '@material-ui/icons';
 
 interface Props {
     newCharacter: Character;
     skillPoints: number;
     onChange: (attributeId: number, skillId: number, value: number) => void;
+    onReset: () => void;
     buttons: JSX.Element;
 }
 
@@ -19,7 +21,29 @@ export default class StepSkills extends Component<Props, {}> {
 
         return (
             <React.Fragment>
-                <Typography variant='body2'>{T.translate('create.skillsLeft', { num: skillPoints })}</Typography>
+                <Typography variant='body2'>{T.translate('create.skillsdesc')}</Typography>
+                <Snackbar
+                    style={{ opacity: 0.9 }}
+                    anchorOrigin={{
+                        vertical: 'bottom',
+                        horizontal: 'left',
+                    }}
+                    open={skillPoints > 0}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={
+                        <span style={{ display: 'flex', alignItems: 'center' }}>
+                            <Warning style={{ marginRight: '10px' }} />
+                            {T.translate('create.skillsLeft', { num: skillPoints })}
+                        </span>
+                    }
+                    action={[
+                        <Button key="undo" size="small" style={{ color: 'white' }}>
+                            {T.translate('generic.reset')}
+                        </Button>,
+                    ]}
+                />
                 <List>
                     {SKILLS.map((skills, attributeId) => {
                         return (

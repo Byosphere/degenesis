@@ -9,21 +9,24 @@ import { RouteComponentProps } from 'react-router';
 class Navigator extends Component<RouteComponentProps, {}> {
 
     public handleChange = (event: React.ChangeEvent<{}>, value: any) => {
+
+        let params: any = this.props.match.params;
+
         switch (value) {
             case 0:
-                this.props.history.push('/stats');
+                this.props.history.push('/stats/' + params.id);
                 break;
             case 1:
-                this.props.history.push('/inventory');
+                this.props.history.push('/inventory/' + params.id);
                 break;
             case 2:
-                this.props.history.push('/potentials');
+                this.props.history.push('/potentials' + params.id);
                 break;
             case 3:
-                this.props.history.push('/notes');
+                this.props.history.push('/notes' + params.id);
                 break;
             default:
-                this.props.history.push('/stats');
+                this.props.history.push('/stats' + params.id);
         }
     }
 
@@ -37,23 +40,26 @@ class Navigator extends Component<RouteComponentProps, {}> {
                     onChange={this.handleChange}
                 >
                     <BottomNavigationAction label={T.translate('navigator.stats')} icon={<Dashboard />} />
-                    <BottomNavigationAction label={T.translate('navigator.inventory')} icon={<LibraryBooks />} />
-                    <BottomNavigationAction label={T.translate('navigator.potentials')} icon={<AccessibilityNew />} />
-                    <BottomNavigationAction label={T.translate('navigator.notes')} icon={<Note />} />
+                    <BottomNavigationAction disabled label={T.translate('navigator.inventory')} icon={<LibraryBooks />} />
+                    <BottomNavigationAction disabled label={T.translate('navigator.potentials')} icon={<AccessibilityNew />} />
+                    <BottomNavigationAction disabled label={T.translate('navigator.notes')} icon={<Note />} />
                 </BottomNavigation>
             </div>
         );
     }
 
     private getLocationValue(path: string): number {
+
+        let params: any = this.props.match.params;
+
         switch (path) {
-            case '/stats':
+            case '/stats/' + params.id:
                 return 0;
-            case '/inventory':
+            case '/inventory' + params.id:
                 return 1;
-            case '/potentials':
+            case '/potentials' + params.id:
                 return 2;
-            case '/notes':
+            case '/notes' + params.id:
                 return 3;
             default:
                 return 0;

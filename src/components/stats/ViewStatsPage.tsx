@@ -57,16 +57,16 @@ export default class ViewStatsPage extends Component<Props, State> {
         const { char } = this.props;
 
         return (
-            <div style={{ margin: '5px' }}>
+            <div style={{ margin: '5px 5px 61px 5px' }}>
                 <Card>
                     <CardMedia
-                        image={"/images/cultes/" + CULTES[char.culte].name + ".jpg"}
+                        image={"images/cultes/" + CULTES[char.culte].name + ".jpg"}
                         title="Paella dish"
                         style={{ height: '100px' }}
                     />
                     <CardHeader
                         avatar={
-                            <Avatar alt={CULTURES[char.culture].name} src={"/images/cultures/" + CULTURES[char.culture].name + ".jpg"} />
+                            <Avatar alt={CULTURES[char.culture].name} src={"images/cultures/" + CULTURES[char.culture].name + ".jpg"} />
                         }
                         title={char.name + ' (' + T.translate('sex.' + SEX[char.sex]) + ')'}
                         subheader={
