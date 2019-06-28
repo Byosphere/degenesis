@@ -4,10 +4,11 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import T from 'i18n-react';
-import fr from './lang/fr.json';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
+import { LANG } from './constants';
+import { setLang, getLang } from './utils/StorageManager';
 
 const theme = createMuiTheme({
     palette: {
@@ -19,8 +20,30 @@ const theme = createMuiTheme({
         }
     }
 });
+const lang = getLang();
+const defaultLang = 'fr';
 
-T.setTexts(fr);
+if (lang !== '' && LANG[getLang()]) {
+    T.setTexts(LANG[lang]);
+} else if (lang) {
+    setLang(defaultLang);
+    T.setTexts(LANG[defaultLang]);
+} else {
+    const navLang = navigator.language.split('-')[0].toLowerCase();
+    if (LANG[navLang]) {
+        setLang(navLang);
+        T.setTexts(LANG[navLang]);
+    } else {
+        setLang(defaultLang);
+        T.setTexts(LANG[defaultLang]);
+    }
+}
+
+if (LANG[getLang()]) {
+} else {
+    setLang('fr');
+    T.setTexts(LANG.fr);
+}
 
 ReactDOM.render(
     <ThemeProvider theme={theme}>

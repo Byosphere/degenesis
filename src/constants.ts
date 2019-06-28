@@ -2,6 +2,8 @@ import { Culte, Culture, Concept } from "./models/Data";
 import cultes from "./data/cultes.json";
 import cultures from "./data/cultures.json";
 import concepts from "./data/concepts.json";
+import fr from './lang/fr.json';
+import en from './lang/en.json';
 
 export const GENERIC_POTENTIALS = 13;
 export const BASE_ATTRIBUTES = 10;
@@ -11,6 +13,11 @@ export const LOCALSTORAGE_NAME = 'degenesisapp';
 export const CULTES: Culte[] = cultes;
 export const CULTURES: Culture[] = cultures;
 export const CONCEPTS: Concept[] = concepts;
+
+export const LANG = {
+    'en': en,
+    'fr': fr
+};
 
 export const MONEY = [
     50,

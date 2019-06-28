@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core';
+import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
 import Character from '../../models/Character';
 import { RouteComponentProps } from 'react-router-dom';
-import { Add, Delete } from '@material-ui/icons';
+import { Add, Delete, Language } from '@material-ui/icons';
 import T from 'i18n-react';
 import CharacterItem from './CharacterItem';
 import SwipeableViews from 'react-swipeable-views';
+import { LANG } from '../../constants';
+import { setLang, getLang } from '../../utils/StorageManager';
 
 interface ownProps {
     characters: Character[];
@@ -18,6 +20,7 @@ interface State {
     open: boolean;
     selectedChar: Character;
     selectedIndex: number;
+    anchorEl: HTMLElement;
 }
 
 type Props = ownProps & RouteComponentProps;
@@ -31,7 +34,8 @@ export default class Home extends Component<Props, State> {
             tabs: [],
             open: false,
             selectedChar: null,
-            selectedIndex: -1
+            selectedIndex: -1,
+            anchorEl: null
         }
     }
 
@@ -82,7 +86,14 @@ export default class Home extends Component<Props, State> {
         this.props.deleteChar(id);
     }
 
+    public openMenu = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        this.setState({ anchorEl: event.currentTarget });
+    }
+
     public render() {
+
+        const lang = getLang();
+
         return (
             <Card style={{ flex: 1, display: "flex", flexDirection: "column" }}>
                 <CardMedia
@@ -126,7 +137,7 @@ export default class Home extends Component<Props, State> {
                             </ListItemIcon>
                             <ListItemText
                                 primaryTypographyProps={{ color: 'secondary' }}
-                                primary="Créer un nouveau personnage"
+                                primary={T.translate('generic.newcharacter')}
                             />
                         </ListItem>
                     </List>
@@ -149,8 +160,32 @@ export default class Home extends Component<Props, State> {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <IconButton onClick={this.openMenu} style={{ position: 'absolute', top: '3px', right: '3px' }}>
+                    <Language style={{ color: 'white' }} />
+                </IconButton>
+                <Menu
+                    id="lang-menu"
+                    anchorEl={this.state.anchorEl}
+                    keepMounted
+                    open={Boolean(this.state.anchorEl)}
+                    onClose={() => this.setState({ anchorEl: null })}
+                >
+                    {Object.keys(LANG).map((value, index) => (
+                        <MenuItem
+                            key={index}
+                            button
+                            onClick={() => this.changeLang(value)}
+                            disabled={lang === value}
+                        >
+                            {T.translate('lang.' + value)}
+                        </MenuItem>
+                    ))}
+                </Menu>
             </Card>
         );
     }
 
+    public changeLang(value: string): void {
+        setLang(value);
+    }
 }

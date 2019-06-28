@@ -151,7 +151,10 @@ export default class ViewInventoryPage extends Component<Props, State> {
                     in={true}
                     unmountOnExit
                 >
-                    <Fab onClick={this.showAddItemModal} color='secondary' style={{ position: 'absolute', bottom: '70px', right: '20px' }}>
+                    <Fab
+                        onClick={this.showAddItemModal}
+                        color='secondary'
+                        style={{ position: 'absolute', bottom: '70px', right: '20px', zIndex: 8000 }}>
                         <Add />
                     </Fab>
                 </Zoom>

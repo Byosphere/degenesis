@@ -40,3 +40,20 @@ export function deleteCharacter(id: number) {
         localStorage.setItem(LOCALSTORAGE_NAME, JSON.stringify(storage));
     }
 }
+
+export function setLang(value: string) {
+    let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
+    if (storage.lang && storage.lang !== value) {
+        storage.lang = value;
+        localStorage.setItem(LOCALSTORAGE_NAME, JSON.stringify(storage));
+        window.location.reload();
+    } else {
+        storage.lang = value;
+        localStorage.setItem(LOCALSTORAGE_NAME, JSON.stringify(storage));
+    }
+}
+
+export function getLang(): string {
+    let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
+    return storage.lang || '';
+}

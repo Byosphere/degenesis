@@ -64,7 +64,9 @@
         "additem": "Ajouter un objet à l'inventaire",
         "levelup": "Améliorer le potentiel",
         "validate": "Valider",
-        "add": "Ajouter"
+        "add": "Ajouter",
+        "managemoney": "Gestion de l'argent",
+        "newcharacter": "Créer un nouveau personnage"
     },
     "navigator": {
         "stats": "État",
@@ -73,6 +75,10 @@
         "potentials": "Potentiels",
         "home": "Accueil",
         "create": "Créer"
+    },
+    "lang": {
+        "en": "Anglais",
+        "fr": "Français"
     },
     "create": {
         "who": "Choix des caractéristiques de base",
