@@ -23,7 +23,6 @@ export default class AttributeJauge extends Component<Props, State> {
 
         return (
             <FormGroup
-                // onClick={(event) => event.stopPropagation()}
                 row
                 style={{
                     alignItems: "center",
@@ -42,7 +41,6 @@ export default class AttributeJauge extends Component<Props, State> {
                     {this.props.label}
                 </Typography>
                 <div style={{
-                    // borderRight: this.props.attribute ? '' : '1px solid',
                     paddingRight: this.props.attribute ? '20px' : '12px',
                     flex: 1,
                     display: 'flex',
@@ -66,7 +64,7 @@ export default class AttributeJauge extends Component<Props, State> {
     }
 
     public handleClick(event: React.MouseEvent<any>, value: number) {
-        event.stopPropagation()
+        event.stopPropagation();
         if (this.props.onClick) this.props.onClick(value);
     }
 }

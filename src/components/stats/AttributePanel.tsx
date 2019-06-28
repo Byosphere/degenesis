@@ -26,7 +26,7 @@ export default class AttributePanel extends Component<Props, State> {
     }
 
     public handleChange = (value: number, skillId?: number) => {
-        if (skillId) {
+        if (skillId !== undefined) {
             this.props.attribute.skills[skillId].value = value;
         } else {
             this.props.attribute.base = value;
