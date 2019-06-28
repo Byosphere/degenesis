@@ -59,7 +59,7 @@ export default class ViewInventoryPage extends Component<Props, State> {
 
     public onChange = (event: React.ChangeEvent<{ name?: string; value: unknown; }>) => {
         let newItem = this.state.newItem;
-        newItem[event.target.name] = event.target.name === 'weight' ? parseInt(event.target.value as any) : event.target.value;
+        newItem[event.target.name] = event.target.name === 'weight' ? parseInt(event.target.value as string) : event.target.value;
         this.setState({ newItem });
     }
 
@@ -154,7 +154,7 @@ export default class ViewInventoryPage extends Component<Props, State> {
                     <Fab
                         onClick={this.showAddItemModal}
                         color='secondary'
-                        style={{ position: 'absolute', bottom: '70px', right: '20px', zIndex: 8000 }}>
+                        style={{ position: 'absolute', bottom: '70px', right: '20px', zIndex: 10 }}>
                         <Add />
                     </Fab>
                 </Zoom>

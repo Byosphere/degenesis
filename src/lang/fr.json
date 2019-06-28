@@ -17,11 +17,11 @@
         "money": "{money} lettres de Change",
         "save": "Sauvegarder",
         "tech": {
-            "1": "I",
-            "2": "II",
-            "3": "III",
-            "4": "IV",
-            "5": "V"
+            "0": "I",
+            "1": "II",
+            "2": "III",
+            "3": "IV",
+            "4": "V"
         },
         "weightunit": "g",
         "weight": "Poids",
