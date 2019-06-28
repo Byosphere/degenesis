@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import { RouteComponentProps, Redirect } from 'react-router-dom';
 import Character from '../../models/Character';
-import SwipeableViews from 'react-swipeable-views';
 import ViewStatsPage from './ViewStatsPage';
-import EditStatsPage from './EditStatsPage';
 import Navigator from '../navigator/Navigator';
 import T from 'i18n-react';
 
 interface ownProps {
     characters: Character[];
-    onTabChange: (value: any) => void;
     onCharChange: (char: Character, save: boolean) => void;
-    tab: number;
     setHeader: (title: string) => void;
 }
 
@@ -34,7 +30,7 @@ export default class Stats extends Component<Props, State> {
     }
 
     public componentDidMount() {
-        this.props.setHeader(T.translate('navigator.stats') as string);
+        this.props.setHeader(T.translate('generic.characterstats') as string);
     }
 
     public render() {
@@ -46,15 +42,6 @@ export default class Stats extends Component<Props, State> {
                 <ViewStatsPage onCharChange={this.props.onCharChange} char={this.state.character} />
                 <Navigator />
             </div>
-            // <SwipeableViews
-            //     index={this.props.tab}
-            //     onChangeIndex={this.props.onTabChange}
-            //     style={{ height: '100%' }}
-            //     resistance
-            // >
-            //     <ViewStatsPage onCharChange={this.props.onCharChange} char={this.state.character} />
-            //     <EditStatsPage onCharChange={this.props.onCharChange} char={this.state.character} visible={this.props.tab === 1} />
-            // </SwipeableViews>
         );
     }
 }

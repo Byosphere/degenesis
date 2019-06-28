@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Typography, IconButton } from '@material-ui/core';
-import { RemoveCircle, AddCircle, TurnedIn, TurnedInNot } from '@material-ui/icons';
+import { Typography } from '@material-ui/core';
+import { TurnedIn, TurnedInNot, Close } from '@material-ui/icons';
 import T from 'i18n-react';
 
 interface Props {
@@ -24,13 +24,21 @@ export default class InteractiveJauge extends Component<Props, {}> {
         }
     }
 
+    public handleClick(value: number): void {
+        this.props.onChange(this.props.label, value);
+    }
+
     public render() {
 
         const { label, currentValue, maximum } = this.props;
 
-        let icons: JSX.Element[] = [];
+        let icons: JSX.Element[] = [
+            <Close style={{ margin: '0' }} key={0} color='inherit' onClick={() => this.handleClick(0)} />
+        ];
         for (let i = 1; i <= maximum; i++) {
-            const icon = i <= currentValue ? <TurnedIn style={{ margin: '0 -2px' }} key={i} color='inherit' /> : <TurnedInNot style={{ margin: '0 -2px' }} key={i} color='inherit' />
+            const icon = i <= currentValue ?
+                <TurnedIn style={{ margin: '0' }} key={i} color='inherit' onClick={() => this.handleClick(i)} /> :
+                <TurnedInNot style={{ margin: '0' }} key={i} color='inherit' onClick={() => this.handleClick(i)} />
             icons.push(icon);
         }
 
@@ -42,15 +50,8 @@ export default class InteractiveJauge extends Component<Props, {}> {
                         {icons}
                     </div>
                 </div>
-                <div style={{ display: 'flex' }}>
-                    <IconButton style={{ padding: '5px' }} onClick={this.handleRemove} disabled={currentValue === 0}>
-                        <RemoveCircle color='primary' />
-                    </IconButton>
-                    <IconButton style={{ padding: '5px' }} onClick={this.handleAdd} disabled={currentValue === maximum}>
-                        <AddCircle color='secondary' />
-                    </IconButton>
-                </div>
             </div>
         );
     }
+
 }

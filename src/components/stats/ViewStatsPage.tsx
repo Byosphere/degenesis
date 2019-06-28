@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, IconButton, Chip, Snackbar } from '@material-ui/core';
-import { CULTES, CULTURES, CONCEPTS, RANGS, ATTRIBUTES, SEX, SKILLS } from '../../constants';
+import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, IconButton, Chip } from '@material-ui/core';
+import { CULTES, CULTURES, CONCEPTS, RANGS, SEX } from '../../constants';
 import { ExpandMore, ExpandLess, OfflineBolt, OfflineBoltOutlined, Clear } from '@material-ui/icons';
-import Character, { Attribute, Skill } from '../../models/Character';
-import AttributeJauge from '../attributeJauge/AttributeJauge';
+import Character, { Attribute } from '../../models/Character';
 import T from 'i18n-react';
 import InteractiveJauge from '../interactiveJauge/InteractiveJauge';
+import AttributePanel from './AttributePanel';
 
 interface Props {
     char: Character;
@@ -50,6 +50,10 @@ export default class ViewStatsPage extends Component<Props, State> {
         let char: any = this.props.char;
         char[field] = value;
         this.props.onCharChange(char, true);
+    }
+
+    public handleAttributeSave = () => {
+        this.props.onCharChange(this.props.char, true);
     }
 
     public render() {
@@ -133,35 +137,9 @@ export default class ViewStatsPage extends Component<Props, State> {
                     </CardContent>
                 </Card>
                 <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.attributes')}</Typography>
-                {char.attributes.map((att: Attribute) => (
-                    <ExpansionPanel key={att.id}>
-                        <ExpansionPanelSummary
-                            expandIcon={<ExpandMore />}
-                        >
-                            <AttributeJauge
-                                label={T.translate('attributes.' + ATTRIBUTES[att.id] + '.name') as string}
-                                value={att.base}
-                                attribute
-                            />
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
-                            {att.skills.map((skill: Skill) => (
-                                <AttributeJauge
-                                    key={skill.id}
-                                    label={T.translate('skills.' + SKILLS[att.id][skill.id]) as string}
-                                    value={skill.value}
-                                />
-                            ))}
-                        </ExpansionPanelDetails>
-                    </ExpansionPanel>
+                {char.attributes.map((att: Attribute, i: number) => (
+                    <AttributePanel key={i} attribute={att} onChange={this.handleAttributeSave} />
                 ))}
-                <Snackbar
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    open={this.state.open}
-                    autoHideDuration={6000}
-                    onClose={() => this.setState({ open: false })}
-                    message={<span id="message-id">Test de Force : 4 5 6 4 2 1</span>}
-                />
             </div>
         )
     }

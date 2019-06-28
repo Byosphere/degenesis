@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Card, Stepper, Step, StepLabel, StepContent, Typography, Button, Chip } from '@material-ui/core';
+import { Card, Stepper, Step, StepLabel, StepContent, Button, Chip } from '@material-ui/core';
 import Character from '../../models/Character';
-import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import T from 'i18n-react';
 import { CULTURES, CULTES, CONCEPTS, MONEY, BASE_SKILLS, BASE_ATTRIBUTES } from '../../constants';
 import { Done } from '@material-ui/icons';

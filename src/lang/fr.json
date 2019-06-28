@@ -59,10 +59,15 @@
         "yes": "Oui",
         "no": "Non",
         "delete": "Supprimer",
-        "confirmdelete": "Êtes-vous sûr de vouloir supprimer _{who}_ ?"
+        "confirmdelete": "Êtes-vous sûr de vouloir supprimer _{who}_ ?",
+        "characterstats": "Fiche de personnage",
+        "additem": "Ajouter un objet à l'inventaire",
+        "levelup": "Améliorer le potentiel",
+        "validate": "Valider",
+        "add": "Ajouter"
     },
     "navigator": {
-        "stats": "Status",
+        "stats": "État",
         "inventory": "Inventaire",
         "notes": "Notes",
         "potentials": "Potentiels",
@@ -105,6 +110,21 @@
         "volonte": "La *volonté* du personnage lui permet de croire en lui et en ses actes. Il est seul maître de son esprit.",
         "concentration": "Le personnage va préférer la réflexion et la *concentration* avant d'agir. Il sait généralement contrôler ses émotions.",
         "pulsions": "Les *pulsions* du personnages lui permettent d'agir vite et parfois sans réfléchir à une situation. Pour le meilleur ou pour le pire."
+    },
+    "inventory": {
+        "arme": "Arme",
+        "armure": "Armure",
+        "equipement": "Équipement",
+        "keyitem": "Objet clé",
+        "additem": "Ajouter un Objet",
+        "additemdesc": "Renseignez les informations du nouvel objet à ajouter à l'inventaire.",
+        "type": "Type d'objet",
+        "desc": "Description",
+        "name": "Intitulé"
+    },
+    "potential": {
+        "new": "Apprendre un nouveau potentiel",
+        "add": "Sélectionner un potentiel"
     },
     "cultes": {
         "anabaptiste": "Anabaptiste",

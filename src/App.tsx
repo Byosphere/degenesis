@@ -6,7 +6,6 @@ import Stats from './components/stats/Stats';
 import Inventory from './components/inventory/Inventory';
 import Notes from './components/notes/Notes';
 import Potentials from './components/potentials/Potentials';
-import Navigator from './components/navigator/Navigator';
 import Character from './models/Character';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import Home from './components/home/Home';
@@ -14,7 +13,6 @@ import { getCharacters, storeCharacter, deleteCharacter } from './utils/StorageM
 
 interface State {
     characters: Character[];
-    tabValue: number;
     headerTitle: string;
     displayTabs: boolean;
 }
@@ -26,14 +24,9 @@ class App extends Component<{}, State> {
 
         this.state = {
             characters: getCharacters(),
-            tabValue: 0,
             headerTitle: '',
             displayTabs: false
         };
-    }
-
-    public handleTabChange = (value: any) => {
-        this.setState({ tabValue: value });
     }
 
     public handleCharChange = (char: Character, save: boolean) => {
@@ -61,15 +54,12 @@ class App extends Component<{}, State> {
 
     public render() {
 
-        const { tabValue, characters } = this.state;
+        const { characters } = this.state;
 
         return (
             <div className="App">
                 <HashRouter basename='/'>
                     <Header
-                        onToggleTab={this.handleTabChange}
-                        tab={tabValue}
-                        displayTabs={this.state.displayTabs}
                         title={this.state.headerTitle}
                     />
                     <div className="app-content">
@@ -91,32 +81,29 @@ class App extends Component<{}, State> {
                             <Route path="/stats/:id" render={
                                 props => <Stats {...props}
                                     characters={characters}
-                                    tab={tabValue}
-                                    onTabChange={this.handleTabChange}
                                     onCharChange={this.handleCharChange}
                                     setHeader={this.setHeader}
                                 />
                             } />
-                            <Route path="/inventory" render={
+                            <Route path="/inventory/:id" render={
                                 props => <Inventory {...props}
-                                    char={null}
-                                    tab={tabValue}
-                                    onTabChange={this.handleTabChange}
+                                    characters={characters}
+                                    onCharChange={this.handleCharChange}
+                                    setHeader={this.setHeader}
                                 />
                             } />
-                            <Route path="/potentials" render={
+                            <Route path="/potentials/:id" render={
                                 props => <Potentials {...props}
-                                    char={null}
-                                    tab={tabValue}
-                                    onTabChange={this.handleTabChange}
+                                    characters={characters}
+                                    onCharChange={this.handleCharChange}
+                                    setHeader={this.setHeader}
                                 />
                             } />
-                            <Route path="/notes" render={
+                            <Route path="/notes/:id" render={
                                 props => <Notes {...props}
-                                    char={null}
-                                    tab={tabValue}
-                                    onTabChange={this.handleTabChange}
-                                    onChangeChar={this.handleCharChange}
+                                    characters={characters}
+                                    onCharChange={this.handleCharChange}
+                                    setHeader={this.setHeader}
                                 />
                             } />
                         </Switch>

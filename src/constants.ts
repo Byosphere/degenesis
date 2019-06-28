@@ -28,6 +28,13 @@ export const MONEY = [
     100
 ];
 
+export const TYPES = [
+    'arme',
+    'armure',
+    'equipement',
+    'keyitem'
+];
+
 export const ATTRIBUTES = [
     'physique',
     'agilite',

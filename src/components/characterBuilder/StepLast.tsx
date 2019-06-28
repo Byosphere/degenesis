@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Character from '../../models/Character';
 import T from 'i18n-react';
-import { TextField, Typography } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 
 interface Props {
     newCharacter: Character;
@@ -16,7 +16,6 @@ export default class StepLast extends Component<Props, {}> {
 
         return (
             <React.Fragment>
-                <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>{T.translate('create.lastdesc')}</Typography>
                 <div style={{ display: 'flex' }}>
                     <TextField
                         label={T.translate('generic.blessures')}

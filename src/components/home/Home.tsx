@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, ListItemAvatar, Avatar, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core';
+import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core';
 import Character from '../../models/Character';
-import { Redirect, RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from 'react-router-dom';
 import { Add, Delete } from '@material-ui/icons';
 import T from 'i18n-react';
-import { CULTURES, CULTES, CONCEPTS } from '../../constants';
 import CharacterItem from './CharacterItem';
 import SwipeableViews from 'react-swipeable-views';
-import { deleteCharacter } from '../../utils/StorageManager';
 
 interface ownProps {
     characters: Character[];

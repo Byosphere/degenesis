@@ -20,13 +20,13 @@ class Navigator extends Component<RouteComponentProps, {}> {
                 this.props.history.push('/inventory/' + params.id);
                 break;
             case 2:
-                this.props.history.push('/potentials' + params.id);
+                this.props.history.push('/potentials/' + params.id);
                 break;
             case 3:
-                this.props.history.push('/notes' + params.id);
+                this.props.history.push('/notes/' + params.id);
                 break;
             default:
-                this.props.history.push('/stats' + params.id);
+                this.props.history.push('/stats/' + params.id);
         }
     }
 
@@ -40,9 +40,9 @@ class Navigator extends Component<RouteComponentProps, {}> {
                     onChange={this.handleChange}
                 >
                     <BottomNavigationAction label={T.translate('navigator.stats')} icon={<Dashboard />} />
-                    <BottomNavigationAction disabled label={T.translate('navigator.inventory')} icon={<LibraryBooks />} />
-                    <BottomNavigationAction disabled label={T.translate('navigator.potentials')} icon={<AccessibilityNew />} />
-                    <BottomNavigationAction disabled label={T.translate('navigator.notes')} icon={<Note />} />
+                    <BottomNavigationAction label={T.translate('navigator.inventory')} icon={<LibraryBooks />} />
+                    <BottomNavigationAction label={T.translate('navigator.potentials')} icon={<AccessibilityNew />} />
+                    <BottomNavigationAction label={T.translate('navigator.notes')} icon={<Note />} />
                 </BottomNavigation>
             </div>
         );
@@ -55,11 +55,11 @@ class Navigator extends Component<RouteComponentProps, {}> {
         switch (path) {
             case '/stats/' + params.id:
                 return 0;
-            case '/inventory' + params.id:
+            case '/inventory/' + params.id:
                 return 1;
-            case '/potentials' + params.id:
+            case '/potentials/' + params.id:
                 return 2;
-            case '/notes' + params.id:
+            case '/notes/' + params.id:
                 return 3;
             default:
                 return 0;
