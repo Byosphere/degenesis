@@ -57,3 +57,13 @@ export function getLang(): string {
     let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
     return storage.lang || '';
 }
+
+export function setDarkMode(enabled: boolean) {
+    let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
+    storage.darkMode = enabled;
+}
+
+export function isDarkMode(): boolean {
+    let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
+    return storage.darkMode || false;
+}

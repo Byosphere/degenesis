@@ -66,7 +66,8 @@
         "validate": "Valider",
         "add": "Ajouter",
         "managemoney": "Gestion de l'argent",
-        "newcharacter": "Créer un nouveau personnage"
+        "newcharacter": "Créer un nouveau personnage",
+        "currentnote": "la note courante"
     },
     "navigator": {
         "stats": "État",
@@ -75,6 +76,18 @@
         "potentials": "Potentiels",
         "home": "Accueil",
         "create": "Créer"
+    },
+    "settings": {
+        "settings": "Paramètres",
+        "language": "Langue",
+        "darkmode": "Mode Sombre",
+        "activated": "Activé",
+        "desactivated": "Désactivé",
+        "exportdata": "Exporter les données",
+        "importdata": "Importer des données",
+        "contact": "Contact",
+        "version": "Version",
+        "license": "License"
     },
     "lang": {
         "en": "Anglais",

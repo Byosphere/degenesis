@@ -19,6 +19,8 @@ export const LANG = {
     'fr': fr
 };
 
+export const NOTES_MAX = 12;
+
 export const MONEY = [
     50,
     100,
