@@ -94,13 +94,13 @@ export default class Character implements ICharacter {
         this._culte = culte;
         this._culture = culture;
         this._concept = concept;
-        this.story = story;
+        this.story = story || '';
         this.belief = belief;
         this.behavior = behavior;
         this.attributes = attributes || JSON.parse(JSON.stringify(baseAttributes));
         this.potentials = potentials || [];
         this.inventory = inventory || [];
-        this.notes = notes || [];
+        this.notes = notes || [''];
         this.ego = ego || 0;
         this.sporulation = sporulation || 0;
         this.blessures = blessures || 0;
