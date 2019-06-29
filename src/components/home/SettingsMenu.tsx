@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { Menu, List, ListSubheader, ListItem, ListItemIcon, ListItemText, Collapse, Divider, ListItemSecondaryAction, Switch } from '@material-ui/core';
 import { LANG } from '../../constants';
-import { getLang, setLang, isDarkMode } from '../../utils/StorageManager';
+import { getLang, setLang, isDarkMode, getLocalData } from '../../utils/StorageManager';
 import T from 'i18n-react';
 import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, Brightness4, CloudDownload, CloudUpload } from '@material-ui/icons';
+import { saveFile } from '../../utils/helper';
 
 interface Props {
     anchorEl: Element;
@@ -31,6 +32,10 @@ export default class SettingsMenu extends Component<Props, State> {
 
     public handleExpand = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         this.setState({ langExpand: !this.state.langExpand });
+    }
+
+    public saveData = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        saveFile(getLocalData(), 'degenesis.json');
     }
 
     public render() {
@@ -76,7 +81,7 @@ export default class SettingsMenu extends Component<Props, State> {
                             ))}
                         </List>
                     </Collapse>
-                    <ListItem disabled>
+                    {/* <ListItem disabled>
                         <ListItemIcon>
                             <Brightness4 />
                         </ListItemIcon>
@@ -92,19 +97,19 @@ export default class SettingsMenu extends Component<Props, State> {
                                 inputProps={{ 'aria-labelledby': 'switch-list-label-wifi' }}
                             />
                         </ListItemSecondaryAction>
-                    </ListItem>
-                    <ListItem button>
+                    </ListItem> */}
+                    <ListItem button onClick={this.saveData}>
                         <ListItemIcon>
                             <CloudDownload />
                         </ListItemIcon>
                         <ListItemText primary={T.translate('settings.exportdata')} secondary="degenesis.json" />
                     </ListItem>
-                    <ListItem button disabled>
+                    {/* <ListItem button disabled>
                         <ListItemIcon>
                             <CloudUpload />
                         </ListItemIcon>
                         <ListItemText primary={T.translate('settings.importdata')} />
-                    </ListItem>
+                    </ListItem> */}
                     <Divider />
                     <ListItem>
                         <ListItemIcon>

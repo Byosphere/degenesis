@@ -68,7 +68,8 @@
         "managemoney": "Gestion de l'argent",
         "newcharacter": "Créer un nouveau personnage",
         "currentnote": "la note courante",
-        "addnote": "Ajouter une page"
+        "addnote": "Ajouter une page",
+        "invalidfield": "Champ invalide"
     },
     "navigator": {
         "stats": "État",

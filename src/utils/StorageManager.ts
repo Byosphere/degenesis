@@ -67,3 +67,7 @@ export function isDarkMode(): boolean {
     let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
     return storage.darkMode || false;
 }
+
+export function getLocalData(): any {
+    return localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
+}

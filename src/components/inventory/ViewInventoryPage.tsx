@@ -268,6 +268,7 @@ export default class ViewInventoryPage extends Component<Props, State> {
                             inputProps={{
                                 min: '0'
                             }}
+                            // eslint-disable-next-line
                             InputProps={{
                                 startAdornment: <InputAdornment position="start"><ChangeHistory /></InputAdornment>,
                                 endAdornment: <InputAdornment position="end">L.d.C</InputAdornment>
