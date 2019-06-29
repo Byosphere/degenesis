@@ -3,7 +3,7 @@ import { Menu, List, ListSubheader, ListItem, ListItemIcon, ListItemText, Collap
 import { LANG } from '../../constants';
 import { getLang, setLang, isDarkMode } from '../../utils/StorageManager';
 import T from 'i18n-react';
-import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, InvertColors, Brightness4, CloudDone, CloudDownload, CloudUpload } from '@material-ui/icons';
+import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, Brightness4, CloudDownload, CloudUpload } from '@material-ui/icons';
 
 interface Props {
     anchorEl: Element;

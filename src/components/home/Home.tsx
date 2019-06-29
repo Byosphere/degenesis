@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton } from '@material-ui/core';
 import Character from '../../models/Character';
 import { RouteComponentProps } from 'react-router-dom';
 import { Add, Delete, Settings } from '@material-ui/icons';

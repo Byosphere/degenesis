@@ -67,7 +67,8 @@
         "add": "Ajouter",
         "managemoney": "Gestion de l'argent",
         "newcharacter": "Créer un nouveau personnage",
-        "currentnote": "la note courante"
+        "currentnote": "la note courante",
+        "addnote": "Ajouter une page"
     },
     "navigator": {
         "stats": "État",

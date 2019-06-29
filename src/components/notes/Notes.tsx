@@ -101,7 +101,7 @@ export default class Notes extends Component<Props, State> {
                         nextButton={
                             <Button
                                 size="small"
-                                disabled={activeStep === notes.length}
+                                disabled={activeStep === notes.length - 1}
                                 onClick={() => this.setState({ activeStep: this.state.activeStep + 1 })}
                             >
                                 {T.translate('generic.next')}

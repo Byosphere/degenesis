@@ -23,7 +23,7 @@ export function storeCharacter(character: Character) {
     localStorage.setItem(LOCALSTORAGE_NAME, JSON.stringify(storage));
 }
 
-export function getCharacters() {
+export function getCharacters(): Character[] {
     let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
     let characters = [];
     if (storage.characters)
