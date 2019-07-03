@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Stepper, Step, StepLabel, StepContent, Button, Chip } from '@material-ui/core';
-import Character from '../../models/Character';
+import Character, { Attribute, Skill } from '../../models/Character';
 import { RouteComponentProps } from 'react-router-dom';
 import T from 'i18n-react';
 import { CULTURES, CULTES, CONCEPTS, MONEY, BASE_SKILLS, BASE_ATTRIBUTES } from '../../constants';
@@ -25,7 +25,7 @@ type Props = OwnProps & RouteComponentProps;
 
 interface State {
     activeStep: number;
-    newCharacter: any;
+    newCharacter: Character;
     attributePoints: number;
     skillPoints: number;
 }
@@ -69,7 +69,13 @@ export default class CharacterBuilder extends Component<Props, State> {
     }
 
     public handleReset = () => {
-        // TODO
+        let character = this.state.newCharacter;
+        character.attributes.forEach((attribute: Attribute) => {
+            attribute.skills.forEach((skill: Skill) => {
+                skill.value = 0;
+            });
+        });
+        this.setState({ newCharacter: character, skillPoints: BASE_SKILLS });
     }
 
     public handleAttributeChange = (attributeId: number, skillId: number, value: number) => {

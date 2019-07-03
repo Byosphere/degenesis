@@ -15,6 +15,7 @@ interface Props {
 }
 
 export default class StepSkills extends Component<Props, {}> {
+
     public render() {
 
         const { newCharacter, onChange, buttons, skillPoints } = this.props;
@@ -39,7 +40,12 @@ export default class StepSkills extends Component<Props, {}> {
                         </span>
                     }
                     action={[
-                        <Button key="undo" size="small" style={{ color: 'white' }}>
+                        <Button
+                            key="undo"
+                            size="small"
+                            style={{ color: 'white' }}
+                            onClick={this.props.onReset}
+                        >
                             {T.translate('generic.reset')}
                         </Button>,
                     ]}
