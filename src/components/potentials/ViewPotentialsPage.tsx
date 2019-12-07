@@ -84,6 +84,9 @@ export default class ViewPotentialsPage extends Component<Props, State>{
                                     label={
                                         T.translate('potentials.' + POTENTIALS[GENERIC_POTENTIALS][potential.id] + '.name') as string
                                     }
+                                    desc={
+                                        T.translate('potentials.' + POTENTIALS[GENERIC_POTENTIALS][potential.id] + '.desc') as string
+                                    }
                                 />
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
@@ -111,6 +114,9 @@ export default class ViewPotentialsPage extends Component<Props, State>{
                                     potential
                                     attribute
                                     value={potential.level}
+                                    desc={
+                                        T.translate('potentials.' + POTENTIALS[GENERIC_POTENTIALS][potential.id] + '.desc') as string
+                                    }
                                     label={
                                         T.translate('potentials.' + POTENTIALS[char.culte][potential.id] + '.name') as string
                                     }

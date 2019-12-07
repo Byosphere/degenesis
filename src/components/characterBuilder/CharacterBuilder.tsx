@@ -154,7 +154,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                                     T.translate('cultures.' + CULTURES[newCharacter.culture].name).toString() : '',
                                 1
                             )}
-                            <StepContent>
+                            <StepContent className='step-culture'>
                                 <StepCulture
                                     newCharacter={newCharacter}
                                     onChange={this.handleChange}
@@ -169,7 +169,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                                     T.translate('cultes.' + CULTES[newCharacter.culte].name).toString() : '',
                                 2
                             )}
-                            <StepContent>
+                            <StepContent className='step-culte'>
                                 <StepCulte
                                     newCharacter={newCharacter}
                                     onChange={this.handleChange}
@@ -184,7 +184,7 @@ export default class CharacterBuilder extends Component<Props, State> {
                                     T.translate('concepts.' + CONCEPTS[newCharacter.concept].name).toString() : '',
                                 3
                             )}
-                            <StepContent>
+                            <StepContent className='step-concept'>
                                 <StepConcept
                                     newCharacter={newCharacter}
                                     onChange={this.handleChange}

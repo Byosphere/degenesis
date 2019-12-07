@@ -82,6 +82,9 @@ export default class ViewStatsPage extends Component<Props, State> {
             char.size = this.state.charCopy.size : errors = { size: T.translate('generic.invalidfield'), ...errors };
         this.state.charCopy.story ?
             char.story = this.state.charCopy.story : errors = { story: T.translate('generic.invalidfield'), ...errors };
+        this.state.charCopy.rang ?
+            char.rang = this.state.charCopy.rang : errors = { rang: T.translate('generic.invalidfield'), ...errors };
+        char.sex = this.state.charCopy.sex;
 
         if (errors) {
             this.setState({ errors });
@@ -115,7 +118,7 @@ export default class ViewStatsPage extends Component<Props, State> {
                     />
                     <CardHeader
                         avatar={
-                            <Avatar alt={CULTURES[char.culture].name} src={"images/cultures/" + CULTURES[char.culture].name + ".jpg"} />
+                            <Avatar alt={CULTURES[char.culture].name} src={"images/cultures/" + CULTURES[char.culture].img} />
                         }
                         title={char.name + ' (' + T.translate('sex.' + SEX[char.sex]) + ')'}
                         subheader={
@@ -150,17 +153,8 @@ export default class ViewStatsPage extends Component<Props, State> {
                                 {this.state.expanded ? <ExpandLess /> : <ExpandMore />}
                             </IconButton>
                         </CardContent>}
-                    <CardContent>
-                        <div>
-                            <Typography component='div' variant='caption'>
-                                {T.translate('generic.trauma') + ' (' + char.trauma + '/' + char.traumaMax + ') :'}
-                            </Typography>
-                            <div style={{ marginTop: '-4px' }}>
-                                {this.displayTrauma()}
-                            </div>
-                        </div>
-                    </CardContent>
                 </Card>
+                <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.health')}</Typography>
                 <Card style={{ margin: '5px 0' }}>
                     <CardContent>
                         <InteractiveJauge
@@ -181,6 +175,14 @@ export default class ViewStatsPage extends Component<Props, State> {
                             maximum={char.sporulationMax}
                             onChange={this.handleChange}
                         />
+                        <div>
+                            <Typography component='div' variant='caption'>
+                                {T.translate('generic.trauma') + ' (' + char.trauma + '/' + char.traumaMax + ') :'}
+                            </Typography>
+                            <div style={{ marginTop: '-4px' }}>
+                                {this.displayTrauma()}
+                            </div>
+                        </div>
                     </CardContent>
                 </Card>
                 <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.attributes')}</Typography>

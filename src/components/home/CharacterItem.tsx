@@ -28,7 +28,7 @@ export default class CharacterItem extends Component<Props, {}> {
                 onClick={() => this.props.onSelectCharacter(char.id)}
             >
                 <ListItemAvatar>
-                    <Avatar alt={char.name} src={"images/cultures/" + CULTURES[char.culture].name + ".jpg"} />
+                    <Avatar alt={char.name} src={"images/cultures/" + CULTURES[char.culture].img} />
                 </ListItemAvatar>
                 <ListItemText
                     style={{ background: 'rgba(255, 255, 255, 0.3)', marginRight: '50px' }}

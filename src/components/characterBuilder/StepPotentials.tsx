@@ -17,7 +17,9 @@ export default class StepPotentials extends Component<Props, {}> {
 
         return (
             <React.Fragment>
-                <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>{T.translate('create.potentialsdesc')}</Typography>
+                <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+                    {T.translate('create.potentialsdesc', { num: Math.abs(newCharacter.potentials.length - 2) })}
+                </Typography>
                 <List
                     dense
                     component="div"

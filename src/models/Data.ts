@@ -1,10 +1,13 @@
 export interface Culte {
     name: string;
+    desc: string;
     bonus: Bonus[];
 }
 
 export interface Culture {
     name: string;
+    desc: string;
+    img: string;
     bonus: Bonus[];
 }
 

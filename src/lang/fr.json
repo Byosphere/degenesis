@@ -2,6 +2,7 @@
     "generic": {
         "view": "Visualiser",
         "edit": "Modifier",
+        "close": "fermer",
         "reset": "Recommencer",
         "life": "Blessures superficielles",
         "ego": "Ego",
@@ -32,6 +33,7 @@
         "name": "Nom",
         "age": "Âge",
         "sex": "Sexe",
+        "health": "Santé",
         "culte": "Culte",
         "culture": "Culture",
         "concept": "Concept",
@@ -69,7 +71,8 @@
         "newcharacter": "Créer un nouveau personnage",
         "currentnote": "la note courante",
         "addnote": "Ajouter une page",
-        "invalidfield": "Champ invalide"
+        "invalidfield": "Champ invalide",
+        "rolldicequestion": "Effectuer un jet de *{attribute}* ({anum}) + *{skill}* ({snum}) ?"
     },
     "navigator": {
         "stats": "État",
@@ -123,6 +126,7 @@
         "attributes": "Choix des Attributs particuliers",
         "beliefdesc": "Certains attributs sont exclusifs. Choisissez ceux qui définissent le mieux _{who}_.",
         "potentials": "Choix des Potentiels",
+        "potentialsdesc": "Les potentiels sont des capacités spéciales qui peuvent être utilisées dans certaines condition. Vous devez en sélectionner {num}.",
         "lasttouch": "Touches finales",
         "selectedskills": "Compétences choisies",
         "selectedattributes": "Attributs choisis",
@@ -136,6 +140,7 @@
         "arme": "Arme",
         "armure": "Armure",
         "equipement": "Équipement",
+        "weight": "Poids de l'objet",
         "keyitem": "Objet clé",
         "additem": "Ajouter un Objet",
         "additemdesc": "Renseignez les informations du nouvel objet à ajouter à l'inventaire.",
@@ -163,13 +168,34 @@
         "spitalier": "Spitalier"
     },
     "cultures": {
-        "afrika": "Afrika",
-        "balkhans": "Balkhans",
-        "borca": "Borca",
-        "franka": "Franka",
-        "hybrispanie": "Hybrispanie",
-        "pollen": "Pollen",
-        "purgare": "Purgare"
+        "afrika": {
+            "name": "Afrika",
+            "desc": "_«L’Afrika est forte et prospère. Depuis des siècles, le culte marchand néolybien nourrit les cités cotières. Le temps est clément et une douce bise souffle sur la Méditerranée. Des auvents rouges et bleus s’agitent, le charbon des narguilés luit. Là où le désert de sable brillait au soleil autrefois, des rivières serpentent mainteant à travers la terre alors que la végétation se développe.»_ \n Afrika est puissante et influente. Ses métropoles sont parmis les plus belles. Le temps est beaucoup plus clément qu’en Europe. Une menace demeure cependant. La ceinture psychovore avance."
+        },
+        "balkhans": {
+            "name": "Balkhans",
+            "desc": "_«En ces temps troublés, les seigneurs de guerre renoncent à leur perfidie et fraternisent avec ceux qu’ils auraient assassinés la veille, car les Balkhans sont devenus des terres d’extrèmes. L’hiver inflige aux hommes un froid arctique et des tempètes de neige. L’été calcine les plaines verdoyantes et les réduits à des champs de chaume.»_ \n Les habitants des Balkhans sont à l’image de leur pays : sauvages, indépendants, passionnés et sanguins. Ils vivent selon le principe «Moi contre mon frère, mon frère et moi contre mon oncle, nous tous contre le reste du monde». Les querelles ne s’arrêtent jamais."
+        },
+        "borca": {
+            "name": "Borca",
+            "desc": "_«En Borca, les humains errent à travers une jungle d’acier et de béton. De colonie en colonie, ils longent les cratères envahis de mauvaises herbes, traversent des champs de blé sauvage, suivent des lits de rivières asséchés. Pierre après pierre, ils extraient des métropoles en ruine comme Justicienne, Cathédrale, et Osman pour bâtir un nouveau monde, conquérir la terre et asseoir leur règne.»_ \n Cette contrée est composée de peuples fiers. Le territoire est divisé en deux par une faille allant jusqu’aux glaces nordiques. L’ouest est constituée de ruines de béton et d’acier, l’Est est principalement une forêt de connifères."
+        },
+        "franka": {
+            "name": "Franka",
+            "desc": "_«En Franka, les humains ont beau fuir jusqu’aux rivières afin d’échapper aux nuées de guêpes et aux attaques de termites, ils voient toujours des cheminées remplies de fourmis pousser dans leur champs. Bientôt, la terre recrachera la colonie. Tous les villages pourissent les uns après les autres. Mais la bataille n’est pas encore perdue.»_ \n En Franka, la vie est florissante, mais l’homme n’y règne plus en maitre. L’homo sapiens est au bord de l’extinction cependant, les habitants sont en train de construire des cités neuves et solides."
+        },
+        "hybrispanie": {
+            "name": "Hybrispanie",
+            "desc": "_«Dès leur naissance les Hybrispaniols sont bercés par la notion de liberté et de reconquête. Les maisons sont ornées de peinture de guerre, les chants préparent à la mort, les textes enseignent le maniement des armes et la survie dans la jungle. On laisse de côté les aspects de la vie inutiles.»_ \n C’est un pays déchiré par la haine et l’envie de mort dans lequel l’humain est la première victime. La jungle qui s’étent au sud est abreuvée du sang des Afrikains. Au nord les animaux des plaines se nourissent de cadavre des légions Jéhammetans."
+        },
+        "pollen": {
+            "name": "Pollen",
+            "desc": "_«En pollen, les vents transforment la terre en une mer agitée, hérissée de pierres friables. Des toiles d’araignées recouvrent les gouffres et dissimulent les ruines. Armés de haches en pierres, les Pollenais défendent les derniers oasis avec ardeur, même s’ils savent que ce n’est qu’une question de temps avant que les la désolation ne s’abatte de nouveau.»_ \n Terre morte, les habitants ne doivent leur survie qu’à leur adaptation et leur vitesse, car en Pollen, la paix peut du jour au lendemain, disparaitre dans des tempètes de vent."
+        },
+        "purgare": {
+            "name": "Purgare",
+            "desc": "_«Scindée par une chaîne de montagne, la Purgare est divisée en deux régions distinctes. A l’est, les paysages sont couverts d’oliveraies, de vignes et d’autres cultures. L’ouest, au contraire a été brûlé et empoisonné par les vapeurs de volcans. Le sol tremble parfois et des rivières de lave coulent dans la Méditerranée.»_ \n C’est uniquement en famille que les habitants de Purgare font face au danger. Douze familles contrôlent le pays. C’est aussi la nouvelle terre sainte pour de nombreuses croyances religieuses. Le pays est une armée sur le pied de guerre."
+        }
     },
     "concepts": {
         "abomination": "Abomination",
@@ -199,32 +225,32 @@
         "physique": {
             "name": "Physique",
             "short": "PHY",
-            "desc": ""
+            "desc": "Le *Physique* représente la force, la ténacité, et l'endurance. Les personnages dotés d'une valeur élevée en *Physique* s'épuisent moins vite et récupèrent plus rapidement. Leur carrure impressionne leurs ennemis. Cet attribut permet de survivre plus longtemps, de résister à la douleur et d'utiliser leur corps comme une arme."
         },
         "agilite": {
             "name": "Agilité",
             "short": "AGI",
-            "desc": ""
+            "desc": "La force n'est rien sans contrôle. Une bonne valeur d'*Agilité* permet non seulement d'améliorer sa souplesse, mais aussi d'esquiver les dangers et de manipuler des mécanismes complexes."
         },
         "charisme": {
             "name": "Charisme",
             "short": "CHA",
-            "desc": ""
+            "desc": "Les personnages *charismatiques* impressionnent grâce à leur présence. Ils n'ont aps à faire semblant d'être aimés ou adorés. Les autres les suivent par conviction et avec dévotion. Le *Charisme* ouvre les portes du monde : diplomatie, négociation et consensus exigent des personnalités charismatiques."
         },
         "intellect": {
             "name": "Intellect",
             "short": "INT",
-            "desc": ""
+            "desc": "Un esprit entraîné et aiguisé favorise la capacité d'abstraction et la concentration absolue, des aptitudes essentielles pour comprendre et utiliser la technologie ou les sciences. L'*Intellect représente l'organisation, la sagesse, la réflexion et la capacité à envisager les conséquences."
         },
         "psyche": {
             "name": "Psyché",
             "short": "PSY",
-            "desc": ""
+            "desc": "La *Psyché* est le feu qui réchauffe l'âme, qui anime la volonté et la foi. La *Psyché* est la force mentale, la soeur ma aimée de l'Intellect. Elle nourrit les mensonges et la trahison, l'intimidation et la supériorité mentale. Sa puissance permet de réprimer l'influence de l'Amorce et de dépasser ses propres limites."
         },
         "instinct": {
             "name": "Instinct",
             "short": "INS",
-            "desc": ""
+            "desc": "L'*Instinct* prend le relais de la langue et des lois quand celles-ci ne sont plus en mesure d'assurer notre subsistance et notre cohésion. Il contrôle nos réactions primitives aux influences extérieures et laisse parler l'animal qui sommeille en nous."
         }
     },
     "skills": {

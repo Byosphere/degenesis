@@ -63,7 +63,7 @@ export default class Home extends Component<Props, State> {
 
     public handleClose = (event: React.MouseEvent<any>) => {
         let tabs = this.state.tabs;
-        tabs[this.state.selectedIndex] = 0;
+        tabs[this.state.selectedIndex] = 1;
         this.setState({
             open: false,
             selectedChar: null,
@@ -75,7 +75,7 @@ export default class Home extends Component<Props, State> {
     public handleDelete = (event: React.MouseEvent<any>) => {
         let id = this.state.selectedChar.id;
         let tabs = this.state.tabs;
-        tabs[this.state.selectedIndex] = 0;
+        tabs[this.state.selectedIndex] = 1;
         this.setState({
             open: false,
             selectedChar: null,
@@ -112,17 +112,16 @@ export default class Home extends Component<Props, State> {
                         {this.props.characters.map((char: Character, key: number) => (
                             <SwipeableViews
                                 key={key}
-                                index={this.state.tabs[key]}
+                                index={this.state.tabs.length ? this.state.tabs[key] : 1}
                                 onChangeIndex={(index) => this.onTabChange(index, key, char)}
                                 resistance
                             >
-                                <CharacterItem char={char} onSelectCharacter={this.selectCharacter} />
-                                <ListItem style={{ background: '#F44336', margin: '5px 0', height: 'calc(100% - 10px)', color: 'white' }}>
+                                <ListItem style={{ background: '#F44336', margin: '5px 0', height: 'calc(100% - 10px)', color: 'white', flexDirection: 'row-reverse' }}>
                                     <ListItemIcon>
                                         <Delete style={{ color: 'white' }} />
                                     </ListItemIcon>
-                                    <ListItemText primary={T.translate('generic.delete')} />
                                 </ListItem>
+                                <CharacterItem char={char} onSelectCharacter={this.selectCharacter} />
                             </SwipeableViews>
                         ))}
                     </List>

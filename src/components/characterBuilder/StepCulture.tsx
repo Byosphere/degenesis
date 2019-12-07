@@ -43,11 +43,14 @@ export default class StepCulture extends Component<Props, {}> {
                     </Select>
                 </FormControl>
                 {typeof newCharacter.culture === 'number' && <div style={{ margin: '16px 0' }}>
+                    <Typography variant="button">
+                        {T.translate('cultures.' + CULTURES[newCharacter.culture].name)}
+                    </Typography>
+                    <Typography variant='body2' component='p' style={{ marginBottom: "8px" }}>
+                        {T.translate('cultures.' + CULTURES[newCharacter.culture].desc)}
+                    </Typography>
                     <Grid container spacing={2} alignItems='center'>
                         <Grid item xs={6}>
-                            <Typography variant="button">
-                                {T.translate('cultures.' + CULTURES[newCharacter.culture].name)}
-                            </Typography>
                             <Typography variant='body2' component='p'>
                                 {T.translate('create.bonus.attributes')}
                             </Typography>
@@ -76,7 +79,7 @@ export default class StepCulture extends Component<Props, {}> {
                         </Grid>
                         <Grid item xs={6}>
                             <CardMedia
-                                image={"images/cultures/" + CULTURES[newCharacter.culture].name + ".jpg"}
+                                image={"images/cultures/" + CULTURES[newCharacter.culture].img}
                                 title={CULTURES[newCharacter.culture].name}
                                 style={{ height: '100px' }}
                             />

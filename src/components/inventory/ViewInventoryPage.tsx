@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Character, { Item } from '../../models/Character';
 import { Card, IconButton, CardContent, List, ListSubheader, ListItem, ListItemText, ListItemSecondaryAction, Divider, Collapse, CardHeader, Avatar, Typography, Button, Dialog, DialogContent, DialogContentText, DialogActions, MenuItem, Select, Input, Slide, AppBar, Toolbar, FormControl, InputLabel, TextField, Fab, Zoom, DialogTitle, FormControlLabel, Radio, RadioGroup, InputAdornment } from '@material-ui/core';
 import T from 'i18n-react';
-import { ExpandMore, ExpandLess, CardTravel, Close, SwapVerticalCircle, Add, ChangeHistory } from '@material-ui/icons';
+import { ExpandMore, ExpandLess, CardTravel, Close, SwapVerticalCircle, Add, DonutSmall } from '@material-ui/icons';
 import { TYPES } from '../../constants';
 import { TransitionProps } from '@material-ui/core/transitions/transition';
 
@@ -270,7 +270,9 @@ export default class ViewInventoryPage extends Component<Props, State> {
                             }}
                             // eslint-disable-next-line
                             InputProps={{
-                                startAdornment: <InputAdornment position="start"><ChangeHistory /></InputAdornment>,
+                                startAdornment: <InputAdornment position="start">
+                                    <DonutSmall fontSize='small' />
+                                </InputAdornment>,
                                 endAdornment: <InputAdornment position="end">L.d.C</InputAdornment>
                             }}
                             fullWidth

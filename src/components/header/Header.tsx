@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ArrowBack } from '@material-ui/icons';
+import Character from '../../models/Character';
 
 interface OwnProps {
     title: string;
+    characters: Character[];
 }
 
 interface State {
@@ -36,7 +38,7 @@ class Header extends Component<Props, State> {
             return (
                 <AppBar position="relative" elevation={4}>
                     <Toolbar>
-                        {this.props.location.pathname !== '/' &&
+                        {this.props.location.pathname !== '/' && !!this.props.characters.length &&
                             <IconButton edge="start" color="inherit" onClick={this.handleBack}>
                                 <ArrowBack />
                             </IconButton>

@@ -1,6 +1,8 @@
 [
     {
-        "name": "afrika",
+        "name": "afrika.name",
+        "desc": "afrika.desc",
+        "img": "afrika.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -34,7 +36,9 @@
         ]
     },
     {
-        "name": "balkhans",
+        "name": "balkhans.name",
+        "desc": "balkhans.desc",
+        "img": "balkhans.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -68,7 +72,9 @@
         ]
     },
     {
-        "name": "borca",
+        "name": "borca.name",
+        "desc": "borca.desc",
+        "img": "borca.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -102,7 +108,9 @@
         ]
     },
     {
-        "name": "franka",
+        "name": "franka.name",
+        "desc": "franka.desc",
+        "img": "franka.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -142,7 +150,9 @@
         ]
     },
     {
-        "name": "hybrispanie",
+        "name": "hybrispanie.name",
+        "desc": "hybrispanie.desc",
+        "img": "hybrispanie.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -176,7 +186,9 @@
         ]
     },
     {
-        "name": "pollen",
+        "name": "pollen.name",
+        "desc": "pollen.desc",
+        "img": "pollen.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -204,7 +216,9 @@
         ]
     },
     {
-        "name": "purgare",
+        "name": "purgare.name",
+        "desc": "purgare.desc",
+        "img": "purgare.jpg",
         "bonus": [
             {
                 "name": "charisme",

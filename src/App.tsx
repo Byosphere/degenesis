@@ -61,6 +61,7 @@ class App extends Component<{}, State> {
                 <HashRouter basename='/'>
                     <Header
                         title={this.state.headerTitle}
+                        characters={characters}
                     />
                     <div className="app-content">
                         <Switch>
