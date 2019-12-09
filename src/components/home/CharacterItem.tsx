@@ -19,7 +19,7 @@ export default class CharacterItem extends Component<Props, {}> {
             <ListItem
                 button
                 style={{
-                    backgroundImage: 'url(images/cultes/' + CULTES[char.culte].name + '.jpg)',
+                    backgroundImage: 'url(images/cultes/' + CULTES[char.culte].img + ')',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     backgroundPosition: '160px center',

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Character, { Item } from '../../models/Character';
 import { Card, IconButton, CardContent, List, ListSubheader, ListItem, ListItemText, ListItemSecondaryAction, Divider, Collapse, CardHeader, Avatar, Typography, Button, Dialog, DialogContent, DialogContentText, DialogActions, MenuItem, Select, Input, Slide, AppBar, Toolbar, FormControl, InputLabel, TextField, Fab, Zoom, DialogTitle, FormControlLabel, Radio, RadioGroup, InputAdornment } from '@material-ui/core';
 import T from 'i18n-react';
-import { ExpandMore, ExpandLess, CardTravel, Close, SwapVerticalCircle, Add, DonutSmall } from '@material-ui/icons';
+import { ExpandMore, ExpandLess, CardTravel, Close, SwapVerticalCircle, Add, DonutSmall, Delete } from '@material-ui/icons';
 import { TYPES } from '../../constants';
 import { TransitionProps } from '@material-ui/core/transitions/transition';
 
@@ -13,6 +13,7 @@ interface Props {
 
 interface State {
     open: boolean[];
+    confirmOpen: boolean[];
     modalOpen: boolean;
     newItem: Item;
     moneyModalOpen: boolean;
@@ -33,7 +34,8 @@ export default class ViewInventoryPage extends Component<Props, State> {
             newItem: { name: '', type: 0, desc: '', weight: 0, tech: 0 },
             moneyModalOpen: false,
             addRemoveMoney: 'add',
-            moneyValue: 0
+            moneyValue: 0,
+            confirmOpen: []
         };
 
         this.Transition = React.forwardRef<unknown, TransitionProps>(function Transition(props, ref) {
@@ -113,14 +115,14 @@ export default class ViewInventoryPage extends Component<Props, State> {
                 <Card style={{ height: '100%' }}>
                     <CardHeader
                         avatar={
-                            <Avatar style={{ background: '#d50000' }}>
+                            <Avatar color='primary'>
                                 <CardTravel />
                             </Avatar>
                         }
                         title={T.translate('generic.money', { money: char.money })}
                         subheader={T.translate('generic.totalweight', { weight: totalWeight })}
                         action={
-                            <IconButton color='primary' onClick={this.openMoneyModal}>
+                            <IconButton color='secondary' onClick={this.openMoneyModal}>
                                 <SwapVerticalCircle />
                             </IconButton>
                         }
@@ -336,6 +338,9 @@ export default class ViewInventoryPage extends Component<Props, State> {
                         <IconButton onClick={() => this.handleExpand(itemKey)}>
                             {this.state.open[itemKey] ? <ExpandLess /> : <ExpandMore />}
                         </IconButton>
+                        <IconButton color='secondary' onClick={(event) => this.handleDelete(event, itemKey)}>
+                            <Delete />
+                        </IconButton>
                     </ListItemSecondaryAction>
                 </ListItem>
                 <Collapse in={this.state.open[itemKey]} unmountOnExit>
@@ -349,8 +354,46 @@ export default class ViewInventoryPage extends Component<Props, State> {
                         />
                     </ListItem>
                 </Collapse>
+                <Dialog
+                    open={this.state.confirmOpen[itemKey]}
+                    onClose={(event: any) => this.handleCloseConfirm(event, itemKey)}
+                >
+                    <DialogTitle>
+                        {T.translate('generic.confirmdelete', { who: item.name })}
+                    </DialogTitle>
+                    <DialogActions>
+                        <Button onClick={(event) => this.handleCloseConfirm(event, itemKey)} color="primary">
+                            {T.translate('generic.no')}
+                        </Button>
+                        <Button onClick={(event) => this.confirmDelete(event, item, itemKey)} autoFocus color='secondary'>
+                            {T.translate('generic.yes')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </React.Fragment>
         );
+    }
+
+    public confirmDelete = (event: React.MouseEvent<any>, item: Item, itemKey: number) => {
+        let char = this.props.char;
+        let itemIndex = char.inventory.findIndex((i) => i.name === item.name);
+        if (itemIndex !== -1) {
+            char.inventory.splice(itemIndex, 1);
+        }
+        this.props.onChange(char, true);
+        this.handleCloseConfirm(event, itemKey);
+    }
+
+    public handleCloseConfirm(event: React.MouseEvent<any>, itemKey: number): void {
+        let confirmOpen = this.state.confirmOpen;
+        confirmOpen[itemKey] = false;
+        this.setState({ confirmOpen });
+    }
+
+    public handleDelete(event: React.MouseEvent<any>, itemKey: number): void {
+        let confirmOpen = this.state.confirmOpen;
+        confirmOpen[itemKey] = true;
+        this.setState({ confirmOpen });
     }
 
 }

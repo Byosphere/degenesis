@@ -89,11 +89,6 @@ export default class ViewPotentialsPage extends Component<Props, State>{
                                     }
                                 />
                             </ExpansionPanelSummary>
-                            <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
-                                <Typography variant='body1'>
-                                    {T.translate('potentials.' + POTENTIALS[GENERIC_POTENTIALS][potential.id] + '.desc')}
-                                </Typography>
-                            </ExpansionPanelDetails>
                             <Divider />
                             <ExpansionPanelActions>
                                 <Button disabled={potential.level === 3} onClick={() => this.upgradePotential(0, potential.id)}>{T.translate('generic.levelup')}</Button>

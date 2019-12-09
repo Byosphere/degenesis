@@ -5,6 +5,7 @@ import { getLang, setLang, isDarkMode, getLocalData } from '../../utils/StorageM
 import T from 'i18n-react';
 import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, Brightness4, CloudDownload, CloudUpload } from '@material-ui/icons';
 import { saveFile } from '../../utils/helper';
+import packageJson from '../../../package.json';
 
 interface Props {
     anchorEl: Element;
@@ -124,7 +125,7 @@ export default class SettingsMenu extends Component<Props, State> {
                         <ListItemIcon>
                             <Android />
                         </ListItemIcon>
-                        <ListItemText primary={T.translate('settings.version')} secondary="1.0.0" />
+                        <ListItemText primary={T.translate('settings.version')} secondary={packageJson.version} />
                     </ListItem>
                     <ListItem>
                         <ListItemIcon>

@@ -1,7 +1,8 @@
 [
     {
         "name": "anabaptiste.name",
-        "desc": "",
+        "desc": "anabaptiste.desc",
+        "img": "anabaptiste.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -36,8 +37,9 @@
         ]
     },
     {
-        "name": "anubien",
-        "desc": "",
+        "name": "anubien.name",
+        "desc": "anubien.desc",
+        "img": "anubien.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -72,8 +74,9 @@
         ]
     },
     {
-        "name": "apocalyptique",
-        "desc": "",
+        "name": "apocalyptique.name",
+        "desc": "apocalyptique.desc",
+        "img": "apocalyptique.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -107,8 +110,9 @@
         ]
     },
     {
-        "name": "blafard",
-        "desc": "",
+        "name": "blafard.name",
+        "desc": "blafard.desc",
+        "img": "blafard.jpg",
         "bonus": [
             {
                 "name": "agilite",
@@ -142,8 +146,9 @@
         ]
     },
     {
-        "name": "chroniqueur",
-        "desc": "",
+        "name": "chroniqueur.name",
+        "desc": "chroniqueur.desc",
+        "img": "chroniqueur.jpg",
         "bonus": [
             {
                 "name": "agilite",
@@ -177,8 +182,9 @@
         ]
     },
     {
-        "name": "claniste",
-        "desc": "",
+        "name": "claniste.name",
+        "desc": "claniste.desc",
+        "img": "claniste.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -206,8 +212,9 @@
         ]
     },
     {
-        "name": "ferrailleur",
-        "desc": "",
+        "name": "ferrailleur.name",
+        "desc": "ferrailleur.desc",
+        "img": "ferrailleur.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -241,8 +248,9 @@
         ]
     },
     {
-        "name": "fleau",
-        "desc": "",
+        "name": "fleau.name",
+        "desc": "fleau.desc",
+        "img": "fleau.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -270,8 +278,9 @@
         ]
     },
     {
-        "name": "hellvetique",
-        "desc": "",
+        "name": "hellvetique.name",
+        "desc": "hellvetique.desc",
+        "img": "hellvetique.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -305,8 +314,9 @@
         ]
     },
     {
-        "name": "jehammetan",
-        "desc": "",
+        "name": "jehammetan.name",
+        "desc": "jehammetan.desc",
+        "img": "jehammetan.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -347,8 +357,9 @@
         ]
     },
     {
-        "name": "juge",
-        "desc": "",
+        "name": "juge.name",
+        "desc": "juge.desc",
+        "img": "juge.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -382,8 +393,9 @@
         ]
     },
     {
-        "name": "neolybien",
-        "desc": "",
+        "name": "neolybien.name",
+        "desc": "neolybien.desc",
+        "img": "neolybien.jpg",
         "bonus": [
             {
                 "name": "agilite",
@@ -417,8 +429,9 @@
         ]
     },
     {
-        "name": "spitalier",
-        "desc": "",
+        "name": "spitalier.name",
+        "desc": "spitalier.desc",
+        "img": "spitalier.jpg",
         "bonus": [
             {
                 "name": "physique",

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button, DialogTitle, Tooltip } from '@material-ui/core';
+import { FormGroup, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button, DialogTitle } from '@material-ui/core';
 import { LooksOne, LooksOneOutlined, LooksTwo, LooksTwoOutlined, Looks6Outlined, Looks3Outlined, Looks3, Looks4Outlined, Looks4, Looks5Outlined, Looks5, Looks6, Info, BackspaceOutlined, Backspace, Casino } from '@material-ui/icons';
 import T from 'i18n-react';
 

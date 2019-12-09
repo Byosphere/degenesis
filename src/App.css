@@ -37,7 +37,7 @@
 
 p.card-overtitle {
   opacity: 0.6;
-  margin: 8px 16px;
+  margin: 16px 16px 8px 16px;
 }
 
 .create-step-label>span {
@@ -48,4 +48,20 @@ p.card-overtitle {
 
 .step-culture em {
   display: block;
+}
+
+.stats-bottom {
+  display: block;
+  height: 44px;
+  position: relative;
+}
+
+.stats-bottom::after {
+  content: '';
+  width: 50%;
+  height: 1px;
+  background-color: rgba(0, 0, 0, 0.16);
+  position: absolute;
+  top: 50%;
+  left: 25%;
 }

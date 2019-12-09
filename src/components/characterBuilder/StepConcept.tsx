@@ -43,6 +43,9 @@ export default class StepConcept extends Component<Props, {}> {
                     </Select>
                 </FormControl>
                 {typeof newCharacter.concept === 'number' && <CardContent>
+                    <Typography variant='body2' component='p' style={{ marginBottom: "8px" }}>
+                        {T.translate('concepts.' + CONCEPTS[newCharacter.concept].desc)}
+                    </Typography>
                     <Typography variant='body2' component='p'>
                         {T.translate('create.bonus.attributes')}
                     </Typography>

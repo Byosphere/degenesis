@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, IconButton, Chip, Dialog, DialogContent, DialogActions, Button, DialogTitle, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment } from '@material-ui/core';
+import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, IconButton, Chip, Dialog, DialogContent, DialogActions, Button, DialogTitle, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, List, ListItem, ListItemText, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions } from '@material-ui/core';
 import { CULTES, CULTURES, CONCEPTS, RANGS, SEX } from '../../constants';
-import { ExpandMore, ExpandLess, OfflineBolt, OfflineBoltOutlined, Clear, Edit } from '@material-ui/icons';
+import { ExpandMore, ExpandLess, OfflineBolt, OfflineBoltOutlined, Clear, Edit, Info } from '@material-ui/icons';
 import Character, { Attribute } from '../../models/Character';
 import T from 'i18n-react';
 import InteractiveJauge from '../interactiveJauge/InteractiveJauge';
@@ -17,6 +17,7 @@ interface State {
     open: boolean;
     charCopy: Character;
     errors: any;
+    showRank: boolean;
 }
 
 export default class ViewStatsPage extends Component<Props, State> {
@@ -30,7 +31,8 @@ export default class ViewStatsPage extends Component<Props, State> {
             expanded: false,
             open: false,
             charCopy: this.props.char.clone(),
-            errors: {}
+            errors: {},
+            showRank: false
         }
     }
 
@@ -107,14 +109,16 @@ export default class ViewStatsPage extends Component<Props, State> {
             <div style={{ margin: '5px 5px 61px 5px' }}>
                 <Card style={{ position: 'relative' }}>
                     <CardMedia
-                        image={"images/cultes/" + CULTES[char.culte].name + ".jpg"}
+                        image={"images/cultes/" + CULTES[char.culte].img}
                         title="Paella dish"
                         style={{ height: '100px' }}
                     />
                     <Chip
-                        style={{ position: 'absolute', top: '8px', right: '8px' }}
-                        label={T.translate('rangs.' + RANGS[char.culte][char.rang])}
+                        style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(255,255,255,0.7)' }}
+                        label={T.translate('rangs.' + RANGS[char.culte][char.rang] + '.name')}
                         variant="outlined"
+                        deleteIcon={<Info />}
+                        onDelete={this.showDetailRank}
                     />
                     <CardHeader
                         avatar={
@@ -189,6 +193,38 @@ export default class ViewStatsPage extends Component<Props, State> {
                 {char.attributes.map((att: Attribute, i: number) => (
                     <AttributePanel key={i} attribute={att} onChange={this.handleAttributeSave} />
                 ))}
+                <Typography variant='body1' component='p' className='card-overtitle'>Status</Typography>
+                <ExpansionPanel style={{ marginBottom: '5px' }}>
+                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+                        <b>{T.translate('cultes.' + CULTES[char.culte].name)}</b>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        {T.translate('cultes.' + CULTES[char.culte].desc)}
+                    </ExpansionPanelDetails>
+                    <ExpansionPanelActions>
+                        <Button color='secondary'>{T.translate('generic.edit')}</Button>
+                    </ExpansionPanelActions>
+                </ExpansionPanel>
+                <ExpansionPanel style={{ marginBottom: '5px' }}>
+                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+                        <b>{T.translate('cultures.' + CULTURES[char.culture].name)}</b>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
+                        {T.translate('cultures.' + CULTURES[char.culture].desc)}
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+                <ExpansionPanel style={{ marginBottom: '5px' }}>
+                    <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+                        <b>{T.translate('concepts.' + CONCEPTS[char.concept].name)}</b>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
+                        {T.translate('concepts.' + CONCEPTS[char.concept].desc)}
+                    </ExpansionPanelDetails>
+                    <ExpansionPanelActions>
+                        <Button color='secondary'>{T.translate('generic.edit')}</Button>
+                    </ExpansionPanelActions>
+                </ExpansionPanel>
+                <span className='stats-bottom'></span>
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleModalClose}
@@ -337,10 +373,32 @@ export default class ViewStatsPage extends Component<Props, State> {
                         </Button>
                     </DialogActions>
                 </Dialog>
+                <Dialog
+                    open={this.state.showRank}
+                    onClose={this.hideDetailRank}
+                >
+                    <DialogTitle>{T.translate('rangs.' + RANGS[char.culte][char.rang] + '.name')}</DialogTitle>
+                    <DialogContent>
+                        {T.translate('rangs.' + RANGS[char.culte][char.rang] + '.desc')}
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.hideDetailRank}>
+                            {T.translate('generic.close')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
             </div>
         )
     }
 
+    public showDetailRank = (event: any) => {
+        this.setState({ showRank: true });
+    }
+
+    public hideDetailRank = (event: React.MouseEvent<any>) => {
+        event.stopPropagation();
+        this.setState({ showRank: false });
+    }
 
     private displayTrauma(): JSX.Element[] {
         const traumaMax = this.props.char.traumaMax;

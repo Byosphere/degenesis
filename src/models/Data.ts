@@ -1,6 +1,7 @@
 export interface Culte {
     name: string;
     desc: string;
+    img: string;
     bonus: Bonus[];
 }
 
@@ -13,6 +14,8 @@ export interface Culture {
 
 export interface Concept {
     name: string;
+    desc: string;
+    img: string;
     bonus: Bonus[];
 }
 

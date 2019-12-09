@@ -1,6 +1,8 @@
 [
     {
-        "name": "abomination",
+        "name": "abomination.name",
+        "desc": "abomination.desc",
+        "img": "abomination.jpg",
         "bonus": [
             {
                 "name": "psyche",
@@ -19,7 +21,9 @@
         ]
     },
     {
-        "name": "aventurier",
+        "name": "aventurier.name",
+        "desc": "aventurier.desc",
+        "img": "aventurier.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -43,7 +47,9 @@
         ]
     },
     {
-        "name": "chef",
+        "name": "chef.name",
+        "desc": "chef.desc",
+        "img": "chef.jpg",
         "bonus": [
             {
                 "name": "psyche",
@@ -62,7 +68,9 @@
         ]
     },
     {
-        "name": "chercheur",
+        "name": "chercheur.name",
+        "desc": "chercheur.desc",
+        "img": "chercheur.jpg",
         "bonus": [
             {
                 "name": "intellect",
@@ -75,7 +83,9 @@
         ]
     },
     {
-        "name": "conquerant",
+        "name": "conquerant.name",
+        "desc": "conquerant.desc",
+        "img": "conquerant.jpg",
         "bonus": [
             {
                 "name": "physique",
@@ -88,7 +98,9 @@
         ]
     },
     {
-        "name": "createur",
+        "name": "createur.name",
+        "desc": "createur.desc",
+        "img": "createur.jpg",
         "bonus": [
             {
                 "name": "agilite",
@@ -112,7 +124,9 @@
         ]
     },
     {
-        "name": "destructeur",
+        "name": "destructeur.name",
+        "desc": "destructeur.desc",
+        "img": "destructeur.jpg",
         "bonus": [
             {
                 "name": "instinct",
@@ -130,7 +144,9 @@
         ]
     },
     {
-        "name": "disciple",
+        "name": "disciple.name",
+        "desc": "disciple.desc",
+        "img": "disciple.jpg",
         "bonus": [
             {
                 "name": "charisme",
@@ -148,7 +164,9 @@
         ]
     },
     {
-        "name": "elu",
+        "name": "elu.name",
+        "desc": "elu.desc",
+        "img": "elu.jpg",
         "bonus": [
             {
                 "name": "charisme",
@@ -161,7 +179,9 @@
         ]
     },
     {
-        "name": "ermite",
+        "name": "ermite.name",
+        "desc": "ermite.desc",
+        "img": "ermite.jpg",
         "bonus": [
             {
                 "name": "instinct",
@@ -180,7 +200,9 @@
         ]
     },
     {
-        "name": "fanatique",
+        "name": "fanatique.name",
+        "desc": "fanatique.desc",
+        "img": "fanatique.jpg",
         "bonus": [
             {
                 "name": "instinct",
@@ -199,7 +221,9 @@
         ]
     },
     {
-        "name": "heretique",
+        "name": "heretique.name",
+        "desc": "heretique.desc",
+        "img": "heretique.jpg",
         "bonus": [
             {
                 "name": "psyche",
@@ -218,7 +242,9 @@
         ]
     },
     {
-        "name": "martyr",
+        "name": "martyr.name",
+        "desc": "martyr.desc",
+        "img": "martyr.jpg",
         "bonus": [
             {
                 "name": "psyche",
@@ -238,7 +264,9 @@
         ]
     },
     {
-        "name": "mediateur",
+        "name": "mediateur.name",
+        "desc": "mediateur.desc",
+        "img": "mediateur.jpg",
         "bonus": [
             {
                 "name": "psyche",
@@ -262,7 +290,9 @@
         ]
     },
     {
-        "name": "mentor",
+        "name": "mentor.name",
+        "desc": "mentor.desc",
+        "img": "mentor.jpg",
         "bonus": [
             {
                 "name": "intellect",
@@ -281,7 +311,9 @@
         ]
     },
     {
-        "name": "profanateur",
+        "name": "profanateur.name",
+        "desc": "profanateur.desc",
+        "img": "profanateur.jpg",
         "bonus": [
             {
                 "name": "psyche",
@@ -294,7 +326,9 @@
         ]
     },
     {
-        "name": "protecteur",
+        "name": "protecteur.name",
+        "desc": "protecteur.desc",
+        "img": "protecteur.jpg",
         "bonus": [
             {
                 "name": "psyche",
@@ -312,7 +346,9 @@
         ]
     },
     {
-        "name": "soigneur",
+        "name": "soigneur.name",
+        "desc": "soigneur.desc",
+        "img": "soigneur.jpg",
         "bonus": [
             {
                 "name": "intellect",
@@ -331,7 +367,9 @@
         ]
     },
     {
-        "name": "traditionnaliste",
+        "name": "traditionnaliste.name",
+        "desc": "traditionnaliste.desc",
+        "img": "traditionnaliste.jpg",
         "bonus": [
             {
                 "name": "intellect",
@@ -355,7 +393,9 @@
         ]
     },
     {
-        "name": "vertueux",
+        "name": "vertueux.name",
+        "desc": "vertueux.desc",
+        "img": "vertueux.jpg",
         "bonus": [
             {
                 "name": "intellect",
@@ -379,7 +419,9 @@
         ]
     },
     {
-        "name": "visionnaire",
+        "name": "visionnaire.name",
+        "desc": "visionnaire.desc",
+        "img": "visionnaire.jpg",
         "bonus": [
             {
                 "name": "charisme",
@@ -398,7 +440,9 @@
         ]
     },
     {
-        "name": "voyageur",
+        "name": "voyageur.name",
+        "desc": "voyageur.desc",
+        "img": "voyageur.jpg",
         "bonus": [
             {
                 "name": "instinct",

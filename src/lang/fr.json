@@ -42,6 +42,7 @@
         "story": "Histoire",
         "editmode": "Mode édition",
         "cancel": "Annuler",
+        "roll": "Lancer",
         "heroslist": "Liste de personnages",
         "attack": "Attaque",
         "defense": "Défense",
@@ -72,7 +73,8 @@
         "currentnote": "la note courante",
         "addnote": "Ajouter une page",
         "invalidfield": "Champ invalide",
-        "rolldicequestion": "Effectuer un jet de *{attribute}* ({anum}) + *{skill}* ({snum}) ?"
+        "rolldicequestion": "Effectuer un jet de *{attribute}* ({anum}) + *{skill}* ({snum}) ?",
+        "diceroll": "Jet de dés"
     },
     "navigator": {
         "stats": "État",
@@ -153,19 +155,58 @@
         "add": "Sélectionner un potentiel"
     },
     "cultes": {
-        "anabaptiste": "Anabaptiste",
-        "anubien": "Anubien",
-        "apocalyptique": "Apocalyptique",
-        "blafard": "Blafard",
-        "chroniqueur": "Chroniqueur",
-        "claniste": "Claniste",
-        "ferrailleur": "Ferrailleur",
-        "fleau": "Fléau",
-        "hellvetique": "Hellvétique",
-        "jehammetan": "Jéhammetan",
-        "juge": "Juge",
-        "neolybien": "Néolybien",
-        "spitalier": "Spitalier"
+        "anabaptiste": {
+            "name": "Anabaptiste",
+            "desc": "La Terre était belle et couverte d’arbres magnifiques autrefois. Mais désormais, tout est pourri depuis la chute des météorites. La racine du mal est évidente et doit être arrachée. Les Anabaptistes ont fait de cette purge leur raison de vivre. Ils affrontent l’engeance avec des épées et des lance-flamme. La dernière bataille pour l’humanité est proche, les Anabaptistes seront prêts."
+        },
+        "anubien": {
+            "name": "Anubien",
+            "desc": "Les Anubiens se considèrent comme des élus. Les sept cercles tatoués sur leur peau représentent les sept transformations qu’ils doivent subir pour devenir un réceptable du Kâ. Certains prennent conscience de leur nature de guérisseur et catalysent les spores toxiques dans leur corps pour les transformer en puissante drogues. Pourtant, ils gardent l’esprit ouvert et aiguisé sur le monde qui les entoure."
+        },
+        "apocalyptique": {
+            "name": "Apocalyptique",
+            "desc": "Les Apocalyptiques mènent une vie dissolue et dépravée. Leurs alcools sont les plus forts, leurs drogues sont les plus puissantes et leurs prostituées les plus belles. Tous les vices sont les bienvenus chez eux. Ils vivent dans le présent et chacune de leurs actions sont sacrées et célébrées comme s’ils vivaient leur dernier jour sur Terre. Le crime et les excès sont leur quotidien, le tarot aussi."
+        },
+        "blafard": {
+            "name": "Blafard",
+            "desc": ""
+        },
+        "chroniqueur": {
+            "name": "Chroniqueur",
+            "desc": "Le flux. Ce réseau qui agitait et connectait l’humanité autrefois a été réactivé. Les chroniqueurs sont les descendants des diffuseurs du flux. Ils ne sont pas des guerriers mais ont accès à un savoir caché qui forcent le respect de tous les autres cultes. Mais personne n’est dupe, en prodiguant leur conseils et leur savoir ancestral, ils pourraient faire du monde leur marionnette."
+        },
+        "claniste": {
+            "name": "Claniste",
+            "desc": "L’individu n’est rien. Après la fin du monde, ceux qui voulaient survivre dûrent s’unir. Certains d’entre eux tombèrent dans un nouvel âge de pierre. Ils prièrent les divinités du soleil et du tonnerre, dévorant la chair de leurs ancètres pour absorber leur force. Rares sont les clanistes qui s’installèrent. La plupart préfèrent mener une vie nomade et coucher à la belle étoile afin de trouver de quoi manger le jour suivant."
+        },
+        "ferrailleur": {
+            "name": "Ferrailleur",
+            "desc": "Attirés par les ruines, loin du bourdonnement des villes, les Ferrailleurs fouillent la terre. Chaque coup de pioche les rapproche de l’époque des anciens et les poussent à continuer de creuser pour découvrir des merveilles du passé. Leurs visages et leur corps sont marqués par la poussière, le froid, les éclats de pierre et la faim. Mais lorsqu’ils dénichent un trésor, ils savent que leur vie est là, en ce lieu sombre et crasseux."
+        },
+        "fleau": {
+            "name": "Fléau",
+            "desc": "Ils sont considérés comme les messagers de la mort. Le visage caché derrière des masques ancestraux, ils portent des armures, des lances et des fusils. Ce sont eux qui signent les plus grands explois sur le champ de bataille. Les Fléaux se battent pour le peuple d’Afrika, mais ils n’aiment pas les Néolibyens à cause de leur cupidité et leur manières pompeuses."
+        },
+        "hellvetique": {
+            "name": "Hellvétique",
+            "desc": "En plein coeur des Alpes. La fin du monde était attendue. Quand la mort s’abattit, elle fendit la forteresse des hellvétiques, éventra les ravins et  fit jaillir le magma. Cependant, des décénies plus tard ils étaient encore là. Leur doctrine de soldat les avaient sauvé. Aujourd’hui ils sont affaiblis mais déterminés. Personne ne peut affronter leurs remparts, et personne ne peut s’opposer à leurs fusils d’assauts. Ils sont invulnérables."
+        },
+        "jehammetan": {
+            "name": "Jéhammetan",
+            "desc": "La vie d’un Jehammétan est toute tracée depuis le jour de sa naissance. Il remplira ses devoirs envers sa famille comme son père et son grandpère avant lui. Il suivra les préceptes de Jehamet, le dernier prophète. Il combattera, peut-être, puis il trouvera une femme et fondera sa propre famille. Le début d’un nouveau cycle. A moins qu’il entende un jour l’appel d’Ariès. Là il découvrira les véritables arcanes des Jehammétans."
+        },
+        "juge": {
+            "name": "Juge",
+            "desc": "Les juges instaurèrent la loi dans les terres de désolation. Armés de marteaux et de mousquets, ils affrontent les sauvages. Le temps de la survie est révolue et il est temps de mettre en place un monde juste et sûr. Ils parcourent le monde afin de montrer les bienfaits du Codex, la loi Justicienne et étendre l’influence du Protectorat."
+        },
+        "neolybien": {
+            "name": "Néolybien",
+            "desc": "Le luxe et le parfum des huiles précieuses les accompagnent partout où les Néolibyens vont vont. A la banque du Commerce de Tripol, ils se disputent les routes commerciales et achètent des plantations ou des gisements de pétrole. Ce sont souvent de bon marins et pour le Néolibyen, «non» veut dire «oui». Il n’y a jamais de problème, juste des options, et dans le meilleur des cas, une aventure."
+        },
+        "spitalier": {
+            "name": "Spitalier",
+            "desc": "Les Spitaliers sont la dernière ligne de défense contre l’invasion Homodegenesis. Si vous êtes du côté de l’humanité, vous devez rejoindre les Spitaliers. Cependant une tâche aussi importante demande une discipline et des règles strictes. Les Spitaliers ne peuvent se permettre d’être indulgents. Ils luttent chaque jours contre les conséquences néfastes des actes de clémence des autres cultes."
+        }
     },
     "cultures": {
         "afrika": {
@@ -198,28 +239,94 @@
         }
     },
     "concepts": {
-        "abomination": "Abomination",
-        "aventurier": "Aventurier",
-        "chef": "Chef",
-        "chercheur": "Chercheur",
-        "conquerant": "Conquérant",
-        "createur": "Créateur",
-        "destructeur": "Destructeur",
-        "disciple": "Disciple",
-        "elu": "Élu",
-        "ermite": "Ermite",
-        "fanatique": "Fanatique",
-        "heretique": "Hérétique",
-        "martyr": "Martyr",
-        "mediateur": "Médiateur",
-        "mentor": "Mentor",
-        "profanateur": "Profanateur",
-        "protecteur": "Protecteur",
-        "soigneur": "Soigneur",
-        "traditionnaliste": "Traditionnaliste",
-        "vertueux": "Vertueux",
-        "visionnaire": "Visionnaire",
-        "voyageur": "Voyageur"
+        "abomination": {
+            "name": "Abomination",
+            "desc": ""
+        },
+        "aventurier": {
+            "name": "Aventurier",
+            "desc": "Téméraire et en quète de ses limites physiques et mentales."
+        },
+        "chef": {
+            "name": "Chef",
+            "desc": "Contrôler est le seul moyen d’atteindre son but."
+        },
+        "chercheur": {
+            "name": "Chercheur",
+            "desc": "D’où venons-nous et où allons-nous ? Des question toujours."
+        },
+        "conquerant": {
+            "name": "Conquérant",
+            "desc": "La victoire est tout ce qui lui importe. Présompteux."
+        },
+        "createur": {
+            "name": "Créateur",
+            "desc": "Les créateurs veulent laisser un héritage, pour qu'on se souvienne d’eux."
+        },
+        "destructeur": {
+            "name": "Destructeur",
+            "desc": ""
+        },
+        "disciple": {
+            "name": "Disciple",
+            "desc": "Soif de connaissance, mais n’arrive pas à choisir une voie."
+        },
+        "elu": {
+            "name": "Élu",
+            "desc": "Ses discours sont empreint de sagesse. Il est LA solution."
+        },
+        "ermite": {
+            "name": "Ermite",
+            "desc": "Vivre en solitaire est ce qu’il y a de plus plaisant."
+        },
+        "fanatique": {
+            "name": "Fanatique",
+            "desc": "Il pourrait mourrir pour ses croyances. Il n’y a que ça qui importe."
+        },
+        "heretique": {
+            "name": "Hérétique",
+            "desc": "Les lois, les religions, les traditions... rien n’est sacré."
+        },
+        "martyr": {
+            "name": "Martyr",
+            "desc": "Le martyr consacre sa vie à l’abnégation et à l’abandon de soi."
+        },
+        "mediateur": {
+            "name": "Médiateur",
+            "desc": "Il se considère comme le porte-parole de toutes les communautés."
+        },
+        "mentor": {
+            "name": "Mentor",
+            "desc": "Il transmet son savoir de manière désintéressé à qui le veut."
+        },
+        "profanateur": {
+            "name": "Profanateur",
+            "desc": "La jalousie incarnée, il ne supporte pas le bonheur d’autrui."
+        },
+        "protecteur": {
+            "name": "Protecteur",
+            "desc": "Il veut tout préserver : artefacts, oeuvres culturelles, vies humaines."
+        },
+        "soigneur": {
+            "name": "Soigneur",
+            "desc": "Il voit le monde se désagréger et consacre sa vie à y remédier."
+        },
+        "traditionnaliste": {
+            "name": "Traditionnaliste",
+            "desc": "L’ordre, c’est la sécurité, ce qui sépare les humains des animaux."
+        },
+        "vertueux": {
+            "name": "Vertueux",
+            "desc": "Action et conscience sont inséparables. Tout doit être pur."
+        },
+        "visionnaire": {
+            "name": "Visionnaire",
+            "desc": "Il espère paver la voie d’un avenir meilleur en imaginant le futur."
+        },
+        "voyageur": {
+            "name": "Voyageur",
+            "desc": "Il doit parcourir le monde pour évoluer, lui et ceux qui l’habitent."
+        }
     },
     "attributes": {
         "physique": {
@@ -631,169 +738,661 @@
         }
     },
     "rangs": {
-        "ravi": "Ravi",
-        "ascete": "Ascète",
-        "elyseen": "Élyséen",
-        "orgiastique": "Orgiastique",
-        "fureur": "Fureur",
-        "emissaire": "Émissaire",
-        "conseiller": "Conseiller",
-        "baptiste": "Baptiste",
-        "sublime": "Sublime",
-        "archeron": "Archeron",
-        "initie": "Initié",
-        "enchanteur": "Enchanteur",
-        "embaumeur": "Embaumeur",
-        "prophetedesames": "Prophète des âmes",
-        "guerisseur": "Guérisseur",
-        "hecateen": "Hecateen",
-        "faucille": "Faucille",
-        "ammout": "Ammout",
-        "hogon": "Hogon",
-        "pinson": "Pinson",
-        "epervier": "Épervier",
-        "pie": "Pie",
-        "vautour": "Vautour",
-        "coucou": "Coucou",
-        "chouette": "Chouette",
-        "picvert": "Pic Vert",
-        "cigogne": "Cigogne",
-        "corneille": "Corneille",
-        "sterne": "Sterne",
-        "mouette": "Mouette",
-        "pelican": "Pélican",
-        "albatros": "Albatros",
-        "colibri": "Colibri",
-        "marabout": "Marabout",
-        "ibis": "Ibis",
-        "toko": "Toko",
-        "busard": "Busard",
-        "phenix": "Phénix",
-        "spectre": "Spectre",
-        "solaire": "Solaire",
-        "aurore": "Aurore",
-        "eveilleur": "Éveilleur",
-        "redempteur": "Rédempteur",
-        "fantome": "Fantôme",
-        "cyclope": "Cyclope",
-        "aspirant": "Aspirant",
-        "demagogue": "Démagogue",
-        "halo": "Halo",
-        "bit": "Bit",
-        "agent": "Agent",
-        "mediateur": "Médiateur",
-        "diffuseur": "Diffuseur",
-        "fragment": "Fragment",
-        "paradigme": "Paradigme",
-        "occulteur": "Occulteur",
-        "fusible": "Fusible",
-        "skalar": "Skalar",
-        "zero": "Zéro",
-        "aiguille": "Aiguille",
-        "eclaireur": "Éclaireur",
-        "chasseur": "Chasseur",
-        "cueilleur": "Cueilleur",
-        "guerriertribal": "Guerrier Tribal",
-        "chaman": "Chaman",
-        "chefdeclan": "Chef de clan",
-        "champion": "Champion",
-        "fondateur": "Fondateur",
-        "souris": "Souris",
-        "blaireau": "Blaireau",
-        "renard": "Renard",
-        "loupsolitaire": "Loup solitaire",
-        "oursdescavernes": "Ours des cavernes",
-        "mecanicien": "Mécanicien",
-        "artisan": "Artisan",
-        "recuperateur": "Récupérateur",
-        "loupalpha": "Loup Alpha",
-        "legende": "Légende",
-        "malfrat": "Malfrat",
-        "estimateur": "Estimateur",
-        "officier": "Officier",
-        "dufu": "Dufu",
-        "hondo": "Hondo",
-        "chaga": "Chaga",
-        "damu": "Damu",
-        "simba": "Simba",
-        "dumisai": "Dumisai",
-        "moyo": "Moyo",
-        "kifo": "Kifo",
-        "soldat": "Soldat",
-        "caporal": "Caporal",
-        "sapeur": "Sapeur",
-        "grenadier": "Grenadier",
-        "forcespecial": "Force Spéciale",
-        "garde": "Garde",
-        "transmetteur": "Transmetteur",
-        "infiltre": "Infiltré",
-        "escouade": "Escouade",
-        "medecin": "Médecin",
-        "ingenieur": "Ingénieur",
-        "approvisionneur": "Approvisionneur",
-        "subalterne": "Subalterne",
-        "officiersup": "Officier supérieur",
-        "commandant": "Commandant",
-        "ismaeli": "Ismaeli",
-        "glaive": "Glaive",
-        "abrami": "Abrami",
-        "berger": "Berger",
-        "isaaki": "Isaaki",
-        "bienfait": "Bienfait",
-        "iconide": "Icônide",
-        "prophete": "Prophète",
-        "hagari": "Hagari",
-        "dalila": "Dalila",
-        "voix": "Voix de Jéhamet",
-        "juste": "Juste",
-        "saraeli": "Saraeli",
-        "fierte": "Fierté",
-        "maculee": "Maculée",
-        "immaculee": "Immaculée",
-        "oracle": "Oracle",
-        "arianoi": "Arianoi",
-        "sangdaries": "Sang d'Aries",
-        "fatum": "Fatum",
-        "vagabond": "Vagabond",
-        "jugedeville": "Juge des Villes",
-        "protecteur": "Protecteur",
-        "executeur": "Executeur",
-        "jugenoir": "Juge Noir",
-        "avocat": "Avocat",
-        "arbitre": "Arbitre",
-        "contrôleur": "Contrôleur",
-        "commissaire": "Commissaire",
-        "procureur": "Procureur",
-        "senateur": "Sénateur",
-        "jugesupreme": "Juge Suprème",
-        "apprenti": "Apprenti",
-        "scribe": "Scribe",
-        "marchand": "Marchand",
-        "navigateur": "Navigateur",
-        "cartographe": "Cartographe",
-        "grandchasseur": "Grand Chasseur",
-        "magnat": "Magnat",
-        "cheik": "Cheik",
-        "pillard": "Pillard",
-        "ambassadeur": "Ambassadeur",
-        "waziri": "Waziri",
-        "consul": "Consul",
-        "recrue": "Recrue",
-        "aidesoignant": "Aide Soignant",
-        "fambulancier": "Fambulancier",
-        "medecinterrain": "Médecin de Terrain",
-        "hygieniste": "Hygiéniste",
-        "chirurgien": "Chirurgien",
-        "epigeneticien": "Épigénéticien",
-        "pharmacien": "Pharmacien",
-        "hippocrate": "Hippocrate",
-        "anesthesiste": "Anesthésiste",
-        "chef": "Chef",
-        "specialiste": "Spécialiste",
-        "preserviste": "Préserviste",
-        "commando": "Commando",
-        "recteur": "Recteur",
-        "medecinvillage": "Médecin de Village",
-        "ancien": "Ancien"
+        "ravi": {
+            "name": "Ravi",
+            "desc": ""
+        },
+        "ascete": {
+            "name": "Ascète",
+            "desc": ""
+        },
+        "elyseen": {
+            "name": "Élyséen",
+            "desc": ""
+        },
+        "orgiastique": {
+            "name": "Orgiastique",
+            "desc": ""
+        },
+        "fureur": {
+            "name": "Fureur",
+            "desc": ""
+        },
+        "emissaire": {
+            "name": "Émissaire",
+            "desc": ""
+        },
+        "conseiller": {
+            "name": "Conseiller",
+            "desc": ""
+        },
+        "baptiste": {
+            "name": "Baptiste",
+            "desc": ""
+        },
+        "sublime": {
+            "name": "Sublime",
+            "desc": ""
+        },
+        "archeron": {
+            "name": "Archeron",
+            "desc": ""
+        },
+        "initie": {
+            "name": "Initié",
+            "desc": ""
+        },
+        "enchanteur": {
+            "name": "Enchanteur",
+            "desc": ""
+        },
+        "embaumeur": {
+            "name": "Embaumeur",
+            "desc": ""
+        },
+        "prophetedesames": {
+            "name": "Prophète des âmes",
+            "desc": ""
+        },
+        "guerisseur": {
+            "name": "Guérisseur",
+            "desc": ""
+        },
+        "hecateen": {
+            "name": "Hecateen",
+            "desc": ""
+        },
+        "faucille": {
+            "name": "Faucille",
+            "desc": ""
+        },
+        "ammout": {
+            "name": "Ammout",
+            "desc": ""
+        },
+        "hogon": {
+            "name": "Hogon",
+            "desc": ""
+        },
+        "pinson": {
+            "name": "Pinson",
+            "desc": ""
+        },
+        "epervier": {
+            "name": "Épervier",
+            "desc": ""
+        },
+        "pie": {
+            "name": "Pie",
+            "desc": ""
+        },
+        "vautour": {
+            "name": "Vautour",
+            "desc": ""
+        },
+        "coucou": {
+            "name": "Coucou",
+            "desc": ""
+        },
+        "chouette": {
+            "name": "Chouette",
+            "desc": ""
+        },
+        "picvert": {
+            "name": "Pic Vert",
+            "desc": ""
+        },
+        "cigogne": {
+            "name": "Cigogne",
+            "desc": ""
+        },
+        "corneille": {
+            "name": "Corneille",
+            "desc": ""
+        },
+        "sterne": {
+            "name": "Sterne",
+            "desc": ""
+        },
+        "mouette": {
+            "name": "Mouette",
+            "desc": ""
+        },
+        "pelican": {
+            "name": "Pélican",
+            "desc": ""
+        },
+        "albatros": {
+            "name": "Albatros",
+            "desc": ""
+        },
+        "colibri": {
+            "name": "Colibri",
+            "desc": ""
+        },
+        "marabout": {
+            "name": "Marabout",
+            "desc": ""
+        },
+        "ibis": {
+            "name": "Ibis",
+            "desc": ""
+        },
+        "toko": {
+            "name": "Toko",
+            "desc": ""
+        },
+        "busard": {
+            "name": "Busard",
+            "desc": ""
+        },
+        "phenix": {
+            "name": "Phénix",
+            "desc": ""
+        },
+        "spectre": {
+            "name": "Spectre",
+            "desc": ""
+        },
+        "solaire": {
+            "name": "Solaire",
+            "desc": ""
+        },
+        "aurore": {
+            "name": "Aurore",
+            "desc": ""
+        },
+        "eveilleur": {
+            "name": "Éveilleur",
+            "desc": ""
+        },
+        "redempteur": {
+            "name": "Rédempteur",
+            "desc": ""
+        },
+        "fantome": {
+            "name": "Fantôme",
+            "desc": ""
+        },
+        "cyclope": {
+            "name": "Cyclope",
+            "desc": ""
+        },
+        "aspirant": {
+            "name": "Aspirant",
+            "desc": ""
+        },
+        "demagogue": {
+            "name": "Démagogue",
+            "desc": ""
+        },
+        "halo": {
+            "name": "Halo",
+            "desc": ""
+        },
+        "bit": {
+            "name": "Bit",
+            "desc": ""
+        },
+        "agent": {
+            "name": "Agent",
+            "desc": ""
+        },
+        "mediateur": {
+            "name": "Médiateur",
+            "desc": ""
+        },
+        "diffuseur": {
+            "name": "Diffuseur",
+            "desc": ""
+        },
+        "fragment": {
+            "name": "Fragment",
+            "desc": ""
+        },
+        "paradigme": {
+            "name": "Paradigme",
+            "desc": ""
+        },
+        "occulteur": {
+            "name": "Occulteur",
+            "desc": ""
+        },
+        "fusible": {
+            "name": "Fusible",
+            "desc": ""
+        },
+        "skalar": {
+            "name": "Skalar",
+            "desc": ""
+        },
+        "zero": {
+            "name": "Zéro",
+            "desc": ""
+        },
+        "aiguille": {
+            "name": "Aiguille",
+            "desc": ""
+        },
+        "eclaireur": {
+            "name": "Éclaireur",
+            "desc": ""
+        },
+        "chasseur": {
+            "name": "Chasseur",
+            "desc": ""
+        },
+        "cueilleur": {
+            "name": "Cueilleur",
+            "desc": ""
+        },
+        "guerriertribal": {
+            "name": "Guerrier Tribal",
+            "desc": ""
+        },
+        "chaman": {
+            "name": "Chaman",
+            "desc": ""
+        },
+        "chefdeclan": {
+            "name": "Chef de clan",
+            "desc": ""
+        },
+        "champion": {
+            "name": "Champion",
+            "desc": ""
+        },
+        "fondateur": {
+            "name": "Fondateur",
+            "desc": ""
+        },
+        "souris": {
+            "name": "Souris",
+            "desc": ""
+        },
+        "blaireau": {
+            "name": "Blaireau",
+            "desc": ""
+        },
+        "renard": {
+            "name": "Renard",
+            "desc": ""
+        },
+        "loupsolitaire": {
+            "name": "Loup solitaire",
+            "desc": ""
+        },
+        "oursdescavernes": {
+            "name": "Ours des cavernes",
+            "desc": ""
+        },
+        "mecanicien": {
+            "name": "Mécanicien",
+            "desc": ""
+        },
+        "artisan": {
+            "name": "Artisan",
+            "desc": ""
+        },
+        "recuperateur": {
+            "name": "Récupérateur",
+            "desc": ""
+        },
+        "loupalpha": {
+            "name": "Loup Alpha",
+            "desc": ""
+        },
+        "legende": {
+            "name": "Légende",
+            "desc": ""
+        },
+        "malfrat": {
+            "name": "Malfrat",
+            "desc": ""
+        },
+        "estimateur": {
+            "name": "Estimateur",
+            "desc": ""
+        },
+        "officier": {
+            "name": "Officier",
+            "desc": ""
+        },
+        "dufu": {
+            "name": "Dufu",
+            "desc": ""
+        },
+        "hondo": {
+            "name": "Hondo",
+            "desc": ""
+        },
+        "chaga": {
+            "name": "Chaga",
+            "desc": ""
+        },
+        "damu": {
+            "name": "Damu",
+            "desc": ""
+        },
+        "simba": {
+            "name": "Simba",
+            "desc": ""
+        },
+        "dumisai": {
+            "name": "Dumisai",
+            "desc": ""
+        },
+        "moyo": {
+            "name": "Moyo",
+            "desc": ""
+        },
+        "kifo": {
+            "name": "Kifo",
+            "desc": ""
+        },
+        "soldat": {
+            "name": "Soldat",
+            "desc": ""
+        },
+        "caporal": {
+            "name": "Caporal",
+            "desc": ""
+        },
+        "sapeur": {
+            "name": "Sapeur",
+            "desc": ""
+        },
+        "grenadier": {
+            "name": "Grenadier",
+            "desc": ""
+        },
+        "forcespecial": {
+            "name": "Force Spéciale",
+            "desc": ""
+        },
+        "garde": {
+            "name": "Garde",
+            "desc": ""
+        },
+        "transmetteur": {
+            "name": "Transmetteur",
+            "desc": ""
+        },
+        "infiltre": {
+            "name": "Infiltré",
+            "desc": ""
+        },
+        "escouade": {
+            "name": "Escouade",
+            "desc": ""
+        },
+        "medecin": {
+            "name": "Médecin",
+            "desc": ""
+        },
+        "ingenieur": {
+            "name": "Ingénieur",
+            "desc": ""
+        },
+        "approvisionneur": {
+            "name": "Approvisionneur",
+            "desc": ""
+        },
+        "subalterne": {
+            "name": "Subalterne",
+            "desc": ""
+        },
+        "officiersup": {
+            "name": "Officier supérieur",
+            "desc": ""
+        },
+        "commandant": {
+            "name": "Commandant",
+            "desc": ""
+        },
+        "ismaeli": {
+            "name": "Ismaeli",
+            "desc": ""
+        },
+        "glaive": {
+            "name": "Glaive",
+            "desc": ""
+        },
+        "abrami": {
+            "name": "Abrami",
+            "desc": ""
+        },
+        "berger": {
+            "name": "Berger",
+            "desc": ""
+        },
+        "isaaki": {
+            "name": "Isaaki",
+            "desc": ""
+        },
+        "bienfait": {
+            "name": "Bienfait",
+            "desc": ""
+        },
+        "iconide": {
+            "name": "Icônide",
+            "desc": ""
+        },
+        "prophete": {
+            "name": "Prophète",
+            "desc": ""
+        },
+        "hagari": {
+            "name": "Hagari",
+            "desc": ""
+        },
+        "dalila": {
+            "name": "Dalila",
+            "desc": ""
+        },
+        "voix": {
+            "name": "Voix de Jéhamet",
+            "desc": ""
+        },
+        "juste": {
+            "name": "Juste",
+            "desc": ""
+        },
+        "saraeli": {
+            "name": "Saraeli",
+            "desc": ""
+        },
+        "fierte": {
+            "name": "Fierté",
+            "desc": ""
+        },
+        "maculee": {
+            "name": "Maculée",
+            "desc": ""
+        },
+        "immaculee": {
+            "name": "Immaculée",
+            "desc": ""
+        },
+        "oracle": {
+            "name": "Oracle",
+            "desc": ""
+        },
+        "arianoi": {
+            "name": "Arianoi",
+            "desc": ""
+        },
+        "sangdaries": {
+            "name": "Sang d'Aries",
+            "desc": ""
+        },
+        "fatum": {
+            "name": "Fatum",
+            "desc": ""
+        },
+        "vagabond": {
+            "name": "Vagabond",
+            "desc": ""
+        },
+        "jugedeville": {
+            "name": "Juge des Villes",
+            "desc": ""
+        },
+        "protecteur": {
+            "name": "Protecteur",
+            "desc": ""
+        },
+        "executeur": {
+            "name": "Executeur",
+            "desc": ""
+        },
+        "jugenoir": {
+            "name": "Juge Noir",
+            "desc": ""
+        },
+        "avocat": {
+            "name": "Avocat",
+            "desc": ""
+        },
+        "arbitre": {
+            "name": "Arbitre",
+            "desc": ""
+        },
+        "contrôleur": {
+            "name": "Contrôleur",
+            "desc": ""
+        },
+        "commissaire": {
+            "name": "Commissaire",
+            "desc": ""
+        },
+        "procureur": {
+            "name": "Procureur",
+            "desc": ""
+        },
+        "senateur": {
+            "name": "Sénateur",
+            "desc": ""
+        },
+        "jugesupreme": {
+            "name": "Juge Suprème",
+            "desc": ""
+        },
+        "apprenti": {
+            "name": "Apprenti",
+            "desc": ""
+        },
+        "scribe": {
+            "name": "Scribe",
+            "desc": ""
+        },
+        "marchand": {
+            "name": "Marchand",
+            "desc": ""
+        },
+        "navigateur": {
+            "name": "Navigateur",
+            "desc": ""
+        },
+        "cartographe": {
+            "name": "Cartographe",
+            "desc": ""
+        },
+        "grandchasseur": {
+            "name": "Grand Chasseur",
+            "desc": ""
+        },
+        "magnat": {
+            "name": "Magnat",
+            "desc": ""
+        },
+        "cheik": {
+            "name": "Cheik",
+            "desc": ""
+        },
+        "pillard": {
+            "name": "Pillard",
+            "desc": ""
+        },
+        "ambassadeur": {
+            "name": "Ambassadeur",
+            "desc": ""
+        },
+        "waziri": {
+            "name": "Waziri",
+            "desc": ""
+        },
+        "consul": {
+            "name": "Consul",
+            "desc": ""
+        },
+        "recrue": {
+            "name": "Recrue",
+            "desc": ""
+        },
+        "aidesoignant": {
+            "name": "Aide Soignant",
+            "desc": ""
+        },
+        "fambulancier": {
+            "name": "Fambulancier",
+            "desc": ""
+        },
+        "medecinterrain": {
+            "name": "Médecin de Terrain",
+            "desc": ""
+        },
+        "hygieniste": {
+            "name": "Hygiéniste",
+            "desc": ""
+        },
+        "chirurgien": {
+            "name": "Chirurgien",
+            "desc": ""
+        },
+        "epigeneticien": {
+            "name": "Épigénéticien",
+            "desc": ""
+        },
+        "pharmacien": {
+            "name": "Pharmacien",
+            "desc": ""
+        },
+        "hippocrate": {
+            "name": "Hippocrate",
+            "desc": ""
+        },
+        "anesthesiste": {
+            "name": "Anesthésiste",
+            "desc": ""
+        },
+        "chef": {
+            "name": "Chef",
+            "desc": ""
+        },
+        "specialiste": {
+            "name": "Spécialiste",
+            "desc": ""
+        },
+        "preserviste": {
+            "name": "Préserviste",
+            "desc": ""
+        },
+        "commando": {
+            "name": "Commando",
+            "desc": ""
+        },
+        "recteur": {
+            "name": "Recteur",
+            "desc": ""
+        },
+        "medecinvillage": {
+            "name": "Médecin de Village",
+            "desc": ""
+        },
+        "ancien": {
+            "name": "Ancien",
+            "desc": ""
+        }
     }
 }

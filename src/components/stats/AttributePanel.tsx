@@ -77,7 +77,7 @@ export default class AttributePanel extends Component<Props, State> {
                     open={this.state.rollOpen}
                     onClose={this.handleClose}
                 >
-                    <DialogTitle>Jet de dés</DialogTitle>
+                    <DialogTitle>{T.translate('generic.diceroll')}</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
                             {T.translate('generic.rolldicequestion', {
@@ -87,31 +87,33 @@ export default class AttributePanel extends Component<Props, State> {
                                 snum: this.state.selectedSkill ? this.state.selectedSkill.value : 0
                             })}
                             <p>
-                                {this.state.rollResult.map((nb: number) => {
+                                {this.state.rollResult.map((nb: number, index: number) => {
                                     switch (nb) {
                                         case 1:
-                                            return (<LooksOne fontSize='large' />);
+                                            return (<LooksOne key={index} fontSize='large' />);
                                         case 2:
-                                            return (<LooksTwo fontSize='large' />);
+                                            return (<LooksTwo key={index} fontSize='large' />);
                                         case 3:
-                                            return (<Looks3 fontSize='large' />);
+                                            return (<Looks3 key={index} fontSize='large' />);
                                         case 4:
-                                            return (<Looks4 fontSize='large' />);
+                                            return (<Looks4 key={index} fontSize='large' />);
                                         case 5:
-                                            return (<Looks5 fontSize='large' />);
+                                            return (<Looks5 key={index} fontSize='large' />);
                                         case 6:
-                                            return (<Looks6 fontSize='large' />);
+                                            return (<Looks6 key={index} fontSize='large' />);
+                                        default:
+                                            return null;
                                     }
                                 })}
                             </p>
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
-                        <Button disabled={this.state.rollInProgress} onClick={this.roll} color="secondary" autoFocus>
-                            Lancer
-                        </Button>
                         <Button disabled={this.state.rollInProgress} onClick={this.handleClose}>
-                            Annuler
+                            {T.translate('generic.cancel')}
+                        </Button>
+                        <Button disabled={this.state.rollInProgress} onClick={this.roll} color="secondary" autoFocus>
+                            {T.translate('generic.roll')}
                         </Button>
                     </DialogActions>
                 </Dialog>

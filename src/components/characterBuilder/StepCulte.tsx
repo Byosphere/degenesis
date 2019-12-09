@@ -44,11 +44,14 @@ export default class StepCulte extends Component<Props, {}> {
                 </FormControl>
                 {typeof newCharacter.culte === 'number' && <div style={{ margin: '16px 0' }}>
                     <CardMedia
-                        image={"images/cultes/" + CULTES[newCharacter.culte].name + ".jpg"}
+                        image={"images/cultes/" + CULTES[newCharacter.culte].img}
                         title={CULTES[newCharacter.culte].name}
                         style={{ height: '100px' }}
                     />
                     <CardContent>
+                        <Typography variant='body2' component='p' style={{ marginBottom: "8px" }}>
+                            {T.translate('cultes.' + CULTES[newCharacter.culte].desc)}
+                        </Typography>
                         <Typography variant='body2' style={{ display: 'flex', alignItems: 'center', fontStyle: 'italic' }}>
                             <DonutSmall fontSize='small' style={{ marginRight: '5px' }} />
                             {T.translate('generic.money', { money: MONEY[newCharacter.culte] * 2 })}
