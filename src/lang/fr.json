@@ -494,7 +494,7 @@
         },
         "elu": {
             "name": "Élu",
-            "desc": "*Condition* : _Halo_ \n "
+            "desc": "*Condition* : _Halo_ \n Confère à Autorité et Secrets un bonus en dés égal au niveau du Potentiel."
         },
         "insinuateur": {
             "name": "Insinuateur",
@@ -554,7 +554,7 @@
         },
         "sangancestral": {
             "name": "Sang Ancestral",
-            "desc": ""
+            "desc": "*Condition* : _PSY+Foi >=8_ \n Le Fléau effectue pendant une quinzaine de minutes un rituel rigoureux le préparant à un combat imminent. Son niveau de Potentiel en dés s'ajoute à sa résistance mentale."
         },
         "epreuveduheros": {
             "name": "L'épreuve du Héros",
@@ -630,7 +630,7 @@
         },
         "coupdemarteau": {
             "name": "Coup de Marteau",
-            "desc": ""
+            "desc": "La maitrise du marteau de la justice est innée pour le Juge. Les malus de la capacité spéciale 'impact' sont réduits de 1 par niveau de potentiel."
         },
         "visagedejanus": {
             "name": "Visage de Janus",
@@ -674,11 +674,11 @@
         },
         "phalange": {
             "name": "Phalange",
-            "desc": ""
+            "desc": "Pour chaque homme présent à ses côtés. Le Spitalier obtient un dé supplémentaire à son jet de défense pour chaque niveau de ce Potentiel. S'il obtient au moins deux déclencheurs, la défense compte comme une attaque réussie, et les déclencheurs comme des dégats. (Utilisable uniquement lors du premier round d'un combat)."
         },
         "preservalis": {
             "name": "Preservalis",
-            "desc": "*Condition* : _Préserviste_"
+            "desc": "*Condition* : _Préserviste_ Attaque spéciale nécessitant une arme à feu. Il tente d'enfoncer son arme dans le ventre de l'adversaire et tire. Ignore la valeur d'armure de son adversaire. Une fois par combat."
         },
         "dernier bastion": {
             "name": "Dernier bastion",
@@ -686,7 +686,7 @@
         },
         "enseignementkranzler": {
             "name": "Enseignement de Kranzler",
-            "desc": "*Condition* : _Concentration_"
+            "desc": "*Condition* : _Concentration_ Le Spitalier devient immunisé contre l'influence de l'Amorce pendant un nombre de tours égal au niveau du Potentiel."
         },
         "ultimeadieu": {
             "name": "L'ultime adieu",
