@@ -9,12 +9,15 @@ import Potentials from './components/potentials/Potentials';
 import Character from './models/Character';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import Home from './components/home/Home';
-import { getCharacters, storeCharacter, deleteCharacter } from './utils/StorageManager';
+import { getCharacters, storeCharacter, deleteCharacter, getUser } from './utils/StorageManager';
+import Connect from './components/connect/Connect';
+import User from './models/User';
 
 interface State {
     characters: Character[];
     headerTitle: string;
     displayTabs: boolean;
+    user: User;
 }
 
 class App extends Component<{}, State> {
@@ -25,7 +28,8 @@ class App extends Component<{}, State> {
         this.state = {
             characters: getCharacters(),
             headerTitle: '',
-            displayTabs: false
+            displayTabs: false,
+            user: getUser()
         };
     }
 
@@ -52,6 +56,12 @@ class App extends Component<{}, State> {
         this.setState({ headerTitle: title });
     }
 
+    public handleConnected = (user: User) => {
+        this.setState({
+            user
+        });
+    }
+
     public render() {
 
         const { characters } = this.state;
@@ -64,12 +74,12 @@ class App extends Component<{}, State> {
                         characters={characters}
                     />
                     <div className="app-content">
-                        <Switch>
+                        {this.state.user && <Switch>
                             <Route path='/' exact render={
                                 props => <Home {...props}
                                     characters={characters}
-                                    setHeader={this.setHeader}
                                     deleteChar={this.handleDeleteChar}
+                                    user={this.state.user}
                                 />
                             } />
                             <Route path="/create" exact render={
@@ -107,7 +117,8 @@ class App extends Component<{}, State> {
                                     setHeader={this.setHeader}
                                 />
                             } />
-                        </Switch>
+                        </Switch>}
+                        {!this.state.user && <Connect onConnected={this.handleConnected} />}
                     </div>
                 </HashRouter >
             </div>

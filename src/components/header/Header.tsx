@@ -38,7 +38,7 @@ class Header extends Component<Props, State> {
             return (
                 <AppBar position="relative" elevation={4}>
                     <Toolbar>
-                        {this.props.location.pathname !== '/' && !!this.props.characters.length &&
+                        {this.props.location.pathname !== '/' &&
                             <IconButton edge="start" color="inherit" onClick={this.handleBack}>
                                 <ArrowBack />
                             </IconButton>

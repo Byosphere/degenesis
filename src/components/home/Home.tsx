@@ -7,10 +7,11 @@ import T from 'i18n-react';
 import CharacterItem from './CharacterItem';
 import SwipeableViews from 'react-swipeable-views';
 import SettingsMenu from './SettingsMenu';
+import User from '../../models/User';
 
 interface ownProps {
+    user: User;
     characters: Character[];
-    setHeader: (title: string) => void;
     deleteChar: (charId: number) => void;
 }
 
@@ -36,10 +37,6 @@ export default class Home extends Component<Props, State> {
             selectedIndex: -1,
             anchorEl: null
         }
-    }
-
-    public componentDidMount() {
-        this.props.setHeader(T.translate('navigator.home') as string);
     }
 
     public selectCharacter = (charId: number) => {
@@ -93,6 +90,11 @@ export default class Home extends Component<Props, State> {
 
         return (
             <Card style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+                <span
+                    style={{ position: "absolute", top: '8px', left: '8px', color: 'rgba(255,255,255,0.7)', fontSize: '0.7rem' }}
+                >
+                    Connecté : {' ' + this.props.user.name}
+                </span>
                 <CardMedia
                     image="images/logo.png"
                     title="logo"

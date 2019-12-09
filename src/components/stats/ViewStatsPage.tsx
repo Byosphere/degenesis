@@ -104,6 +104,7 @@ export default class ViewStatsPage extends Component<Props, State> {
 
         const { char } = this.props;
         const { charCopy } = this.state;
+        const rankDesc = T.translate('rangs.' + RANGS[char.culte][char.rang] + '.desc');
 
         return (
             <div style={{ margin: '5px 5px 61px 5px' }}>
@@ -118,7 +119,7 @@ export default class ViewStatsPage extends Component<Props, State> {
                         label={T.translate('rangs.' + RANGS[char.culte][char.rang] + '.name')}
                         variant="outlined"
                         deleteIcon={<Info />}
-                        onDelete={this.showDetailRank}
+                        onDelete={rankDesc ? this.showDetailRank : null}
                     />
                     <CardHeader
                         avatar={

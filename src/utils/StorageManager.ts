@@ -1,5 +1,17 @@
 import Character from "../models/Character";
 import { LOCALSTORAGE_NAME } from "../constants";
+import User from "../models/User";
+
+export function getUser(): User {
+    let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
+    return storage.user;
+}
+
+export function saveUser(user: User) {
+    let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
+    storage.user = user;
+    localStorage.setItem(LOCALSTORAGE_NAME, JSON.stringify(storage));
+}
 
 export function storeCharacter(character: Character) {
     let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
