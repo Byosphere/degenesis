@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
-import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton } from '@material-ui/core';
-import Character from '../../models/Character';
+import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton, CircularProgress } from '@material-ui/core';
+import Character from '../models/Character';
 import { RouteComponentProps } from 'react-router-dom';
 import { Add, Delete, Settings } from '@material-ui/icons';
 import T from 'i18n-react';
-import CharacterItem from './CharacterItem';
+import CharacterItem from '../components/home/CharacterItem';
 import SwipeableViews from 'react-swipeable-views';
-import SettingsMenu from './SettingsMenu';
-import User from '../../models/User';
+import SettingsMenu from '../components/home/SettingsMenu';
+import User from '../models/User';
 
 interface ownProps {
     user: User;
+    onDisconnect: () => void;
     characters: Character[];
-    deleteChar: (charId: number) => void;
+    onDelete: (charId: string) => void;
 }
 
 interface State {
@@ -25,13 +26,13 @@ interface State {
 
 type Props = ownProps & RouteComponentProps;
 
-export default class Home extends Component<Props, State> {
+export default class HomePage extends Component<Props, State> {
 
     public constructor(props: Props) {
         super(props);
 
         this.state = {
-            tabs: [],
+            tabs: props.characters.map(() => 1),
             open: false,
             selectedChar: null,
             selectedIndex: -1,
@@ -39,8 +40,8 @@ export default class Home extends Component<Props, State> {
         }
     }
 
-    public selectCharacter = (charId: number) => {
-        this.props.history.push('/stats/' + charId);
+    public selectCharacter = (charId: string) => {
+        this.props.history.push('/detail/' + charId);
     }
 
     public handleCreate = () => {
@@ -70,7 +71,7 @@ export default class Home extends Component<Props, State> {
     }
 
     public handleDelete = (event: React.MouseEvent<any>) => {
-        let id = this.state.selectedChar.id;
+        let id = this.state.selectedChar._id;
         let tabs = this.state.tabs;
         tabs[this.state.selectedIndex] = 1;
         this.setState({
@@ -79,7 +80,7 @@ export default class Home extends Component<Props, State> {
             selectedIndex: -1,
             tabs
         });
-        this.props.deleteChar(id);
+        this.props.onDelete(id);
     }
 
     public openMenu = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -90,11 +91,6 @@ export default class Home extends Component<Props, State> {
 
         return (
             <Card style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                <span
-                    style={{ position: "absolute", top: '8px', left: '8px', color: 'rgba(255,255,255,0.7)', fontSize: '0.7rem' }}
-                >
-                    Connecté : {' ' + this.props.user.name}
-                </span>
                 <CardMedia
                     image="images/logo.png"
                     title="logo"
@@ -162,8 +158,10 @@ export default class Home extends Component<Props, State> {
                     <Settings style={{ color: 'white' }} />
                 </IconButton>
                 <SettingsMenu
+                    accountName={this.props.user.pseudo}
                     anchorEl={this.state.anchorEl}
                     onClose={() => this.setState({ anchorEl: null })}
+                    onDisconnect={this.props.onDisconnect}
                 />
             </Card>
         );

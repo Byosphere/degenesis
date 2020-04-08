@@ -16,7 +16,6 @@ import StepPotentials from './StepPotentials';
 import StepLast from './StepLast';
 
 interface OwnProps {
-    characters: Character[];
     createCharacter: (char: Character) => void;
     setHeader: (title: string) => void;
 }

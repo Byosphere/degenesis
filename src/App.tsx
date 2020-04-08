@@ -2,22 +2,23 @@ import React, { Component } from 'react';
 import './App.css';
 import Header from './components/header/Header';
 import { Route, Switch, HashRouter } from "react-router-dom";
-import Stats from './components/stats/Stats';
-import Inventory from './components/inventory/Inventory';
-import Notes from './components/notes/Notes';
-import Potentials from './components/potentials/Potentials';
 import Character from './models/Character';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
-import Home from './components/home/Home';
-import { getCharacters, storeCharacter, deleteCharacter, getUser } from './utils/StorageManager';
-import Connect from './components/connect/Connect';
+import { getUserToken } from './utils/StorageManager';
 import User from './models/User';
+import { getUser, saveCharacterAsync, getCharactersAsync, deleteCharacterAsync } from './utils/fetchers';
+import Loader from './components/Loader';
+import ConnectPage from './pages/ConnectPage';
+import HomePage from './pages/HomePage';
+import DetailPage from './pages/DetailPage';
 
 interface State {
-    characters: Character[];
     headerTitle: string;
     displayTabs: boolean;
     user: User;
+    loading: boolean;
+    token: string;
+    characters: Character[];
 }
 
 class App extends Component<{}, State> {
@@ -25,104 +26,125 @@ class App extends Component<{}, State> {
     constructor(props: any) {
         super(props);
 
+        const token = getUserToken();
+
         this.state = {
-            characters: getCharacters(),
+            characters: [],
             headerTitle: '',
             displayTabs: false,
-            user: getUser()
+            user: null,
+            loading: !!token,
+            token
         };
     }
 
-    public handleCharChange = (char: Character, save: boolean) => {
-        this.forceUpdate();
-        if (char && save) storeCharacter(char);
-    }
+    public componentDidMount() {
+        if (this.state.token) {
+            getUser(this.state.token).then(({ data }) => {
+                this.setState({ user: data });
+                getCharactersAsync().then(({ data }) => {
 
-    public handleCreateCharacter = (char: Character) => {
-        storeCharacter(char);
-        this.setState({
-            characters: getCharacters()
-        });
-    }
-
-    public handleDeleteChar = (charId: number) => {
-        deleteCharacter(charId);
-        this.setState({
-            characters: getCharacters()
-        });
+                    this.setState({
+                        characters: data.map((el) => new Character(el)),
+                        loading: false
+                    });
+                });
+            });
+        }
     }
 
     public setHeader = (title: string) => {
         this.setState({ headerTitle: title });
     }
 
-    public handleConnected = (user: User) => {
-        this.setState({
-            user
+    public handleConnect = (user: User) => {
+        this.setState({ user });
+    }
+
+    public handleDisconnect = () => {
+        this.setState({ user: null });
+    }
+
+    public handleSaveCharacter = (char: Character) => {
+        this.setState({ loading: true });
+        saveCharacterAsync(char).then(({ data }) => {
+            let characters = this.state.characters;
+            characters.push(new Character(data));
+            this.setState({
+                characters,
+                loading: false
+            });
+        }).catch((err) => {
+            this.setState({ loading: false });
+        });
+    }
+
+    public handleDeleteCharacter = (charId: string) => {
+        this.setState({ loading: true });
+        deleteCharacterAsync(charId).then(({ data }) => {
+            if (data) {
+                let characters = this.state.characters;
+                const index = characters.findIndex((char) => char._id === charId);
+                if (index > -1) characters.splice(index, 1);
+                this.setState({
+                    characters,
+                    loading: false
+                });
+            } else {
+                // ERROR
+            }
         });
     }
 
     public render() {
 
-        const { characters } = this.state;
+        if (this.state.loading) {
+            return <div className="App">
+                <Loader />
+            </div>;
+        } else if (!this.state.user) {
+            return <div className="App">
+                <ConnectPage onConnect={this.handleConnect} />
+            </div>;
+        } else {
+            return (
+                <div className="App">
+                    <HashRouter basename='/'>
+                        <Header title={this.state.headerTitle} />
+                        <div className="app-content">
+                            <Switch>
+                                <Route path='/' exact render={
+                                    props => <HomePage {...props}
+                                        onDisconnect={this.handleDisconnect}
+                                        user={this.state.user}
+                                        characters={this.state.characters}
+                                        onDelete={this.handleDeleteCharacter}
+                                    />
+                                } />
+                                <Route path="/create" exact render={
+                                    props => <CharacterBuilder {...props}
+                                        createCharacter={this.handleSaveCharacter}
+                                        setHeader={this.setHeader}
+                                    />
+                                } />
+                                <Route path="/detail/:id" render={
+                                    props => <DetailPage {...props}
+                                        setHeader={this.setHeader}
+                                        onModifyCharacter={() => { /* TODO */ }}
+                                        selectedCharacter={this.getSelectedChar(props)}
+                                    />
+                                } />
+                            </Switch>
+                        </div>
+                    </HashRouter>
+                </div>
+            );
+        }
+    }
 
-        return (
-            <div className="App">
-                <HashRouter basename='/'>
-                    <Header
-                        title={this.state.headerTitle}
-                        characters={characters}
-                    />
-                    <div className="app-content">
-                        {this.state.user && <Switch>
-                            <Route path='/' exact render={
-                                props => <Home {...props}
-                                    characters={characters}
-                                    deleteChar={this.handleDeleteChar}
-                                    user={this.state.user}
-                                />
-                            } />
-                            <Route path="/create" exact render={
-                                props => <CharacterBuilder {...props}
-                                    characters={characters}
-                                    createCharacter={this.handleCreateCharacter}
-                                    setHeader={this.setHeader}
-                                />
-                            } />
-                            <Route path="/stats/:id" render={
-                                props => <Stats {...props}
-                                    characters={characters}
-                                    onCharChange={this.handleCharChange}
-                                    setHeader={this.setHeader}
-                                />
-                            } />
-                            <Route path="/inventory/:id" render={
-                                props => <Inventory {...props}
-                                    characters={characters}
-                                    onCharChange={this.handleCharChange}
-                                    setHeader={this.setHeader}
-                                />
-                            } />
-                            <Route path="/potentials/:id" render={
-                                props => <Potentials {...props}
-                                    characters={characters}
-                                    onCharChange={this.handleCharChange}
-                                    setHeader={this.setHeader}
-                                />
-                            } />
-                            <Route path="/notes/:id" render={
-                                props => <Notes {...props}
-                                    characters={characters}
-                                    onCharChange={this.handleCharChange}
-                                    setHeader={this.setHeader}
-                                />
-                            } />
-                        </Switch>}
-                        {!this.state.user && <Connect onConnected={this.handleConnected} />}
-                    </div>
-                </HashRouter >
-            </div>
-        );
+    private getSelectedChar(props): Character {
+        const char = this.state.characters.find((char) => props.match.params.id === char._id);
+        return char;
     }
 }
 

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import Character, { Potential } from '../../models/Character';
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Typography, Divider, Button, Dialog, Slide, AppBar, Toolbar, IconButton, DialogContent, List, ListItem, ListItemText, ListSubheader, Zoom, Fab, ExpansionPanelActions } from '@material-ui/core';
-import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
 import T from 'i18n-react';
 import { ExpandMore, Close, Add } from '@material-ui/icons';
-import AttributeJauge from '../attributeJauge/AttributeJauge';
 import { TransitionProps } from 'react-transition-group/Transition';
+import Character, { Potential } from '../models/Character';
+import AttributeJauge from '../components/attributeJauge/AttributeJauge';
+import { POTENTIALS, GENERIC_POTENTIALS } from '../constants';
 
 interface Props {
     char: Character;
@@ -16,7 +16,7 @@ interface State {
     modalOpen: boolean;
 }
 
-export default class ViewPotentialsPage extends Component<Props, State>{
+export default class PotentialsPage extends Component<Props, State>{
 
     private Transition: any;
 

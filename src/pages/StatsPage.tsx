@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, IconButton, Chip, Dialog, DialogContent, DialogActions, Button, DialogTitle, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, List, ListItem, ListItemText, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions } from '@material-ui/core';
-import { CULTES, CULTURES, CONCEPTS, RANGS, SEX } from '../../constants';
+import { CULTES, CULTURES, CONCEPTS, RANGS, SEX } from '../constants';
 import { ExpandMore, ExpandLess, OfflineBolt, OfflineBoltOutlined, Clear, Edit, Info } from '@material-ui/icons';
-import Character, { Attribute } from '../../models/Character';
+import Character, { Attribute } from '../models/Character';
 import T from 'i18n-react';
-import InteractiveJauge from '../interactiveJauge/InteractiveJauge';
-import AttributePanel from './AttributePanel';
+import InteractiveJauge from '../components/interactiveJauge/InteractiveJauge';
+import AttributePanel from '../components/AttributePanel';
 
 interface Props {
     char: Character;
-    onCharChange: (char: Character, save: boolean) => void;
+    onChange: (char: Character, save: boolean) => void;
 }
 
 interface State {
@@ -20,7 +20,7 @@ interface State {
     showRank: boolean;
 }
 
-export default class ViewStatsPage extends Component<Props, State> {
+export default class StatsPage extends Component<Props, State> {
 
     private STORY_LENGTH: number = 200;
 
@@ -44,18 +44,18 @@ export default class ViewStatsPage extends Component<Props, State> {
         let char = this.props.char;
         if (char.trauma !== index) {
             char.trauma = index;
-            this.props.onCharChange(char, true);
+            this.props.onChange(char, true);
         }
     }
 
     public handleChange = (field: string, value: number) => {
         let char: any = this.props.char;
         char[field] = value;
-        this.props.onCharChange(char, true);
+        this.props.onChange(char, true);
     }
 
     public handleAttributeSave = () => {
-        this.props.onCharChange(this.props.char, true);
+        this.props.onChange(this.props.char, true);
     }
 
     public handleModalClose = (event: any) => {
@@ -91,7 +91,7 @@ export default class ViewStatsPage extends Component<Props, State> {
         if (errors) {
             this.setState({ errors });
         } else {
-            this.props.onCharChange(this.props.char, true);
+            this.props.onChange(this.props.char, true);
             this.setState({
                 open: false,
                 errors: {}

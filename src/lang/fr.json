@@ -2,6 +2,7 @@
     "generic": {
         "view": "Visualiser",
         "edit": "Modifier",
+        "loading": "Chargement",
         "close": "fermer",
         "reset": "Recommencer",
         "life": "Blessures superficielles",
@@ -17,6 +18,7 @@
         "bagof": "Inventaire de {who}",
         "money": "{money} lettres de Change",
         "save": "Sauvegarder",
+        "wrongpassword": "Mauvais identifiant ou mot de passe.",
         "tech": {
             "0": "I",
             "1": "II",
@@ -63,7 +65,7 @@
         "no": "Non",
         "delete": "Supprimer",
         "confirmdelete": "Êtes-vous sûr de vouloir supprimer _{who}_ ?",
-        "characterstats": "Fiche de personnage",
+        "characterstats": "Fiche de personnage : {name}",
         "additem": "Ajouter un objet à l'inventaire",
         "levelup": "Améliorer le potentiel",
         "validate": "Valider",
@@ -75,6 +77,11 @@
         "invalidfield": "Champ invalide",
         "rolldicequestion": "Effectuer un jet de *{attribute}* ({anum}) + *{skill}* ({snum}) ?",
         "diceroll": "Jet de dés"
+    },
+    "connect": {
+        "connect": "Se connecter",
+        "pseudo": "Identifiant",
+        "password": "Mot de Passe"
     },
     "navigator": {
         "stats": "État",
@@ -94,7 +101,9 @@
         "importdata": "Importer des données",
         "contact": "Contact",
         "version": "Version",
-        "license": "License"
+        "license": "License",
+        "disconnect": "Changer d'utilisateur",
+        "currentaccount": "Compte actuel : {name}"
     },
     "lang": {
         "en": "Anglais",

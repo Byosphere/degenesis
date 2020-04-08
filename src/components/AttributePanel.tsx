@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Dialog, DialogTitle, DialogActions, Button, DialogContent, DialogContentText } from '@material-ui/core';
 import { ExpandMore, LooksTwo, LooksOne, Looks3, Looks4, Looks5, Looks6 } from '@material-ui/icons';
-import AttributeJauge from '../attributeJauge/AttributeJauge';
-import { ATTRIBUTES, SKILLS } from '../../constants';
-import { Skill, Attribute } from '../../models/Character';
+import AttributeJauge from './attributeJauge/AttributeJauge';
+import { ATTRIBUTES, SKILLS } from '../constants';
+import { Skill, Attribute } from '../models/Character';
 import T from 'i18n-react';
 
 interface Props {
@@ -79,7 +79,7 @@ export default class AttributePanel extends Component<Props, State> {
                 >
                     <DialogTitle>{T.translate('generic.diceroll')}</DialogTitle>
                     <DialogContent>
-                        <DialogContentText>
+                        <DialogContentText component='div'>
                             {T.translate('generic.rolldicequestion', {
                                 attribute: T.translate('attributes.' + ATTRIBUTES[this.props.attribute.id] + '.name'),
                                 anum: this.props.attribute.base,

@@ -58,7 +58,7 @@ export interface ICharacter {
 
 export default class Character implements ICharacter {
 
-    id: number;
+    _id: string;
     name: string;
     age: number;
     rang: number;
@@ -82,8 +82,8 @@ export default class Character implements ICharacter {
     behavior: string;
 
     public constructor(data: any = {}) {
-        const { id, name, age, ego, sporulation, trauma, blessures, rang, sex, size, weight, money, culte, culture, concept, story, belief, behavior, attributes, potentials, inventory, notes } = data;
-        this.id = id || 0;
+        const { _id, name, age, ego, sporulation, trauma, blessures, rang, sex, size, weight, money, culte, culture, concept, story, belief, behavior, attributes, potentials, inventory, notes } = data;
+        this._id = _id;
         this.name = name || '';
         this.age = age;
         this.rang = rang || 0;
@@ -205,7 +205,7 @@ export default class Character implements ICharacter {
 
     public toObject() {
         return {
-            id: this.id,
+            _id: this._id,
             name: this.name,
             age: this.age,
             rang: this.rang,

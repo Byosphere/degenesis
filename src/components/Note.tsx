@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Character from '../../models/Character';
+import Character from '../models/Character';
 import { CardContent, TextField } from '@material-ui/core';
 import T from 'i18n-react';
 

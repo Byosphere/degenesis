@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
 import { Menu, List, ListSubheader, ListItem, ListItemIcon, ListItemText, Collapse, Divider, ListItemSecondaryAction, Switch } from '@material-ui/core';
 import { LANG } from '../../constants';
-import { getLang, setLang, isDarkMode, getLocalData } from '../../utils/StorageManager';
+import { getLang, setLang, isDarkMode, getLocalData, disconnect } from '../../utils/StorageManager';
 import T from 'i18n-react';
-import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, Brightness4, CloudDownload, CloudUpload } from '@material-ui/icons';
+import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, Brightness4, CloudDownload, CloudUpload, PowerSettingsNew } from '@material-ui/icons';
 import { saveFile } from '../../utils/helper';
 import packageJson from '../../../package.json';
 
 interface Props {
     anchorEl: Element;
+    accountName: string;
     onClose: () => void;
+    onDisconnect: () => void;
 }
 
 interface State {
@@ -37,6 +39,11 @@ export default class SettingsMenu extends Component<Props, State> {
 
     public saveData = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         saveFile(getLocalData(), 'degenesis.json');
+    }
+
+    public disconnect = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        disconnect();
+        this.props.onDisconnect();
     }
 
     public render() {
@@ -133,10 +140,19 @@ export default class SettingsMenu extends Component<Props, State> {
                         </ListItemIcon>
                         <ListItemText primary={T.translate('settings.license')} secondary="Creative Commons" />
                     </ListItem>
-                    <ListItem style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                    <ListItem button onClick={this.disconnect}>
+                        <ListItemIcon>
+                            <PowerSettingsNew />
+                        </ListItemIcon>
+                        <ListItemText
+                            primary={T.translate('settings.disconnect')}
+                            secondary={T.translate('settings.currentaccount', { name: this.props.accountName })}
+                        />
+                    </ListItem>
+                    {/* <ListItem style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                         <ListItemText secondary='This is a fan App, Degenesis belongs' />
                         <ListItemText secondary='to SixMoreVodka - All Rights Reserved' />
-                    </ListItem>
+                    </ListItem> */}
                 </List>
             </Menu>
         );

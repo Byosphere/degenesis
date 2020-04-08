@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import { ArrowBack } from '@material-ui/icons';
-import Character from '../../models/Character';
 
 interface OwnProps {
     title: string;
-    characters: Character[];
 }
 
 interface State {
@@ -44,7 +42,7 @@ class Header extends Component<Props, State> {
                             </IconButton>
                         }
                         <Typography variant='body1' component='h1' style={{ flexGrow: 1 }}>
-                            {'Degenesis - ' + this.props.title}
+                            {this.props.title}
                         </Typography>
                     </Toolbar>
                 </AppBar>

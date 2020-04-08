@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import Character, { Item } from '../../models/Character';
 import { Card, IconButton, CardContent, List, ListSubheader, ListItem, ListItemText, ListItemSecondaryAction, Divider, Collapse, CardHeader, Avatar, Typography, Button, Dialog, DialogContent, DialogContentText, DialogActions, MenuItem, Select, Input, Slide, AppBar, Toolbar, FormControl, InputLabel, TextField, Fab, Zoom, DialogTitle, FormControlLabel, Radio, RadioGroup, InputAdornment } from '@material-ui/core';
 import T from 'i18n-react';
 import { ExpandMore, ExpandLess, CardTravel, Close, SwapVerticalCircle, Add, DonutSmall, Delete } from '@material-ui/icons';
-import { TYPES } from '../../constants';
+import { TYPES } from '../constants';
 import { TransitionProps } from '@material-ui/core/transitions/transition';
+import Character, { Item } from '../models/Character';
 
 interface Props {
     char: Character;
@@ -21,7 +21,7 @@ interface State {
     moneyValue: number;
 }
 
-export default class ViewInventoryPage extends Component<Props, State> {
+export default class InventoryPage extends Component<Props, State> {
 
     private Transition: React.ForwardRefExoticComponent<TransitionProps & React.RefAttributes<unknown>>;
 

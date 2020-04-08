@@ -1,48 +1,35 @@
 import React, { Component } from 'react';
-import Character from '../../models/Character';
-import { RouteComponentProps, Redirect } from 'react-router-dom';
+import Character from '../models/Character';
 import { Card, MobileStepper, Button, CardActions, Dialog, DialogTitle, DialogActions } from '@material-ui/core';
-import T from 'i18n-react';
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons';
-import Navigator from '../navigator/Navigator';
+import { KeyboardArrowRight, KeyboardArrowLeft } from '@material-ui/icons';
 import SwipeableViews from 'react-swipeable-views';
-import Note from './Note';
-import { NOTES_MAX } from '../../constants';
+import { NOTES_MAX } from '../constants';
+import T from 'i18n-react';
+import Note from '../components/Note';
 
-interface ownProps {
-    characters: Character[];
-    onCharChange: (char: Character, save: boolean) => void;
-    setHeader: (title: string) => void;
+interface Props {
+    char: Character;
+    onChange: (char: Character, save: boolean) => void;
 }
-
-type Props = ownProps & RouteComponentProps;
 
 interface State {
     activeStep: number;
-    character: Character;
     deleteModalOpen: boolean;
 }
 
-export default class Notes extends Component<Props, State> {
+export default class NotesPage extends Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
 
-        let params: any = this.props.match.params;
-
         this.state = {
             activeStep: 0,
-            character: this.props.characters.find(c => c.id === parseInt(params.id)),
             deleteModalOpen: false
         }
     }
 
-    public componentDidMount() {
-        this.props.setHeader(T.translate('navigator.notes') as string);
-    }
-
     public handleSave = () => {
-        this.props.onCharChange(this.state.character, true);
+        this.props.onChange(this.props.char, true);
     }
 
     public handleChangeStep = (step: number) => {
@@ -58,13 +45,13 @@ export default class Notes extends Component<Props, State> {
     }
 
     public handleDelete = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        let char = this.state.character;
+        let char = this.props.char;
         char.notes.splice(this.state.activeStep, 1);
         this.setState({
             deleteModalOpen: false,
             activeStep: this.state.activeStep - 1
         });
-        this.props.onCharChange(this.state.character, true);
+        this.props.onChange(this.props.char, true);
     }
 
     public updateNote = (id: number) => {
@@ -72,21 +59,20 @@ export default class Notes extends Component<Props, State> {
     }
 
     public handleAdd = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        let char = this.state.character;
+        let char = this.props.char;
         char.notes[char.notes.length] = '';
         this.setState({ activeStep: char.notes.length - 1 });
-        this.props.onCharChange(this.state.character, true);
+        this.props.onChange(this.props.char, true);
     }
 
     public render() {
-        const { activeStep, character } = this.state;
+        const { activeStep } = this.state;
+        const { char } = this.props;
 
-        if (!character) return <Redirect to="/" />;
-
-        const notes = character.notes;
+        const notes = char.notes;
 
         return (
-            <div style={{ height: 'calc(100% - 56px)', padding: '5px' }}>
+            <div style={{ height: '100%', padding: '5px' }}>
                 <Card style={{
                     position: 'relative',
                     display: 'flex',
@@ -126,28 +112,28 @@ export default class Notes extends Component<Props, State> {
                         style={{ flex: 1 }}
                     >
                         {notes.map((text, id) => (
-                            <Note key={id} noteId={id} char={character} onUpdate={() => this.forceUpdate()} />
+                            <Note key={id} noteId={id} char={char} onUpdate={() => this.forceUpdate()} />
                         ))}
                     </SwipeableViews>
                     <CardActions style={{ justifyContent: 'space-around', marginBottom: '8px' }} >
                         <Button
                             color='primary'
                             onClick={this.handleAdd}
-                            disabled={character.notes.length === NOTES_MAX}
+                            disabled={char.notes.length === NOTES_MAX}
                         >
                             {T.translate('generic.addnote')}
                         </Button>
                         <Button
                             color='primary'
                             onClick={this.handleSave}
-                            disabled={!character.notes[activeStep]}
+                            disabled={!char.notes[activeStep]}
                         >
                             {T.translate('generic.save')}
                         </Button>
                         <Button
                             color='secondary'
                             onClick={this.openDeleteConfirm}
-                            disabled={activeStep === character.notes.length || activeStep === 0}
+                            disabled={activeStep === char.notes.length || activeStep === 0}
                         >
                             {T.translate('generic.delete')}
                         </Button>
@@ -171,7 +157,6 @@ export default class Notes extends Component<Props, State> {
                         </DialogActions>
                     </Dialog>
                 </Card>
-                <Navigator />
             </div>
         );
     }

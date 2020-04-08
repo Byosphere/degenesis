@@ -6,7 +6,7 @@ import T from 'i18n-react';
 
 interface Props {
     char: Character;
-    onSelectCharacter: (charId: number) => void;
+    onSelectCharacter: (charId: string) => void;
 }
 
 export default class CharacterItem extends Component<Props, {}> {
@@ -25,7 +25,7 @@ export default class CharacterItem extends Component<Props, {}> {
                     backgroundPosition: '160px center',
                     margin: '5px 0'
                 }}
-                onClick={() => this.props.onSelectCharacter(char.id)}
+                onClick={() => this.props.onSelectCharacter(char._id)}
             >
                 <ListItemAvatar>
                     <Avatar alt={char.name} src={"images/cultures/" + CULTURES[char.culture].img} />
