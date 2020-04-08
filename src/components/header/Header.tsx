@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton, Fab } from '@material-ui/core';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
-import { ArrowBack } from '@material-ui/icons';
+import { ArrowBack, Save } from '@material-ui/icons';
 
 interface OwnProps {
     title: string;
@@ -36,15 +36,20 @@ class Header extends Component<Props, State> {
             return (
                 <AppBar position="relative" elevation={4}>
                     <Toolbar>
-                        {this.props.location.pathname !== '/' &&
-                            <IconButton edge="start" color="inherit" onClick={this.handleBack}>
-                                <ArrowBack />
-                            </IconButton>
-                        }
+                        <IconButton edge="start" color="inherit" onClick={this.handleBack}>
+                            <ArrowBack />
+                        </IconButton>
                         <Typography variant='body1' component='h1' style={{ flexGrow: 1 }}>
                             {this.props.title}
                         </Typography>
                     </Toolbar>
+                    {this.props.location.pathname !== '/create' && <Fab
+                        style={{ position: 'absolute', right: '24px', top: '24px' }}
+                        color="secondary"
+                        aria-label="save"
+                    >
+                        <Save />
+                    </Fab>}
                 </AppBar>
             );
         }

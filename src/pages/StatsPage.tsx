@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, IconButton, Chip, Dialog, DialogContent, DialogActions, Button, DialogTitle, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, List, ListItem, ListItemText, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions } from '@material-ui/core';
+import { Card, CardMedia, CardHeader, Avatar, CardContent, Typography, IconButton, Chip, Dialog, DialogContent, DialogActions, Button, DialogTitle, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions } from '@material-ui/core';
 import { CULTES, CULTURES, CONCEPTS, RANGS, SEX } from '../constants';
 import { ExpandMore, ExpandLess, OfflineBolt, OfflineBoltOutlined, Clear, Edit, Info } from '@material-ui/icons';
 import Character, { Attribute } from '../models/Character';
@@ -115,7 +115,7 @@ export default class StatsPage extends Component<Props, State> {
                         style={{ height: '100px' }}
                     />
                     <Chip
-                        style={{ position: 'absolute', top: '8px', right: '8px', background: 'rgba(255,255,255,0.7)' }}
+                        style={{ position: 'absolute', top: '8px', left: '8px', background: 'rgba(255,255,255,0.7)' }}
                         label={T.translate('rangs.' + RANGS[char.culte][char.rang] + '.name')}
                         variant="outlined"
                         deleteIcon={<Info />}
@@ -367,7 +367,7 @@ export default class StatsPage extends Component<Props, State> {
                     </DialogContent>
                     <DialogActions>
                         <Button color='secondary' onClick={this.handleSave}>
-                            {T.translate('generic.save')}
+                            {T.translate('generic.validate')}
                         </Button>
                         <Button color='primary' onClick={this.handleModalClose}>
                             {T.translate('generic.cancel')}

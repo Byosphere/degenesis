@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { Menu, List, ListSubheader, ListItem, ListItemIcon, ListItemText, Collapse, Divider, ListItemSecondaryAction, Switch } from '@material-ui/core';
+import { Menu, List, ListSubheader, ListItem, ListItemIcon, ListItemText, Collapse, Divider } from '@material-ui/core';
 import { LANG } from '../../constants';
-import { getLang, setLang, isDarkMode, getLocalData, disconnect } from '../../utils/StorageManager';
+import { getLang, setLang, getLocalData, disconnect } from '../../utils/StorageManager';
 import T from 'i18n-react';
-import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, Brightness4, CloudDownload, CloudUpload, PowerSettingsNew } from '@material-ui/icons';
+import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, CloudDownload, PowerSettingsNew } from '@material-ui/icons';
 import { saveFile } from '../../utils/helper';
 import packageJson from '../../../package.json';
 
@@ -49,7 +49,6 @@ export default class SettingsMenu extends Component<Props, State> {
     public render() {
 
         const lang = getLang();
-        const darkMode = isDarkMode();
 
         return (
             <Menu
@@ -89,23 +88,6 @@ export default class SettingsMenu extends Component<Props, State> {
                             ))}
                         </List>
                     </Collapse>
-                    {/* <ListItem disabled>
-                        <ListItemIcon>
-                            <Brightness4 />
-                        </ListItemIcon>
-                        <ListItemText
-                            id="dark-mode"
-                            primary={T.translate('settings.darkmode')}
-                            secondary={darkMode ? T.translate('settings.activated') : T.translate('settings.desactivated')}
-                        />
-                        <ListItemSecondaryAction>
-                            <Switch
-                                edge="end"
-                                checked={darkMode}
-                                inputProps={{ 'aria-labelledby': 'switch-list-label-wifi' }}
-                            />
-                        </ListItemSecondaryAction>
-                    </ListItem> */}
                     <ListItem button onClick={this.saveData}>
                         <ListItemIcon>
                             <CloudDownload />

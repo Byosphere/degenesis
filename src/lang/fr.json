@@ -81,7 +81,15 @@
     "connect": {
         "connect": "Se connecter",
         "pseudo": "Identifiant",
-        "password": "Mot de Passe"
+        "password": "Mot de Passe",
+        "register": "S'inscrire",
+        "registertext": "Pour obtenir un compte, veuillez remplir le formulaire suivant :",
+        "pseudoalpha": "L'identifiant doit avoir au moins 6 caractères.",
+        "passwordmin": "Le mot de passe doit avoir au moins 8 caractères.",
+        "passwordconfirm": "Confirmation du mot de passe",
+        "servercode": "Code serveur",
+        "codehelper": "Le code donné par l'administrateur.",
+        "passworderror": "Les mots de passes ne correspondent pas."
     },
     "navigator": {
         "stats": "État",

@@ -3,6 +3,12 @@ import Axios from 'axios';
 import { API_PATH } from "../constants";
 import Character from "../models/Character";
 import { getUserToken } from "./StorageManager";
+import { RegisterForm } from "../pages/connectpage/RegisterModal";
+
+export async function registerUser(registerForm: RegisterForm) {
+    const url = API_PATH + '/register';
+    return Axios.post(url, null, { params: registerForm });
+}
 
 export async function userConnect(pseudo: string, password: string): Promise<{ data: { error: boolean, token: string, user: User } }> {
     const url = API_PATH + '/login';
@@ -19,7 +25,7 @@ export async function getCharactersAsync(): Promise<{ data: Character[] }> {
     return Axios.get(url, { headers: { 'auth-token': getUserToken() } });
 }
 
-export async function saveCharacterAsync(char: Character): Promise<{ data: Character[] }> {
+export async function saveCharacterAsync(char: Character): Promise<{ data: Character }> {
     const url = API_PATH + '/character';
     return Axios.post(url, char.toObject(), { headers: { 'auth-token': getUserToken() } });
 }

@@ -1,151 +1,143 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect, createContext } from 'react';
 import './App.css';
-import Header from './components/header/Header';
-import { Route, Switch, HashRouter } from "react-router-dom";
-import Character from './models/Character';
-import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import { getUserToken } from './utils/StorageManager';
-import User from './models/User';
-import { getUser, saveCharacterAsync, getCharactersAsync, deleteCharacterAsync } from './utils/fetchers';
 import Loader from './components/Loader';
-import ConnectPage from './pages/ConnectPage';
+import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync } from './utils/fetchers';
+import User from './models/User';
+import Character from './models/Character';
+import { HashRouter, Route, Switch } from 'react-router-dom';
+import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
+import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import DetailPage from './pages/DetailPage';
+import ConnectPage from './pages/connectpage/ConnectPage';
 
-interface State {
-    headerTitle: string;
-    displayTabs: boolean;
-    user: User;
-    loading: boolean;
-    token: string;
-    characters: Character[];
-}
+export default function App() {
 
-class App extends Component<{}, State> {
+    const token = getUserToken();
 
-    constructor(props: any) {
-        super(props);
+    const UserContext = createContext(null);
+    const HeaderContext = createContext(null);
 
-        const token = getUserToken();
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    const [user, setUser] = useState<User>(null);
+    const [characters, setCharacters] = useState<Character[]>([]);
+    const [headerTitle, setHeaderTitle] = useState<string>('');
 
-        this.state = {
-            characters: [],
-            headerTitle: '',
-            displayTabs: false,
-            user: null,
-            loading: !!token,
-            token
-        };
-    }
-
-    public componentDidMount() {
-        if (this.state.token) {
-            getUser(this.state.token).then(({ data }) => {
-                this.setState({ user: data });
-                getCharactersAsync().then(({ data }) => {
-
-                    this.setState({
-                        characters: data.map((el) => new Character(el)),
-                        loading: false
-                    });
-                });
-            });
-        }
-    }
-
-    public setHeader = (title: string) => {
-        this.setState({ headerTitle: title });
-    }
-
-    public handleConnect = (user: User) => {
-        this.setState({ user });
-    }
-
-    public handleDisconnect = () => {
-        this.setState({ user: null });
-    }
-
-    public handleSaveCharacter = (char: Character) => {
-        this.setState({ loading: true });
-        saveCharacterAsync(char).then(({ data }) => {
-            let characters = this.state.characters;
-            characters.push(new Character(data));
-            this.setState({
-                characters,
-                loading: false
-            });
-        }).catch((err) => {
-            this.setState({ loading: false });
-        });
-    }
-
-    public handleDeleteCharacter = (charId: string) => {
-        this.setState({ loading: true });
-        deleteCharacterAsync(charId).then(({ data }) => {
-            if (data) {
-                let characters = this.state.characters;
+    // Supprime un personnage
+    async function handleDeleteCharacter(charId: string) {
+        setIsLoading(true);
+        try {
+            const result = await deleteCharacterAsync(charId);
+            if (result.data) {
                 const index = characters.findIndex((char) => char._id === charId);
                 if (index > -1) characters.splice(index, 1);
-                this.setState({
-                    characters,
-                    loading: false
-                });
-            } else {
-                // ERROR
             }
-        });
-    }
+            setIsLoading(false);
+            setCharacters(characters);
 
-    public render() {
-
-        if (this.state.loading) {
-            return <div className="App">
-                <Loader />
-            </div>;
-        } else if (!this.state.user) {
-            return <div className="App">
-                <ConnectPage onConnect={this.handleConnect} />
-            </div>;
-        } else {
-            return (
-                <div className="App">
-                    <HashRouter basename='/'>
-                        <Header title={this.state.headerTitle} />
-                        <div className="app-content">
-                            <Switch>
-                                <Route path='/' exact render={
-                                    props => <HomePage {...props}
-                                        onDisconnect={this.handleDisconnect}
-                                        user={this.state.user}
-                                        characters={this.state.characters}
-                                        onDelete={this.handleDeleteCharacter}
-                                    />
-                                } />
-                                <Route path="/create" exact render={
-                                    props => <CharacterBuilder {...props}
-                                        createCharacter={this.handleSaveCharacter}
-                                        setHeader={this.setHeader}
-                                    />
-                                } />
-                                <Route path="/detail/:id" render={
-                                    props => <DetailPage {...props}
-                                        setHeader={this.setHeader}
-                                        onModifyCharacter={() => { /* TODO */ }}
-                                        selectedCharacter={this.getSelectedChar(props)}
-                                    />
-                                } />
-                            </Switch>
-                        </div>
-                    </HashRouter>
-                </div>
-            );
+        } catch (error) {
+            setIsLoading(false);
+            console.error(error.message);
         }
     }
 
-    private getSelectedChar(props): Character {
-        const char = this.state.characters.find((char) => props.match.params.id === char._id);
-        return char;
+    // Modifie un personnage
+    async function handleEditCharacter(char: Character) {
+        setIsLoading(true);
+        try {
+            const character = await saveCharacterAsync(char);
+            const index = characters.findIndex((c) => c._id === char._id);
+            characters[index] = new Character(character.data);
+            setCharacters(characters);
+
+        } catch (error) {
+            setIsLoading(false);
+            console.error(error.message);
+        }
+    }
+
+    // sauvegarde un nouveau personnage
+    async function handleSaveNewCharacter(char: Character) {
+        setIsLoading(true);
+        try {
+            const character = await saveCharacterAsync(char);
+            characters.push(new Character(character.data));
+            setCharacters(characters);
+            setIsLoading(false);
+
+        } catch (error) {
+            setIsLoading(false);
+            console.error(error.message);
+        }
+    }
+
+    useEffect(() => {
+        const getUserDataFromToken = async () => {
+            try {
+                const user = await getUser(token);
+                const characters = await getCharactersAsync();
+                setUser(user.data);
+                setCharacters(characters.data.map((el) => new Character(el)));
+                setIsLoading(false);
+            } catch (error) {
+                setIsLoading(false);
+                console.error(error.message);
+            }
+        }
+
+        if (token) getUserDataFromToken();
+        else setIsLoading(false);
+    }, [token]);
+
+    if (isLoading) {
+        return <div className="App">
+            <Loader />
+        </div>;
+    } else if (!user) {
+        return <div className="App">
+            <ConnectPage onConnect={(user) => setUser(user)} />
+        </div>;
+    } else {
+        return (
+            <div className="App">
+                <UserContext.Provider value={{ user, setUser }}>
+                    <HeaderContext.Provider value={{}}>
+                        <HashRouter basename='/'>
+                            <Header title={headerTitle} />
+                            <div className="app-content">
+                                <Switch>
+                                    <Route path='/' exact render={
+                                        props => <HomePage {...props}
+                                            onDisconnect={() => setUser(null)}
+                                            user={user}
+                                            characters={characters}
+                                            onDelete={handleDeleteCharacter}
+                                        />
+                                    } />
+                                    <Route path="/create" exact render={
+                                        props => <CharacterBuilder {...props}
+                                            createCharacter={handleSaveNewCharacter}
+                                            setHeader={setHeaderTitle}
+                                        />
+                                    } />
+                                    <Route path="/detail/:id" render={
+                                        props => <DetailPage {...props}
+                                            setHeader={setHeaderTitle}
+                                            onModifyCharacter={handleEditCharacter}
+                                            selectedCharacter={getSelectedChar(props)}
+                                        />
+                                    } />
+                                </Switch>
+                            </div>
+                        </HashRouter>
+                    </HeaderContext.Provider>
+                </UserContext.Provider>
+            </div>
+        );
+    }
+
+    function getSelectedChar(props): Character {
+        return characters.find((char: Character) => props.match.params.id === char._id);
     }
 }
-
-export default App;

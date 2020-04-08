@@ -18,28 +18,6 @@ export function disconnect() {
     localStorage.setItem(LOCALSTORAGE_NAME, JSON.stringify(storage));
 }
 
-export function storeCharacter(character: Character) {
-    // let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
-    // if (storage.characters) {
-    //     if (character._id) {
-    //         storage.characters[character._id] = character.toObject();
-    //     } else {
-    //         let id: number = 1;
-    //         while (storage.characters[id]) {
-    //             id++;
-    //         }
-    //         character.id = id;
-    //         storage.characters[id] = character.toObject();
-    //     }
-
-    // } else {
-    //     storage.characters = [];
-    //     character.id = 1;
-    //     storage.characters[1] = character.toObject();
-    // }
-    // localStorage.setItem(LOCALSTORAGE_NAME, JSON.stringify(storage));
-}
-
 export function getCharacters(): Character[] {
     let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
     let characters = [];
@@ -73,16 +51,6 @@ export function setLang(value: string) {
 export function getLang(): string {
     let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
     return storage.lang || '';
-}
-
-export function setDarkMode(enabled: boolean) {
-    let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
-    storage.darkMode = enabled;
-}
-
-export function isDarkMode(): boolean {
-    let storage = localStorage.getItem(LOCALSTORAGE_NAME) ? JSON.parse(localStorage.getItem(LOCALSTORAGE_NAME)) : {};
-    return storage.darkMode || false;
 }
 
 export function getLocalData(): any {
