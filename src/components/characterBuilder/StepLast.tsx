@@ -2,6 +2,7 @@ import React from 'react'
 import T from 'i18n-react';
 import { TextField } from '@material-ui/core';
 import { Character } from '../../models/Character';
+import { getBlessuresMax, getEgoMax, getSporulationMax, getTraumaMax } from '../../utils/characterTools';
 
 interface Props {
     newCharacter: Character;
@@ -11,7 +12,7 @@ interface Props {
 
 export default function StepLast(props: Props) {
 
-    const { newCharacter, onChange, buttons } = this.props;
+    const { newCharacter, onChange, buttons } = props;
 
     return (
         <>
@@ -24,7 +25,7 @@ export default function StepLast(props: Props) {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    value={newCharacter.blessuresMax}
+                    value={getBlessuresMax(newCharacter)}
                     disabled
                 />
                 <TextField
@@ -35,7 +36,7 @@ export default function StepLast(props: Props) {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    value={newCharacter.egoMax}
+                    value={getEgoMax(newCharacter)}
                     disabled
                 />
             </div>
@@ -48,7 +49,7 @@ export default function StepLast(props: Props) {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    value={newCharacter.sporulationMax}
+                    value={getSporulationMax(newCharacter)}
                     disabled
                 />
                 <TextField
@@ -59,7 +60,7 @@ export default function StepLast(props: Props) {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    value={newCharacter.traumaMax}
+                    value={getTraumaMax(newCharacter)}
                     disabled
                 />
             </div>

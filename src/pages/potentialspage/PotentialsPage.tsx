@@ -55,6 +55,7 @@ export default function PotentialsPage(props: Props) {
             {!cultePotentials.length && <Empty />}
             {genericPotentials.map((potential: Potential, key: number) => (
                 <PotentialDisplay
+                    key={key}
                     type={0}
                     potential={potential}
                     onDeletePotential={handleDeletePotential}
@@ -65,8 +66,9 @@ export default function PotentialsPage(props: Props) {
                 {T.translate('generic.potential1')}
             </Typography>
             {!cultePotentials.length && <Empty />}
-            {cultePotentials.map((potential: Potential) => (
+            {cultePotentials.map((potential: Potential, key: number) => (
                 <PotentialDisplay
+                    key={key}
                     type={1}
                     potential={potential}
                     onDeletePotential={handleDeletePotential}

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect, useMemo } from 'react'
 import { Card, Stepper, Step, StepLabel, StepContent, Button, Chip } from '@material-ui/core';
 import { Attribute, Skill, Character } from '../../models/Character';
 import { useHistory } from 'react-router-dom';
@@ -15,7 +15,7 @@ import StepBelief from './StepBelief';
 import StepPotentials from './StepPotentials';
 import StepLast from './StepLast';
 import { HeaderContext } from '../../App';
-import { getNewCharacter } from '../../utils/characterTools';
+import { getNewCharacter, updateAttributes } from '../../utils/characterTools';
 
 interface Props {
     onCreateCharacter: (char: Character) => void;

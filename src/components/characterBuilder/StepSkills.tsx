@@ -42,7 +42,7 @@ export default function StepSkills(props: Props) {
                         key="undo"
                         size="small"
                         style={{ color: 'white' }}
-                        onClick={this.props.onReset}
+                        onClick={props.onReset}
                     >
                         {T.translate('generic.reset')}
                     </Button>,

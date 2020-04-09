@@ -64,7 +64,7 @@ export default function ConnectPage(props: Props) {
     if (loading) return <Loader />;
 
     return (
-        <Card style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: 'center', marginTop: '10%' }}>
+        <Card style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: 'center', paddingTop: '10%' }}>
             <figure style={{ textAlign: 'center', marginBottom: '16px', marginTop: '32px' }}>
                 <img src='./images/degenesis.png' alt='degenesis' />
                 <figcaption style={{ opacity: 0.8 }}>- Unofficial Player App -</figcaption>
