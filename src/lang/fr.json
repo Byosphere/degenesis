@@ -63,6 +63,7 @@
         "attributes": "Attributs",
         "yes": "Oui",
         "no": "Non",
+        "remove": "Retirer",
         "delete": "Supprimer",
         "confirmdelete": "Êtes-vous sûr de vouloir supprimer _{who}_ ?",
         "characterstats": "Fiche de personnage : {name}",
@@ -77,7 +78,8 @@
         "deletenote": "Supprimer la page",
         "invalidfield": "Champ invalide",
         "rolldicequestion": "Effectuer un jet de *{attribute}* ({anum}) + *{skill}* ({snum}) ?",
-        "diceroll": "Jet de dés"
+        "diceroll": "Jet de dés",
+        "ldc": "L.d.C"
     },
     "connect": {
         "connect": "Se connecter",
@@ -98,7 +100,7 @@
         "notes": "Notes",
         "potentials": "Potentiels",
         "home": "Accueil",
-        "create": "Créer"
+        "create": "Créer un personnage"
     },
     "settings": {
         "settings": "Paramètres",
@@ -166,7 +168,8 @@
         "additemdesc": "Renseignez les informations du nouvel objet à ajouter à l'inventaire.",
         "type": "Type d'objet",
         "desc": "Description",
-        "name": "Intitulé"
+        "name": "Intitulé",
+        "moneyedit": "Gestion de l'argent"
     },
     "potential": {
         "new": "Apprendre un nouveau potentiel",

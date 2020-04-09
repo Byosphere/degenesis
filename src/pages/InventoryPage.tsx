@@ -31,7 +31,7 @@ export default class InventoryPage extends Component<Props, State> {
         this.state = {
             open: [],
             modalOpen: false,
-            newItem: { name: '', type: 0, desc: '', weight: 0, tech: 0 },
+            newItem: { id: 0, name: '', type: 0, desc: '', weight: 0, tech: 0 },
             moneyModalOpen: false,
             addRemoveMoney: 'add',
             moneyValue: 0,
@@ -56,7 +56,7 @@ export default class InventoryPage extends Component<Props, State> {
     }
 
     public handleClose = (event: any) => {
-        this.setState({ modalOpen: false, newItem: { name: '', type: 0, desc: '', weight: 0, tech: 0 } });
+        // this.setState({ modalOpen: false, newItem: { name: '', type: 0, desc: '', weight: 0, tech: 0 } });
     }
 
     public onChange = (event: React.ChangeEvent<{ name?: string; value: unknown; }>) => {
@@ -66,13 +66,13 @@ export default class InventoryPage extends Component<Props, State> {
     }
 
     public handleSave = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        let char = this.props.char;
-        char.inventory.push(this.state.newItem);
-        this.setState({
-            modalOpen: false,
-            newItem: { name: '', type: 0, desc: '', weight: 0, tech: 0 }
-        });
-        this.props.onChange(char, true);
+        // let char = this.props.char;
+        // char.inventory.push(this.state.newItem);
+        // this.setState({
+        //     modalOpen: false,
+        //     newItem: { name: '', type: 0, desc: '', weight: 0, tech: 0 }
+        // });
+        // this.props.onChange(char, true);
     }
 
     public openMoneyModal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

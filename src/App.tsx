@@ -5,7 +5,7 @@ import Loader from './components/Loader';
 import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync } from './utils/fetchers';
 import User from './models/User';
 import Character from './models/Character';
-import { HashRouter, Route, Switch, useParams } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
@@ -115,7 +115,7 @@ export default function App() {
                                         />
                                     </Route>
                                     <Route path="/create" exact>
-                                        create
+                                        <CharacterBuilder onCreateCharacter={handleCreateCharacter} />
                                     </Route>
                                     <Route path="/detail/:id">
                                         <DetailPage
@@ -123,19 +123,6 @@ export default function App() {
                                             characters={characters}
                                         />
                                     </Route>
-                                    {/* 
-                                    <Route path="/create" exact render={
-                                        props => <CharacterBuilder {...props}
-                                            createCharacter={handleSaveNewCharacter}
-                                            setHeader={setHeaderTitle}
-                                        />
-                                    } />
-                                    <Route path="/detail/:id" render={
-                                        props => <DetailPage {...props}
-                                            onModifyCharacter={handleEditCharacter}
-                                            selectedCharacter={getSelectedChar(props)}
-                                        />
-                                    } /> */}
                                 </Switch>
                             </div>
                         </HashRouter>

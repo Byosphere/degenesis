@@ -1,13 +1,12 @@
-import React, { Component, useState, useEffect, useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton } from '@material-ui/core';
 import Character from '../models/Character';
-import { RouteComponentProps, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Add, Delete, Settings } from '@material-ui/icons';
 import T from 'i18n-react';
 import CharacterItem from '../components/home/CharacterItem';
 import SwipeableViews from 'react-swipeable-views';
 import SettingsMenu from '../components/home/SettingsMenu';
-import User from '../models/User';
 import { UserContext } from '../App';
 
 interface Props {

@@ -22,6 +22,7 @@ export interface Potential {
 }
 
 export interface Item {
+    id: number;
     name: string;
     type: number;
     desc: string;

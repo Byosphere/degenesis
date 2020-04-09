@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Card, Stepper, Step, StepLabel, StepContent, Button, Chip } from '@material-ui/core';
 import Character, { Attribute, Skill } from '../../models/Character';
-import { RouteComponentProps } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import T from 'i18n-react';
 import { CULTURES, CULTES, CONCEPTS, MONEY, BASE_SKILLS, BASE_ATTRIBUTES } from '../../constants';
 import { Done } from '@material-ui/icons';
@@ -14,95 +14,108 @@ import StepSkills from './StepSkills';
 import StepBelief from './StepBelief';
 import StepPotentials from './StepPotentials';
 import StepLast from './StepLast';
+import { HeaderContext } from '../../App';
 
-interface OwnProps {
-    createCharacter: (char: Character) => void;
-    setHeader: (title: string) => void;
+interface Props {
+    onCreateCharacter: (char: Character) => void;
 }
 
-type Props = OwnProps & RouteComponentProps;
+export default function CharacterBuilder(props: Props) {
 
-interface State {
-    activeStep: number;
-    newCharacter: Character;
-    attributePoints: number;
-    skillPoints: number;
-}
+    const [step, setStep] = useState<number>(0);
+    const [character, setCharacter] = useState<Character>(new Character());
+    const [attributePoints, setAttributePoints] = useState<number>(BASE_ATTRIBUTES);
+    const [skillPoints, setSkillPoints] = useState<number>(BASE_SKILLS);
+    const { setHeaderTitle } = useContext(HeaderContext);
+    const history = useHistory();
 
-export default class CharacterBuilder extends Component<Props, State> {
+    useEffect(() => {
+        setHeaderTitle(T.translate('navigator.create') as string);
+    }, [setHeaderTitle]);
 
-    public constructor(props: Props) {
-        super(props);
-
-        this.state = {
-            activeStep: 0,
-            newCharacter: new Character(),
-            attributePoints: BASE_ATTRIBUTES,
-            skillPoints: BASE_SKILLS
-        };
+    function handleSelectAttribute(field: string, value: string) {
+        let newCharacter: Character = character.clone();
+        newCharacter[field] = value;
+        setCharacter(newCharacter);
     }
 
-    public componentDidMount() {
-        this.props.setHeader(T.translate('generic.charactercreate') as string);
+    function handleCreate() {
+        let newCharacter = character.clone();
+        newCharacter.money = MONEY[newCharacter.culte] * 2;
+        props.onCreateCharacter(newCharacter);
+        history.push('/');
     }
 
-    public handleChange = (event: any) => {
-        let newCharacter: any = this.state.newCharacter;
-        newCharacter[event.target.name] = event.target.value;
-        this.setState({ newCharacter });
+    function displayLabel(title: any, validElement: any, currentStep: number): JSX.Element {
+        return (
+            <StepLabel classes={{ labelContainer: 'create-step-label' }}>
+                {title}
+                {step >= currentStep + 1 &&
+                    <Chip label={validElement} color="secondary" icon={<Done />} />}
+            </StepLabel>
+        );
     }
 
-    public handleNext = (event: React.MouseEvent<HTMLButtonElement>) => {
-        this.setState({ activeStep: this.state.activeStep + 1 });
-    }
-
-    public handlePrev = (event: React.MouseEvent<HTMLButtonElement>) => {
-        if (this.state.activeStep === 6) this.handleReset();
-        this.setState({ activeStep: this.state.activeStep - 1 });
-    }
-
-    public handleCreate = (event: React.MouseEvent<HTMLButtonElement>) => {
-        let character = this.state.newCharacter;
-        character.money = MONEY[character.culte] * 2;
-        this.props.createCharacter(character);
-        this.props.history.push('/');
-    }
-
-    public handleReset = () => {
-        let character = this.state.newCharacter;
-        character.attributes.forEach((attribute: Attribute) => {
-            attribute.skills.forEach((skill: Skill) => {
-                skill.value = 0;
-            });
-        });
-        this.setState({ newCharacter: character, skillPoints: BASE_SKILLS });
-    }
-
-    public handleAttributeChange = (attributeId: number, skillId: number, value: number) => {
-        let character: Character = this.state.newCharacter;
-        let attributePoints = this.state.attributePoints;
-        let skillPoints = this.state.skillPoints;
-        let attribute = character.attributes[attributeId];
+    function handleAttributeChange(attributeId: number, skillId: number, value: number) {
+        let newCharacter: Character = character.clone();
+        let attrPoints = attributePoints;
+        let skPoints = skillPoints;
+        let attribute = newCharacter.attributes[attributeId];
 
         if (isNaN(skillId)) {
             let remainingValue = attributePoints + attribute.base - value;
             if (remainingValue >= 0) {
-                attributePoints = remainingValue;
+                attrPoints = remainingValue;
                 attribute.base = value;
             }
         } else {
             let remainingValue = skillPoints + attribute.skills[skillId].value - value;
             if (remainingValue >= 0) {
-                skillPoints = remainingValue;
+                skPoints = remainingValue;
                 attribute.skills[skillId].value = value;
             }
         }
-
-        this.setState({ newCharacter: character, attributePoints, skillPoints });
+        setCharacter(newCharacter);
+        setAttributePoints(attrPoints);
+        setSkillPoints(skPoints);
     }
 
-    public handleToggle = (id: number, type: number) => {
-        let newCharacter: any = this.state.newCharacter;
+    function handleReset() {
+        let newCharacter = character.clone();
+        newCharacter.attributes.forEach((attribute: Attribute) => {
+            attribute.skills.forEach((skill: Skill) => {
+                skill.value = 0;
+            });
+        });
+        setCharacter(newCharacter);
+        setSkillPoints(BASE_SKILLS);
+    }
+
+    function displayControls(disableNext: boolean, enablePrev: boolean, isLast?: boolean): JSX.Element {
+        return (
+            <div style={{ display: 'flex', justifyContent: "space-between" }}>
+                {enablePrev && <Button
+                    style={{ marginTop: '16px' }}
+                    color='primary'
+                    onClick={() => setStep(step - 1)}
+                >
+                    {T.translate('generic.prev')}
+                </Button>}
+                <Button
+                    style={{ marginTop: '16px' }}
+                    variant='contained'
+                    color='secondary'
+                    onClick={isLast ? handleCreate : () => setStep(step + 1)}
+                    disabled={disableNext}
+                >
+                    {isLast ? T.translate('generic.create') : T.translate('generic.next')}
+                </Button>
+            </div>
+        );
+    }
+
+    function handleToggle(id: number, type: number) {
+        let newCharacter: any = character.clone();
         let index = newCharacter.potentials.findIndex(p => p.id === id && p.type === type);
         if (index === -1 && newCharacter.potentials.length !== 2) {
             newCharacter.potentials.push({
@@ -113,194 +126,136 @@ export default class CharacterBuilder extends Component<Props, State> {
         } else if (index !== -1) {
             newCharacter.potentials.splice(index, 1);
         }
-        this.setState({ newCharacter });
+        setCharacter(newCharacter);
     }
 
-    public handleSelectAttribute = (field: string, value: string) => {
-        let newCharacter: any = this.state.newCharacter;
-        newCharacter[field] = value;
-        this.setState({ newCharacter });
+    function handleChange(event: any) {
+        let newCharacter: any = character.clone();
+        newCharacter[event.target.name] = event.target.value;
+        setCharacter(newCharacter);
     }
 
-    public render() {
-
-        const { activeStep, newCharacter, attributePoints, skillPoints } = this.state;
-
-        return (
-            <div style={{ margin: '5px', flex: 1 }}>
-                <Card style={{ flex: 1, display: "flex", flexDirection: "column", overflowY: 'auto', minHeight: 'calc(100% - 46px)' }}>
-                    <Stepper activeStep={activeStep} orientation="vertical">
-                        <Step>
-                            {this.displayLabel(T.translate('create.who').toString(), newCharacter.name, 0)}
-                            <StepContent>
-                                <StepWho
-                                    newCharacter={newCharacter}
-                                    onChange={this.handleChange}
-                                    buttons={this.displayControls(
-                                        !newCharacter.name ||
-                                        !newCharacter.age ||
-                                        !newCharacter.sex ||
-                                        !newCharacter.weight ||
-                                        !newCharacter.size,
-                                        false
-                                    )}
-                                />
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            {this.displayLabel(
-                                T.translate('create.culture.title').toString(),
-                                (typeof newCharacter.culture === 'number') ?
-                                    T.translate('cultures.' + CULTURES[newCharacter.culture].name).toString() : '',
-                                1
-                            )}
-                            <StepContent className='step-culture'>
-                                <StepCulture
-                                    newCharacter={newCharacter}
-                                    onChange={this.handleChange}
-                                    buttons={this.displayControls(typeof newCharacter.culture !== 'number', true)}
-                                />
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            {this.displayLabel(
-                                T.translate('create.culte.title').toString(),
-                                (typeof newCharacter.culte === 'number') ?
-                                    T.translate('cultes.' + CULTES[newCharacter.culte].name).toString() : '',
-                                2
-                            )}
-                            <StepContent className='step-culte'>
-                                <StepCulte
-                                    newCharacter={newCharacter}
-                                    onChange={this.handleChange}
-                                    buttons={this.displayControls(typeof newCharacter.culte !== 'number', true)}
-                                />
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            {this.displayLabel(
-                                T.translate('create.concept.title').toString(),
-                                (typeof newCharacter.concept === 'number') ?
-                                    T.translate('concepts.' + CONCEPTS[newCharacter.concept].name).toString() : '',
-                                3
-                            )}
-                            <StepContent className='step-concept'>
-                                <StepConcept
-                                    newCharacter={newCharacter}
-                                    onChange={this.handleChange}
-                                    buttons={this.displayControls(typeof newCharacter.concept !== 'number', true)}
-                                />
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            {this.displayLabel(
-                                T.translate('create.attributes').toString(),
-                                T.translate('skills.' + newCharacter.belief) + ' | ' + T.translate('skills.' + newCharacter.behavior),
-                                4
-                            )}
-                            <StepContent>
-                                <StepBelief
-                                    newCharacter={newCharacter}
-                                    onChange={this.handleSelectAttribute}
-                                    buttons={this.displayControls(!newCharacter.behavior || !newCharacter.belief, true)}
-                                />
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            {this.displayLabel(
-                                T.translate('create.selectattributes').toString(),
-                                T.translate('create.selectedattributes').toString(),
-                                5
-                            )}
-                            <StepContent>
-                                <StepAttributes
-                                    newCharacter={newCharacter}
-                                    attributePoints={attributePoints}
-                                    onChange={this.handleAttributeChange}
-                                    buttons={this.displayControls(attributePoints !== 0, true)}
-                                />
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            {this.displayLabel(
-                                T.translate('create.selectskills').toString(),
-                                T.translate('create.selectedskills').toString(),
-                                6
-                            )}
-                            <StepContent>
-                                <StepSkills
-                                    newCharacter={newCharacter}
-                                    skillPoints={skillPoints}
-                                    onChange={this.handleAttributeChange}
-                                    buttons={this.displayControls(skillPoints !== 0, true)}
-                                    onReset={this.handleReset}
-                                />
-                            </StepContent>
-                        </Step>
-                        <Step>
-                            {this.displayLabel(
-                                T.translate('create.potentials').toString(),
-                                T.translate('generic.selectedpotentials').toString(),
-                                7
-                            )}
-                            {newCharacter.culte && <StepContent>
-                                <StepPotentials
-                                    newCharacter={newCharacter}
-                                    onToggle={this.handleToggle}
-                                    buttons={this.displayControls(!newCharacter.potentials || newCharacter.potentials.length !== 2, true)}
-                                />
-                            </StepContent>}
-                        </Step>
-                        <Step>
-                            <StepLabel>{T.translate('create.lasttouch')}</StepLabel>
-                            <StepContent>
-                                <StepLast
-                                    newCharacter={newCharacter}
-                                    onChange={this.handleChange}
-                                    buttons={this.displayControls(false, true, true)}
-                                />
-                            </StepContent>
-                        </Step>
-                    </Stepper>
-                </Card>
-            </div>
-        );
-    }
-
-    private displayLabel(title: string, validElement: string, currentStep: number): JSX.Element {
-        return (
-            <StepLabel classes={{ labelContainer: 'create-step-label' }}>
-                {title}
-                {this.state.activeStep >= currentStep + 1 &&
-                    <Chip
-                        label={validElement}
-                        color="secondary"
-                        icon={<Done />}
-                    />}
-            </StepLabel>
-        );
-    }
-
-    private displayControls(disableNext: boolean, enablePrev: boolean, isLast?: boolean): JSX.Element {
-        return (
-            <div style={{ display: 'flex', justifyContent: "space-between" }}>
-                {enablePrev && <Button
-                    style={{ marginTop: '16px' }}
-                    color='primary'
-                    onClick={this.handlePrev}
-                >
-                    {T.translate('generic.prev')}
-                </Button>}
-                <Button
-                    style={{ marginTop: '16px' }}
-                    variant='contained'
-                    color='secondary'
-                    onClick={isLast ? this.handleCreate : this.handleNext}
-                    disabled={disableNext}
-                >
-                    {isLast ? T.translate('generic.create') : T.translate('generic.next')}
-                </Button>
-            </div>
-        );
-    }
+    return (
+        <div style={{ margin: '5px', flex: 1 }}>
+            <Card style={{ flex: 1, display: "flex", flexDirection: "column", overflowY: 'auto', minHeight: 'calc(100% - 46px)' }}>
+                <Stepper activeStep={step} orientation="vertical">
+                    <Step>
+                        {displayLabel(T.translate('create.who'), character.name, 0)}
+                        <StepContent>
+                            <StepWho
+                                newCharacter={character}
+                                onChange={handleChange}
+                                buttons={displayControls(
+                                    !character.name ||
+                                    !character.age ||
+                                    !character.sex ||
+                                    !character.weight ||
+                                    !character.size,
+                                    false
+                                )}
+                            />
+                        </StepContent>
+                    </Step>
+                    <Step>
+                        {displayLabel(T.translate('create.culture.title'),
+                            (typeof character.culture === 'number') ?
+                                T.translate('cultures.' + CULTURES[character.culture].name) : '',
+                            1
+                        )}
+                        <StepContent className='step-culture'>
+                            <StepCulture
+                                newCharacter={character}
+                                onChange={handleChange}
+                                buttons={displayControls(typeof character.culture !== 'number', true)}
+                            />
+                        </StepContent>
+                    </Step>
+                    <Step>
+                        {displayLabel(T.translate('create.culte.title'),
+                            (typeof character.culte === 'number') ?
+                                T.translate('cultes.' + CULTES[character.culte].name) : '',
+                            2
+                        )}
+                        <StepContent className='step-culte'>
+                            <StepCulte
+                                newCharacter={character}
+                                onChange={handleChange}
+                                buttons={displayControls(typeof character.culte !== 'number', true)}
+                            />
+                        </StepContent>
+                    </Step>
+                    <Step>
+                        {displayLabel(T.translate('create.concept.title'),
+                            (typeof character.concept === 'number') ?
+                                T.translate('concepts.' + CONCEPTS[character.concept].name) : '',
+                            3
+                        )}
+                        <StepContent className='step-concept'>
+                            <StepConcept
+                                newCharacter={character}
+                                onChange={handleChange}
+                                buttons={displayControls(typeof character.concept !== 'number', true)}
+                            />
+                        </StepContent>
+                    </Step>
+                    <Step>
+                        {displayLabel(T.translate('create.attributes'),
+                            T.translate('skills.' + character.belief) + ' | ' + T.translate('skills.' + character.behavior),
+                            4
+                        )}
+                        <StepContent>
+                            <StepBelief
+                                newCharacter={character}
+                                onChange={handleSelectAttribute}
+                                buttons={displayControls(!character.behavior || !character.belief, true)}
+                            />
+                        </StepContent>
+                    </Step>
+                    <Step>
+                        {displayLabel(T.translate('create.selectattributes'), T.translate('create.selectedattributes'), 5)}
+                        <StepContent>
+                            <StepAttributes
+                                newCharacter={character}
+                                attributePoints={attributePoints}
+                                onChange={handleAttributeChange}
+                                buttons={displayControls(attributePoints !== 0, true)}
+                            />
+                        </StepContent>
+                    </Step>
+                    <Step>
+                        {displayLabel(T.translate('create.selectskills'), T.translate('create.selectedskills'), 6)}
+                        <StepContent>
+                            <StepSkills
+                                newCharacter={character}
+                                skillPoints={skillPoints}
+                                onChange={handleAttributeChange}
+                                buttons={displayControls(skillPoints !== 0, true)}
+                                onReset={handleReset}
+                            />
+                        </StepContent>
+                    </Step>
+                    <Step>
+                        {displayLabel(T.translate('create.potentials'), T.translate('generic.selectedpotentials'), 7)}
+                        {character.culte && <StepContent>
+                            <StepPotentials
+                                newCharacter={character}
+                                onToggle={handleToggle}
+                                buttons={displayControls(!character.potentials || character.potentials.length !== 2, true)}
+                            />
+                        </StepContent>}
+                    </Step>
+                    <Step>
+                        <StepLabel>{T.translate('create.lasttouch')}</StepLabel>
+                        <StepContent>
+                            <StepLast
+                                newCharacter={character}
+                                onChange={handleChange}
+                                buttons={displayControls(false, true, true)}
+                            />
+                        </StepContent>
+                    </Step>
+                </Stepper>
+            </Card>
+        </div>
+    );
 }

@@ -22,7 +22,7 @@ export default function NotesPage(props: Props) {
 
     useEffect(() => {
         setHeaderTitle(T.translate('navigator.notes') as string);
-    }, []);
+    }, [setHeaderTitle]);
 
     function handleAdd() {
         let char = props.char;
