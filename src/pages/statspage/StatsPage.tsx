@@ -32,15 +32,21 @@ export default function StatsPage(props: Props) {
     }, [setHeaderTitle]);
 
     function handleChange(field: string, newValue: number) {
-
+        if (char[field] !== newValue) {
+            char[field] = newValue;
+            this.props.onChange(char, true);
+        }
     }
 
     function handleTrauma(val: number) {
-
+        if (char.trauma !== val) {
+            char.trauma = val;
+            this.props.onChange(char, true);
+        }
     }
 
     function handleAttributeSave(attribute: Attribute) {
-
+        // TODO
     }
 
     function handleSave(formValues: EditFormValues) {
