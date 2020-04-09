@@ -5,19 +5,19 @@ import Loader from './components/Loader';
 import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync } from './utils/fetchers';
 import User from './models/User';
 import Character from './models/Character';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, useParams } from 'react-router-dom';
 import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import DetailPage from './pages/DetailPage';
 import ConnectPage from './pages/connectpage/ConnectPage';
 
+export const UserContext = createContext(null);
+export const HeaderContext = createContext(null);
+
 export default function App() {
 
     const token = getUserToken();
-
-    const UserContext = createContext(null);
-    const HeaderContext = createContext(null);
 
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [user, setUser] = useState<User>(null);
@@ -43,7 +43,7 @@ export default function App() {
     }
 
     // Modifie un personnage
-    async function handleEditCharacter(char: Character) {
+    async function handleSaveCharacter(char: Character) {
         setIsLoading(true);
         try {
             const character = await saveCharacterAsync(char);
@@ -58,7 +58,7 @@ export default function App() {
     }
 
     // sauvegarde un nouveau personnage
-    async function handleSaveNewCharacter(char: Character) {
+    async function handleCreateCharacter(char: Character) {
         setIsLoading(true);
         try {
             const character = await saveCharacterAsync(char);
@@ -102,19 +102,28 @@ export default function App() {
         return (
             <div className="App">
                 <UserContext.Provider value={{ user, setUser }}>
-                    <HeaderContext.Provider value={{}}>
+                    <HeaderContext.Provider value={{ headerTitle, setHeaderTitle }}>
                         <HashRouter basename='/'>
                             <Header title={headerTitle} />
                             <div className="app-content">
                                 <Switch>
-                                    <Route path='/' exact render={
-                                        props => <HomePage {...props}
-                                            onDisconnect={() => setUser(null)}
-                                            user={user}
+                                    <Route path='/' exact>
+                                        <HomePage
                                             characters={characters}
                                             onDelete={handleDeleteCharacter}
+                                            onDisconnect={() => setUser(null)}
                                         />
-                                    } />
+                                    </Route>
+                                    <Route path="/create" exact>
+                                        create
+                                    </Route>
+                                    <Route path="/detail/:id">
+                                        <DetailPage
+                                            onSaveCharacter={handleSaveCharacter}
+                                            characters={characters}
+                                        />
+                                    </Route>
+                                    {/* 
                                     <Route path="/create" exact render={
                                         props => <CharacterBuilder {...props}
                                             createCharacter={handleSaveNewCharacter}
@@ -123,11 +132,10 @@ export default function App() {
                                     } />
                                     <Route path="/detail/:id" render={
                                         props => <DetailPage {...props}
-                                            setHeader={setHeaderTitle}
                                             onModifyCharacter={handleEditCharacter}
                                             selectedCharacter={getSelectedChar(props)}
                                         />
-                                    } />
+                                    } /> */}
                                 </Switch>
                             </div>
                         </HashRouter>
@@ -135,9 +143,5 @@ export default function App() {
                 </UserContext.Provider>
             </div>
         );
-    }
-
-    function getSelectedChar(props): Character {
-        return characters.find((char: Character) => props.match.params.id === char._id);
     }
 }

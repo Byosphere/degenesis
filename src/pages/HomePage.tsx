@@ -1,169 +1,136 @@
-import React, { Component } from 'react'
+import React, { Component, useState, useEffect, useContext } from 'react'
 import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton } from '@material-ui/core';
 import Character from '../models/Character';
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps, useHistory } from 'react-router-dom';
 import { Add, Delete, Settings } from '@material-ui/icons';
 import T from 'i18n-react';
 import CharacterItem from '../components/home/CharacterItem';
 import SwipeableViews from 'react-swipeable-views';
 import SettingsMenu from '../components/home/SettingsMenu';
 import User from '../models/User';
+import { UserContext } from '../App';
 
-interface ownProps {
-    user: User;
+interface Props {
     onDisconnect: () => void;
     characters: Character[];
     onDelete: (charId: string) => void;
 }
 
-interface State {
+interface Slider {
     tabs: number[];
-    open: boolean;
     selectedChar: Character;
-    selectedIndex: number;
-    anchorEl: HTMLElement;
+    index: number;
 }
 
-type Props = ownProps & RouteComponentProps;
+export default function HomePage(props: Props) {
+    const { user } = useContext(UserContext);
+    const [open, setOpen] = useState<boolean>(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const history = useHistory();
+    const [slider, setSlider] = useState<Slider>({
+        tabs: props.characters.map(() => 1),
+        selectedChar: null,
+        index: -1
+    });
 
-export default class HomePage extends Component<Props, State> {
-
-    public constructor(props: Props) {
-        super(props);
-
-        this.state = {
-            tabs: props.characters.map(() => 1),
-            open: false,
-            selectedChar: null,
-            selectedIndex: -1,
-            anchorEl: null
-        }
-    }
-
-    public selectCharacter = (charId: string) => {
-        this.props.history.push('/detail/' + charId);
-    }
-
-    public handleCreate = () => {
-        this.props.history.push('/create');
-    }
-
-    public onTabChange = (index: number, key: number, char: Character) => {
-        let tabs = this.state.tabs;
+    function onTabChange(index: number, key: number, char: Character) {
+        let tabs = slider.tabs;
         tabs[key] = index;
-        this.setState({
-            tabs,
-            open: true,
-            selectedChar: char,
-            selectedIndex: key
-        });
+
+        setSlider({ tabs, selectedChar: char, index });
+        setOpen(true);
     }
 
-    public handleClose = (event: React.MouseEvent<any>) => {
-        let tabs = this.state.tabs;
-        tabs[this.state.selectedIndex] = 1;
-        this.setState({
-            open: false,
-            selectedChar: null,
-            selectedIndex: -1,
-            tabs
-        });
+    function handleClose() {
+        let tabs = slider.tabs;
+        tabs[slider.index] = 1;
+
+        setSlider({ tabs, selectedChar: null, index: -1 });
+        setOpen(false);
     }
 
-    public handleDelete = (event: React.MouseEvent<any>) => {
-        let id = this.state.selectedChar._id;
-        let tabs = this.state.tabs;
-        tabs[this.state.selectedIndex] = 1;
-        this.setState({
-            open: false,
-            selectedChar: null,
-            selectedIndex: -1,
-            tabs
-        });
-        this.props.onDelete(id);
+    function handleDelete() {
+        let id = slider.selectedChar._id;
+        let tabs = slider.tabs;
+        tabs[slider.index] = 1;
+
+        setSlider({ tabs, selectedChar: null, index: -1 });
+        setOpen(false);
+        props.onDelete(id);
     }
 
-    public openMenu = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        this.setState({ anchorEl: event.currentTarget });
-    }
-
-    public render() {
-
-        return (
-            <Card style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-                <CardMedia
-                    image="images/logo.png"
-                    title="logo"
-                    style={{ height: '200px' }}
-                />
-                <CardContent style={{ flex: 1, height: 'calc(100% - 300px)' }} >
-                    <List
-                        component="nav"
-                        disablePadding
-                        subheader={
-                            <ListSubheader style={{ background: 'white' }} component="div">
-                                {T.translate('generic.heroslist')}
-                            </ListSubheader>
-                        }
-                        style={{ height: 'calc(100% - 64px)', overflowY: 'auto' }}
-                    >
-                        {this.props.characters.map((char: Character, key: number) => (
-                            <SwipeableViews
-                                key={key}
-                                index={this.state.tabs.length ? this.state.tabs[key] : 1}
-                                onChangeIndex={(index) => this.onTabChange(index, key, char)}
-                                resistance
-                            >
-                                <ListItem style={{ background: '#F44336', margin: '5px 0', height: 'calc(100% - 10px)', color: 'white', flexDirection: 'row-reverse' }}>
-                                    <ListItemIcon>
-                                        <Delete style={{ color: 'white' }} />
-                                    </ListItemIcon>
-                                </ListItem>
-                                <CharacterItem char={char} onSelectCharacter={this.selectCharacter} />
-                            </SwipeableViews>
-                        ))}
-                    </List>
-                    <Divider />
-                    <List component="nav">
-                        <ListItem button onClick={this.handleCreate}>
-                            <ListItemIcon>
-                                <Add color='secondary' />
-                            </ListItemIcon>
-                            <ListItemText
-                                primaryTypographyProps={{ color: 'secondary' }}
-                                primary={T.translate('generic.newcharacter')}
-                            />
-                        </ListItem>
-                    </List>
-                </CardContent>
-                <Dialog
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
+    return (
+        <Card style={{ flex: 1, display: "flex", flexDirection: "column" }}>
+            <CardMedia
+                image="images/logo.png"
+                title="logo"
+                style={{ height: '200px' }}
+            />
+            <CardContent style={{ flex: 1, height: 'calc(100% - 300px)' }} >
+                <List
+                    component="nav"
+                    disablePadding
+                    subheader={
+                        <ListSubheader style={{ background: 'white' }} component="div">
+                            {T.translate('generic.heroslist')}
+                        </ListSubheader>
+                    }
+                    style={{ height: 'calc(100% - 64px)', overflowY: 'auto' }}
                 >
-                    <DialogTitle id="alert-dialog-title">
-                        {T.translate('generic.confirmdelete', { who: this.state.selectedChar ? this.state.selectedChar.name : '' })}
-                    </DialogTitle>
-                    <DialogActions>
-                        <Button onClick={this.handleClose} color="primary">
-                            {T.translate('generic.no')}
-                        </Button>
-                        <Button onClick={this.handleDelete} autoFocus color='secondary'>
-                            {T.translate('generic.yes')}
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-                <IconButton onClick={this.openMenu} style={{ position: 'absolute', top: '3px', right: '3px' }}>
-                    <Settings style={{ color: 'white' }} />
-                </IconButton>
-                <SettingsMenu
-                    accountName={this.props.user.pseudo}
-                    anchorEl={this.state.anchorEl}
-                    onClose={() => this.setState({ anchorEl: null })}
-                    onDisconnect={this.props.onDisconnect}
-                />
-            </Card>
-        );
-    }
+                    {props.characters.map((char: Character, key: number) => (
+                        <SwipeableViews
+                            key={key}
+                            index={slider.tabs.length ? slider.tabs[key] : 1}
+                            onChangeIndex={(index) => onTabChange(index, key, char)}
+                            resistance
+                        >
+                            <ListItem style={{ background: '#F44336', margin: '5px 0', height: 'calc(100% - 10px)', color: 'white', flexDirection: 'row-reverse' }}>
+                                <ListItemIcon>
+                                    <Delete style={{ color: 'white' }} />
+                                </ListItemIcon>
+                            </ListItem>
+                            <CharacterItem char={char} onSelectCharacter={(id) => history.push('/detail/' + id)} />
+                        </SwipeableViews>
+                    ))}
+                </List>
+                <Divider />
+                <List component="nav">
+                    <ListItem button onClick={() => history.push('/create')}>
+                        <ListItemIcon>
+                            <Add color='secondary' />
+                        </ListItemIcon>
+                        <ListItemText
+                            primaryTypographyProps={{ color: 'secondary' }}
+                            primary={T.translate('generic.newcharacter')}
+                        />
+                    </ListItem>
+                </List>
+            </CardContent>
+            <IconButton onClick={(event) => setAnchorEl(event.currentTarget)} style={{ position: 'absolute', top: '3px', right: '3px' }}>
+                <Settings style={{ color: 'white' }} />
+            </IconButton>
+            <SettingsMenu
+                accountName={user.pseudo}
+                anchorEl={anchorEl}
+                onClose={() => setAnchorEl(null)}
+                onDisconnect={props.onDisconnect}
+            />
+            <Dialog
+                open={open}
+                onClose={handleClose}
+            >
+                <DialogTitle>
+                    {T.translate('generic.confirmdelete', { who: slider.selectedChar ? slider.selectedChar.name : '' })}
+                </DialogTitle>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        {T.translate('generic.no')}
+                    </Button>
+                    <Button onClick={handleDelete} autoFocus color='secondary'>
+                        {T.translate('generic.yes')}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </Card>
+    );
 }

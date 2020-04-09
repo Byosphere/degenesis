@@ -57,6 +57,7 @@ export default class CharacterBuilder extends Component<Props, State> {
     }
 
     public handlePrev = (event: React.MouseEvent<HTMLButtonElement>) => {
+        if (this.state.activeStep === 6) this.handleReset();
         this.setState({ activeStep: this.state.activeStep - 1 });
     }
 

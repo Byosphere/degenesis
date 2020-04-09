@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { Menu, List, ListSubheader, ListItem, ListItemIcon, ListItemText, Collapse, Divider } from '@material-ui/core';
 import { LANG } from '../../constants';
-import { getLang, setLang, getLocalData, disconnect } from '../../utils/StorageManager';
+import { getLang, setLang, disconnect } from '../../utils/StorageManager';
 import T from 'i18n-react';
 import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, CloudDownload, PowerSettingsNew } from '@material-ui/icons';
-import { saveFile } from '../../utils/helper';
 import packageJson from '../../../package.json';
 
 interface Props {
@@ -38,7 +37,7 @@ export default class SettingsMenu extends Component<Props, State> {
     }
 
     public saveData = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        saveFile(getLocalData(), 'degenesis.json');
+        // saveFile(getLocalData(), 'degenesis.json');
     }
 
     public disconnect = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {

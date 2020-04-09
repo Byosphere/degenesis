@@ -74,6 +74,7 @@
         "newcharacter": "Créer un nouveau personnage",
         "currentnote": "la note courante",
         "addnote": "Ajouter une page",
+        "deletenote": "Supprimer la page",
         "invalidfield": "Champ invalide",
         "rolldicequestion": "Effectuer un jet de *{attribute}* ({anum}) + *{skill}* ({snum}) ?",
         "diceroll": "Jet de dés"
