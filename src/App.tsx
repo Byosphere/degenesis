@@ -4,13 +4,13 @@ import { getUserToken } from './utils/StorageManager';
 import Loader from './components/Loader';
 import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync } from './utils/fetchers';
 import User from './models/User';
-import Character from './models/Character';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/header/Header';
 import HomePage from './pages/HomePage';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import DetailPage from './pages/DetailPage';
 import ConnectPage from './pages/connectpage/ConnectPage';
+import { Character } from './models/Character';
 
 export const UserContext = createContext(null);
 export const HeaderContext = createContext(null);
@@ -48,7 +48,7 @@ export default function App() {
         try {
             const character = await saveCharacterAsync(char);
             const index = characters.findIndex((c) => c._id === char._id);
-            characters[index] = new Character(character.data);
+            characters[index] = character.data;
             setCharacters(characters);
 
         } catch (error) {
@@ -62,7 +62,7 @@ export default function App() {
         setIsLoading(true);
         try {
             const character = await saveCharacterAsync(char);
-            characters.push(new Character(character.data));
+            characters.push(character.data);
             setCharacters(characters);
             setIsLoading(false);
 
@@ -78,7 +78,7 @@ export default function App() {
                 const user = await getUser(token);
                 const characters = await getCharactersAsync();
                 setUser(user.data);
-                setCharacters(characters.data.map((el) => new Character(el)));
+                setCharacters(characters.data);
                 setIsLoading(false);
             } catch (error) {
                 setIsLoading(false);

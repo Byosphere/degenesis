@@ -1,9 +1,9 @@
 import User from "../models/User";
 import Axios from 'axios';
 import { API_PATH } from "../constants";
-import Character from "../models/Character";
 import { getUserToken } from "./StorageManager";
 import { RegisterForm } from "../pages/connectpage/RegisterModal";
+import { Character } from "../models/Character";
 
 export async function registerUser(registerForm: RegisterForm) {
     const url = API_PATH + '/register';
@@ -27,7 +27,7 @@ export async function getCharactersAsync(): Promise<{ data: Character[] }> {
 
 export async function saveCharacterAsync(char: Character): Promise<{ data: Character }> {
     const url = API_PATH + '/character';
-    return Axios.post(url, char.toObject(), { headers: { 'auth-token': getUserToken() } });
+    return Axios.post(url, char, { headers: { 'auth-token': getUserToken() } });
 }
 
 export async function deleteCharacterAsync(charId: string): Promise<{ data: boolean }> {

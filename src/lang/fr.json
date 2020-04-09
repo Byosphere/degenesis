@@ -79,7 +79,8 @@
         "invalidfield": "Champ invalide",
         "rolldicequestion": "Effectuer un jet de *{attribute}* ({anum}) + *{skill}* ({snum}) ?",
         "diceroll": "Jet de dés",
-        "ldc": "L.d.C"
+        "ldc": "L.d.C",
+        "origins": "Origines"
     },
     "connect": {
         "connect": "Se connecter",

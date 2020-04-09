@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import Character, { Item } from '../../models/Character';
+import { Item, Character } from '../../models/Character';
 import T from 'i18n-react';
 import { Typography, Card, CardHeader, Avatar, IconButton, CardContent, List, ListSubheader, Divider, Zoom, Fab } from '@material-ui/core';
 import { HeaderContext } from '../../App';
@@ -7,6 +7,7 @@ import { CardTravel, SwapVerticalCircle, Add } from '@material-ui/icons';
 import ItemDisplay from './ItemDisplay';
 import AddItemDialog from './AddItemDialog';
 import MoneyDialog from './MoneyDialog';
+import Empty from '../../components/Empty';
 
 
 interface Props {
@@ -31,18 +32,6 @@ export default function InventoryPage(props: Props) {
     useEffect(() => {
         setHeaderTitle(T.translate('navigator.inventory') as string);
     }, [setHeaderTitle]);
-
-    function Empty() {
-        return (
-            <span style={{
-                width: '100%',
-                textAlign: 'center',
-                display: 'block',
-                opacity: 0.5,
-                marginBottom: '16px'
-            }}>{T.translate('generic.empty')}</span>
-        );
-    }
 
     function handleDelete(id: number) {
         // TODO
@@ -85,22 +74,22 @@ export default function InventoryPage(props: Props) {
                 <CardContent style={{ overflow: 'auto', height: 'calc(100% - 72px)', paddingTop: 0 }}>
                     <List subheader={<ListSubheader style={{ background: 'white' }}>{T.translate('generic.weapons')}</ListSubheader>} >
                         {!weapons.length && <Empty />}
-                        {weapons.map((item, key) => <ItemDisplay onDelete={handleDelete} type={0} item={item} key={key} />)}
+                        {weapons.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
                     </List>
                     <Divider />
                     <List subheader={<ListSubheader style={{ background: 'white' }}>{T.translate('generic.armors')}</ListSubheader>} >
                         {!armors.length && <Empty />}
-                        {armors.map((item, key) => <ItemDisplay onDelete={handleDelete} type={1} item={item} key={key} />)}
+                        {armors.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
                     </List>
                     <Divider />
                     <List subheader={<ListSubheader style={{ background: 'white' }}>{T.translate('generic.equipment')}</ListSubheader>} >
                         {!equipment.length && <Empty />}
-                        {equipment.map((item, key) => <ItemDisplay onDelete={handleDelete} type={2} item={item} key={key} />)}
+                        {equipment.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
                     </List>
                     <Divider />
                     <List subheader={<ListSubheader style={{ background: 'white' }}>{T.translate('generic.items')}</ListSubheader>} >
                         {!items.length && <Empty />}
-                        {items.map((item, key) => <ItemDisplay onDelete={handleDelete} type={3} item={item} key={key} />)}
+                        {items.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
                     </List>
                 </CardContent>
                 <Zoom in={true} unmountOnExit>

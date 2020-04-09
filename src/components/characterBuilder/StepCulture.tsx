@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import Character from '../../models/Character';
+import React from 'react'
 import { FormControl, InputLabel, Select, Input, MenuItem, Grid, Typography, CardMedia } from '@material-ui/core';
 import { CULTURES } from '../../constants';
 import { Culture } from '../../models/Data';
 import T from 'i18n-react';
+import { Character } from '../../models/Character';
 
 interface Props {
     newCharacter: Character;
@@ -11,38 +11,38 @@ interface Props {
     buttons: JSX.Element;
 }
 
-export default class StepCulture extends Component<Props, {}> {
-    public render() {
+export default function StepCulture(props: Props) {
 
-        const { newCharacter, onChange, buttons } = this.props;
-        let skills = [];
+    const { newCharacter, onChange, buttons } = props;
+    let skills = [];
 
-        return (
-            <React.Fragment>
-                <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
-                    {T.translate('create.culturedesc', { who: newCharacter.name })}
-                </Typography>
-                <FormControl fullWidth margin='dense'>
-                    <InputLabel shrink htmlFor="culture">
-                        {T.translate('generic.culture')}
-                    </InputLabel>
-                    <Select
-                        input={<Input name="culture" fullWidth />}
-                        fullWidth
-                        value={isNaN(newCharacter.culture) ? '' : newCharacter.culture}
-                        onChange={onChange}
-                    >
-                        <MenuItem value={''}>
-                            {T.translate('generic.none')}
+    return (
+        <>
+            <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+                {T.translate('create.culturedesc', { who: newCharacter.name })}
+            </Typography>
+            <FormControl fullWidth margin='dense'>
+                <InputLabel shrink htmlFor="culture">
+                    {T.translate('generic.culture')}
+                </InputLabel>
+                <Select
+                    input={<Input name="culture" fullWidth />}
+                    fullWidth
+                    value={isNaN(newCharacter.culture) ? '' : newCharacter.culture}
+                    onChange={onChange}
+                >
+                    <MenuItem value={''}>
+                        {T.translate('generic.none')}
+                    </MenuItem>
+                    {CULTURES.map((culture: Culture, key) => (
+                        <MenuItem key={key} value={key}>
+                            {T.translate('cultures.' + culture.name)}
                         </MenuItem>
-                        {CULTURES.map((culture: Culture, key) => (
-                            <MenuItem key={key} value={key}>
-                                {T.translate('cultures.' + culture.name)}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
-                {typeof newCharacter.culture === 'number' && <div style={{ margin: '16px 0' }}>
+                    ))}
+                </Select>
+            </FormControl>
+            {
+                typeof newCharacter.culture === 'number' && <div style={{ margin: '16px 0' }}>
                     <Typography variant="button">
                         {T.translate('cultures.' + CULTURES[newCharacter.culture].name)}
                     </Typography>
@@ -85,9 +85,9 @@ export default class StepCulture extends Component<Props, {}> {
                             />
                         </Grid>
                     </Grid>
-                </div>}
-                {buttons}
-            </React.Fragment>
-        )
-    }
+                </div>
+            }
+            {buttons}
+        </>
+    );
 }

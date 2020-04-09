@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { Card, Stepper, Step, StepLabel, StepContent, Button, Chip } from '@material-ui/core';
-import Character, { Attribute, Skill } from '../../models/Character';
+import { Attribute, Skill, Character } from '../../models/Character';
 import { useHistory } from 'react-router-dom';
 import T from 'i18n-react';
 import { CULTURES, CULTES, CONCEPTS, MONEY, BASE_SKILLS, BASE_ATTRIBUTES } from '../../constants';
@@ -15,6 +15,7 @@ import StepBelief from './StepBelief';
 import StepPotentials from './StepPotentials';
 import StepLast from './StepLast';
 import { HeaderContext } from '../../App';
+import { getNewCharacter } from '../../utils/characterTools';
 
 interface Props {
     onCreateCharacter: (char: Character) => void;
@@ -23,7 +24,7 @@ interface Props {
 export default function CharacterBuilder(props: Props) {
 
     const [step, setStep] = useState<number>(0);
-    const [character, setCharacter] = useState<Character>(new Character());
+    const [character, setCharacter] = useState<Character>(getNewCharacter());
     const [attributePoints, setAttributePoints] = useState<number>(BASE_ATTRIBUTES);
     const [skillPoints, setSkillPoints] = useState<number>(BASE_SKILLS);
     const { setHeaderTitle } = useContext(HeaderContext);
@@ -34,15 +35,12 @@ export default function CharacterBuilder(props: Props) {
     }, [setHeaderTitle]);
 
     function handleSelectAttribute(field: string, value: string) {
-        let newCharacter: Character = character.clone();
-        newCharacter[field] = value;
-        setCharacter(newCharacter);
+        setCharacter({ ...character, [field]: value });
     }
 
     function handleCreate() {
-        let newCharacter = character.clone();
-        newCharacter.money = MONEY[newCharacter.culte] * 2;
-        props.onCreateCharacter(newCharacter);
+        setCharacter({ ...character, money: MONEY[character.culte] * 2 });
+        props.onCreateCharacter(character);
         history.push('/');
     }
 
@@ -57,10 +55,9 @@ export default function CharacterBuilder(props: Props) {
     }
 
     function handleAttributeChange(attributeId: number, skillId: number, value: number) {
-        let newCharacter: Character = character.clone();
         let attrPoints = attributePoints;
         let skPoints = skillPoints;
-        let attribute = newCharacter.attributes[attributeId];
+        let attribute = character.attributes[attributeId];
 
         if (isNaN(skillId)) {
             let remainingValue = attributePoints + attribute.base - value;
@@ -75,19 +72,18 @@ export default function CharacterBuilder(props: Props) {
                 attribute.skills[skillId].value = value;
             }
         }
-        setCharacter(newCharacter);
+        setCharacter({ ...character });
         setAttributePoints(attrPoints);
         setSkillPoints(skPoints);
     }
 
     function handleReset() {
-        let newCharacter = character.clone();
-        newCharacter.attributes.forEach((attribute: Attribute) => {
+        character.attributes.forEach((attribute: Attribute) => {
             attribute.skills.forEach((skill: Skill) => {
                 skill.value = 0;
             });
         });
-        setCharacter(newCharacter);
+        setCharacter({ ...character });
         setSkillPoints(BASE_SKILLS);
     }
 
@@ -115,24 +111,21 @@ export default function CharacterBuilder(props: Props) {
     }
 
     function handleToggle(id: number, type: number) {
-        let newCharacter: any = character.clone();
-        let index = newCharacter.potentials.findIndex(p => p.id === id && p.type === type);
-        if (index === -1 && newCharacter.potentials.length !== 2) {
-            newCharacter.potentials.push({
+        let index = character.potentials.findIndex(p => p.id === id && p.type === type);
+        if (index === -1 && character.potentials.length !== 2) {
+            character.potentials.push({
                 id,
                 type,
                 level: 1
             });
         } else if (index !== -1) {
-            newCharacter.potentials.splice(index, 1);
+            character.potentials.splice(index, 1);
         }
-        setCharacter(newCharacter);
+        setCharacter({ ...character });
     }
 
     function handleChange(event: any) {
-        let newCharacter: any = character.clone();
-        newCharacter[event.target.name] = event.target.value;
-        setCharacter(newCharacter);
+        setCharacter({ ...character, [event.target.name]: event.target.value });
     }
 
     return (

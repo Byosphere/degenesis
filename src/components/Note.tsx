@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import Character from '../models/Character';
 import { CardContent, TextField } from '@material-ui/core';
 import T from 'i18n-react';
+import { Character } from '../models/Character';
 
 interface Props {
     noteId: number;

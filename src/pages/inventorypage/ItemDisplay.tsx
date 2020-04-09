@@ -5,14 +5,13 @@ import { ListItem, ListItemText, ListItemSecondaryAction, IconButton, Collapse, 
 import { ExpandLess, ExpandMore, Delete } from '@material-ui/icons';
 
 interface Props {
-    type: number;
     item: Item;
     onDelete: (id: number) => void;
 }
 
 export default function ItemDisplay(props: Props) {
 
-    const { item, type } = props;
+    const { item } = props;
     const [expand, setExpand] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const itemDetails = T.translate('generic.weight') + ' : '

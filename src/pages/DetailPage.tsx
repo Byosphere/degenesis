@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import Character from '../models/Character';
 import Navigator from '../components/navigator/Navigator';
-import StatsPage from './StatsPage';
-import PotentialsPage from './PotentialsPage';
 import NotesPage from './NotesPage';
 import InventoryPage from './inventorypage/InventoryPage';
+import { Character } from '../models/Character';
+import PotentialsPage from './potentialspage/PotentialsPage';
+import StatsPage from './statspage/StatsPage';
 
 interface Props {
     onSaveCharacter: (character: Character) => void;

@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Character from '../models/Character';
 import { Card, MobileStepper, Button, CardActions, Dialog, DialogTitle, DialogActions, Divider } from '@material-ui/core';
 import { KeyboardArrowRight, KeyboardArrowLeft } from '@material-ui/icons';
 import SwipeableViews from 'react-swipeable-views';
@@ -7,6 +6,7 @@ import { NOTES_MAX } from '../constants';
 import T from 'i18n-react';
 import Note from '../components/Note';
 import { HeaderContext } from '../App';
+import { Character } from '../models/Character';
 
 interface Props {
     char: Character;
