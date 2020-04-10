@@ -10,7 +10,7 @@ import { HeaderContext } from '../../App';
 
 interface Props {
     char: Character;
-    onChange: (char: Character, save: boolean) => void;
+    onChange: (char: Character) => void;
 }
 
 export default function PotentialsPage(props: Props) {
@@ -25,20 +25,20 @@ export default function PotentialsPage(props: Props) {
         let potentialIndex = props.char.potentials.findIndex((p) => p.id === id && p.type === type);
         if (potentialIndex > -1)
             char.potentials.splice(potentialIndex, 1);
-        props.onChange(char, true);
+        props.onChange(char);
     }
 
     function handleUpgradePotential(type: number, id: number) {
         let potential = props.char.potentials.find((p) => p.id === id && p.type === type);
         if (potential)
             potential.level++;
-        props.onChange(char, true);
+        props.onChange(char);
     }
 
     function handleClick(id: number, type: number) {
         setOpen(false);
         char.potentials.push({ id, type, level: 1 });
-        props.onChange(char, true);
+        props.onChange(char);
     }
 
     useEffect(() => {

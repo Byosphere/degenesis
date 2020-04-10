@@ -10,7 +10,7 @@ import { Character } from '../models/Character';
 
 interface Props {
     char: Character;
-    onChange: (char: Character, save: boolean) => void;
+    onChange: (char: Character) => void;
 }
 
 export default function NotesPage(props: Props) {
@@ -28,7 +28,7 @@ export default function NotesPage(props: Props) {
         let char = props.char;
         char.notes[char.notes.length] = '';
         setStep(char.notes.length - 1);
-        props.onChange(props.char, true);
+        props.onChange(props.char);
     }
 
     function handleDelete() {
@@ -36,7 +36,7 @@ export default function NotesPage(props: Props) {
         char.notes.splice(step, 1);
         setOpen(false);
         setStep(step - 1);
-        props.onChange(props.char, true);
+        props.onChange(props.char);
     }
 
     return (

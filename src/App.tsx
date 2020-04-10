@@ -23,7 +23,6 @@ export default function App() {
     const [user, setUser] = useState<User>(null);
     const [characters, setCharacters] = useState<Character[]>([]);
     const [headerTitle, setHeaderTitle] = useState<string>('');
-    const [dirty, setDirty] = useState<boolean>(false);
 
     // Supprime un personnage
     async function handleDeleteCharacter(charId: string) {
@@ -41,14 +40,6 @@ export default function App() {
             setIsLoading(false);
             console.error(error.message);
         }
-    }
-
-    // Modifie un personnage
-    async function handleChangeCharacter(char: Character) {
-        const index = characters.findIndex((c) => c._id === char._id);
-        characters[index] = char;
-        setCharacters([...characters]);
-        setDirty(true);
     }
 
     async function handleSaveCharacter(): Promise<boolean> {
@@ -118,7 +109,7 @@ export default function App() {
                                     </Route>
                                     <Route path="/detail/:id">
                                         <DetailPage
-                                            onSaveCharacter={handleChangeCharacter}
+                                            onSaveCharacter={handleSaveCharacter}
                                             characters={characters}
                                         />
                                     </Route>

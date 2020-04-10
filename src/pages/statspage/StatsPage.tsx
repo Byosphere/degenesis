@@ -3,7 +3,7 @@ import { Character, Attribute } from '../../models/Character';
 import { RANGS, CULTES, CULTURES, SEX, CONCEPTS } from '../../constants';
 import T from 'i18n-react';
 import { HeaderContext } from '../../App';
-import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, ExpansionPanelActions, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Info, Edit, ExpandLess, ExpandMore } from '@material-ui/icons';
 import InteractiveJauge from '../../components/interactiveJauge/InteractiveJauge';
 import { getBlessuresMax, getEgoMax, getSporulationMax, getTraumaMax } from '../../utils/characterTools';
@@ -45,7 +45,7 @@ export default function StatsPage(props: Props) {
         }
     }
 
-    function handleAttributeSave(attribute: Attribute) {
+    function handleAttributeSave() {
         props.onChange(char);
     }
 
@@ -154,9 +154,6 @@ export default function StatsPage(props: Props) {
                 <ExpansionPanelDetails>
                     {T.translate('cultes.' + CULTES[char.culte].desc)}
                 </ExpansionPanelDetails>
-                <ExpansionPanelActions>
-                    <Button color='secondary'>{T.translate('generic.edit')}</Button>
-                </ExpansionPanelActions>
             </ExpansionPanel>
             <ExpansionPanel style={{ marginBottom: '5px' }}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
@@ -173,9 +170,6 @@ export default function StatsPage(props: Props) {
                 <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
                     {T.translate('concepts.' + CONCEPTS[char.concept].desc)}
                 </ExpansionPanelDetails>
-                <ExpansionPanelActions>
-                    <Button color='secondary'>{T.translate('generic.edit')}</Button>
-                </ExpansionPanelActions>
             </ExpansionPanel>
             <span className='stats-bottom'></span>
             <CharacterEditDialog
