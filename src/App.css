@@ -46,10 +46,6 @@ p.card-overtitle {
   justify-content: space-between;
 }
 
-.step-culture em {
-  display: block;
-}
-
 .stats-bottom {
   display: block;
   height: 44px;

@@ -52,7 +52,7 @@ export default function RegisterModal(props: Props) {
     }
 
     return (
-        <Dialog open={props.open} onClose={props.onClose} fullWidth maxWidth='lg'>
+        <Dialog open={props.open} onClose={props.onClose} fullScreen>
             <DialogTitle id="form-dialog-title">{T.translate('connect.register')}</DialogTitle>
             <DialogContent>
                 <DialogContentText>

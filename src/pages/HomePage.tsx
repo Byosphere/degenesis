@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton } from '@material-ui/core';
 import { useHistory, Prompt } from 'react-router-dom';
 import { Add, Delete, Settings } from '@material-ui/icons';
@@ -20,9 +20,13 @@ export default function HomePage(props: Props) {
     const [open, setOpen] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const history = useHistory();
-    const [tabs, setTabs] = useState<number[]>(props.characters.map(() => 1));
+    const [tabs, setTabs] = useState<number[]>([]);
     const [index, setIndex] = useState<number>(-1);
     const [disabled, setDisabled] = useState<boolean>(false);
+
+    useEffect(() => {
+        setTabs(props.characters.map(() => 1))
+    }, [setTabs, props.characters]);
 
     function onTabChange(tabIndex: number, charIndex: number) {
         setIndex(charIndex);

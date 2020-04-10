@@ -5,7 +5,7 @@ import concepts from "./data/concepts.json";
 import fr from './lang/fr.json';
 import en from './lang/en.json';
 
-export const API_PATH = 'http://localhost:8080';
+export const API_PATH = 'https://degenesis-api.herokuapp.com';
 export const GENERIC_POTENTIALS = 13;
 export const BASE_ATTRIBUTES = 10;
 export const BASE_SKILLS = 28;
