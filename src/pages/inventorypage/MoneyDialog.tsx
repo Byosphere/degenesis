@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, RadioGroup, FormControlLabel, Radio, TextField, InputAdornment, DialogActions, Button } from '@material-ui/core';
+import { DialogTitle, DialogContent, RadioGroup, FormControlLabel, Radio, TextField, InputAdornment, DialogActions, Button } from '@material-ui/core';
 import { DonutSmall } from '@material-ui/icons';
 import T from 'i18n-react';
 
 interface Props {
-    open: boolean;
     money: number;
     onClose: () => void;
     onValidate: (value: number) => void;
@@ -12,7 +11,6 @@ interface Props {
 
 export default function MoneyDialog(props: Props) {
 
-    const { open } = props;
     const [radioValue, setRadioValue] = useState<string>('add');
     const [value, setValue] = useState<number>(0);
 
@@ -28,10 +26,7 @@ export default function MoneyDialog(props: Props) {
     }
 
     return (
-        <Dialog
-            open={open}
-            onClose={props.onClose}
-        >
+        <>
             <DialogTitle id="form-dialog-title">{T.translate('inventory.moneyedit')}</DialogTitle>
             <DialogContent>
                 <RadioGroup
@@ -84,6 +79,6 @@ export default function MoneyDialog(props: Props) {
                     {T.translate('generic.validate')}
                 </Button>
             </DialogActions>
-        </Dialog>
+        </>
     );
 }

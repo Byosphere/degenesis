@@ -67,7 +67,7 @@ export default function CharacterEditDialog(props: Props) {
         newErrors.rang = formValues.rang ? '' : T.translate('generic.invalidfield') as string;
         newErrors.sex = formValues.sex ? '' : T.translate('generic.invalidfield') as string;
 
-        if (Object.keys(errors).find((e) => errors[e])) {
+        if (Object.keys(errors).find((e) => !errors[e])) {
             props.onSave(formValues);
         } else {
             setErrors(newErrors);
@@ -121,7 +121,7 @@ export default function CharacterEditDialog(props: Props) {
                         <Select
                             input={<Input name="sex" />}
                             value={formValues.sex}
-                            onChange={handleChange}
+                            onChange={(event) => handleChange(event, 'sex')}
                             required
                         >
                             {SEX.map((text, key) => {

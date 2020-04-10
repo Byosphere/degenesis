@@ -46,7 +46,7 @@ export default function PotentialsPage(props: Props) {
     }, [setHeaderTitle]);
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto', paddingBottom: '32px' }}>
             <div style={{ overflow: 'auto', paddingBottom: '5px' }}>
                 <Typography variant='subtitle1' component='p' className="card-overtitle">
                     {T.translate('generic.potential0')}

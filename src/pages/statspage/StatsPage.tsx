@@ -13,7 +13,7 @@ import CharacterEditDialog, { EditFormValues } from './CharacterEditDialog';
 
 interface Props {
     char: Character;
-    onChange: (char: Character, save: boolean) => void;
+    onChange: (char: Character) => void;
 }
 
 const STORY_LENGTH: number = 200;
@@ -34,24 +34,24 @@ export default function StatsPage(props: Props) {
     function handleChange(field: string, newValue: number) {
         if (char[field] !== newValue) {
             char[field] = newValue;
-            this.props.onChange(char, true);
+            props.onChange(char);
         }
     }
 
     function handleTrauma(val: number) {
         if (char.trauma !== val) {
             char.trauma = val;
-            this.props.onChange(char, true);
+            props.onChange(char);
         }
     }
 
     function handleAttributeSave(attribute: Attribute) {
-        // TODO
+        props.onChange(char);
     }
 
     function handleSave(formValues: EditFormValues) {
         setOpen(false);
-        console.log(formValues);
+        props.onChange({ ...char, ...formValues });
     }
 
     return (

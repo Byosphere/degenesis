@@ -23,6 +23,7 @@ export default function App() {
     const [user, setUser] = useState<User>(null);
     const [characters, setCharacters] = useState<Character[]>([]);
     const [headerTitle, setHeaderTitle] = useState<string>('');
+    const [dirty, setDirty] = useState<boolean>(false);
 
     // Supprime un personnage
     async function handleDeleteCharacter(charId: string) {
@@ -34,7 +35,7 @@ export default function App() {
                 if (index > -1) characters.splice(index, 1);
             }
             setIsLoading(false);
-            setCharacters(characters);
+            setCharacters([...characters]);
 
         } catch (error) {
             setIsLoading(false);
@@ -43,18 +44,16 @@ export default function App() {
     }
 
     // Modifie un personnage
-    async function handleSaveCharacter(char: Character) {
-        setIsLoading(true);
-        try {
-            const character = await saveCharacterAsync(char);
-            const index = characters.findIndex((c) => c._id === char._id);
-            characters[index] = character.data;
-            setCharacters(characters);
+    async function handleChangeCharacter(char: Character) {
+        const index = characters.findIndex((c) => c._id === char._id);
+        characters[index] = char;
+        setCharacters([...characters]);
+        setDirty(true);
+    }
 
-        } catch (error) {
-            setIsLoading(false);
-            console.error(error.message);
-        }
+    async function handleSaveCharacter(): Promise<boolean> {
+        // TODO SAVE
+        return true;
     }
 
     // sauvegarde un nouveau personnage
@@ -104,7 +103,7 @@ export default function App() {
                 <UserContext.Provider value={{ user, setUser }}>
                     <HeaderContext.Provider value={{ headerTitle, setHeaderTitle }}>
                         <HashRouter basename='/'>
-                            <Header title={headerTitle} />
+                            <Header title={headerTitle} onSave={handleSaveCharacter} />
                             <div className="app-content">
                                 <Switch>
                                     <Route path='/' exact>
@@ -119,7 +118,7 @@ export default function App() {
                                     </Route>
                                     <Route path="/detail/:id">
                                         <DetailPage
-                                            onSaveCharacter={handleSaveCharacter}
+                                            onSaveCharacter={handleChangeCharacter}
                                             characters={characters}
                                         />
                                     </Route>

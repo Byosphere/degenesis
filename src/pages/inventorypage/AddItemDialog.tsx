@@ -1,24 +1,17 @@
 import React, { useState } from 'react';
-import { Dialog, AppBar, Toolbar, IconButton, Typography, DialogContent, DialogContentText, TextField, FormControl, InputLabel, Select, Input, MenuItem, DialogActions, Button, Slide } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, DialogContent, DialogContentText, TextField, FormControl, InputLabel, Select, Input, MenuItem, DialogActions, Button } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { TYPES } from '../../constants';
 import T from 'i18n-react';
-import { TransitionProps } from '@material-ui/core/transitions/transition';
 import { Item } from '../../models/Character';
 
 interface Props {
-    open: boolean;
-    onClose: () => void;
     onSave: (item: Item) => void;
+    onClose: () => void;
 }
-
-const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(p, ref) {
-    return <Slide direction="up" ref={ref} {...p} />;
-});
 
 export default function AddItemDialog(props: Props) {
 
-    const { open, onClose } = props;
     const [item, setItem] = useState<Item>({
         id: 0,
         name: '',
@@ -40,15 +33,10 @@ export default function AddItemDialog(props: Props) {
     }
 
     return (
-        <Dialog
-            open={open}
-            onClose={onClose}
-            fullScreen
-            TransitionComponent={Transition}
-        >
+        <>
             <AppBar>
                 <Toolbar>
-                    <IconButton edge="start" color="inherit" onClick={onClose} aria-label="Close">
+                    <IconButton edge="start" color="inherit" onClick={props.onClose} aria-label="Close">
                         <Close />
                     </IconButton>
                     <Typography variant="h6">
@@ -103,9 +91,9 @@ export default function AddItemDialog(props: Props) {
                 />
             </DialogContent>
             <DialogActions>
-                <Button color='primary' onClick={onClose}>{T.translate('generic.cancel')}</Button>
+                <Button color='primary' onClick={props.onClose}>{T.translate('generic.cancel')}</Button>
                 <Button color='secondary' disabled={verifyItem()} onClick={() => props.onSave(item)}>{T.translate('generic.add')}</Button>
             </DialogActions>
-        </Dialog>
+        </>
     );
 }

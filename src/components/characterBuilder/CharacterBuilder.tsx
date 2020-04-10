@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useMemo } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Card, Stepper, Step, StepLabel, StepContent, Button, Chip } from '@material-ui/core';
 import { Attribute, Skill, Character } from '../../models/Character';
 import { useHistory } from 'react-router-dom';
@@ -93,7 +93,7 @@ export default function CharacterBuilder(props: Props) {
                 {enablePrev && <Button
                     style={{ marginTop: '16px' }}
                     color='primary'
-                    onClick={() => setStep(step - 1)}
+                    onClick={() => onStepChange('backward')}
                 >
                     {T.translate('generic.prev')}
                 </Button>}
@@ -101,7 +101,7 @@ export default function CharacterBuilder(props: Props) {
                     style={{ marginTop: '16px' }}
                     variant='contained'
                     color='secondary'
-                    onClick={isLast ? handleCreate : () => setStep(step + 1)}
+                    onClick={isLast ? handleCreate : () => onStepChange('forward')}
                     disabled={disableNext}
                 >
                     {isLast ? T.translate('generic.create') : T.translate('generic.next')}
@@ -126,6 +126,27 @@ export default function CharacterBuilder(props: Props) {
 
     function handleChange(event: any) {
         setCharacter({ ...character, [event.target.name]: event.target.value });
+    }
+
+    function onStepChange(action: 'forward' | 'backward') {
+        const newStep = action === 'forward' ? step + 1 : step - 1;
+        if (newStep === 4 && step === 3) {
+            updateAttributes(character);
+            setCharacter({ ...character });
+        }
+        if (newStep === 3 && step === 4) {
+            character.attributes.forEach((attr: Attribute) => {
+                attr.base = 0;
+                attr.bonusMax = 0;
+                attr.skills.forEach((skill: Skill) => {
+                    skill.value = 0;
+                });
+            });
+            setAttributePoints(BASE_ATTRIBUTES);
+            setSkillPoints(BASE_SKILLS);
+            setCharacter({ ...character });
+        }
+        setStep(newStep);
     }
 
     return (

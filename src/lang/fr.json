@@ -80,7 +80,8 @@
         "rolldicequestion": "Effectuer un jet de *{attribute}* ({anum}) + *{skill}* ({snum}) ?",
         "diceroll": "Jet de dés",
         "ldc": "L.d.C",
-        "origins": "Origines"
+        "origins": "Origines",
+        "charactersaved": "Personnage sauvegardé !"
     },
     "connect": {
         "connect": "Se connecter",
