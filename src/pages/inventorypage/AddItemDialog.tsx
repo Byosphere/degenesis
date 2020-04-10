@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { AppBar, Toolbar, IconButton, Typography, DialogContent, DialogContentText, TextField, FormControl, InputLabel, Select, Input, MenuItem, DialogActions, Button } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
-import { TYPES } from '../../constants';
+import { GROUPS } from '../../constants';
 import T from 'i18n-react';
 import { Item } from '../../models/Character';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
     onSave: (item: Item) => void;
@@ -15,7 +16,7 @@ export default function AddItemDialog(props: Props) {
     const [item, setItem] = useState<Item>({
         id: 0,
         name: '',
-        type: 0,
+        group: 0,
         desc: '',
         weight: 0,
         tech: 0
@@ -32,8 +33,14 @@ export default function AddItemDialog(props: Props) {
         setItem({ ...newItem });
     }
 
+    function actionOnPrompt() {
+        props.onClose();
+        return false;
+    }
+
     return (
         <>
+            <Prompt when={true} message={actionOnPrompt} />
             <AppBar>
                 <Toolbar>
                     <IconButton edge="start" color="inherit" onClick={props.onClose} aria-label="Close">
@@ -44,7 +51,6 @@ export default function AddItemDialog(props: Props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-
             <DialogContent style={{ marginTop: '56px' }}>
                 <DialogContentText>{T.translate('inventory.additemdesc')}</DialogContentText>
                 <TextField
@@ -56,16 +62,16 @@ export default function AddItemDialog(props: Props) {
                     fullWidth
                 />
                 <FormControl fullWidth margin='normal'>
-                    <InputLabel htmlFor="type">{T.translate('inventory.type')}</InputLabel>
+                    <InputLabel htmlFor="group">{T.translate('inventory.type')}</InputLabel>
                     <Select
-                        input={<Input name="type" fullWidth />}
+                        input={<Input name="group" fullWidth />}
                         fullWidth
-                        value={item.type}
+                        value={item.group}
                         onChange={onChange}
                     >
-                        {TYPES.map((type: string, key) => (
+                        {GROUPS.map((group: string, key) => (
                             <MenuItem key={key} value={key}>
-                                {T.translate('inventory.' + type)}
+                                {T.translate('inventory.' + group)}
                             </MenuItem>
                         ))}
                     </Select>

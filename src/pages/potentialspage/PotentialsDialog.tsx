@@ -5,6 +5,7 @@ import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
 import T from 'i18n-react';
 import { TransitionProps } from '@material-ui/core/transitions/transition';
 import { Character } from '../../models/Character';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
     open: boolean;
@@ -19,6 +20,11 @@ const Transition = React.forwardRef<unknown, TransitionProps>(function Transitio
 
 export default function PotentialsDialog(props: Props) {
 
+    function actionOnPrompt(location): boolean {
+        props.onClose();
+        return false;
+    }
+
     return (
         <Dialog
             open={props.open}
@@ -26,6 +32,7 @@ export default function PotentialsDialog(props: Props) {
             fullScreen
             TransitionComponent={Transition}
         >
+            <Prompt when={true} message={actionOnPrompt} />
             <AppBar>
                 <Toolbar>
                     <IconButton edge="start" color="inherit" onClick={props.onClose} aria-label="Close">

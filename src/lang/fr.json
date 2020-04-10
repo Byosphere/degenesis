@@ -66,7 +66,7 @@
         "remove": "Retirer",
         "delete": "Supprimer",
         "confirmdelete": "Êtes-vous sûr de vouloir supprimer _{who}_ ?",
-        "characterstats": "Fiche de personnage : {name}",
+        "characterstats": "Fiche de personnage",
         "additem": "Ajouter un objet à l'inventaire",
         "levelup": "Améliorer le potentiel",
         "validate": "Valider",

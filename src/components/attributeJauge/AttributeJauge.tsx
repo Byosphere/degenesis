@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FormGroup, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button, DialogTitle } from '@material-ui/core';
 import { LooksOne, LooksOneOutlined, LooksTwo, LooksTwoOutlined, Looks6Outlined, Looks3Outlined, Looks3, Looks4Outlined, Looks4, Looks5Outlined, Looks5, Looks6, Info, BackspaceOutlined, Backspace, Casino } from '@material-ui/icons';
 import T from 'i18n-react';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
     label: string;
@@ -25,6 +26,11 @@ export default class AttributeJauge extends Component<Props, State> {
         this.state = {
             openAttribute: false
         }
+    }
+
+    public actionOnPrompt = (): boolean => {
+        this.setState({ openAttribute: false });
+        return false;
     }
 
     public render() {
@@ -92,6 +98,7 @@ export default class AttributeJauge extends Component<Props, State> {
                     onClose={this.handleClose}
                     aria-labelledby="attribute-dialog"
                 >
+                    <Prompt when={true} message={this.actionOnPrompt} />
                     <DialogContent>
                         <DialogTitle>{this.props.label}</DialogTitle>
                         <DialogContentText>

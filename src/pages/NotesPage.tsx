@@ -7,6 +7,7 @@ import T from 'i18n-react';
 import Note from '../components/Note';
 import { HeaderContext } from '../App';
 import { Character } from '../models/Character';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
     char: Character;
@@ -37,6 +38,11 @@ export default function NotesPage(props: Props) {
         setOpen(false);
         setStep(step - 1);
         props.onChange(props.char);
+    }
+
+    function actionOnPrompt() {
+        setOpen(false);
+        return false;
     }
 
     return (
@@ -103,10 +109,9 @@ export default function NotesPage(props: Props) {
                 <Dialog
                     open={open}
                     onClose={() => setOpen(false)}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">
+                    <Prompt when={true} message={actionOnPrompt} />
+                    <DialogTitle>
                         {T.translate('generic.confirmdelete', { who: T.translate('generic.currentnote') })}
                     </DialogTitle>
                     <DialogActions>

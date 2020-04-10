@@ -26,10 +26,10 @@ export default function InventoryPage(props: Props) {
     const [moneyModalOpen, setMoneyModalOpen] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const { setHeaderTitle } = useContext(HeaderContext);
-    const weapons = char.inventory.filter(item => item.type === 0);
-    const armors = char.inventory.filter(item => item.type === 1);
-    const equipment = char.inventory.filter(item => item.type === 2);
-    const items = char.inventory.filter(item => item.type === 3);
+    const weapons = char.inventory.filter(item => item.group === 0);
+    const armors = char.inventory.filter(item => item.group === 1);
+    const equipment = char.inventory.filter(item => item.group === 2);
+    const items = char.inventory.filter(item => item.group === 3);
     let totalWeight = 0;
     char.inventory.forEach((item: Item) => {
         totalWeight += item.weight;

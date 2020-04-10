@@ -10,6 +10,7 @@ import { getBlessuresMax, getEgoMax, getSporulationMax, getTraumaMax } from '../
 import Trauma from './Trauma';
 import AttributePanel from '../../components/AttributePanel';
 import CharacterEditDialog, { EditFormValues } from './CharacterEditDialog';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
     char: Character;
@@ -28,7 +29,7 @@ export default function StatsPage(props: Props) {
     const [expanded, setExpanded] = useState<boolean>(false);
 
     useEffect(() => {
-        setHeaderTitle(T.translate('navigator.stats') as string);
+        setHeaderTitle(T.translate('generic.characterstats') as string);
     }, [setHeaderTitle]);
 
     function handleChange(field: string, newValue: number) {
@@ -52,6 +53,11 @@ export default function StatsPage(props: Props) {
     function handleSave(formValues: EditFormValues) {
         setOpen(false);
         props.onChange({ ...char, ...formValues });
+    }
+
+    function actionOnPrompt(location): boolean {
+        setShowRank(false);
+        return false;
     }
 
     return (
@@ -185,6 +191,7 @@ export default function StatsPage(props: Props) {
                 open={showRank}
                 onClose={() => setShowRank(false)}
             >
+                <Prompt when={true} message={actionOnPrompt} />
                 <DialogTitle>{T.translate('rangs.' + RANGS[char.culte][char.rang] + '.name')}</DialogTitle>
                 <DialogContent>
                     {T.translate('rangs.' + RANGS[char.culte][char.rang] + '.desc')}

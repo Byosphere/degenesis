@@ -5,6 +5,7 @@ import AttributeJauge from './attributeJauge/AttributeJauge';
 import { ATTRIBUTES, SKILLS } from '../constants';
 import { Skill, Attribute } from '../models/Character';
 import T from 'i18n-react';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
     attribute: Attribute;
@@ -46,6 +47,11 @@ export default class AttributePanel extends Component<Props, State> {
         this.setState({ expanded: !this.state.expanded });
     }
 
+    public actionOnPrompt = () => {
+        if (!this.state.rollInProgress) this.setState({ rollOpen: false, rollResult: [] });
+        return false;
+    }
+
     public render() {
         return (
             <React.Fragment>
@@ -77,6 +83,7 @@ export default class AttributePanel extends Component<Props, State> {
                     open={this.state.rollOpen}
                     onClose={this.handleClose}
                 >
+                    <Prompt when={true} message={this.actionOnPrompt} />
                     <DialogTitle>{T.translate('generic.diceroll')}</DialogTitle>
                     <DialogContent>
                         <DialogContentText component='div'>

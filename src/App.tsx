@@ -25,20 +25,18 @@ export default function App() {
     const [headerTitle, setHeaderTitle] = useState<string>('');
 
     // Supprime un personnage
-    async function handleDeleteCharacter(charId: string) {
-        setIsLoading(true);
+    async function handleDeleteCharacter(charId: string): Promise<boolean> {
         try {
             const result = await deleteCharacterAsync(charId);
             if (result.data) {
                 const index = characters.findIndex((char) => char._id === charId);
                 if (index > -1) characters.splice(index, 1);
             }
-            setIsLoading(false);
             setCharacters([...characters]);
-
+            return true;
         } catch (error) {
-            setIsLoading(false);
             console.error(error.message);
+            return false;
         }
     }
 

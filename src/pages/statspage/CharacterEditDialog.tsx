@@ -3,6 +3,7 @@ import { Dialog, DialogTitle, DialogContent, TextField, FormControl, InputLabel,
 import { SEX, RANGS } from '../../constants';
 import T from 'i18n-react';
 import { Character } from '../../models/Character';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
     open: boolean;
@@ -74,11 +75,17 @@ export default function CharacterEditDialog(props: Props) {
         }
     }
 
+    function actionOnPrompt(location): boolean {
+        props.onClose();
+        return false;
+    }
+
     return (
         <Dialog
             open={open}
             onClose={props.onClose}
         >
+            <Prompt when={true} message={actionOnPrompt} />
             <DialogTitle id="edit-character">{T.translate('generic.characteredit')}</DialogTitle>
             <DialogContent>
                 <TextField

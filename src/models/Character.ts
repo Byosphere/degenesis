@@ -24,7 +24,7 @@ export interface Potential {
 export interface Item {
     id: number;
     name: string;
-    type: number;
+    group: number;
     desc: string;
     weight: number;
     tech: number;

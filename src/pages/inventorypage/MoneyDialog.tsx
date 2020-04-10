@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { DialogTitle, DialogContent, RadioGroup, FormControlLabel, Radio, TextField, InputAdornment, DialogActions, Button } from '@material-ui/core';
 import { DonutSmall } from '@material-ui/icons';
 import T from 'i18n-react';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
     money: number;
@@ -25,8 +26,14 @@ export default function MoneyDialog(props: Props) {
         props.onValidate(newMoneyValue);
     }
 
+    function actionOnPrompt() {
+        props.onClose();
+        return false;
+    }
+
     return (
         <>
+            <Prompt when={true} message={actionOnPrompt} />
             <DialogTitle id="form-dialog-title">{T.translate('inventory.moneyedit')}</DialogTitle>
             <DialogContent>
                 <RadioGroup

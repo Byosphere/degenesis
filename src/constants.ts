@@ -38,7 +38,7 @@ export const MONEY = [
     100
 ];
 
-export const TYPES = [
+export const GROUPS = [
     'arme',
     'armure',
     'equipement',

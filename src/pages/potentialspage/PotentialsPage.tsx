@@ -21,15 +21,15 @@ export default function PotentialsPage(props: Props) {
     const [open, setOpen] = useState<boolean>(false);
     const { setHeaderTitle } = useContext(HeaderContext);
 
-    function handleDeletePotential(type: number, id: number) {
-        let potentialIndex = props.char.potentials.findIndex((p) => p.id === id && p.group === type);
+    function handleDeletePotential(group: number, id: number) {
+        let potentialIndex = props.char.potentials.findIndex((p) => p.id === id && p.group === group);
         if (potentialIndex > -1)
             char.potentials.splice(potentialIndex, 1);
         props.onChange(char);
     }
 
-    function handleUpgradePotential(type: number, id: number) {
-        let potential = props.char.potentials.find((p) => p.id === id && p.group === type);
+    function handleUpgradePotential(group: number, id: number) {
+        let potential = props.char.potentials.find((p) => p.id === id && p.group === group);
         if (potential)
             potential.level++;
         props.onChange(char);
@@ -52,7 +52,7 @@ export default function PotentialsPage(props: Props) {
                     {T.translate('generic.potential0')}
                 </Typography>
             </div>
-            {!cultePotentials.length && <Empty />}
+            {!genericPotentials.length && <Empty />}
             {genericPotentials.map((potential: Potential, key: number) => (
                 <PotentialDisplay
                     key={key}

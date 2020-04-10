@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Prompt } from 'react-router-dom';
 import { Add, Delete, Settings } from '@material-ui/icons';
 import T from 'i18n-react';
 import CharacterItem from '../components/home/CharacterItem';
@@ -12,7 +12,7 @@ import { Character } from '../models/Character';
 interface Props {
     onDisconnect: () => void;
     characters: Character[];
-    onDelete: (charId: string) => void;
+    onDelete: (charId: string) => Promise<boolean>;
 }
 
 export default function HomePage(props: Props) {
@@ -22,6 +22,7 @@ export default function HomePage(props: Props) {
     const history = useHistory();
     const [tabs, setTabs] = useState<number[]>(props.characters.map(() => 1));
     const [index, setIndex] = useState<number>(-1);
+    const [disabled, setDisabled] = useState<boolean>(false);
 
     function onTabChange(tabIndex: number, charIndex: number) {
         setIndex(charIndex);
@@ -31,19 +32,25 @@ export default function HomePage(props: Props) {
     }
 
     function handleClose() {
+        setOpen(false);
         tabs[index] = 1;
         setTabs([...tabs]);
-        setOpen(false);
-        setIndex(-1);
     }
 
-    function handleDelete() {
+    async function handleDelete() {
+        setDisabled(true);
         let id = props.characters[index]._id;
         tabs[index] = 1;
         setTabs([...tabs]);
         setOpen(false);
         setIndex(-1);
-        props.onDelete(id);
+        await props.onDelete(id);
+        setDisabled(false);
+    }
+
+    function actionOnPrompt() {
+        handleClose();
+        return false;
     }
 
     return (
@@ -64,7 +71,7 @@ export default function HomePage(props: Props) {
                     }
                     style={{ height: 'calc(100% - 64px)', overflowY: 'auto' }}
                 >
-                    {props.characters.map((char: Character, charIndex: number) => (
+                    {!disabled && props.characters.map((char: Character, charIndex: number) => (
                         <SwipeableViews
                             key={charIndex}
                             index={tabs[charIndex]}
@@ -106,6 +113,7 @@ export default function HomePage(props: Props) {
                 open={open}
                 onClose={handleClose}
             >
+                <Prompt when={true} message={actionOnPrompt} />
                 <DialogTitle>
                     {T.translate('generic.confirmdelete', { who: props.characters[index] ? props.characters[index].name : '' })}
                 </DialogTitle>
