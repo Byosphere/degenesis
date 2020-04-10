@@ -25,6 +25,11 @@ export async function getCharactersAsync(): Promise<{ data: Character[] }> {
     return Axios.get(url, { headers: { 'auth-token': getUserToken() } });
 }
 
+export async function updateCharacterAsync(char: Character): Promise<{ data: Character }> {
+    const url = API_PATH + '/character/' + char._id;
+    return Axios.put(url, char, { headers: { 'auth-token': getUserToken() } });
+}
+
 export async function saveCharacterAsync(char: Character): Promise<{ data: Character }> {
     const url = API_PATH + '/character';
     return Axios.post(url, char, { headers: { 'auth-token': getUserToken() } });

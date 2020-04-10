@@ -47,7 +47,8 @@ export default function InventoryPage(props: Props) {
 
     function handleSave(item: Item) {
         let id = 1;
-        while (char.inventory.find((item) => item.id === id)) {
+        let func = (item: Item) => item.id === id;
+        while (char.inventory.find(func)) {
             id++;
         }
         char.inventory.push({ ...item, id });

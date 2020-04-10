@@ -110,12 +110,12 @@ export default function CharacterBuilder(props: Props) {
         );
     }
 
-    function handleToggle(id: number, type: number) {
-        let index = character.potentials.findIndex(p => p.id === id && p.type === type);
+    function handleToggle(id: number, group: number) {
+        let index = character.potentials.findIndex(p => p.id === id && p.group === group);
         if (index === -1 && character.potentials.length !== 2) {
             character.potentials.push({
                 id,
-                type,
+                group,
                 level: 1
             });
         } else if (index !== -1) {

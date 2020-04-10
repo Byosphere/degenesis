@@ -53,7 +53,7 @@ export default function PotentialsDialog(props: Props) {
                             role="listitem"
                             button
                             onClick={() => props.onClick(key, 1)}
-                            disabled={Boolean(props.char.potentials.find(p => p.id === key && p.type === 1))}
+                            disabled={Boolean(props.char.potentials.find(p => p.id === key && p.group === 1))}
                         >
                             <ListItemText
                                 primary={T.translate('potentials.' + potential + '.name')}
@@ -77,7 +77,7 @@ export default function PotentialsDialog(props: Props) {
                             role="listitem"
                             button
                             onClick={() => props.onClick(key, 0)}
-                            disabled={Boolean(props.char.potentials.find(p => p.id === key && p.type === 0))}
+                            disabled={Boolean(props.char.potentials.find(p => p.id === key && p.group === 0))}
                         >
                             <ListItemText
                                 primary={T.translate('potentials.' + potential + '.name')}

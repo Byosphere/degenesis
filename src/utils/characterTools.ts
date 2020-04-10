@@ -101,7 +101,6 @@ export function updateAttributes(character: Character) {
 
 export function getNewCharacter(): Character {
     return {
-        _id: '',
         name: '',
         age: 0,
         rang: 0,

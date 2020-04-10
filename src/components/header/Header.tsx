@@ -5,7 +5,6 @@ import { ArrowBack } from '@material-ui/icons';
 
 interface Props {
     title: string;
-    onSave: () => Promise<boolean>;
 }
 
 export default function Header(props: Props) {

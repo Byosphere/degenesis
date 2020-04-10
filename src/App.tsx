@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from 'react';
 import './App.css';
 import { getUserToken } from './utils/StorageManager';
 import Loader from './components/Loader';
-import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync } from './utils/fetchers';
+import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync, updateCharacterAsync } from './utils/fetchers';
 import User from './models/User';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import Header from './components/header/Header';
@@ -42,8 +42,15 @@ export default function App() {
         }
     }
 
-    async function handleSaveCharacter(): Promise<boolean> {
-        // TODO SAVE
+    async function handleSaveCharacter(char: Character): Promise<boolean> {
+        try {
+            const charData = await updateCharacterAsync(char);
+            const index = characters.findIndex((c) => c._id === charData.data._id);
+            characters[index] = charData.data;
+            setCharacters([...characters]);
+        } catch (error) {
+            console.error(error.message);
+        }
         return true;
     }
 
@@ -94,7 +101,7 @@ export default function App() {
                 <UserContext.Provider value={{ user, setUser }}>
                     <HeaderContext.Provider value={{ headerTitle, setHeaderTitle }}>
                         <HashRouter basename='/'>
-                            <Header title={headerTitle} onSave={handleSaveCharacter} />
+                            <Header title={headerTitle} />
                             <div className="app-content">
                                 <Switch>
                                     <Route path='/' exact>

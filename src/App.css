@@ -1,7 +1,4 @@
-.App,
-html,
-body,
-#root {
+.App, html, body, #root {
   height: 100%;
 }
 
@@ -25,11 +22,11 @@ body,
   height: 100%;
 }
 
-.react-swipeable-view-container > div {
+.react-swipeable-view-container>div {
   min-height: 100%;
 }
 
-.textfield-fullheight > div {
+.textfield-fullheight>div {
   height: 100%;
 }
 
@@ -43,7 +40,7 @@ p.card-overtitle {
   margin: 16px 16px 8px 16px;
 }
 
-.create-step-label > span {
+.create-step-label>span {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -69,10 +66,16 @@ p.card-overtitle {
   left: 25%;
 }
 
-.error-snackbar > div {
+.error-snackbar>div {
   background-color: #d32f2f;
 }
-.success-snackbar > div {
+
+.success-snackbar>div {
   background-color: #4caf50;
   margin-bottom: 54px;
+}
+
+.navigator-divider {
+  width: 1px;
+  height: 100% !important;
 }

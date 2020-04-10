@@ -81,7 +81,8 @@
         "diceroll": "Jet de dés",
         "ldc": "L.d.C",
         "origins": "Origines",
-        "charactersaved": "Personnage sauvegardé !"
+        "charactersaved": "Personnage sauvegardé !",
+        "savewarning": "Sauvegarder les modifications apportées à *{name}* ?"
     },
     "connect": {
         "connect": "Se connecter",

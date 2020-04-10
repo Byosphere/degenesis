@@ -16,28 +16,28 @@ interface Props {
 export default function PotentialsPage(props: Props) {
 
     const { char } = props;
-    const genericPotentials = char.potentials.filter(p => p.type === 0);
-    const cultePotentials = char.potentials.filter(p => p.type === 1);
+    const genericPotentials = char.potentials.filter(p => p.group === 0);
+    const cultePotentials = char.potentials.filter(p => p.group === 1);
     const [open, setOpen] = useState<boolean>(false);
     const { setHeaderTitle } = useContext(HeaderContext);
 
     function handleDeletePotential(type: number, id: number) {
-        let potentialIndex = props.char.potentials.findIndex((p) => p.id === id && p.type === type);
+        let potentialIndex = props.char.potentials.findIndex((p) => p.id === id && p.group === type);
         if (potentialIndex > -1)
             char.potentials.splice(potentialIndex, 1);
         props.onChange(char);
     }
 
     function handleUpgradePotential(type: number, id: number) {
-        let potential = props.char.potentials.find((p) => p.id === id && p.type === type);
+        let potential = props.char.potentials.find((p) => p.id === id && p.group === type);
         if (potential)
             potential.level++;
         props.onChange(char);
     }
 
-    function handleClick(id: number, type: number) {
+    function handleClick(id: number, group: number) {
         setOpen(false);
-        char.potentials.push({ id, type, level: 1 });
+        char.potentials.push({ id, group, level: 1 });
         props.onChange(char);
     }
 

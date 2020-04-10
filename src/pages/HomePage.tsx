@@ -15,46 +15,34 @@ interface Props {
     onDelete: (charId: string) => void;
 }
 
-interface Slider {
-    tabs: number[];
-    selectedChar: Character;
-    index: number;
-}
-
 export default function HomePage(props: Props) {
     const { user } = useContext(UserContext);
     const [open, setOpen] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const history = useHistory();
-    const [slider, setSlider] = useState<Slider>({
-        tabs: props.characters.map(() => 1),
-        selectedChar: null,
-        index: -1
-    });
+    const [tabs, setTabs] = useState<number[]>(props.characters.map(() => 1));
+    const [index, setIndex] = useState<number>(-1);
 
-    function onTabChange(index: number, key: number, char: Character) {
-        let tabs = slider.tabs;
-        tabs[key] = index;
-
-        setSlider({ tabs, selectedChar: char, index });
+    function onTabChange(tabIndex: number, charIndex: number) {
+        setIndex(charIndex);
+        tabs[charIndex] = tabIndex;
+        setTabs([...tabs]);
         setOpen(true);
     }
 
     function handleClose() {
-        let tabs = slider.tabs;
-        tabs[slider.index] = 1;
-
-        setSlider({ tabs, selectedChar: null, index: -1 });
+        tabs[index] = 1;
+        setTabs([...tabs]);
         setOpen(false);
+        setIndex(-1);
     }
 
     function handleDelete() {
-        let id = slider.selectedChar._id;
-        let tabs = slider.tabs;
-        tabs[slider.index] = 1;
-
-        setSlider({ tabs, selectedChar: null, index: -1 });
+        let id = props.characters[index]._id;
+        tabs[index] = 1;
+        setTabs([...tabs]);
         setOpen(false);
+        setIndex(-1);
         props.onDelete(id);
     }
 
@@ -76,11 +64,11 @@ export default function HomePage(props: Props) {
                     }
                     style={{ height: 'calc(100% - 64px)', overflowY: 'auto' }}
                 >
-                    {props.characters.map((char: Character, key: number) => (
+                    {props.characters.map((char: Character, charIndex: number) => (
                         <SwipeableViews
-                            key={key}
-                            index={slider.tabs.length ? slider.tabs[key] : 1}
-                            onChangeIndex={(index) => onTabChange(index, key, char)}
+                            key={charIndex}
+                            index={tabs[charIndex]}
+                            onChangeIndex={(tabIndex) => onTabChange(tabIndex, charIndex)}
                             resistance
                         >
                             <ListItem style={{ background: '#F44336', margin: '5px 0', height: 'calc(100% - 10px)', color: 'white', flexDirection: 'row-reverse' }}>
@@ -119,7 +107,7 @@ export default function HomePage(props: Props) {
                 onClose={handleClose}
             >
                 <DialogTitle>
-                    {T.translate('generic.confirmdelete', { who: slider.selectedChar ? slider.selectedChar.name : '' })}
+                    {T.translate('generic.confirmdelete', { who: props.characters[index] ? props.characters[index].name : '' })}
                 </DialogTitle>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

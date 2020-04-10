@@ -49,7 +49,7 @@ export default function StepWho(props: Props) {
                     </InputLabel>
                     <Select
                         input={<Input name="sex" />}
-                        value={newCharacter.sex || ''}
+                        value={newCharacter.sex}
                         onChange={onChange}
                         required
                     >

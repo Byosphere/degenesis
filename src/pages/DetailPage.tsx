@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from 'react';
-import { useParams, Prompt, useHistory } from 'react-router-dom';
+import { useParams, Prompt, useHistory, Redirect } from 'react-router-dom';
 import Navigator from '../components/navigator/Navigator';
 import NotesPage from './NotesPage';
 import InventoryPage from './inventorypage/InventoryPage';
 import { Character } from '../models/Character';
 import PotentialsPage from './potentialspage/PotentialsPage';
 import StatsPage from './statspage/StatsPage';
-import { Fab, Snackbar, CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Fab, Snackbar, CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, Zoom } from '@material-ui/core';
 import { Save, Check } from '@material-ui/icons';
 import T from 'i18n-react';
 
@@ -47,8 +47,6 @@ export default function DetailPage(props: Props) {
         if (result) {
             setOpen(true);
             setDirty(false);
-        } else {
-            // TODO
         }
         setDisabled(false);
     }
@@ -67,32 +65,47 @@ export default function DetailPage(props: Props) {
             history.push(dialogOpen);
         } else {
             // TODO
+            setDisabled(false);
         }
-        setDisabled(false);
     }
 
+    function handleTabChange(event, value: number) {
+        if (value <= 3) {
+            setTab(value);
+        } else {
+            history.push('/');
+        }
+    }
+
+    if (!id) return <Redirect to={'/'} />;
+
     return (
-        <div style={{ height: 'calc(100% - 57px)' }}>
+        <div style={{ height: 'calc(100% - 57px)', overflowY: 'auto' }}>
             <Prompt when={dirty} message={actionOnPrompt} />
             {tab === 0 && <StatsPage char={character} onChange={handleChange} />}
             {tab === 1 && <InventoryPage char={character} onChange={handleChange} />}
             {tab === 2 && <PotentialsPage char={character} onChange={handleChange} />}
             {tab === 3 && <NotesPage char={character} onChange={handleChange} />}
-            <Navigator currentTab={tab} onTabChange={(evt, value) => setTab(value)} />
-            <Fab
-                style={{
-                    position: 'absolute',
-                    right: '24px',
-                    top: '24px',
-                    zIndex: 1200,
-                    pointerEvents: disabled ? 'none' : 'initial'
-                }}
-                color="secondary"
-                aria-label="save"
-                onClick={handleClick}
+            <Navigator currentTab={tab} onTabChange={handleTabChange} />
+            <Zoom
+                in={dirty}
+                unmountOnExit
             >
-                {disabled ? <CircularProgress style={{ color: 'white' }} /> : <Save />}
-            </Fab>
+                <Fab
+                    style={{
+                        position: 'absolute',
+                        right: '24px',
+                        top: '24px',
+                        zIndex: 1200,
+                        pointerEvents: disabled ? 'none' : 'initial'
+                    }}
+                    color="secondary"
+                    aria-label="save"
+                    onClick={handleClick}
+                >
+                    {disabled ? <CircularProgress style={{ color: 'white' }} /> : <Save />}
+                </Fab>
+            </Zoom>
             <Snackbar
                 open={open}
                 autoHideDuration={3000}
@@ -111,14 +124,14 @@ export default function DetailPage(props: Props) {
                 <DialogTitle>Alerte</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
-                        Sauvegarder les modifications apportées à {character.name} ?
+                        {T.translate('generic.savewarning', { name: character.name })}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={handleCancel} color="primary">
+                    <Button onClick={handleCancel} disabled={disabled} color="primary">
                         {T.translate('generic.no')}
                     </Button>
-                    <Button onClick={handleOk} color="secondary">
+                    <Button onClick={handleOk} disabled={disabled} color="secondary">
                         {T.translate('generic.yes')}
                     </Button>
                 </DialogActions>

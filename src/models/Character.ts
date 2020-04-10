@@ -18,7 +18,7 @@ export interface Skill {
 export interface Potential {
     id: number;
     level: number;
-    type: number;
+    group: number;
 }
 
 export interface Item {
@@ -34,7 +34,7 @@ export interface Item {
 }
 
 export interface Character {
-    _id: string;
+    _id?: string;
     name: string;
     age: number;
     rang: number;

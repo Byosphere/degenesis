@@ -40,7 +40,7 @@ export default function StepPotentials(props: Props) {
                             <Checkbox
                                 disableRipple
                                 tabIndex={-1}
-                                checked={Boolean(newCharacter.potentials.find(p => p.id === key && p.type === 1))}
+                                checked={Boolean(newCharacter.potentials.find(p => p.id === key && p.group === 1))}
                             />
                         </ListItemIcon>
                         <ListItemText
@@ -70,7 +70,7 @@ export default function StepPotentials(props: Props) {
                             <Checkbox
                                 disableRipple
                                 tabIndex={-1}
-                                checked={Boolean(newCharacter.potentials.find(p => p.id === key && p.type === 0))}
+                                checked={Boolean(newCharacter.potentials.find(p => p.id === key && p.group === 0))}
                             />
                         </ListItemIcon>
                         <ListItemText

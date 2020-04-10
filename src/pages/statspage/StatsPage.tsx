@@ -55,7 +55,7 @@ export default function StatsPage(props: Props) {
     }
 
     return (
-        <div style={{ margin: '5px 5px 61px 5px' }}>
+        <div style={{ margin: '5px' }}>
             <Card style={{ position: 'relative' }}>
                 <CardMedia
                     image={"images/cultes/" + CULTES[char.culte].img}
@@ -149,7 +149,8 @@ export default function StatsPage(props: Props) {
             <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.origins')}</Typography>
             <ExpansionPanel style={{ marginBottom: '5px' }}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                    <b>{T.translate('cultes.' + CULTES[char.culte].name)}</b>
+                    <Avatar alt={CULTES[char.culte].name} src={"images/cultes/" + CULTES[char.culte].img} />
+                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('cultes.' + CULTES[char.culte].name)}</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails>
                     {T.translate('cultes.' + CULTES[char.culte].desc)}
@@ -157,7 +158,8 @@ export default function StatsPage(props: Props) {
             </ExpansionPanel>
             <ExpansionPanel style={{ marginBottom: '5px' }}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                    <b>{T.translate('cultures.' + CULTURES[char.culture].name)}</b>
+                    <Avatar alt={CULTURES[char.culture].name} src={"images/cultures/" + CULTURES[char.culture].img} />
+                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('cultures.' + CULTURES[char.culture].name)}</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
                     {T.translate('cultures.' + CULTURES[char.culture].desc)}
@@ -165,7 +167,8 @@ export default function StatsPage(props: Props) {
             </ExpansionPanel>
             <ExpansionPanel style={{ marginBottom: '5px' }}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                    <b>{T.translate('concepts.' + CONCEPTS[char.concept].name)}</b>
+                    <Avatar alt={CONCEPTS[char.concept].name} src={"images/concepts/" + CONCEPTS[char.concept].img} />
+                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('concepts.' + CONCEPTS[char.concept].name)}</Typography>
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
                     {T.translate('concepts.' + CONCEPTS[char.concept].desc)}
