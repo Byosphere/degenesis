@@ -8,6 +8,7 @@ import SwipeableViews from 'react-swipeable-views';
 import SettingsMenu from '../components/home/SettingsMenu';
 import { UserContext } from '../App';
 import { Character } from '../models/Character';
+import { CHAR_MAX } from '../constants';
 
 interface Props {
     onDisconnect: () => void;
@@ -71,6 +72,7 @@ export default function HomePage(props: Props) {
                     subheader={
                         <ListSubheader style={{ background: 'white' }} component="div">
                             {T.translate('generic.heroslist')}
+                            <span style={{ float: 'right' }}>{props.characters.length}/{CHAR_MAX}</span>
                         </ListSubheader>
                     }
                     style={{ height: 'calc(100% - 64px)', overflowY: 'auto' }}
@@ -93,7 +95,7 @@ export default function HomePage(props: Props) {
                 </List>
                 <Divider />
                 <List component="nav">
-                    <ListItem button onClick={() => history.push('/create')}>
+                    <ListItem disabled={props.characters.length === CHAR_MAX} button onClick={() => history.push('/create')}>
                         <ListItemIcon>
                             <Add color='secondary' />
                         </ListItemIcon>

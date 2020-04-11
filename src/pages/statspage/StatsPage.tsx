@@ -11,6 +11,7 @@ import Trauma from './Trauma';
 import AttributePanel from '../../components/AttributePanel';
 import CharacterEditDialog, { EditFormValues } from './CharacterEditDialog';
 import { Prompt } from 'react-router-dom';
+import FloatingAction from '../../components/FloatingAction';
 
 interface Props {
     char: Character;
@@ -55,7 +56,7 @@ export default function StatsPage(props: Props) {
         props.onChange({ ...char, ...formValues });
     }
 
-    function actionOnPrompt(location): boolean {
+    function actionOnPrompt(): boolean {
         setShowRank(false);
         return false;
     }
@@ -84,11 +85,6 @@ export default function StatsPage(props: Props) {
                         T.translate('cultes.' + CULTES[char.culte].name) + ' - ' +
                         T.translate('cultures.' + CULTURES[char.culture].name) + ' - ' +
                         T.translate('concepts.' + CONCEPTS[char.concept].name)
-                    }
-                    action={
-                        <IconButton onClick={() => setOpen(true)}>
-                            <Edit />
-                        </IconButton>
                     }
                 />
                 <CardContent>
@@ -202,6 +198,7 @@ export default function StatsPage(props: Props) {
                     </Button>
                 </DialogActions>
             </Dialog>
+            <FloatingAction onClick={() => setOpen(true)} icon={<Edit />} />
         </div>
     );
 }

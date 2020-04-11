@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
-import { BottomNavigation, BottomNavigationAction, Divider } from '@material-ui/core';
-import { Note, HowToReg, WifiTethering, ExitToApp, BusinessCenter } from '@material-ui/icons';
+import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
+import { Note, HowToReg, WifiTethering, BusinessCenter, Whatshot } from '@material-ui/icons';
 import T from 'i18n-react';
 
 interface Props {
@@ -9,7 +9,7 @@ interface Props {
     onTabChange: (event: React.ChangeEvent<{}>, value: any) => void;
 }
 
-export default function (props: Props) {
+export default function Navigator(props: Props) {
     return (
         <div className='bottom-navigator'>
             <BottomNavigation
@@ -20,8 +20,7 @@ export default function (props: Props) {
                 <BottomNavigationAction label={T.translate('navigator.inventory')} icon={<BusinessCenter />} />
                 <BottomNavigationAction label={T.translate('navigator.potentials')} icon={<WifiTethering />} />
                 <BottomNavigationAction label={T.translate('navigator.notes')} icon={<Note />} />
-                <Divider className='navigator-divider' />
-                <BottomNavigationAction label={T.translate('navigator.back')} icon={<ExitToApp />} />
+                <BottomNavigationAction label={T.translate('navigator.battle')} icon={<Whatshot />} />
             </BottomNavigation>
         </div>
     );

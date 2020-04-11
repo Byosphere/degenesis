@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Character, Potential } from '../../models/Character';
-import { Typography, Zoom, Fab } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import T from 'i18n-react';
 import Empty from '../../components/Empty';
 import PotentialDisplay from './PotentialDisplay';
 import { Add } from '@material-ui/icons';
 import PotentialsDialog from './PotentialsDialog';
 import { HeaderContext } from '../../App';
+import FloatingAction from '../../components/FloatingAction';
 
 interface Props {
     char: Character;
@@ -75,18 +76,7 @@ export default function PotentialsPage(props: Props) {
                     onUpgradePotential={handleUpgradePotential}
                 />
             ))}
-            <Zoom
-                in={true}
-                unmountOnExit
-            >
-                <Fab
-                    onClick={() => setOpen(true)}
-                    color='secondary'
-                    style={{ position: 'absolute', bottom: '70px', right: '20px' }}
-                >
-                    <Add />
-                </Fab>
-            </Zoom>
+            <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
             <PotentialsDialog
                 open={open}
                 char={props.char}

@@ -49,6 +49,7 @@ export default function App() {
             setCharacters([...characters]);
         } catch (error) {
             console.error(error.message);
+            return false;
         }
         return true;
     }
@@ -66,6 +67,14 @@ export default function App() {
             setIsLoading(false);
             console.error(error.message);
         }
+    }
+
+    async function handleAddXp(id: string, value: number): Promise<boolean> {
+        let character = characters.find((char) => char._id === id);
+        character.exp = character.exp + value;
+        setExp(character.exp);
+        const result = await handleSaveCharacter(character);
+        return result;
     }
 
     useEffect(() => {
@@ -100,7 +109,7 @@ export default function App() {
                 <UserContext.Provider value={{ user, setUser }}>
                     <HeaderContext.Provider value={{ headerTitle, setHeaderTitle, exp, setExp }}>
                         <HashRouter basename='/'>
-                            <Header title={headerTitle} exp={exp} />
+                            <Header title={headerTitle} exp={exp} onAddXp={handleAddXp} />
                             <div className="app-content">
                                 <Switch>
                                     <Route path='/' exact>

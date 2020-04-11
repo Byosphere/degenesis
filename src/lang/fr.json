@@ -82,7 +82,8 @@
         "ldc": "L.d.C",
         "origins": "Origines",
         "charactersaved": "Personnage sauvegardé !",
-        "savewarning": "Sauvegarder les modifications apportées à *{name}* ?"
+        "savewarning": "Sauvegarder les modifications apportées à *{name}* ?",
+        "addxp": "Ajouter de l'expérience"
     },
     "connect": {
         "connect": "Se connecter",
@@ -103,7 +104,8 @@
         "notes": "Notes",
         "potentials": "Potentiels",
         "home": "Accueil",
-        "create": "Créer un personnage"
+        "create": "Créer un personnage",
+        "battle": "Combat"
     },
     "settings": {
         "settings": "Paramètres",

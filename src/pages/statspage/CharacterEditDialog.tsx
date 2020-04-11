@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, DialogActions, Button } from '@material-ui/core';
+import { Dialog, DialogContent, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, DialogActions, Button, Slide, AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { SEX, RANGS } from '../../constants';
 import T from 'i18n-react';
 import { Character } from '../../models/Character';
 import { Prompt } from 'react-router-dom';
+import { TransitionProps } from '@material-ui/core/transitions/transition';
+import { Close } from '@material-ui/icons';
 
 interface Props {
     open: boolean;
@@ -31,6 +33,13 @@ interface FormErrors {
     rang: string;
     story: string;
 }
+
+const Transition = React.forwardRef(function Transition(
+    props: TransitionProps & { children?: React.ReactElement<any, any> },
+    ref: React.Ref<unknown>,
+) {
+    return <Slide direction="up" ref={ref} {...props} />;
+});
 
 export default function CharacterEditDialog(props: Props) {
 
@@ -84,10 +93,21 @@ export default function CharacterEditDialog(props: Props) {
         <Dialog
             open={open}
             onClose={props.onClose}
+            fullScreen
+            TransitionComponent={Transition}
         >
             <Prompt when={true} message={actionOnPrompt} />
-            <DialogTitle id="edit-character">{T.translate('generic.characteredit')}</DialogTitle>
-            <DialogContent>
+            <AppBar>
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" onClick={props.onClose} aria-label="Close">
+                        <Close />
+                    </IconButton>
+                    <Typography variant="h6">
+                        {T.translate('generic.characteredit')}
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+            <DialogContent style={{ marginTop: '56px' }}>
                 <TextField
                     name='name'
                     label={T.translate('generic.name')}

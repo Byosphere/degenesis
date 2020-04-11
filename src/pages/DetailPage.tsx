@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, useContext } from 'react';
 import { useParams, Prompt, useHistory, Redirect } from 'react-router-dom';
 import Navigator from '../components/navigator/Navigator';
 import NotesPage from './NotesPage';
@@ -9,6 +9,7 @@ import StatsPage from './statspage/StatsPage';
 import { Fab, Snackbar, CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, Zoom } from '@material-ui/core';
 import { Save, Check } from '@material-ui/icons';
 import T from 'i18n-react';
+import { HeaderContext } from '../App';
 
 interface Props {
     onSaveCharacter: (character: Character) => Promise<boolean>;
@@ -25,6 +26,11 @@ export default function DetailPage(props: Props) {
     const [open, setOpen] = useState<boolean>(false);
     const [disabled, setDisabled] = useState<boolean>(false);
     const [dialogOpen, setDialogOpen] = useState<string>('');
+    const { setExp } = useContext(HeaderContext);
+
+    useEffect(() => {
+        setExp(character.exp);
+    }, [character.exp, setExp]);
 
     function actionOnPrompt(location): boolean {
         if (dialogOpen) {
@@ -69,14 +75,6 @@ export default function DetailPage(props: Props) {
         }
     }
 
-    function handleTabChange(event, value: number) {
-        if (value <= 3) {
-            setTab(value);
-        } else {
-            history.push('/');
-        }
-    }
-
     if (!id) return <Redirect to={'/'} />;
 
     return (
@@ -86,7 +84,7 @@ export default function DetailPage(props: Props) {
             {tab === 1 && <InventoryPage char={character} onChange={handleChange} />}
             {tab === 2 && <PotentialsPage char={character} onChange={handleChange} />}
             {tab === 3 && <NotesPage char={character} onChange={handleChange} />}
-            <Navigator currentTab={tab} onTabChange={handleTabChange} />
+            <Navigator currentTab={tab} onTabChange={(event, value) => setTab(value)} />
             <Zoom
                 in={dirty}
                 unmountOnExit
@@ -94,7 +92,7 @@ export default function DetailPage(props: Props) {
                 <Fab
                     style={{
                         position: 'absolute',
-                        right: '24px',
+                        right: '16px',
                         top: '24px',
                         zIndex: 1200,
                         pointerEvents: disabled ? 'none' : 'initial'

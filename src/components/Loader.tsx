@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CircularProgress } from '@material-ui/core';
 import T from 'i18n-react';
 
-export default function () {
+export default function Loader() {
     return (
         <Card style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: 'center' }}>
             <figure style={{ textAlign: 'center', marginBottom: '16px', marginTop: '32px' }}>

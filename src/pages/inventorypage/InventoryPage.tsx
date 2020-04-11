@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Item, Character } from '../../models/Character';
 import T from 'i18n-react';
-import { Typography, Card, CardHeader, Avatar, IconButton, CardContent, List, ListSubheader, Divider, Zoom, Fab, Dialog, Slide } from '@material-ui/core';
+import { Typography, Card, CardHeader, Avatar, IconButton, CardContent, List, ListSubheader, Divider, Dialog, Slide } from '@material-ui/core';
 import { HeaderContext } from '../../App';
 import { CardTravel, SwapVerticalCircle, Add } from '@material-ui/icons';
 import ItemDisplay from './ItemDisplay';
@@ -9,6 +9,7 @@ import AddItemDialog from './AddItemDialog';
 import MoneyDialog from './MoneyDialog';
 import Empty from '../../components/Empty';
 import { TransitionProps } from '@material-ui/core/transitions/transition';
+import FloatingAction from '../../components/FloatingAction';
 
 
 interface Props {
@@ -106,14 +107,7 @@ export default function InventoryPage(props: Props) {
                         {items.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
                     </List>
                 </CardContent>
-                <Zoom in={true} unmountOnExit>
-                    <Fab
-                        onClick={() => setOpen(true)}
-                        color='secondary'
-                        style={{ position: 'absolute', bottom: '70px', right: '20px', zIndex: 10 }}>
-                        <Add />
-                    </Fab>
-                </Zoom>
+                <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
                 <Dialog
                     open={open}
                     onClose={() => setOpen(false)}
