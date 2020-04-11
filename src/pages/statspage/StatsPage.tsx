@@ -5,13 +5,13 @@ import T from 'i18n-react';
 import { HeaderContext } from '../../App';
 import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Info, Edit, ExpandLess, ExpandMore } from '@material-ui/icons';
-import InteractiveJauge from '../../components/interactiveJauge/InteractiveJauge';
 import { getBlessuresMax, getEgoMax, getSporulationMax, getTraumaMax } from '../../utils/characterTools';
 import Trauma from './Trauma';
 import AttributePanel from '../../components/AttributePanel';
 import CharacterEditDialog, { EditFormValues } from './CharacterEditDialog';
 import { Prompt } from 'react-router-dom';
 import FloatingAction from '../../components/FloatingAction';
+import InteractiveJauge from '../../components/InteractiveJauge';
 
 interface Props {
     char: Character;

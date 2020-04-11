@@ -1,10 +1,10 @@
 import React from 'react';
 import { ExpansionPanel, ExpansionPanelSummary, Divider, ExpansionPanelActions, Button } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
-import AttributeJauge from '../../components/attributeJauge/AttributeJauge';
 import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
 import T from 'i18n-react';
 import { Potential } from '../../models/Character';
+import AttributeJauge from '../../components/AttributeJauge';
 
 interface Props {
     type: number;

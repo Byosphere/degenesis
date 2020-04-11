@@ -119,7 +119,7 @@ export default function DetailPage(props: Props) {
                 maxWidth="xs"
                 open={!!dialogOpen}
             >
-                <DialogTitle>Alerte</DialogTitle>
+                <DialogTitle>{T.translate('generic.savewarningtitle')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText>
                         {T.translate('generic.savewarning', { name: character.name })}

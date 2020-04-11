@@ -82,8 +82,10 @@
         "ldc": "L.d.C",
         "origins": "Origines",
         "charactersaved": "Personnage sauvegardé !",
+        "savewarningtitle": "Modifications en cours",
         "savewarning": "Sauvegarder les modifications apportées à *{name}* ?",
-        "addxp": "Ajouter de l'expérience"
+        "addxp": "Ajouter de l'expérience",
+        "diceresult": "Vous obtenez *{success}* réussites, dont *{trigger}* déclencheurs."
     },
     "connect": {
         "connect": "Se connecter",

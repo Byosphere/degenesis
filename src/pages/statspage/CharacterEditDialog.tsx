@@ -242,11 +242,11 @@ export default function CharacterEditDialog(props: Props) {
                 />
             </DialogContent>
             <DialogActions>
-                <Button color='secondary' onClick={handleSave}>
-                    {T.translate('generic.validate')}
-                </Button>
                 <Button color='primary' onClick={props.onClose}>
                     {T.translate('generic.cancel')}
+                </Button>
+                <Button color='secondary' onClick={handleSave}>
+                    {T.translate('generic.validate')}
                 </Button>
             </DialogActions>
         </Dialog>

@@ -5,7 +5,7 @@ import Loader from './components/Loader';
 import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync, updateCharacterAsync } from './utils/fetchers';
 import User from './models/User';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-import Header from './components/header/Header';
+import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import DetailPage from './pages/DetailPage';

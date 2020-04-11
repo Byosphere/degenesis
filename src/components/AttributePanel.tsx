@@ -1,159 +1,149 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Dialog, DialogTitle, DialogActions, Button, DialogContent, DialogContentText } from '@material-ui/core';
 import { ExpandMore, LooksTwo, LooksOne, Looks3, Looks4, Looks5, Looks6 } from '@material-ui/icons';
-import AttributeJauge from './attributeJauge/AttributeJauge';
 import { ATTRIBUTES, SKILLS } from '../constants';
 import { Skill, Attribute } from '../models/Character';
 import T from 'i18n-react';
 import { Prompt } from 'react-router-dom';
+import AttributeJauge from './AttributeJauge';
 
 interface Props {
     attribute: Attribute;
     onChange: (attribute: Attribute) => void;
 }
 
-interface State {
-    expanded: boolean;
-    rollOpen: boolean;
-    rollResult: number[];
-    rollInProgress: boolean;
-    selectedSkill: Skill;
-}
+export default function AttributePanel(props: Props) {
 
-export default class AttributePanel extends Component<Props, State> {
+    const { attribute, onChange } = props;
+    const [open, setOpen] = useState<boolean>(false);
+    const [expanded, setExpanded] = useState<boolean>(false);
+    const [skill, setSkill] = useState<Skill>(undefined);
+    const [rollInProgress, setRollInProgress] = useState<boolean>(false);
+    const [rollResult, setRollResult] = useState<number[]>([]);
 
-    public constructor(props: Props) {
-        super(props);
-
-        this.state = {
-            expanded: false,
-            rollOpen: false,
-            rollResult: [],
-            rollInProgress: false,
-            selectedSkill: null
+    function actionOnPrompt() {
+        if (!rollInProgress) {
+            setOpen(false);
+            setRollResult([]);
         }
-    }
-
-    public handleChange = (value: number, skillId?: number) => {
-        if (skillId !== undefined) {
-            this.props.attribute.skills[skillId].value = value;
-        } else {
-            this.props.attribute.base = value;
-        }
-        this.props.onChange(this.props.attribute);
-    }
-
-    public onExpandChange = (event: React.ChangeEvent<{}>, expanded: boolean) => {
-        this.setState({ expanded: !this.state.expanded });
-    }
-
-    public actionOnPrompt = () => {
-        if (!this.state.rollInProgress) this.setState({ rollOpen: false, rollResult: [] });
         return false;
     }
 
-    public render() {
-        return (
-            <React.Fragment>
-                <ExpansionPanel expanded={this.state.expanded} onChange={this.onExpandChange} style={{ marginBottom: '5px' }}>
-                    <ExpansionPanelSummary
-                        expandIcon={<ExpandMore />}
-                    >
-                        <AttributeJauge
-                            label={T.translate('attributes.' + ATTRIBUTES[this.props.attribute.id] + '.name') as string}
-                            desc={T.translate('attributes.' + ATTRIBUTES[this.props.attribute.id] + '.desc') as string}
-                            value={this.props.attribute.base}
-                            attribute
-                            onClick={(value) => this.handleChange(value)}
-                        />
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
-                        {this.props.attribute.skills.map((skill: Skill) => (
-                            <AttributeJauge
-                                key={skill.id}
-                                label={T.translate('skills.' + SKILLS[this.props.attribute.id][skill.id]) as string}
-                                value={skill.value}
-                                onClick={(value) => this.handleChange(value, skill.id)}
-                                onRollDice={(event) => this.openRollModal(event, skill)}
-                            />
-                        ))}
-                    </ExpansionPanelDetails>
-                </ExpansionPanel>
-                <Dialog
-                    open={this.state.rollOpen}
-                    onClose={this.handleClose}
-                >
-                    <Prompt when={true} message={this.actionOnPrompt} />
-                    <DialogTitle>{T.translate('generic.diceroll')}</DialogTitle>
-                    <DialogContent>
-                        <DialogContentText component='div'>
-                            {T.translate('generic.rolldicequestion', {
-                                attribute: T.translate('attributes.' + ATTRIBUTES[this.props.attribute.id] + '.name'),
-                                anum: this.props.attribute.base,
-                                skill: this.state.selectedSkill ? T.translate('skills.' + SKILLS[this.props.attribute.id][this.state.selectedSkill.id]) : '',
-                                snum: this.state.selectedSkill ? this.state.selectedSkill.value : 0
-                            })}
-                            <p>
-                                {this.state.rollResult.map((nb: number, index: number) => {
-                                    switch (nb) {
-                                        case 1:
-                                            return (<LooksOne key={index} fontSize='large' />);
-                                        case 2:
-                                            return (<LooksTwo key={index} fontSize='large' />);
-                                        case 3:
-                                            return (<Looks3 key={index} fontSize='large' />);
-                                        case 4:
-                                            return (<Looks4 key={index} fontSize='large' />);
-                                        case 5:
-                                            return (<Looks5 key={index} fontSize='large' />);
-                                        case 6:
-                                            return (<Looks6 key={index} fontSize='large' />);
-                                        default:
-                                            return null;
-                                    }
-                                })}
-                            </p>
-                        </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                        <Button disabled={this.state.rollInProgress} onClick={this.handleClose}>
-                            {T.translate('generic.cancel')}
-                        </Button>
-                        <Button disabled={this.state.rollInProgress} onClick={this.roll} color="secondary" autoFocus>
-                            {T.translate('generic.roll')}
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            </React.Fragment>
-        );
-    }
-
-    public roll = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        this.setState({ rollInProgress: true });
-        const diceNumber = this.props.attribute.base + this.state.selectedSkill.value;
+    function roll() {
+        setRollInProgress(true);
+        const diceNumber = attribute.base + skill.value;
         let rollResult = [];
         let cpt = 0;
         let interval = setInterval(() => {
             if (cpt === diceNumber) {
                 clearInterval(interval);
-                this.setState({ rollInProgress: false });
+                setRollInProgress(false);
             } else {
                 cpt++;
                 rollResult.push(Math.floor(Math.random() * 6) + 1);
-                this.setState({ rollResult });
+                setRollResult([...rollResult]);
             }
         }, 1000);
     }
 
-    public handleClose = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-        event.stopPropagation();
-        if (!this.state.rollInProgress) this.setState({ rollOpen: false, rollResult: [] });
+    function handleChange(value: number, skillId?: number) {
+        if (skillId !== undefined) {
+            attribute.skills[skillId].value = value;
+        } else {
+            attribute.base = value;
+        }
+        onChange(attribute);
     }
 
-    public openRollModal = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, selectedSkill: Skill) => {
-        this.setState({
-            selectedSkill,
-            rollOpen: true
-        });
+    function openRollModal(event, selectedSkill: Skill) {
+        setSkill(selectedSkill);
+        setOpen(true);
     }
+
+    function handleClose() {
+        if (!rollInProgress) {
+            setOpen(false);
+            setRollResult([]);
+        }
+    }
+
+    return (
+        <>
+            <ExpansionPanel expanded={expanded} onChange={() => setExpanded(!expanded)} style={{ marginBottom: '5px' }}>
+                <ExpansionPanelSummary
+                    expandIcon={<ExpandMore />}
+                >
+                    <AttributeJauge
+                        label={T.translate('attributes.' + ATTRIBUTES[attribute.id] + '.name') as string}
+                        desc={T.translate('attributes.' + ATTRIBUTES[attribute.id] + '.desc') as string}
+                        value={attribute.base}
+                        attribute
+                        onClick={(value) => handleChange(value)}
+                    />
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
+                    {attribute.skills.map((skill: Skill) => (
+                        <AttributeJauge
+                            key={skill.id}
+                            label={T.translate('skills.' + SKILLS[attribute.id][skill.id]) as string}
+                            value={skill.value}
+                            onClick={(value) => handleChange(value, skill.id)}
+                            onRollDice={(event) => openRollModal(event, skill)}
+                        />
+                    ))}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+            >
+                <Prompt when={true} message={actionOnPrompt} />
+                <DialogTitle>{T.translate('generic.diceroll')}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText component='div'>
+                        {T.translate('generic.rolldicequestion', {
+                            attribute: T.translate('attributes.' + ATTRIBUTES[attribute.id] + '.name'),
+                            anum: attribute.base,
+                            skill: skill ? T.translate('skills.' + SKILLS[attribute.id][skill.id]) : '',
+                            snum: skill ? skill.value : 0
+                        })}
+                        <p>
+                            {rollResult.map((nb: number, index: number) => {
+                                switch (nb) {
+                                    case 1:
+                                        return (<LooksOne key={index} fontSize='large' />);
+                                    case 2:
+                                        return (<LooksTwo key={index} fontSize='large' />);
+                                    case 3:
+                                        return (<Looks3 key={index} fontSize='large' />);
+                                    case 4:
+                                        return (<Looks4 key={index} fontSize='large' />);
+                                    case 5:
+                                        return (<Looks5 key={index} fontSize='large' />);
+                                    case 6:
+                                        return (<Looks6 key={index} fontSize='large' />);
+                                    default:
+                                        return null;
+                                }
+                            })}
+                        </p>
+                    </DialogContentText>
+                    {(!rollInProgress && !!rollResult.length) && <DialogContentText>
+                        {T.translate('generic.diceresult', {
+                            success: rollResult.filter((i) => i > 3).length,
+                            trigger: rollResult.filter((i) => i === 6).length
+                        })}
+                    </DialogContentText>}
+                </DialogContent>
+                <DialogActions>
+                    <Button disabled={rollInProgress} onClick={handleClose}>
+                        {T.translate('generic.cancel')}
+                    </Button>
+                    <Button disabled={rollInProgress} onClick={roll} color="secondary" autoFocus>
+                        {T.translate('generic.roll')}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </>
+    );
 }
