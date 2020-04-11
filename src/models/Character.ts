@@ -56,4 +56,5 @@ export interface Character {
     notes: string[];
     belief: string;
     behavior: string;
+    exp: number;
 }

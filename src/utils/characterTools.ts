@@ -121,6 +121,7 @@ export function getNewCharacter(): Character {
         ego: 0,
         sporulation: 0,
         blessures: 0,
-        trauma: 0
+        trauma: 0,
+        exp: 0
     };
 }

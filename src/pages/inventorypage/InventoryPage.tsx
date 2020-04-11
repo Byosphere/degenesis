@@ -16,8 +16,11 @@ interface Props {
     onChange: (char: Character) => void;
 }
 
-const Transition = React.forwardRef<unknown, TransitionProps>(function Transition(p, ref) {
-    return <Slide direction="up" ref={ref} {...p} />;
+const Transition = React.forwardRef(function Transition(
+    props: TransitionProps & { children?: React.ReactElement<any, any> },
+    ref: React.Ref<unknown>,
+) {
+    return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function InventoryPage(props: Props) {

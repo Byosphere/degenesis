@@ -23,6 +23,7 @@ export default function App() {
     const [user, setUser] = useState<User>(null);
     const [characters, setCharacters] = useState<Character[]>([]);
     const [headerTitle, setHeaderTitle] = useState<string>('');
+    const [exp, setExp] = useState<number>(0);
 
     // Supprime un personnage
     async function handleDeleteCharacter(charId: string): Promise<boolean> {
@@ -97,9 +98,9 @@ export default function App() {
         return (
             <div className="App">
                 <UserContext.Provider value={{ user, setUser }}>
-                    <HeaderContext.Provider value={{ headerTitle, setHeaderTitle }}>
+                    <HeaderContext.Provider value={{ headerTitle, setHeaderTitle, exp, setExp }}>
                         <HashRouter basename='/'>
-                            <Header title={headerTitle} />
+                            <Header title={headerTitle} exp={exp} />
                             <div className="app-content">
                                 <Switch>
                                     <Route path='/' exact>
