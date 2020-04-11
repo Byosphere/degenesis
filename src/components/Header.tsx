@@ -47,32 +47,36 @@ export default function Header(props: Props) {
         return (
             <>
                 <AppBar position="relative" elevation={4}>
-                    <Toolbar style={{ paddingRight: '88px' }}>
+                    <Toolbar style={{ marginRight: '58px', paddingRight: 0, borderRight: location.pathname !== '/create' ? '1px solid rgba(0, 0, 0, 0.12)' : '' }}>
                         <IconButton edge="start" color="inherit" onClick={handleBack}>
                             <ArrowBack />
                         </IconButton>
                         <Divider style={{ margin: '0 5px' }} orientation="vertical" flexItem />
-                        {location.pathname !== '/create' && <IconButton
-                            onClick={() => setOpen(true)}
-                            disabled={disabled}
-                        >
-                            <Badge
-                                badgeContent={props.exp}
-                                overlap="circle"
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                color='secondary'
-                                showZero
-                            >
-                                <Avatar style={{ backgroundColor: '#555', width: '24px', height: '24px' }}>Xp</Avatar>
-                            </Badge>
-                        </IconButton>}
-                        <Divider style={{ margin: '0 0 0 5px' }} orientation="vertical" flexItem />
                         <Typography variant='body1' component='h1' style={{ flexGrow: 1, textAlign: 'center' }}>
                             {props.title}
                         </Typography>
+                        {location.pathname !== '/create' && <>
+                            <Divider style={{ margin: '0 0 0 5px' }} orientation="vertical" flexItem />
+                            <IconButton
+                                onClick={() => setOpen(true)}
+                                disabled={disabled}
+                                style={{ margin: '0 6px' }}
+                            >
+                                <Badge
+                                    badgeContent={props.exp}
+                                    overlap="circle"
+                                    anchorOrigin={{
+                                        vertical: 'top',
+                                        horizontal: 'right',
+                                    }}
+                                    color='secondary'
+                                    showZero
+                                    max={999}
+                                >
+                                    <Avatar style={{ backgroundColor: '#555', width: '24px', height: '24px' }}>Xp</Avatar>
+                                </Badge>
+                            </IconButton>
+                        </>}
                     </Toolbar>
                 </AppBar>
                 <Dialog

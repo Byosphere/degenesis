@@ -6,7 +6,7 @@ import InventoryPage from './inventorypage/InventoryPage';
 import { Character } from '../models/Character';
 import PotentialsPage from './potentialspage/PotentialsPage';
 import StatsPage from './statspage/StatsPage';
-import { Fab, Snackbar, CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, Zoom } from '@material-ui/core';
+import { Snackbar, CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, IconButton, Badge } from '@material-ui/core';
 import { Save, Check } from '@material-ui/icons';
 import T from 'i18n-react';
 import { HeaderContext } from '../App';
@@ -85,25 +85,23 @@ export default function DetailPage(props: Props) {
             {tab === 2 && <PotentialsPage char={character} onChange={handleChange} />}
             {tab === 3 && <NotesPage char={character} onChange={handleChange} />}
             <Navigator currentTab={tab} onTabChange={(event, value) => setTab(value)} />
-            <Zoom
-                in={dirty}
-                unmountOnExit
+            <IconButton
+                style={{
+                    position: 'absolute',
+                    right: '4px',
+                    top: '4px',
+                    zIndex: 1200,
+                    pointerEvents: disabled ? 'none' : 'initial',
+                    color: 'white',
+                    opacity: (!dirty) ? 0.4 : 1
+                }}
+                disabled={disabled || !dirty}
+                onClick={handleClick}
             >
-                <Fab
-                    style={{
-                        position: 'absolute',
-                        right: '16px',
-                        top: '24px',
-                        zIndex: 1200,
-                        pointerEvents: disabled ? 'none' : 'initial'
-                    }}
-                    color="secondary"
-                    aria-label="save"
-                    onClick={handleClick}
-                >
-                    {disabled ? <CircularProgress style={{ color: 'white' }} /> : <Save />}
-                </Fab>
-            </Zoom>
+                <Badge color="secondary" invisible={!dirty || disabled} variant="dot">
+                    {disabled ? <CircularProgress disableShrink size={24} style={{ color: 'white' }} /> : <Save />}
+                </Badge>
+            </IconButton>
             <Snackbar
                 open={open}
                 autoHideDuration={3000}
