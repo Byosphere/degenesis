@@ -13,14 +13,15 @@ interface Props {
 export default function MoneyDialog(props: Props) {
 
     const [radioValue, setRadioValue] = useState<string>('add');
-    const [value, setValue] = useState<number>(0);
+    const [value, setValue] = useState<string>('');
 
     function changeMoney() {
         let newMoneyValue = 0;
+        let valueNumber = parseInt(value, 10) || 0;
         if (radioValue === 'add') {
-            newMoneyValue = props.money + value;
+            newMoneyValue = props.money + valueNumber;
         } else {
-            newMoneyValue = props.money - value;
+            newMoneyValue = props.money - valueNumber;
             if (newMoneyValue < 0) newMoneyValue = 0;
         }
         props.onValidate(newMoneyValue);
@@ -60,7 +61,7 @@ export default function MoneyDialog(props: Props) {
                     id="money-number"
                     label="Valeur"
                     value={value}
-                    onChange={(event) => setValue(parseInt(event.target.value, 10) || 0)}
+                    onChange={(event) => setValue(event.target.value)}
                     type="number"
                     InputLabelProps={{
                         shrink: true,

@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { FormGroup, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button, DialogTitle } from '@material-ui/core';
-import { LooksOne, LooksOneOutlined, LooksTwo, LooksTwoOutlined, Looks6Outlined, Looks3Outlined, Looks3, Looks4Outlined, Looks4, Looks5Outlined, Looks5, Looks6, Info, BackspaceOutlined, Backspace, Casino } from '@material-ui/icons';
+import { Info, Casino } from '@material-ui/icons';
 import T from 'i18n-react';
 import { Prompt } from 'react-router-dom';
 import IconNumber from './IconNumber';
@@ -23,6 +23,15 @@ export default function AttributeJauge(props: Props) {
 
     function handleClick(value: number) {
         if (onClick) onClick(value);
+    }
+
+    function handleOpen(event) {
+        event.stopPropagation();
+        setOpen(true);
+    }
+    function handleClose(event) {
+        event.stopPropagation();
+        setOpen(false);
     }
 
     function actionOnPrompt(): boolean {
@@ -59,7 +68,7 @@ export default function AttributeJauge(props: Props) {
             {attribute && <IconButton
                 size='small'
                 style={{ position: 'absolute', right: '-10px', top: '-10px', padding: '1px', background: 'white', color: '#444' }}
-                onClick={() => setOpen(true)}
+                onClick={handleOpen}
             >
                 <Info />
             </IconButton>}
@@ -89,7 +98,7 @@ export default function AttributeJauge(props: Props) {
             </div>
             {attribute && <Dialog
                 open={open}
-                onClose={() => setOpen(false)}
+                onClose={handleClose}
             >
                 <Prompt when={true} message={actionOnPrompt} />
                 <DialogContent>
@@ -97,7 +106,7 @@ export default function AttributeJauge(props: Props) {
                     <DialogContentText>{desc}</DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setOpen(false)} color="primary">{T.translate('generic.close')}</Button>
+                    <Button onClick={handleClose} color="primary">{T.translate('generic.close')}</Button>
                 </DialogActions>
             </Dialog>}
         </FormGroup>

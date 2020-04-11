@@ -1,13 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Character, Potential } from '../../models/Character';
-import { Typography } from '@material-ui/core';
+import { Typography, Dialog, DialogContentText, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core';
 import T from 'i18n-react';
 import Empty from '../../components/Empty';
 import PotentialDisplay from './PotentialDisplay';
 import { Add } from '@material-ui/icons';
 import PotentialsDialog from './PotentialsDialog';
-import { HeaderContext } from '../../App';
+import { HeaderContext, SnackbarContext } from '../../App';
 import FloatingAction from '../../components/FloatingAction';
+import { getPotentialXpCost } from '../../utils/characterTools';
+import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
 
 interface Props {
     char: Character;
@@ -20,7 +22,10 @@ export default function PotentialsPage(props: Props) {
     const genericPotentials = char.potentials.filter(p => p.group === 0);
     const cultePotentials = char.potentials.filter(p => p.group === 1);
     const [open, setOpen] = useState<boolean>(false);
-    const { setHeaderTitle } = useContext(HeaderContext);
+    const { setHeaderTitle, setExp, exp } = useContext(HeaderContext);
+    const [openXp, setOpenXp] = useState<boolean>(false);
+    const [potential, setPotential] = useState<Potential>(undefined);
+    const { setSnackbar } = useContext(SnackbarContext);
 
     function handleDeletePotential(group: number, id: number) {
         let potentialIndex = props.char.potentials.findIndex((p) => p.id === id && p.group === group);
@@ -29,17 +34,33 @@ export default function PotentialsPage(props: Props) {
         props.onChange(char);
     }
 
-    function handleUpgradePotential(group: number, id: number) {
-        let potential = props.char.potentials.find((p) => p.id === id && p.group === group);
-        if (potential)
-            potential.level++;
-        props.onChange(char);
+    function handleUpgradePotential() {
+        setOpenXp(false);
+        if (potential) {
+            let newExp = (exp || 0) - getPotentialXpCost(char.potentials);
+            if (newExp >= 0) {
+                potential.level++;
+                setExp(newExp);
+                char.exp = newExp;
+                props.onChange(char);
+            } else {
+                setSnackbar({
+                    type: 'error',
+                    message: T.translate('generic.xperror')
+                });
+            }
+        }
     }
 
     function handleClick(id: number, group: number) {
         setOpen(false);
         char.potentials.push({ id, group, level: 1 });
         props.onChange(char);
+    }
+
+    function handleOpenXpDialog(group: number, id: number) {
+        setPotential(char.potentials.find((p) => p.id === id && p.group === group));
+        setOpenXp(true);
     }
 
     useEffect(() => {
@@ -60,7 +81,7 @@ export default function PotentialsPage(props: Props) {
                     type={0}
                     potential={potential}
                     onDeletePotential={handleDeletePotential}
-                    onUpgradePotential={handleUpgradePotential}
+                    onUpgradePotential={handleOpenXpDialog}
                 />
             ))}
             <Typography variant='subtitle1' component='p' style={{ opacity: 0.6, margin: '8px 16px' }}>
@@ -73,7 +94,7 @@ export default function PotentialsPage(props: Props) {
                     type={1}
                     potential={potential}
                     onDeletePotential={handleDeletePotential}
-                    onUpgradePotential={handleUpgradePotential}
+                    onUpgradePotential={handleOpenXpDialog}
                 />
             ))}
             <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
@@ -83,6 +104,29 @@ export default function PotentialsPage(props: Props) {
                 onClose={() => setOpen(false)}
                 onClick={handleClick}
             />
+            <Dialog
+                open={openXp}
+                onClose={() => setOpenXp(false)}
+            >
+                <DialogTitle>{T.translate('potential.upgradetitle')}</DialogTitle>
+                {potential && <DialogContent>
+                    <DialogContentText>
+                        {T.translate('potential.upgrade', {
+                            cost: getPotentialXpCost(char.potentials),
+                            name: potential.group === 0 ? T.translate('potentials.' + POTENTIALS[GENERIC_POTENTIALS][potential.id] + '.name') :
+                                T.translate('potentials.' + POTENTIALS[char.culte][potential.id] + '.name')
+                        })}
+                    </DialogContentText>
+                </DialogContent>}
+                <DialogActions>
+                    <Button onClick={() => setOpenXp(false)} color="primary">
+                        {T.translate('generic.no')}
+                    </Button>
+                    <Button onClick={handleUpgradePotential} color="secondary">
+                        {T.translate('generic.yes')}
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }

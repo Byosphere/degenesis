@@ -1,4 +1,4 @@
-import { Character, Attribute, Skill } from "../models/Character";
+import { Character, Attribute, Skill, Potential } from "../models/Character";
 import { SKILLS, ATTRIBUTES, CULTURES, CULTES, CONCEPTS } from "../constants";
 import baseAttributes from '../data/attributes.json';
 
@@ -112,8 +112,8 @@ export function getNewCharacter(): Character {
         culture: undefined,
         concept: undefined,
         story: '',
-        belief: '',
-        behavior: '',
+        belief: undefined,
+        behavior: undefined,
         attributes: JSON.parse(JSON.stringify(baseAttributes)),
         potentials: [],
         inventory: [],
@@ -124,4 +124,33 @@ export function getNewCharacter(): Character {
         trauma: 0,
         exp: 0
     };
+}
+
+export function getPotentialXpCost(potentials: Potential[]): number {
+    let totalLevels = 0;
+    potentials.forEach(potential => {
+        totalLevels += potential.level;
+    });
+    return (totalLevels + 1) * 10;
+}
+
+export function getAttributeXpCost(attribute: Attribute, behavior: 'pulsions' | 'concentration'): number {
+    let cost = 0;
+    if (behavior === 'concentration') {
+        cost = (attribute.name === 'intellect' || attribute.name === 'agilite' || attribute.name === 'psyche') ? 10 : 12;
+    } else if (behavior === 'pulsions') {
+        cost = (attribute.name === 'physique' || attribute.name === 'charisme' || attribute.name === 'instinct') ? 10 : 12;
+    }
+
+    return (attribute.base + 1) * cost;
+}
+
+export function getSkillXpCost(skillId: number, attribute: Attribute, behavior: 'pulsions' | 'concentration'): number {
+    let cost = 0;
+    if (behavior === 'concentration') {
+        cost = (attribute.name === 'intellect' || attribute.name === 'agilite' || attribute.name === 'psyche') ? 4 : 5;
+    } else if (behavior === 'pulsions') {
+        cost = (attribute.name === 'physique' || attribute.name === 'charisme' || attribute.name === 'instinct') ? 4 : 5;
+    }
+    return (attribute.skills.find((skill) => skill.id === skillId).value + 1) * cost;
 }

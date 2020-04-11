@@ -40,7 +40,7 @@ export default function ItemDisplay(props: Props) {
 
     return (
         <React.Fragment>
-            <ListItem>
+            <ListItem button onClick={() => setExpand(!expand)}>
                 <ListItemText primary={item.name} secondary={itemDetails} />
                 <ListItemSecondaryAction>
                     <IconButton onClick={() => setExpand(!expand)}>

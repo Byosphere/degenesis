@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { AppBar, Toolbar, Typography, IconButton, Badge, Avatar, Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, Divider } from '@material-ui/core';
 import { useHistory, useLocation, Prompt } from 'react-router-dom';
 import { ArrowBack } from '@material-ui/icons';
 import T from 'i18n-react';
+import { SnackbarContext } from '../App';
 
 interface Props {
     title: string;
@@ -17,6 +18,7 @@ export default function Header(props: Props) {
     const [open, setOpen] = useState<boolean>(false);
     const [xp, setXp] = useState<string>('');
     const [disabled, setDisabled] = useState<boolean>(false);
+    const { setSnackbar } = useContext(SnackbarContext);
 
     function handleBack() {
         history.push('/');
@@ -28,15 +30,22 @@ export default function Header(props: Props) {
         setOpen(false);
         setDisabled(true);
         const result = await props.onAddXp(id, parseInt(xp, 10));
+        setXp('');
+        setDisabled(false);
         if (result) {
-            setXp('');
-            setDisabled(false);
+            setSnackbar({
+                type: 'success',
+                message: T.translate('generic.xpsuccess')
+            });
         } else {
-            // TODO
+            setSnackbar({
+                type: 'error',
+                message: T.translate('generic.error')
+            });
         }
     }
 
-    function actionOnPrompt(location): boolean {
+    function actionOnPrompt(): boolean {
         setOpen(false);
         return false;
     }
@@ -70,7 +79,6 @@ export default function Header(props: Props) {
                                         horizontal: 'right',
                                     }}
                                     color='secondary'
-                                    showZero
                                     max={999}
                                 >
                                     <Avatar style={{ backgroundColor: '#555', width: '24px', height: '24px' }}>Xp</Avatar>
@@ -100,7 +108,7 @@ export default function Header(props: Props) {
                         <Button onClick={() => setOpen(false)} color="primary">
                             {T.translate('generic.cancel')}
                         </Button>
-                        <Button onClick={handleAddXp} color="secondary">
+                        <Button onClick={handleAddXp} color="secondary" disabled={!xp}>
                             {T.translate('generic.validate')}
                         </Button>
                     </DialogActions>

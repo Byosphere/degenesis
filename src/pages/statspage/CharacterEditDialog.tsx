@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdornment, DialogActions, Button, Slide, AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { Dialog, DialogContent, TextField, FormControl, InputLabel, Select, MenuItem, InputAdornment, DialogActions, Button, Slide, AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { SEX, RANGS } from '../../constants';
 import T from 'i18n-react';
 import { Character } from '../../models/Character';
@@ -107,11 +107,11 @@ export default function CharacterEditDialog(props: Props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <DialogContent style={{ marginTop: '56px' }}>
+            <DialogContent style={{ marginTop: '56px', display: 'flex', flexDirection: 'column', paddingTop: '24px' }}>
                 <TextField
                     name='name'
                     label={T.translate('generic.name')}
-                    margin="dense"
+                    variant='outlined'
                     InputLabelProps={{
                         shrink: true,
                     }}
@@ -122,11 +122,11 @@ export default function CharacterEditDialog(props: Props) {
                     error={Boolean(errors.name)}
                     helperText={errors.name}
                 />
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', marginTop: '16px' }}>
                     <TextField
                         name='age'
                         label={T.translate('generic.age')}
-                        margin="dense"
+                        variant='outlined'
                         type='number'
                         InputLabelProps={{
                             shrink: true,
@@ -139,17 +139,17 @@ export default function CharacterEditDialog(props: Props) {
                         helperText={errors.age}
                     />
                     <FormControl
-                        margin='dense'
+                        variant='outlined'
                         style={{ flex: 1, marginLeft: '8px' }}
                     >
                         <InputLabel shrink htmlFor="sex">
                             {T.translate('generic.sex')}
                         </InputLabel>
                         <Select
-                            input={<Input name="sex" />}
                             value={formValues.sex}
                             onChange={(event) => handleChange(event, 'sex')}
                             required
+                            label={T.translate('generic.sex')}
                         >
                             {SEX.map((text, key) => {
                                 if (text) {
@@ -165,12 +165,12 @@ export default function CharacterEditDialog(props: Props) {
                         </Select>
                     </FormControl>
                 </div>
-                <div style={{ display: 'flex' }}>
+                <div style={{ display: 'flex', marginTop: '16px' }}>
                     <TextField
                         name='weight'
-                        label="Poids"
-                        margin="dense"
+                        label={T.translate('generic.weight')}
                         type='number'
+                        variant='outlined'
                         InputProps={{
                             endAdornment: <InputAdornment position="end">Kg</InputAdornment>
                         }}
@@ -186,8 +186,8 @@ export default function CharacterEditDialog(props: Props) {
                     />
                     <TextField
                         name='size'
-                        label="Taille"
-                        margin="dense"
+                        label={T.translate('generic.size')}
+                        variant='outlined'
                         type='number'
                         InputProps={{
                             endAdornment: <InputAdornment position="end">cm</InputAdornment>
@@ -203,17 +203,17 @@ export default function CharacterEditDialog(props: Props) {
                         helperText={errors.size}
                     />
                 </div>
-                <FormControl fullWidth margin='dense'>
+                <FormControl fullWidth variant='outlined' style={{ marginTop: '16px' }}>
                     <InputLabel shrink htmlFor="rang">
                         {T.translate('generic.rang')}
                     </InputLabel>
                     <Select
-                        input={<Input name="rang" fullWidth />}
                         fullWidth
                         value={formValues.rang}
                         onChange={(event) => handleChange(event, 'rang')}
                         error={formValues.rang < 0}
                         required
+                        label={T.translate('generic.rang')}
                     >
                         {RANGS[char.culte].map((text, key) => (
                             <MenuItem key={key} value={key}>
@@ -225,20 +225,22 @@ export default function CharacterEditDialog(props: Props) {
                 <TextField
                     name="story"
                     label={T.translate('generic.story')}
-                    margin="dense"
+                    variant='outlined'
                     type='text'
                     InputLabelProps={{
                         shrink: true,
                     }}
                     multiline
                     fullWidth
-                    rows={5}
-                    rowsMax={20}
                     value={formValues.story}
                     onChange={(event) => handleChange(event, 'story')}
                     required
                     error={Boolean(errors.story)}
                     helperText={errors.story}
+                    style={{ marginTop: '16px', flexGrow: 1 }}
+                    classes={{
+                        root: "textfield-fullheight"
+                    }}
                 />
             </DialogContent>
             <DialogActions>

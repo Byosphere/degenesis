@@ -1,4 +1,4 @@
-export const saveFile = (data: any, fileName: string) => {
+export function saveFile(data: any, fileName: string) {
     const json = JSON.stringify(data);
 
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {

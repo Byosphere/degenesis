@@ -35,6 +35,7 @@
         "name": "Nom",
         "age": "Âge",
         "sex": "Sexe",
+        "size": "Taille",
         "health": "Santé",
         "culte": "Culte",
         "culture": "Culture",
@@ -85,7 +86,10 @@
         "savewarningtitle": "Modifications en cours",
         "savewarning": "Sauvegarder les modifications apportées à *{name}* ?",
         "addxp": "Ajouter de l'expérience",
-        "diceresult": "Vous obtenez *{success}* réussites, dont *{trigger}* déclencheurs."
+        "diceresult": "Vous obtenez *{success}* réussites, dont *{trigger}* déclencheurs.",
+        "xpsuccess": "L'experience du personnage a bien été mise à jour.",
+        "error": "Une erreur est survenue.",
+        "xperror": "Vous n'avez pas assez de points d'expérience !"
     },
     "connect": {
         "connect": "Se connecter",
@@ -180,7 +184,9 @@
     },
     "potential": {
         "new": "Apprendre un nouveau potentiel",
-        "add": "Sélectionner un potentiel"
+        "add": "Sélectionner un potentiel",
+        "upgrade": "Voulez-vous dépenser *{cost} points* d'expérience pour augmenter *{name}* ?",
+        "upgradetitle": "Amélioration d'un potentiel"
     },
     "cultes": {
         "anabaptiste": {

@@ -6,10 +6,10 @@ import InventoryPage from './inventorypage/InventoryPage';
 import { Character } from '../models/Character';
 import PotentialsPage from './potentialspage/PotentialsPage';
 import StatsPage from './statspage/StatsPage';
-import { Snackbar, CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, IconButton, Badge } from '@material-ui/core';
-import { Save, Check } from '@material-ui/icons';
+import { CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, IconButton, Badge } from '@material-ui/core';
+import { Save } from '@material-ui/icons';
 import T from 'i18n-react';
-import { HeaderContext } from '../App';
+import { HeaderContext, SnackbarContext } from '../App';
 
 interface Props {
     onSaveCharacter: (character: Character) => Promise<boolean>;
@@ -23,10 +23,10 @@ export default function DetailPage(props: Props) {
     const [dirty, setDirty] = useState<boolean>(false);
     const selectedCharacter = useMemo(() => props.characters.find((char) => char._id === id), [id, props.characters]);
     const [character, setCharacter] = useState<Character>(JSON.parse(JSON.stringify(selectedCharacter)));
-    const [open, setOpen] = useState<boolean>(false);
     const [disabled, setDisabled] = useState<boolean>(false);
     const [dialogOpen, setDialogOpen] = useState<string>('');
     const { setExp } = useContext(HeaderContext);
+    const { setSnackbar } = useContext(SnackbarContext);
 
     useEffect(() => {
         setExp(character.exp);
@@ -51,8 +51,11 @@ export default function DetailPage(props: Props) {
         setDisabled(true);
         let result = await props.onSaveCharacter(character);
         if (result) {
-            setOpen(true);
             setDirty(false);
+            setSnackbar({
+                type: 'success',
+                message: T.translate('generic.charactersaved') as string
+            });
         }
         setDisabled(false);
     }
@@ -66,9 +69,12 @@ export default function DetailPage(props: Props) {
         setDisabled(true);
         let result = await props.onSaveCharacter(character);
         if (result) {
-            setOpen(true);
             setDirty(false);
             history.push(dialogOpen);
+            setSnackbar({
+                type: 'success',
+                message: T.translate('generic.charactersaved') as string
+            });
         } else {
             // TODO
             setDisabled(false);
@@ -102,15 +108,6 @@ export default function DetailPage(props: Props) {
                     {disabled ? <CircularProgress disableShrink size={24} style={{ color: 'white' }} /> : <Save />}
                 </Badge>
             </IconButton>
-            <Snackbar
-                open={open}
-                autoHideDuration={3000}
-                onClose={() => setOpen(false)}
-                message={<span style={{ display: 'flex', alignItems: 'center' }}>
-                    <Check style={{ marginRight: '16px' }} />{T.translate('generic.charactersaved')}
-                </span>}
-                classes={{ root: 'success-snackbar' }}
-            />
             <Dialog
                 disableBackdropClick
                 disableEscapeKeyDown

@@ -54,7 +54,7 @@ export interface Character {
     potentials: Potential[];
     inventory: Item[];
     notes: string[];
-    belief: string;
-    behavior: string;
+    belief: 'volonte' | 'foi';
+    behavior: 'pulsions' | 'concentration';
     exp: number;
 }

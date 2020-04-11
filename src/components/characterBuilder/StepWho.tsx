@@ -64,7 +64,7 @@ export default function StepWho(props: Props) {
             <div style={{ display: 'flex' }}>
                 <TextField
                     name='weight'
-                    label="Poids"
+                    label={T.translate('generic.weight') as string}
                     margin="dense"
                     type='number'
                     InputProps={{
@@ -81,7 +81,7 @@ export default function StepWho(props: Props) {
                 />
                 <TextField
                     name='size'
-                    label="Taille"
+                    label={T.translate('generic.size') as string}
                     margin="dense"
                     type='number'
                     InputProps={{
