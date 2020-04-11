@@ -10,6 +10,7 @@ import { CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogC
 import { Save } from '@material-ui/icons';
 import T from 'i18n-react';
 import { HeaderContext, SnackbarContext } from '../App';
+import BattlePage from './battlepage/BattlePage';
 
 interface Props {
     onSaveCharacter: (character: Character) => Promise<boolean>;
@@ -90,6 +91,7 @@ export default function DetailPage(props: Props) {
             {tab === 1 && <InventoryPage char={character} onChange={handleChange} />}
             {tab === 2 && <PotentialsPage char={character} onChange={handleChange} />}
             {tab === 3 && <NotesPage char={character} onChange={handleChange} />}
+            {tab === 4 && <BattlePage char={character} />}
             <Navigator currentTab={tab} onTabChange={(event, value) => setTab(value)} />
             <IconButton
                 style={{

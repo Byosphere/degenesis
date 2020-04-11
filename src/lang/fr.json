@@ -19,6 +19,7 @@
         "money": "{money} lettres de Change",
         "save": "Sauvegarder",
         "wrongpassword": "Mauvais identifiant ou mot de passe.",
+        "createsuccess": "Le personnage a bien été créé !",
         "tech": {
             "0": "I",
             "1": "II",
@@ -89,7 +90,8 @@
         "diceresult": "Vous obtenez *{success}* réussites, dont *{trigger}* déclencheurs.",
         "xpsuccess": "L'experience du personnage a bien été mise à jour.",
         "error": "Une erreur est survenue.",
-        "xperror": "Vous n'avez pas assez de points d'expérience !"
+        "xperror": "Vous n'avez pas assez de points d'expérience !",
+        "addchar": "Ajouter un personnage"
     },
     "connect": {
         "connect": "Se connecter",
@@ -119,8 +121,8 @@
         "darkmode": "Mode Sombre",
         "activated": "Activé",
         "desactivated": "Désactivé",
-        "exportdata": "Exporter les données",
-        "importdata": "Importer des données",
+        "importsub": "personnage au format JSON",
+        "importdata": "Importer",
         "contact": "Contact",
         "version": "Version",
         "license": "License",

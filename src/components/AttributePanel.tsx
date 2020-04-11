@@ -10,6 +10,7 @@ import AttributeJauge from './AttributeJauge';
 interface Props {
     attribute: Attribute;
     onChange: (attribute: Attribute) => void;
+    locked?: boolean;
 }
 
 export default function AttributePanel(props: Props) {
@@ -79,6 +80,7 @@ export default function AttributePanel(props: Props) {
                         value={attribute.base}
                         attribute
                         onClick={(value) => handleChange(value)}
+                        locked={props.locked}
                     />
                 </ExpansionPanelSummary>
                 <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
@@ -89,6 +91,7 @@ export default function AttributePanel(props: Props) {
                             value={skill.value}
                             onClick={(value) => handleChange(value, skill.id)}
                             onRollDice={(event) => openRollModal(event, skill)}
+                            locked={props.locked}
                         />
                     ))}
                 </ExpansionPanelDetails>

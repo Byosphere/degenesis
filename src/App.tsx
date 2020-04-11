@@ -12,6 +12,8 @@ import DetailPage from './pages/DetailPage';
 import ConnectPage from './pages/connectpage/ConnectPage';
 import { Character } from './models/Character';
 import CustomSnackbar from './components/CustomSnackbar';
+import UploadManager from './components/UploadManager';
+import T from 'i18n-react';
 
 export const UserContext = createContext(null);
 export const HeaderContext = createContext(null);
@@ -32,6 +34,7 @@ export default function App() {
     const [headerTitle, setHeaderTitle] = useState<string>('');
     const [exp, setExp] = useState<number>(0);
     const [snackbar, setSnackbar] = useState<Snackbar>(null);
+    const [open, setOpen] = useState<boolean>(false);
 
     // Supprime un personnage
     async function handleDeleteCharacter(charId: string): Promise<boolean> {
@@ -56,7 +59,10 @@ export default function App() {
             characters[index] = charData.data;
             setCharacters([...characters]);
         } catch (error) {
-            console.error(error.message);
+            setSnackbar({
+                type: 'error',
+                message: error.message
+            });
             return false;
         }
         return true;
@@ -70,10 +76,17 @@ export default function App() {
             characters.push(character.data);
             setCharacters(characters);
             setIsLoading(false);
+            setSnackbar({
+                type: 'success',
+                message: T.translate('generic.createsuccess') as string
+            });
 
         } catch (error) {
             setIsLoading(false);
-            console.error(error.message);
+            setSnackbar({
+                type: 'error',
+                message: error.message
+            });
         }
     }
 
@@ -126,6 +139,7 @@ export default function App() {
                                                 characters={characters}
                                                 onDelete={handleDeleteCharacter}
                                                 onDisconnect={() => setUser(null)}
+                                                onUpload={() => setOpen(true)}
                                             />
                                         </Route>
                                         <Route path="/create" exact>
@@ -140,6 +154,11 @@ export default function App() {
                                     </Switch>
                                 </div>
                                 {snackbar && <CustomSnackbar {...snackbar} setSnackbar={setSnackbar} />}
+                                <UploadManager
+                                    open={open}
+                                    onClose={() => setOpen(false)}
+                                    onSave={handleCreateCharacter}
+                                />
                             </HashRouter>
                         </SnackbarContext.Provider>
                     </HeaderContext.Provider>

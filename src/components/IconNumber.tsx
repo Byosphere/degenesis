@@ -6,18 +6,20 @@ interface Props {
     active?: boolean;
     disabled?: boolean;
     onClick: (num: number) => void;
+    locked?: boolean;
 }
 
 export default function IconNumber(props: Props) {
 
-    const { num, active, disabled } = props;
+    const { num, active, disabled, locked } = props;
     const style: React.CSSProperties = {
         marginRight: '3px',
         opacity: disabled ? 0.4 : 1,
-        pointerEvents: (active || disabled) ? 'none' : 'initial'
+        pointerEvents: disabled ? 'none' : 'initial'
     };
 
     function onClick(event: React.MouseEvent<any>) {
+        if (locked) return;
         event.stopPropagation();
         props.onClick(num);
     }

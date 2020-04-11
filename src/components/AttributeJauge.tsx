@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { FormGroup, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button, DialogTitle } from '@material-ui/core';
-import { Info, Casino } from '@material-ui/icons';
+import { Info, Casino, AddCircle } from '@material-ui/icons';
 import T from 'i18n-react';
 import { Prompt } from 'react-router-dom';
 import IconNumber from './IconNumber';
@@ -13,6 +13,7 @@ interface Props {
     potential?: boolean;
     onRollDice?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     onClick?: (value: number) => void;
+    locked?: boolean;
 }
 
 export default function AttributeJauge(props: Props) {
@@ -39,11 +40,17 @@ export default function AttributeJauge(props: Props) {
         return false;
     }
 
+    function handleEdit(event) {
+        event.stopPropagation();
+        // TODO
+    }
+
     let items = [];
     for (let i = 0; i <= (potential ? 3 : 6); i++) {
 
         items.push(<IconNumber
             key={i}
+            locked={props.locked}
             onClick={handleClick}
             num={i}
             active={value >= i}
@@ -55,7 +62,7 @@ export default function AttributeJauge(props: Props) {
             row
             style={{
                 alignItems: "center",
-                paddingLeft: '10px',
+                paddingLeft: attribute ? '16px' : '',
                 backgroundColor: attribute ? '#444' : '',
                 color,
                 width: '100%',
@@ -67,10 +74,17 @@ export default function AttributeJauge(props: Props) {
         >
             {attribute && <IconButton
                 size='small'
-                style={{ position: 'absolute', right: '-10px', top: '-10px', padding: '1px', background: 'white', color: '#444' }}
+                style={{ position: 'absolute', left: '-18px', top: '6px', padding: '1px', background: 'white', color: '#444' }}
                 onClick={handleOpen}
             >
                 <Info />
+            </IconButton>}
+            {attribute && props.locked && <IconButton
+                size='small'
+                style={{ position: 'absolute', right: '-10px', top: '-10px', padding: '1px', background: 'white', color: '#444' }}
+                onClick={handleEdit}
+            >
+                <AddCircle />
             </IconButton>}
             <Typography
                 variant="body1"
@@ -80,13 +94,13 @@ export default function AttributeJauge(props: Props) {
                 {label}
             </Typography>
             <div style={{
-                paddingRight: attribute ? '20px' : '',
+                paddingRight: attribute ? '14px' : '',
                 flex: 1,
                 display: 'flex',
                 justifyContent: 'flex-end',
                 alignItems: 'center',
                 paddingTop: '8px',
-                paddingBottom: '8px',
+                paddingBottom: '8px'
             }}>
                 {items}
                 {!potential && !attribute && <>

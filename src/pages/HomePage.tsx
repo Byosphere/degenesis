@@ -14,6 +14,7 @@ interface Props {
     onDisconnect: () => void;
     characters: Character[];
     onDelete: (charId: string) => Promise<boolean>;
+    onUpload: () => void;
 }
 
 export default function HomePage(props: Props) {
@@ -56,6 +57,11 @@ export default function HomePage(props: Props) {
     function actionOnPrompt() {
         handleClose();
         return false;
+    }
+
+    function handleUpload() {
+        setAnchorEl(null);
+        props.onUpload();
     }
 
     return (
@@ -113,6 +119,7 @@ export default function HomePage(props: Props) {
                 accountName={user.pseudo}
                 anchorEl={anchorEl}
                 onClose={() => setAnchorEl(null)}
+                onUpload={handleUpload}
                 onDisconnect={props.onDisconnect}
             />
             <Dialog

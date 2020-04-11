@@ -4,7 +4,7 @@ import { RANGS, CULTES, CULTURES, SEX, CONCEPTS } from '../../constants';
 import T from 'i18n-react';
 import { HeaderContext } from '../../App';
 import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
-import { Info, Edit, ExpandLess, ExpandMore } from '@material-ui/icons';
+import { Info, Edit, ExpandLess, ExpandMore, Lock, LockOpen } from '@material-ui/icons';
 import { getBlessuresMax, getEgoMax, getSporulationMax, getTraumaMax } from '../../utils/characterTools';
 import Trauma from './Trauma';
 import AttributePanel from '../../components/AttributePanel';
@@ -28,6 +28,7 @@ export default function StatsPage(props: Props) {
     const [showRank, setShowRank] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [expanded, setExpanded] = useState<boolean>(false);
+    const [lock, setLock] = useState<boolean>(true);
 
     useEffect(() => {
         setHeaderTitle(T.translate('generic.characterstats') as string);
@@ -144,9 +145,14 @@ export default function StatsPage(props: Props) {
                     </div>
                 </CardContent>
             </Card>
-            <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.attributes')}</Typography>
+            <Typography variant='body1' component='p' className='card-overtitle'>
+                {T.translate('generic.attributes')}
+                <span style={{ float: 'right' }} onClick={() => setLock(!lock)}>
+                    {lock ? <Lock fontSize='small' /> : <LockOpen fontSize='small' />}
+                </span>
+            </Typography>
             {char.attributes.map((att: Attribute, i: number) => (
-                <AttributePanel key={i} attribute={att} onChange={handleAttributeSave} />
+                <AttributePanel key={i} attribute={att} onChange={handleAttributeSave} locked={lock} />
             ))}
             <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.origins')}</Typography>
             <ExpansionPanel style={{ marginBottom: '5px' }}>
