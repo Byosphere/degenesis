@@ -84,7 +84,7 @@ export default function CharacterEditDialog(props: Props) {
         }
     }
 
-    function actionOnPrompt(location): boolean {
+    function actionOnPrompt(): boolean {
         props.onClose();
         return false;
     }

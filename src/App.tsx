@@ -122,7 +122,9 @@ export default function App() {
         </div>;
     } else if (!user) {
         return <div className="App">
-            <ConnectPage onConnect={(user) => setUser(user)} />
+            <HashRouter basename='/'>
+                <ConnectPage onConnect={(user) => setUser(user)} />
+            </HashRouter>
         </div>;
     } else {
         return (
