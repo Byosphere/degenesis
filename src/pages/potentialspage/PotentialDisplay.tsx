@@ -7,7 +7,6 @@ import { Potential } from '../../models/Character';
 import AttributeJauge from '../../components/AttributeJauge';
 
 interface Props {
-    type: number;
     potential: Potential;
     onUpgradePotential: (type: number, id: number) => void;
     onDeletePotential: (type: number, id: number) => void;
@@ -15,10 +14,10 @@ interface Props {
 
 export default function PotentialDisplay(props: Props) {
 
-    const { potential, type } = props;
+    const { potential } = props;
 
     return (
-        <ExpansionPanel key={potential.id}>
+        <ExpansionPanel key={potential.id} style={{ marginBottom: '5px' }}>
             <ExpansionPanelSummary
                 expandIcon={<ExpandMore />}
             >
@@ -36,8 +35,8 @@ export default function PotentialDisplay(props: Props) {
             </ExpansionPanelSummary>
             <Divider />
             <ExpansionPanelActions>
-                <Button disabled={potential.level === 3} onClick={() => props.onUpgradePotential(type, potential.id)}>{T.translate('generic.levelup')}</Button>
-                <Button color='secondary' onClick={() => props.onDeletePotential(type, potential.id)}>{T.translate('generic.delete')}</Button>
+                <Button disabled={potential.level === 3} onClick={() => props.onUpgradePotential(potential.group, potential.id)}>{T.translate('generic.levelup')}</Button>
+                <Button color='secondary' onClick={() => props.onDeletePotential(potential.group, potential.id)}>{T.translate('generic.delete')}</Button>
             </ExpansionPanelActions>
         </ExpansionPanel>
     );

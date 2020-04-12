@@ -30,6 +30,12 @@ export interface Item {
     title?: string;
 }
 
+export interface Origin {
+    id: number;
+    name: string;
+    value: number;
+}
+
 export interface Character {
     _id?: string;
     name: string;
@@ -54,4 +60,5 @@ export interface Character {
     belief: 'volonte' | 'foi';
     behavior: 'pulsions' | 'concentration';
     exp: number;
+    origins: Origin[]
 }

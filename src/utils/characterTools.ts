@@ -1,6 +1,7 @@
 import { Character, Attribute, Skill, Potential } from "../models/Character";
 import { SKILLS, ATTRIBUTES, CULTURES, CULTES, CONCEPTS } from "../constants";
 import baseAttributes from '../data/attributes.json';
+import baseOrigins from '../data/origins.json';
 
 export function getSporulationMax(character: Character): number {
     const psyche = character.attributes.find((attr: Attribute) => attr.id === 4);
@@ -122,7 +123,8 @@ export function getNewCharacter(): Character {
         sporulation: 0,
         blessures: 0,
         trauma: 0,
-        exp: 0
+        exp: 0,
+        origins: JSON.parse(JSON.stringify(baseOrigins))
     };
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Character, Potential } from '../../models/Character';
-import { Typography, Dialog, DialogContentText, DialogTitle, DialogContent, DialogActions, Button, ExpansionPanel, ExpansionPanelSummary, Avatar, ExpansionPanelDetails } from '@material-ui/core';
+import { Character, Potential, Origin } from '../../models/Character';
+import { Typography, Dialog, DialogContentText, DialogTitle, DialogContent, DialogActions, Button, ExpansionPanel, ExpansionPanelSummary, Avatar, ExpansionPanelDetails, Card, CardContent } from '@material-ui/core';
 import T from 'i18n-react';
 import Empty from '../../components/Empty';
 import PotentialDisplay from './PotentialDisplay';
@@ -11,6 +11,7 @@ import FloatingAction from '../../components/FloatingAction';
 import { getPotentialXpCost } from '../../utils/characterTools';
 import { POTENTIALS, GENERIC_POTENTIALS, CULTES, CULTURES, CONCEPTS } from '../../constants';
 import { Prompt } from 'react-router-dom';
+import AttributeJauge from '../../components/AttributeJauge';
 
 interface Props {
     char: Character;
@@ -20,8 +21,6 @@ interface Props {
 export default function PotentialsPage(props: Props) {
 
     const { char } = props;
-    const genericPotentials = char.potentials.filter(p => p.group === 0);
-    const cultePotentials = char.potentials.filter(p => p.group === 1);
     const [open, setOpen] = useState<boolean>(false);
     const { setHeaderTitle, setExp, exp } = useContext(HeaderContext);
     const [openXp, setOpenXp] = useState<boolean>(false);
@@ -73,9 +72,41 @@ export default function PotentialsPage(props: Props) {
         return false;
     }
 
+    function handleEdit(origin: Origin, value: number) {
+        origin.value = value;
+        props.onChange(char);
+    }
+
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto', paddingBottom: '32px' }}>
-            <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.legacy', { name: char.name })}</Typography>
+        <div style={{ margin: '5px' }}>
+            <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.origins')}</Typography>
+            <Card style={{ marginBottom: '5px' }}>
+                <CardContent>
+                    {char.origins.map((origin: Origin) => (
+                        <AttributeJauge
+                            key={origin.id}
+                            label={T.translate('origins.' + origin.name + '.name') as string}
+                            value={origin.value}
+                            onClick={(value: number) => handleEdit(origin, value)}
+                            desc={T.translate('origins.' + origin.name + '.desc') as string}
+                            origin
+                        />
+                    ))}
+                </CardContent>
+            </Card>
+            <Typography variant='subtitle1' component='p' className="card-overtitle">
+                {T.translate('generic.potentials')}
+            </Typography>
+            {!char.potentials.length && <Empty />}
+            {char.potentials.map((potential: Potential, key: number) => (
+                <PotentialDisplay
+                    key={key}
+                    potential={potential}
+                    onDeletePotential={handleDeletePotential}
+                    onUpgradePotential={handleOpenXpDialog}
+                />
+            ))}
+            <span className='stats-bottom'></span>
             <ExpansionPanel style={{ marginBottom: '5px' }}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                     <Avatar alt={CULTES[char.culte].name} src={"images/cultes/" + CULTES[char.culte].img} />
@@ -103,34 +134,7 @@ export default function PotentialsPage(props: Props) {
                     {T.translate('concepts.' + CONCEPTS[char.concept].desc)}
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <div style={{ overflow: 'auto', paddingBottom: '5px' }}>
-                <Typography variant='subtitle1' component='p' className="card-overtitle">
-                    {T.translate('generic.potential0')}
-                </Typography>
-            </div>
-            {!genericPotentials.length && <Empty />}
-            {genericPotentials.map((potential: Potential, key: number) => (
-                <PotentialDisplay
-                    key={key}
-                    type={0}
-                    potential={potential}
-                    onDeletePotential={handleDeletePotential}
-                    onUpgradePotential={handleOpenXpDialog}
-                />
-            ))}
-            <Typography variant='subtitle1' component='p' style={{ opacity: 0.6, margin: '8px 16px' }}>
-                {T.translate('generic.potential1')}
-            </Typography>
-            {!cultePotentials.length && <Empty />}
-            {cultePotentials.map((potential: Potential, key: number) => (
-                <PotentialDisplay
-                    key={key}
-                    type={1}
-                    potential={potential}
-                    onDeletePotential={handleDeletePotential}
-                    onUpgradePotential={handleOpenXpDialog}
-                />
-            ))}
+            <span className='stats-bottom'></span>
             <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
             <PotentialsDialog
                 open={open}

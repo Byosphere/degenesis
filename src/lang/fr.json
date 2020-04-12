@@ -9,6 +9,7 @@
         "ego": "Ego",
         "trauma": "Traumatismes",
         "sporulation": "Sporulations",
+        "potentials": "Potentiels",
         "potential0": "Potentiels génériques",
         "potential1": "Potentiels de Culte",
         "weapons": "Armes",
@@ -192,6 +193,32 @@
         "add": "Sélectionner un potentiel",
         "upgrade": "Voulez-vous dépenser *{cost} points* d'expérience pour augmenter *{name}* ?",
         "upgradetitle": "Amélioration d'un potentiel"
+    },
+    "origins": {
+        "allies": {
+            "name": "Alliés",
+            "desc": "Un personnage doté d'une valeur en *Alliés* peut bénéficier d'une certaine assistance au sein de son Culte."
+        },
+        "autorite": {
+            "name": "Autorité",
+            "desc": "Le personnage est tenu en estime pour ses connaissances, son expérience ou sa détermination. Son influence est basée sur sa prééminence sociale au sein du Culte."
+        },
+        "renommee": {
+            "name": "Renommée",
+            "desc": "Le personnage est respecté en dehors de la hiérarchie. Il incarne les valeurs du Culte dans sa façon d'être et dans son apparence."
+        },
+        "reseau": {
+            "name": "Réseau",
+            "desc": "Même issus de différentes cultures, l'entraide est possible. L'historique *Réseau* indique le niveau de sociabilité du personnage en dehors du Culte."
+        },
+        "ressources": {
+            "name": "Ressources",
+            "desc": "Chaque objet d'un Culte a une valeur en *Ressources* aussi bien qu'un prix. Cet attribut détermine le niveau d'accès des ressources du Culte."
+        },
+        "secrets": {
+            "name": "Secrets",
+            "desc": "La valeur de *Secrets* montre à quel point le personnage s'est rapproché de la vérité concernant son Culte."
+        }
     },
     "cultes": {
         "anabaptiste": {

@@ -3,7 +3,7 @@ import { Character, Attribute } from '../../models/Character';
 import { RANGS, CULTES, CULTURES, SEX, CONCEPTS } from '../../constants';
 import T from 'i18n-react';
 import { HeaderContext } from '../../App';
-import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Info, Edit, ExpandLess, ExpandMore, Lock, LockOpen } from '@material-ui/icons';
 import { getBlessuresMax, getEgoMax, getSporulationMax, getTraumaMax } from '../../utils/characterTools';
 import Trauma from './Trauma';

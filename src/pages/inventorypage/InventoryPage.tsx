@@ -67,7 +67,7 @@ export default function InventoryPage(props: Props) {
     }
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100% - 10px)', margin: '5px' }}>
             <Typography variant='subtitle1' component='p' className="card-overtitle">
                 {T.translate('generic.bagof', { who: char.name })}
             </Typography>

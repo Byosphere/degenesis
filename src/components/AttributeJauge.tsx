@@ -16,6 +16,7 @@ interface Props {
     onClick?: (value: number) => void;
     locked?: boolean;
     disabled?: boolean;
+    origin?: boolean;
 }
 
 export default function AttributeJauge(props: Props) {
@@ -63,19 +64,12 @@ export default function AttributeJauge(props: Props) {
         <FormGroup
             row
             style={{
-                alignItems: "center",
-                paddingLeft: '16px',
-                backgroundColor: attribute ? '#444' : '',
                 color,
-                width: '100%',
-                marginRight: attribute ? '10px' : '',
-                position: 'relative',
-                borderBottom: attribute ? 'none' : '1px solid rgba(0,0,0,0.16)',
-                marginBottom: attribute ? '' : '8px',
                 paddingTop: (!potential && !attribute) ? '8px' : '',
                 opacity: disabled ? 0.4 : 1,
                 pointerEvents: disabled ? 'none' : 'initial'
             }}
+            className={'attribute-jauge ' + (attribute ? 'attribute' : '')}
         >
             {attribute && <IconButton
                 size='small'
@@ -125,6 +119,7 @@ export default function AttributeJauge(props: Props) {
                 {items}
                 {!potential && !attribute && <span style={{ display: 'flex', flexGrow: 1, justifyContent: 'flex-end' }}>
                     <hr style={{ margin: '0 3px 0 6px', border: 'none', borderLeft: '1px solid rgba(0,0,0,0.16)', height: '24px' }} />
+                    {props.origin && <IconButton onClick={handleOpen} style={{ margin: '0 8px' }} size='small'><Info /></IconButton>}
                     {props.locked && <IconButton
                         onClick={handleEdit}
                         size='small'
@@ -133,12 +128,12 @@ export default function AttributeJauge(props: Props) {
                     >
                         <AddCircle />
                     </IconButton>}
-                    <IconButton onClick={props.onRollDice} size='small' color='secondary' >
+                    {!props.origin && <IconButton onClick={props.onRollDice} size='small' color='secondary' >
                         <Casino />
-                    </IconButton>
+                    </IconButton>}
                 </span>}
             </div>
-            {attribute && <Dialog
+            {(attribute || origin) && <Dialog
                 open={open}
                 onClose={handleClose}
             >
