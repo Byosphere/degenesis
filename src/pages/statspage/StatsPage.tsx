@@ -162,34 +162,6 @@ export default function StatsPage(props: Props) {
                     locked={lock}
                 />
             ))}
-            <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.origins')}</Typography>
-            <ExpansionPanel style={{ marginBottom: '5px' }}>
-                <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                    <Avatar alt={CULTES[char.culte].name} src={"images/cultes/" + CULTES[char.culte].img} />
-                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('cultes.' + CULTES[char.culte].name)}</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
-                    {T.translate('cultes.' + CULTES[char.culte].desc)}
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel style={{ marginBottom: '5px' }}>
-                <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                    <Avatar alt={CULTURES[char.culture].name} src={"images/cultures/" + CULTURES[char.culture].img} />
-                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('cultures.' + CULTURES[char.culture].name)}</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
-                    {T.translate('cultures.' + CULTURES[char.culture].desc)}
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
-            <ExpansionPanel style={{ marginBottom: '5px' }}>
-                <ExpansionPanelSummary expandIcon={<ExpandMore />}>
-                    <Avatar alt={CONCEPTS[char.concept].name} src={"images/concepts/" + CONCEPTS[char.concept].img} />
-                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('concepts.' + CONCEPTS[char.concept].name)}</Typography>
-                </ExpansionPanelSummary>
-                <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
-                    {T.translate('concepts.' + CONCEPTS[char.concept].desc)}
-                </ExpansionPanelDetails>
-            </ExpansionPanel>
             <span className='stats-bottom'></span>
             <CharacterEditDialog
                 char={char}

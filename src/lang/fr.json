@@ -14,7 +14,7 @@
         "weapons": "Armes",
         "armors": "Armures",
         "equipment": "Équipement",
-        "items": "Objets clés",
+        "items": "Objets",
         "bagof": "Inventaire de {who}",
         "money": "{money} lettres de Change",
         "save": "Sauvegarder",
@@ -91,7 +91,9 @@
         "xpsuccess": "L'experience du personnage a bien été mise à jour.",
         "error": "Une erreur est survenue.",
         "xperror": "Vous n'avez pas assez de points d'expérience !",
-        "addchar": "Ajouter un personnage"
+        "addchar": "Ajouter un personnage",
+        "upgrade": "Dépense d'expérience",
+        "legacy": "Héritage de {name}"
     },
     "connect": {
         "connect": "Se connecter",
@@ -113,7 +115,8 @@
         "potentials": "Potentiels",
         "home": "Accueil",
         "create": "Créer un personnage",
-        "battle": "Combat"
+        "battle": "Combat",
+        "legacy": "Héritage"
     },
     "settings": {
         "settings": "Paramètres",
@@ -176,7 +179,7 @@
         "armure": "Armure",
         "equipement": "Équipement",
         "weight": "Poids de l'objet",
-        "keyitem": "Objet clé",
+        "keyitem": "Objet",
         "additem": "Ajouter un Objet",
         "additemdesc": "Renseignez les informations du nouvel objet à ajouter à l'inventaire.",
         "type": "Type d'objet",
@@ -383,7 +386,7 @@
         "intellect": {
             "name": "Intellect",
             "short": "INT",
-            "desc": "Un esprit entraîné et aiguisé favorise la capacité d'abstraction et la concentration absolue, des aptitudes essentielles pour comprendre et utiliser la technologie ou les sciences. L'*Intellect représente l'organisation, la sagesse, la réflexion et la capacité à envisager les conséquences."
+            "desc": "Un esprit entraîné et aiguisé favorise la capacité d'abstraction et la concentration absolue, des aptitudes essentielles pour comprendre et utiliser la technologie ou les sciences. L'*Intellect* représente l'organisation, la sagesse, la réflexion et la capacité à envisager les conséquences."
         },
         "psyche": {
             "name": "Psyché",

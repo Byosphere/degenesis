@@ -151,7 +151,7 @@ export default function AttributeJauge(props: Props) {
                     <Button onClick={handleClose} color="primary">{T.translate('generic.close')}</Button>
                 </DialogActions>
             </Dialog>}
-            {disabled && <Divider style={{ position: 'absolute', backgroundColor: 'black', height: '2px', width: '100%', left: '4px', opacity: 0.6 }} />}
+            {disabled && <Divider style={{ position: 'absolute', backgroundColor: 'black', height: '2px', width: '100%', left: '0px', opacity: 0.5 }} />}
         </FormGroup>
     );
 }

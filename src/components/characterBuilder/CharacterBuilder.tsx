@@ -39,8 +39,9 @@ export default function CharacterBuilder(props: Props) {
     }
 
     function handleCreate() {
-        setCharacter({ ...character, money: MONEY[character.culte] * 2 });
-        props.onCreateCharacter(character);
+        let char = { ...character, money: MONEY[character.culte] * 2 }
+        setCharacter(char);
+        props.onCreateCharacter(char);
         history.replace('/');
     }
 

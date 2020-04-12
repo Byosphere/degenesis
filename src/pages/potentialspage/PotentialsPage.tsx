@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Character, Potential } from '../../models/Character';
-import { Typography, Dialog, DialogContentText, DialogTitle, DialogContent, DialogActions, Button } from '@material-ui/core';
+import { Typography, Dialog, DialogContentText, DialogTitle, DialogContent, DialogActions, Button, ExpansionPanel, ExpansionPanelSummary, Avatar, ExpansionPanelDetails } from '@material-ui/core';
 import T from 'i18n-react';
 import Empty from '../../components/Empty';
 import PotentialDisplay from './PotentialDisplay';
-import { Add } from '@material-ui/icons';
+import { Add, ExpandMore } from '@material-ui/icons';
 import PotentialsDialog from './PotentialsDialog';
 import { HeaderContext, SnackbarContext } from '../../App';
 import FloatingAction from '../../components/FloatingAction';
 import { getPotentialXpCost } from '../../utils/characterTools';
-import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
+import { POTENTIALS, GENERIC_POTENTIALS, CULTES, CULTURES, CONCEPTS } from '../../constants';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
     char: Character;
@@ -64,11 +65,44 @@ export default function PotentialsPage(props: Props) {
     }
 
     useEffect(() => {
-        setHeaderTitle(T.translate('navigator.potentials') as string);
+        setHeaderTitle(T.translate('navigator.legacy') as string);
     }, [setHeaderTitle]);
+
+    function actionOnPrompt(location): boolean {
+        setOpenXp(false)
+        return false;
+    }
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflowY: 'auto', paddingBottom: '32px' }}>
+            <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.legacy', { name: char.name })}</Typography>
+            <ExpansionPanel style={{ marginBottom: '5px' }}>
+                <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+                    <Avatar alt={CULTES[char.culte].name} src={"images/cultes/" + CULTES[char.culte].img} />
+                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('cultes.' + CULTES[char.culte].name)}</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails>
+                    {T.translate('cultes.' + CULTES[char.culte].desc)}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel style={{ marginBottom: '5px' }}>
+                <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+                    <Avatar alt={CULTURES[char.culture].name} src={"images/cultures/" + CULTURES[char.culture].img} />
+                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('cultures.' + CULTURES[char.culture].name)}</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
+                    {T.translate('cultures.' + CULTURES[char.culture].desc)}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel style={{ marginBottom: '5px' }}>
+                <ExpansionPanelSummary expandIcon={<ExpandMore />}>
+                    <Avatar alt={CONCEPTS[char.concept].name} src={"images/concepts/" + CONCEPTS[char.concept].img} />
+                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('concepts.' + CONCEPTS[char.concept].name)}</Typography>
+                </ExpansionPanelSummary>
+                <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
+                    {T.translate('concepts.' + CONCEPTS[char.concept].desc)}
+                </ExpansionPanelDetails>
+            </ExpansionPanel>
             <div style={{ overflow: 'auto', paddingBottom: '5px' }}>
                 <Typography variant='subtitle1' component='p' className="card-overtitle">
                     {T.translate('generic.potential0')}
@@ -108,6 +142,7 @@ export default function PotentialsPage(props: Props) {
                 open={openXp}
                 onClose={() => setOpenXp(false)}
             >
+                {openXp && <Prompt when={true} message={actionOnPrompt} />}
                 <DialogTitle>{T.translate('potential.upgradetitle')}</DialogTitle>
                 {potential && <DialogContent>
                     <DialogContentText>
