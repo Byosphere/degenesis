@@ -1,6 +1,3 @@
-import { SKILLS, CULTES, CULTURES, CONCEPTS, ATTRIBUTES } from "../constants";
-import baseAttributes from '../data/attributes.json';
-
 export interface Attribute {
     id: number;
     name: string;

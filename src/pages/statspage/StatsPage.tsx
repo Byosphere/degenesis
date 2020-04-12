@@ -152,7 +152,15 @@ export default function StatsPage(props: Props) {
                 </span>
             </Typography>
             {char.attributes.map((att: Attribute, i: number) => (
-                <AttributePanel key={i} attribute={att} onChange={handleAttributeSave} locked={lock} />
+                <AttributePanel
+                    key={i}
+                    char={char}
+                    behavior={char.behavior}
+                    belief={char.belief}
+                    attribute={att}
+                    onChange={handleAttributeSave}
+                    locked={lock}
+                />
             ))}
             <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.origins')}</Typography>
             <ExpansionPanel style={{ marginBottom: '5px' }}>
