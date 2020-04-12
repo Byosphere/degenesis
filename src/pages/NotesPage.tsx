@@ -110,7 +110,7 @@ export default function NotesPage(props: Props) {
                     open={open}
                     onClose={() => setOpen(false)}
                 >
-                    <Prompt when={true} message={actionOnPrompt} />
+                    {open && <Prompt when={true} message={actionOnPrompt} />}
                     <DialogTitle>
                         {T.translate('generic.confirmdelete', { who: T.translate('generic.currentnote') })}
                     </DialogTitle>

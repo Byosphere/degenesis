@@ -114,13 +114,14 @@ export default function InventoryPage(props: Props) {
                     fullScreen
                     TransitionComponent={Transition}
                 >
-                    <AddItemDialog onSave={handleSave} onClose={() => setOpen(false)} />
+                    <AddItemDialog open={open} onSave={handleSave} onClose={() => setOpen(false)} />
                 </Dialog>
                 <Dialog
                     open={moneyModalOpen}
                     onClose={() => setMoneyModalOpen(false)}
                 >
                     <MoneyDialog
+                        open={moneyModalOpen}
                         money={char.money}
                         onClose={() => setMoneyModalOpen(false)}
                         onValidate={handleChangeMoney}

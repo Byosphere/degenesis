@@ -201,7 +201,7 @@ export default function StatsPage(props: Props) {
                 open={showRank}
                 onClose={() => setShowRank(false)}
             >
-                <Prompt when={true} message={actionOnPrompt} />
+                {showRank && <Prompt when={true} message={actionOnPrompt} />}
                 <DialogTitle>{T.translate('rangs.' + RANGS[char.culte][char.rang] + '.name')}</DialogTitle>
                 <DialogContent>
                     {T.translate('rangs.' + RANGS[char.culte][char.rang] + '.desc')}

@@ -35,7 +35,7 @@ export default function PotentialsDialog(props: Props) {
             fullScreen
             TransitionComponent={Transition}
         >
-            <Prompt when={true} message={actionOnPrompt} />
+            {props.open && <Prompt when={true} message={actionOnPrompt} />}
             <AppBar>
                 <Toolbar>
                     <IconButton edge="start" color="inherit" onClick={props.onClose} aria-label="Close">

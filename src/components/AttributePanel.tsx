@@ -38,6 +38,11 @@ export default function AttributePanel(props: Props) {
         return false;
     }
 
+    function actionOnPromptUpgrade() {
+        setEdit(null);
+        return false
+    }
+
     function roll() {
         setRollInProgress(true);
         const diceNumber = attribute.base + skill.value;
@@ -149,7 +154,7 @@ export default function AttributePanel(props: Props) {
                 open={open}
                 onClose={handleClose}
             >
-                <Prompt when={true} message={actionOnPrompt} />
+                {open && <Prompt when={true} message={actionOnPrompt} />}
                 <DialogTitle>{T.translate('generic.diceroll')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText component='div'>
@@ -200,7 +205,7 @@ export default function AttributePanel(props: Props) {
                 open={!!edit}
                 onClose={() => setEdit(null)}
             >
-                <Prompt when={true} message={actionOnPrompt} />
+                {!!edit && <Prompt when={true} message={actionOnPromptUpgrade} />}
                 <DialogTitle>{T.translate('generic.upgrade')}</DialogTitle>
                 {edit && <DialogContent>
                     {T.translate('potential.upgrade', {

@@ -5,6 +5,7 @@ import T from 'i18n-react';
 import { Prompt } from 'react-router-dom';
 
 interface Props {
+    open: boolean;
     money: number;
     onClose: () => void;
     onValidate: (value: number) => void;
@@ -34,7 +35,7 @@ export default function MoneyDialog(props: Props) {
 
     return (
         <>
-            <Prompt when={true} message={actionOnPrompt} />
+            {props.open && <Prompt when={true} message={actionOnPrompt} />}
             <DialogTitle id="form-dialog-title">{T.translate('inventory.moneyedit')}</DialogTitle>
             <DialogContent>
                 <RadioGroup

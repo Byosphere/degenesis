@@ -142,7 +142,7 @@ export default function AttributeJauge(props: Props) {
                 open={open}
                 onClose={handleClose}
             >
-                <Prompt when={true} message={actionOnPrompt} />
+                {open && <Prompt when={true} message={actionOnPrompt} />}
                 <DialogContent>
                     <DialogTitle>{label}</DialogTitle>
                     <DialogContentText>{desc}</DialogContentText>

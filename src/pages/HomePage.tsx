@@ -126,7 +126,7 @@ export default function HomePage(props: Props) {
                 open={open}
                 onClose={handleClose}
             >
-                <Prompt when={true} message={actionOnPrompt} />
+                {open && <Prompt when={true} message={actionOnPrompt} />}
                 <DialogTitle>
                     {T.translate('generic.confirmdelete', { who: props.characters[index] ? props.characters[index].name : '' })}
                 </DialogTitle>

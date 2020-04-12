@@ -91,7 +91,7 @@ export default function Header(props: Props) {
                     open={open}
                     onClose={() => setOpen(false)}
                 >
-                    <Prompt when={true} message={actionOnPrompt} />
+                    {open && <Prompt when={true} message={actionOnPrompt} />}
                     <DialogTitle>{T.translate('generic.addxp')}</DialogTitle>
                     <DialogContent>
                         <TextField
