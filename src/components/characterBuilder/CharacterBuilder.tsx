@@ -41,7 +41,7 @@ export default function CharacterBuilder(props: Props) {
     function handleCreate() {
         setCharacter({ ...character, money: MONEY[character.culte] * 2 });
         props.onCreateCharacter(character);
-        history.push('/');
+        history.replace('/');
     }
 
     function displayLabel(title: any, validElement: any, currentStep: number): JSX.Element {

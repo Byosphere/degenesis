@@ -63,7 +63,7 @@ export default function DetailPage(props: Props) {
 
     function handleCancel() {
         setDirty(false);
-        history.push(dialogOpen);
+        history.replace(dialogOpen);
     }
 
     async function handleOk() {
@@ -71,7 +71,7 @@ export default function DetailPage(props: Props) {
         let result = await props.onSaveCharacter(character);
         if (result) {
             setDirty(false);
-            history.push(dialogOpen);
+            history.replace(dialogOpen);
             setSnackbar({
                 type: 'success',
                 message: T.translate('generic.charactersaved') as string

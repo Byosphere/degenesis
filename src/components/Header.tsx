@@ -21,7 +21,7 @@ export default function Header(props: Props) {
     const { setSnackbar } = useContext(SnackbarContext);
 
     function handleBack() {
-        history.push('/');
+        history.replace('/');
     }
 
     async function handleAddXp() {
