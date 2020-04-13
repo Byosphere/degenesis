@@ -1,83 +1,88 @@
 import React, { useState } from 'react';
 import T from 'i18n-react';
 import { Item } from '../../models/Character';
-import { ListItem, ListItemText, ListItemSecondaryAction, IconButton, Collapse, Dialog, DialogTitle, DialogActions, Button } from '@material-ui/core';
-import { ExpandLess, ExpandMore, Delete } from '@material-ui/icons';
+import { ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Chip, ExpansionPanelActions, Button, Divider, Dialog, DialogTitle, DialogActions } from '@material-ui/core';
+import { ExpandMore } from '@material-ui/icons';
+import Empty from '../../components/Empty';
+import { useStyles } from './styles';
+import { Prompt } from 'react-router-dom';
 
 interface Props {
-    item: Item;
+    title: string;
+    items: Item[];
     onDelete: (id: number) => void;
 }
 
 export default function ItemDisplay(props: Props) {
 
-    const { item } = props;
-    const [expand, setExpand] = useState<boolean>(false);
+    const { items, title } = props;
+    const classes = useStyles();
     const [open, setOpen] = useState<boolean>(false);
-    const itemDetails = T.translate('generic.weight') + ' : '
-        + item.weight + T.translate('generic.weightunit') + ' | ' +
-        T.translate('generic.techname') + ' ' + T.translate('generic.tech.' + item.tech);
-
-    let degatsText = '';
-    let defenseText = '';
-    let titleText = '';
-    if (item.degats) {
-        // const force = props.char.attributes[0].skills[2].value;
-        // // eslint-disable-next-line
-        // const degats = Math.ceil(eval(item.degats.replace('F', force.toString())));
-        // degatsText = T.translate('generic.attack') + ' : ' + degats + ' ' + T.translate('generic.dices') + ' (' + item.degats + ')';
-
-    } else if (item.defense) {
-        defenseText = T.translate('generic.defense') + ' : ' + item.defense + ' ' + T.translate('generic.dices');
-    } else if (item.title) {
-        titleText = item.title;
-    }
+    const [selectedItem, setSelectedItem] = useState<Item>(null);
 
     function handleDelete() {
         setOpen(false);
-        props.onDelete(item.id);
+        props.onDelete(selectedItem.id);
+    }
+
+    function openDelete(item: Item) {
+        setSelectedItem(item);
+        setOpen(true);
+    }
+
+    function actionOnPrompt() {
+        setOpen(false);
+        return false;
     }
 
     return (
-        <React.Fragment>
-            <ListItem button onClick={() => setExpand(!expand)}>
-                <ListItemText primary={item.name} secondary={itemDetails} />
-                <ListItemSecondaryAction>
-                    <IconButton onClick={() => setExpand(!expand)}>
-                        {expand ? <ExpandLess /> : <ExpandMore />}
-                    </IconButton>
-                    <IconButton color='secondary' onClick={handleDelete}>
-                        <Delete />
-                    </IconButton>
-                </ListItemSecondaryAction>
-            </ListItem>
-            <Collapse in={expand} unmountOnExit>
-                <ListItem>
-                    <ListItemText
-                        style={{ margin: '0px 16px 6px 16px' }}
-                        primary={
-                            degatsText || defenseText || titleText
-                        }
-                        secondary={item.desc}
-                    />
-                </ListItem>
-            </Collapse>
+        <>
+            <Chip label={title} className={classes.cardOverTitle} />
+            {!items.length && <Empty />}
+            {items.map((item, key) => (
+                <ExpansionPanel key={key} TransitionProps={{ unmountOnExit: true }}>
+                    <ExpansionPanelSummary
+                        expandIcon={<ExpandMore />}
+                        classes={{ content: classes.expansionPanel }}
+                    >
+                        <Typography>{item.name}</Typography>
+                        <span>
+                            <Typography>{item.weight}g</Typography>
+                            {item.degats && <Typography>{item.degats}</Typography>}
+                            {item.defense && <Typography>{item.defense}</Typography>}
+                        </span>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <Typography>
+                            {item.desc}
+                        </Typography>
+                    </ExpansionPanelDetails>
+                    <Divider />
+                    <ExpansionPanelActions>
+                        <Button size="small">{T.translate('generic.edit')}</Button>
+                        <Button size="small" color="secondary" onClick={() => openDelete(item)}>
+                            {T.translate('generic.delete')}
+                        </Button>
+                    </ExpansionPanelActions>
+                </ExpansionPanel>
+            ))}
             <Dialog
                 open={open}
                 onClose={handleDelete}
             >
+                {open && <Prompt when={true} message={actionOnPrompt} />}
                 <DialogTitle>
-                    {T.translate('generic.confirmdelete', { who: item.name })}
+                    {T.translate('inventory.removeitem', { what: selectedItem ? selectedItem.name : '' })}
                 </DialogTitle>
                 <DialogActions>
                     <Button onClick={() => setOpen(false)} color="primary">
                         {T.translate('generic.no')}
                     </Button>
-                    <Button onClick={handleDelete} autoFocus color='secondary'>
+                    <Button onClick={handleDelete} color='secondary'>
                         {T.translate('generic.yes')}
                     </Button>
                 </DialogActions>
             </Dialog>
-        </React.Fragment>
+        </>
     );
 }

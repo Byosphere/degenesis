@@ -12,6 +12,7 @@ import CharacterEditDialog, { EditFormValues } from './CharacterEditDialog';
 import { Prompt } from 'react-router-dom';
 import FloatingAction from '../../components/FloatingAction';
 import InteractiveJauge from '../../components/InteractiveJauge';
+import CardOverTitle from '../../components/cardovertitle/CardOverTitle';
 
 interface Props {
     char: Character;
@@ -111,7 +112,7 @@ export default function StatsPage(props: Props) {
                     </CardContent>
                 }
             </Card>
-            <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.health')}</Typography>
+            <CardOverTitle title={T.translate('generic.health')} />
             <Card style={{ margin: '5px 0' }}>
                 <CardContent>
                     <InteractiveJauge
@@ -145,12 +146,16 @@ export default function StatsPage(props: Props) {
                     </div>
                 </CardContent>
             </Card>
-            <Typography variant='body1' component='p' className='card-overtitle'>
-                {T.translate('generic.attributes')}
-                <span style={{ float: 'right' }} onClick={() => setLock(!lock)}>
-                    {lock ? <Lock fontSize='small' /> : <LockOpen fontSize='small' />}
-                </span>
-            </Typography>
+            <CardOverTitle
+                title={
+                    <>
+                        {T.translate('generic.attributes')}
+                        <span style={{ float: 'right' }} onClick={() => setLock(!lock)}>
+                            {lock ? <Lock fontSize='small' /> : <LockOpen fontSize='small' />}
+                        </span>
+                    </>
+                }
+            />
             {char.attributes.map((att: Attribute, i: number) => (
                 <AttributePanel
                     key={i}

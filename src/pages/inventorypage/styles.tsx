@@ -39,7 +39,6 @@ export const useStyles = makeStyles({
         display: 'flex',
         alignItems: 'center',
         color: 'white',
-        paddingRight: '12px',
         '& svg': {
             margin: '12px'
         },
@@ -51,6 +50,10 @@ export const useStyles = makeStyles({
             width: '40px'
         }
     },
+    clearPet: {
+        padding: 0,
+        color: 'white'
+    },
     cardList: {
         flex: 1,
         marginTop: '5px',
@@ -58,5 +61,22 @@ export const useStyles = makeStyles({
     },
     subHeader: {
         background: 'white'
+    },
+    cardOverTitle: {
+        top: theme.spacing(0.5),
+        margin: theme.spacing(1),
+        position: 'sticky',
+        zIndex: 5,
+        backgroundColor: '#dcdcdc'
+    },
+    expansionPanel: {
+        justifyContent: 'space-between',
+        textTransform: 'capitalize',
+        '& span': {
+            opacity: 0.6
+        }
+    },
+    textfield: {
+        marginBottom: theme.spacing(2)
     }
 });

@@ -35,11 +35,6 @@
   overflow-y: auto !important;
 }
 
-p.card-overtitle {
-  opacity: 0.6;
-  margin: 16px 16px 8px 16px;
-}
-
 .create-step-label>span {
   display: flex;
   align-items: center;

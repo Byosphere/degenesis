@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Item, Character, Pet } from '../../models/Character';
 import T from 'i18n-react';
-import { Card, Avatar, IconButton, CardContent, List, ListSubheader, Divider, Dialog, Slide, Badge, Typography } from '@material-ui/core';
+import { Card, Avatar, IconButton, Dialog, Slide, Badge, Typography } from '@material-ui/core';
 import { HeaderContext } from '../../App';
-import { CardTravel, Add, DonutSmall, Money, Pets } from '@material-ui/icons';
+import { CardTravel, Add, DonutSmall, Money, Pets, Clear } from '@material-ui/icons';
 import ItemDisplay from './ItemDisplay';
 import AddItemDialog from './AddItemDialog';
 import MoneyDialog from './MoneyDialog';
-import Empty from '../../components/Empty';
 import { TransitionProps } from '@material-ui/core/transitions/transition';
 import FloatingAction from '../../components/FloatingAction';
 import Searchbar from '../../components/searchbar/Searchbar';
@@ -83,6 +82,12 @@ export default function InventoryPage(props: Props) {
         props.onChange(char);
     }
 
+    function removePet(event: React.MouseEvent<any>) {
+        event.stopPropagation();
+        char.pet = undefined;
+        props.onChange(char);
+    }
+
     return (
         <div className={classes.container}>
             <Card>
@@ -114,7 +119,10 @@ export default function InventoryPage(props: Props) {
                 </IconButton>
                 <div className={classes.pets} onClick={() => setPetModalOpen(true)}>
                     <Pets />
-                    <Typography>{char.pet ? char.pet.name + '(' + char.pet.species + ')' : '-'}</Typography>
+                    <Typography>{char.pet ? char.pet.name + ' (' + char.pet.species + ')' : '-'}</Typography>
+                    <IconButton className={classes.clearPet} disabled={!char.pet} onClick={removePet}>
+                        <Clear />
+                    </IconButton>
                 </div>
             </Card>
             <Searchbar
@@ -122,60 +130,43 @@ export default function InventoryPage(props: Props) {
                 className={classes.searchbar}
                 onFilterChange={(value) => setFilter(value)}
             />
-            <Card className={classes.cardList}>
-                <CardContent>
-                    <List subheader={<ListSubheader className={classes.subHeader}>{T.translate('generic.weapons')}</ListSubheader>} >
-                        {!weapons.length && <Empty />}
-                        {weapons.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
-                    </List>
-                    <Divider />
-                    <List subheader={<ListSubheader className={classes.subHeader}>{T.translate('generic.armors')}</ListSubheader>} >
-                        {!armors.length && <Empty />}
-                        {armors.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
-                    </List>
-                    <Divider />
-                    <List subheader={<ListSubheader className={classes.subHeader}>{T.translate('generic.equipment')}</ListSubheader>} >
-                        {!equipment.length && <Empty />}
-                        {equipment.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
-                    </List>
-                    <Divider />
-                    <List subheader={<ListSubheader className={classes.subHeader}>{T.translate('generic.items')}</ListSubheader>} >
-                        {!items.length && <Empty />}
-                        {items.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
-                    </List>
-                </CardContent>
-                <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
-                <Dialog
-                    open={open}
-                    onClose={() => setOpen(false)}
-                    fullScreen
-                    TransitionComponent={Transition}
-                >
-                    <AddItemDialog open={open} onSave={handleSave} onClose={() => setOpen(false)} />
-                </Dialog>
-                <Dialog
+            <div className={classes.cardList}>
+                <ItemDisplay title={T.translate('generic.weapons') as string} onDelete={handleDelete} items={weapons} />
+                <ItemDisplay title={T.translate('generic.armors') as string} onDelete={handleDelete} items={armors} />
+                <ItemDisplay title={T.translate('generic.equipment') as string} onDelete={handleDelete} items={equipment} />
+                <ItemDisplay title={T.translate('generic.items') as string} onDelete={handleDelete} items={items} />
+            </div>
+            <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
+            <Dialog
+                open={open}
+                onClose={() => setOpen(false)}
+                fullScreen
+                TransitionComponent={Transition}
+            >
+                <AddItemDialog open={open} onSave={handleSave} onClose={() => setOpen(false)} />
+            </Dialog>
+            <Dialog
+                open={moneyModalOpen}
+                onClose={() => setMoneyModalOpen(false)}
+            >
+                <MoneyDialog
                     open={moneyModalOpen}
+                    money={char.money}
                     onClose={() => setMoneyModalOpen(false)}
-                >
-                    <MoneyDialog
-                        open={moneyModalOpen}
-                        money={char.money}
-                        onClose={() => setMoneyModalOpen(false)}
-                        onValidate={handleChangeMoney}
-                    />
-                </Dialog>
-                <Dialog
-                    open={moneyModalOpen}
-                    onClose={() => setMoneyModalOpen(false)}
-                >
-                    <PetDialog
-                        open={moneyModalOpen}
-                        pet={char.pet}
-                        onClose={() => setMoneyModalOpen(false)}
-                        onValidate={handleChangePet}
-                    />
-                </Dialog>
-            </Card>
+                    onValidate={handleChangeMoney}
+                />
+            </Dialog>
+            <Dialog
+                open={petModalOpen}
+                onClose={() => setPetModalOpen(false)}
+            >
+                <PetDialog
+                    open={petModalOpen}
+                    pet={char.pet}
+                    onClose={() => setPetModalOpen(false)}
+                    onValidate={handleChangePet}
+                />
+            </Dialog>
         </div>
     );
 }

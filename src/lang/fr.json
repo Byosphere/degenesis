@@ -186,7 +186,12 @@
         "type": "Type d'objet",
         "desc": "Description",
         "name": "Intitulé",
-        "moneyedit": "Gestion de l'argent"
+        "moneyedit": "Gestion de l'argent",
+        "removeitem": "Êtes-vous sûr de vouloir retirer {what} de l'inventaire ?",
+        "petdialog": "Animal de compagnie",
+        "petname": "Nom de l'animal",
+        "species": "Espèce",
+        "notempty": "Le champ ne doit pas être vide."
     },
     "potential": {
         "new": "Apprendre un nouveau potentiel",

@@ -121,7 +121,12 @@ export default function AttributePanel(props: Props) {
 
     return (
         <>
-            <ExpansionPanel expanded={expanded} onChange={() => setExpanded(!expanded)} style={{ marginBottom: '5px' }}>
+            <ExpansionPanel
+                expanded={expanded}
+                onChange={() => setExpanded(!expanded)}
+                style={{ marginBottom: '5px' }}
+                TransitionProps={{ unmountOnExit: true }}
+            >
                 <ExpansionPanelSummary
                     expandIcon={<ExpandMore />}
                 >

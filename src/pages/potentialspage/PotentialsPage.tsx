@@ -12,6 +12,7 @@ import { getPotentialXpCost } from '../../utils/characterTools';
 import { POTENTIALS, GENERIC_POTENTIALS, CULTES, CULTURES, CONCEPTS } from '../../constants';
 import { Prompt } from 'react-router-dom';
 import AttributeJauge from '../../components/AttributeJauge';
+import CardOverTitle from '../../components/cardovertitle/CardOverTitle';
 
 interface Props {
     char: Character;
@@ -79,7 +80,7 @@ export default function PotentialsPage(props: Props) {
 
     return (
         <div style={{ margin: '5px' }}>
-            <Typography variant='body1' component='p' className='card-overtitle'>{T.translate('generic.origins')}</Typography>
+            <CardOverTitle title={T.translate('generic.origins') as string} />
             <Card style={{ marginBottom: '5px' }}>
                 <CardContent>
                     {char.origins.map((origin: Origin) => (
@@ -94,9 +95,7 @@ export default function PotentialsPage(props: Props) {
                     ))}
                 </CardContent>
             </Card>
-            <Typography variant='subtitle1' component='p' className="card-overtitle">
-                {T.translate('generic.potentials')}
-            </Typography>
+            <CardOverTitle title={T.translate('generic.potentials') as string} />
             {!char.potentials.length && <Empty />}
             {char.potentials.map((potential: Potential, key: number) => (
                 <PotentialDisplay
