@@ -5,9 +5,9 @@ import SwipeableViews from 'react-swipeable-views';
 import { NOTES_MAX } from '../../constants';
 import T from 'i18n-react';
 import Note from '../../components/Note';
-import { HeaderContext } from '../../App';
 import { Character } from '../../models/Character';
 import { Prompt } from 'react-router-dom';
+import { HeaderContext } from '../detailpage/DetailPage';
 
 interface Props {
     char: Character;

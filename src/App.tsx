@@ -5,7 +5,6 @@ import Loader from './components/Loader';
 import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync, updateCharacterAsync } from './utils/fetchers';
 import User from './models/User';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Header from './components/Header';
 import HomePage from './pages/homepage/HomePage';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
 import DetailPage from './pages/detailpage/DetailPage';
@@ -16,7 +15,6 @@ import UploadManager from './components/UploadManager';
 import T from 'i18n-react';
 
 export const UserContext = createContext(null);
-export const HeaderContext = createContext(null);
 export const SnackbarContext = createContext(null);
 
 interface Snackbar {
@@ -30,8 +28,6 @@ export default function App() {
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [user, setUser] = useState<User>(null);
     const [characters, setCharacters] = useState<Character[]>([]);
-    const [headerTitle, setHeaderTitle] = useState<string>('');
-    const [exp, setExp] = useState<number>(0);
     const [snackbar, setSnackbar] = useState<Snackbar>(null);
     const [open, setOpen] = useState<boolean>(false);
 
@@ -89,14 +85,6 @@ export default function App() {
         }
     }
 
-    async function handleAddXp(id: string, value: number): Promise<boolean> {
-        let character = characters.find((char) => char._id === id);
-        character.exp = character.exp + value;
-        setExp(character.exp);
-        const result = await handleSaveCharacter(character);
-        return result;
-    }
-
     useEffect(() => {
         const getUserDataFromToken = async () => {
             try {
@@ -121,44 +109,39 @@ export default function App() {
         return (
             <div className="App">
                 <UserContext.Provider value={{ user, setUser }}>
-                    <HeaderContext.Provider value={{ headerTitle, setHeaderTitle, exp, setExp }}>
-                        <SnackbarContext.Provider value={{ setSnackbar }}>
-                            <HashRouter basename='/'>
-                                <Header title={headerTitle} exp={exp} onAddXp={handleAddXp} />
-                                <div className="app-content">
-                                    <Switch>
-                                        {!user ? <Redirect from='/' exact to='/connect' /> : <Redirect from='/connect' exact to='/' />}
-                                        <Route path='/' exact>
-                                            <HomePage
-                                                characters={characters}
-                                                onDelete={handleDeleteCharacter}
-                                                onDisconnect={() => setUser(null)}
-                                                onUpload={() => setOpen(true)}
-                                            />
-                                        </Route>
-                                        <Route path="/connect" exact>
-                                            <ConnectPage onConnect={(user) => setUser(user)} />
-                                        </Route>
-                                        <Route path="/create" exact>
-                                            <CharacterBuilder onCreateCharacter={handleCreateCharacter} />
-                                        </Route>
-                                        <Route path="/detail/:id">
-                                            <DetailPage
-                                                onSaveCharacter={handleSaveCharacter}
-                                                characters={characters}
-                                            />
-                                        </Route>
-                                    </Switch>
-                                </div>
-                                <UploadManager
-                                    open={open}
-                                    onClose={() => setOpen(false)}
-                                    onSave={handleCreateCharacter}
-                                />
-                                {snackbar && <CustomSnackbar {...snackbar} setSnackbar={setSnackbar} />}
-                            </HashRouter>
-                        </SnackbarContext.Provider>
-                    </HeaderContext.Provider>
+                    <SnackbarContext.Provider value={{ setSnackbar }}>
+                        <HashRouter basename='/'>
+                            <Switch>
+                                {!user ? <Redirect from='/' exact to='/connect' /> : <Redirect from='/connect' exact to='/' />}
+                                <Route path='/' exact>
+                                    <HomePage
+                                        characters={characters}
+                                        onDelete={handleDeleteCharacter}
+                                        onDisconnect={() => setUser(null)}
+                                        onUpload={() => setOpen(true)}
+                                    />
+                                </Route>
+                                <Route path="/connect" exact>
+                                    <ConnectPage onConnect={(user) => setUser(user)} />
+                                </Route>
+                                <Route path="/create" exact>
+                                    <CharacterBuilder onCreateCharacter={handleCreateCharacter} />
+                                </Route>
+                                <Route path="/detail/:id">
+                                    <DetailPage
+                                        onSaveCharacter={handleSaveCharacter}
+                                        characters={characters}
+                                    />
+                                </Route>
+                            </Switch>
+                            <UploadManager
+                                open={open}
+                                onClose={() => setOpen(false)}
+                                onSave={handleCreateCharacter}
+                            />
+                            {snackbar && <CustomSnackbar {...snackbar} setSnackbar={setSnackbar} />}
+                        </HashRouter>
+                    </SnackbarContext.Provider>
                 </UserContext.Provider>
             </div>
         );

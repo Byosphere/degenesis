@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Character } from '../../models/Character';
-import { HeaderContext } from '../../App';
 import T from 'i18n-react';
 import { AppBar, Toolbar, IconButton, Badge, Avatar, Fab, Zoom, Slide, Divider, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core';
 import { PlayArrow, FlipCameraAndroid, Block, ExitToApp } from '@material-ui/icons';
@@ -10,6 +9,7 @@ import SetInitiativePanel from './SetInitiativePanel';
 import ActionsList from './ActionsList';
 import ChipsManager from './ChipsManager';
 import { Prompt } from 'react-router-dom';
+import { HeaderContext } from '../detailpage/DetailPage';
 
 interface Props {
     char: Character;

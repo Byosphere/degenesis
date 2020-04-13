@@ -7,7 +7,8 @@ import T from 'i18n-react';
 import { Prompt } from 'react-router-dom';
 import AttributeJauge from './AttributeJauge';
 import { getSkillXpCost, getAttributeXpCost } from '../utils/characterTools';
-import { HeaderContext, SnackbarContext } from '../App';
+import { SnackbarContext } from '../App';
+import { HeaderContext } from '../pages/detailpage/DetailPage';
 
 interface Props {
     char: Character;
@@ -27,7 +28,7 @@ export default function AttributePanel(props: Props) {
     const [rollInProgress, setRollInProgress] = useState<boolean>(false);
     const [rollResult, setRollResult] = useState<number[]>([]);
     const [edit, setEdit] = useState<any>(null);
-    const { exp, setExp } = useContext(HeaderContext);
+    const { xp, setXp } = useContext(HeaderContext);
     const { setSnackbar } = useContext(SnackbarContext);
 
     function actionOnPrompt() {
@@ -82,7 +83,7 @@ export default function AttributePanel(props: Props) {
     }
 
     function handleChangeAttribute(cost: number) {
-        if (cost <= exp) {
+        if (cost <= xp) {
             if (edit.name) { //attribute
                 let at: Attribute = edit;
                 at.base = at.base + 1;
@@ -90,9 +91,9 @@ export default function AttributePanel(props: Props) {
                 let sk: Skill = edit;
                 sk.value = sk.value + 1;
             }
-            let xp = exp - cost;
-            setExp(xp);
-            char.exp = xp;
+            let exp = xp - cost;
+            setXp(exp);
+            char.exp = exp;
             onChange(attribute);
         } else {
             setSnackbar({

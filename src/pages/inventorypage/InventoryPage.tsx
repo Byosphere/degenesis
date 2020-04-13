@@ -1,30 +1,23 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Item, Character, Pet } from '../../models/Character';
 import T from 'i18n-react';
-import { Card, Avatar, IconButton, Dialog, Slide, Badge, Typography } from '@material-ui/core';
-import { HeaderContext } from '../../App';
+import { Card, Avatar, IconButton, Dialog, Badge, Typography } from '@material-ui/core';
 import { CardTravel, Add, DonutSmall, Money, Pets, Clear } from '@material-ui/icons';
 import ItemDisplay from './ItemDisplay';
 import AddItemDialog from './AddItemDialog';
 import MoneyDialog from './MoneyDialog';
-import { TransitionProps } from '@material-ui/core/transitions/transition';
 import FloatingAction from '../../components/FloatingAction';
 import Searchbar from '../../components/searchbar/Searchbar';
 import { useStyles } from './styles';
 import PetDialog from './PetDialog';
+import TransitionUp from '../../components/TransitionUp';
+import { HeaderContext } from '../detailpage/DetailPage';
 
 
 interface Props {
     char: Character;
     onChange: (char: Character) => void;
 }
-
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & { children?: React.ReactElement<any, any> },
-    ref: React.Ref<unknown>,
-) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
 
 export default function InventoryPage(props: Props) {
 
@@ -141,7 +134,7 @@ export default function InventoryPage(props: Props) {
                 open={open}
                 onClose={() => setOpen(false)}
                 fullScreen
-                TransitionComponent={Transition}
+                TransitionComponent={TransitionUp}
             >
                 <AddItemDialog open={open} onSave={handleSave} onClose={() => setOpen(false)} />
             </Dialog>

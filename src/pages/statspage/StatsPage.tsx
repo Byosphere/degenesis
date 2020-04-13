@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState } from 'react';
 import { Character, Attribute } from '../../models/Character';
 import { RANGS, CULTES, CULTURES, SEX, CONCEPTS } from '../../constants';
 import T from 'i18n-react';
-import { HeaderContext } from '../../App';
 import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Info, Edit, ExpandLess, ExpandMore, Lock, LockOpen } from '@material-ui/icons';
 import { getBlessuresMax, getEgoMax, getSporulationMax, getTraumaMax } from '../../utils/characterTools';
@@ -13,6 +12,7 @@ import { Prompt } from 'react-router-dom';
 import FloatingAction from '../../components/FloatingAction';
 import InteractiveJauge from '../../components/InteractiveJauge';
 import CardOverTitle from '../../components/cardovertitle/CardOverTitle';
+import { HeaderContext } from '../detailpage/DetailPage';
 
 interface Props {
     char: Character;

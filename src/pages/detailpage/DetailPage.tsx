@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect, useContext } from 'react';
+import React, { useState, useMemo, useEffect, useContext, createContext } from 'react';
 import { useParams, Prompt, useHistory, Redirect } from 'react-router-dom';
 import Navigator from '../../components/navigator/Navigator';
 import NotesPage from '../notespage/NotesPage';
@@ -6,35 +6,38 @@ import InventoryPage from '../inventorypage/InventoryPage';
 import { Character } from '../../models/Character';
 import PotentialsPage from '../potentialspage/PotentialsPage';
 import StatsPage from '../statspage/StatsPage';
-import { CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, IconButton, Badge } from '@material-ui/core';
-import { Save } from '@material-ui/icons';
+import { Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle } from '@material-ui/core';
 import T from 'i18n-react';
-import { HeaderContext, SnackbarContext } from '../../App';
+import { SnackbarContext } from '../../App';
 import BattlePage from '../battlepage/BattlePage';
 import { useStyles } from './styles';
+import Header from '../../components/header/Header';
 
 interface Props {
     onSaveCharacter: (character: Character) => Promise<boolean>;
     characters: Character[];
 }
 
+export const HeaderContext = createContext(null);
+
 export default function DetailPage(props: Props) {
     const { id } = useParams();
     const history = useHistory();
-    const [tab, setTab] = useState<number>(1); //TODO
+    const [tab, setTab] = useState<number>(0);
     const [dirty, setDirty] = useState<boolean>(false);
     const selectedCharacter = useMemo(() => props.characters.find((char) => char._id === id), [id, props.characters]);
     const [character, setCharacter] = useState<Character>(JSON.parse(JSON.stringify(selectedCharacter)));
     const [disabled, setDisabled] = useState<boolean>(false);
     const [dialogOpen, setDialogOpen] = useState<string>('');
-    const { setExp } = useContext(HeaderContext);
     const { setSnackbar } = useContext(SnackbarContext);
     const [step, setStep] = useState<number>(0);
-    const classes = useStyles({ disabled, dirty });
+    const [headerTitle, setHeaderTitle] = useState<string>('');
+    const [xp, setXp] = useState<number>(0);
+    const classes = useStyles();
 
     useEffect(() => {
-        setExp(character.exp);
-    }, [character.exp, setExp]);
+        setXp(character.exp);
+    }, [character.exp, setXp]);
 
     function actionOnPrompt(location): boolean {
         if (dialogOpen) {
@@ -51,7 +54,7 @@ export default function DetailPage(props: Props) {
         setDirty(true);
     }
 
-    async function handleClick() {
+    async function handleSave() {
         setDisabled(true);
         let result = await props.onSaveCharacter(character);
         if (result) {
@@ -87,48 +90,49 @@ export default function DetailPage(props: Props) {
             setDisabled(false);
         }
     }
+    function handleXpChange(value: number) {
+        setXp(value);
+        setDirty(true);
+        setCharacter({ ...character, exp: character.exp + value });
+    }
 
     if (!id) return <Redirect to={'/'} />;
 
     return (
-        <div className={classes.container}>
-            <Prompt when={dirty} message={actionOnPrompt} />
+        <HeaderContext.Provider value={{ headerTitle, setHeaderTitle, xp, setXp }}>
+            <Header title={headerTitle} exp={xp} onAddXp={handleXpChange} dirty={dirty} disabled={disabled} onSave={handleSave} />
+            <div className={classes.container}>
+                <Prompt when={dirty} message={actionOnPrompt} />
+                {tab === 0 && <StatsPage char={character} onChange={handleChange} />}
+                {tab === 1 && <InventoryPage char={character} onChange={handleChange} />}
+                {tab === 2 && <PotentialsPage char={character} onChange={handleChange} />}
+                {tab === 3 && <NotesPage char={character} onChange={handleChange} />}
+                {tab === 4 && <BattlePage char={character} onChange={handleChange} step={step} setStep={setStep} />}
 
-            {tab === 0 && <StatsPage char={character} onChange={handleChange} />}
-            {tab === 1 && <InventoryPage char={character} onChange={handleChange} />}
-            {tab === 2 && <PotentialsPage char={character} onChange={handleChange} />}
-            {tab === 3 && <NotesPage char={character} onChange={handleChange} />}
-            {tab === 4 && <BattlePage char={character} onChange={handleChange} step={step} setStep={setStep} />}
+                <Navigator currentTab={tab} onTabChange={(event, value) => setTab(value)} />
 
-            <Navigator currentTab={tab} onTabChange={(event, value) => setTab(value)} />
-
-            <IconButton className={classes.saveButton} disabled={disabled || !dirty} onClick={handleClick}>
-                <Badge color="secondary" invisible={!dirty || disabled} variant="dot">
-                    {disabled ? <CircularProgress disableShrink size={24} className={classes.progress} /> : <Save />}
-                </Badge>
-            </IconButton>
-
-            <Dialog
-                disableBackdropClick
-                disableEscapeKeyDown
-                maxWidth="xs"
-                open={!!dialogOpen}
-            >
-                <DialogTitle>{T.translate('generic.savewarningtitle')}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        {T.translate('generic.savewarning', { name: character.name })}
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleCancel} disabled={disabled} color="primary">
-                        {T.translate('generic.no')}
-                    </Button>
-                    <Button onClick={handleOk} disabled={disabled} color="secondary">
-                        {T.translate('generic.yes')}
-                    </Button>
-                </DialogActions>
-            </Dialog>
-        </div>
+                <Dialog
+                    disableBackdropClick
+                    disableEscapeKeyDown
+                    maxWidth="xs"
+                    open={!!dialogOpen}
+                >
+                    <DialogTitle>{T.translate('generic.savewarningtitle')}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            {T.translate('generic.savewarning', { name: character.name })}
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleCancel} disabled={disabled} color="primary">
+                            {T.translate('generic.no')}
+                        </Button>
+                        <Button onClick={handleOk} disabled={disabled} color="secondary">
+                            {T.translate('generic.yes')}
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
+        </HeaderContext.Provider>
     );
 }

@@ -6,13 +6,14 @@ import Empty from '../../components/Empty';
 import PotentialDisplay from './PotentialDisplay';
 import { Add, ExpandMore } from '@material-ui/icons';
 import PotentialsDialog from './PotentialsDialog';
-import { HeaderContext, SnackbarContext } from '../../App';
+import { SnackbarContext } from '../../App';
 import FloatingAction from '../../components/FloatingAction';
 import { getPotentialXpCost } from '../../utils/characterTools';
 import { POTENTIALS, GENERIC_POTENTIALS, CULTES, CULTURES, CONCEPTS } from '../../constants';
 import { Prompt } from 'react-router-dom';
 import AttributeJauge from '../../components/AttributeJauge';
 import CardOverTitle from '../../components/cardovertitle/CardOverTitle';
+import { HeaderContext } from '../detailpage/DetailPage';
 
 interface Props {
     char: Character;
@@ -23,7 +24,7 @@ export default function PotentialsPage(props: Props) {
 
     const { char } = props;
     const [open, setOpen] = useState<boolean>(false);
-    const { setHeaderTitle, setExp, exp } = useContext(HeaderContext);
+    const { setHeaderTitle, setXp, xp } = useContext(HeaderContext);
     const [openXp, setOpenXp] = useState<boolean>(false);
     const [potential, setPotential] = useState<Potential>(undefined);
     const { setSnackbar } = useContext(SnackbarContext);
@@ -38,10 +39,10 @@ export default function PotentialsPage(props: Props) {
     function handleUpgradePotential() {
         setOpenXp(false);
         if (potential) {
-            let newExp = (exp || 0) - getPotentialXpCost(char.potentials);
+            let newExp = (xp || 0) - getPotentialXpCost(char.potentials);
             if (newExp >= 0) {
                 potential.level++;
-                setExp(newExp);
+                setXp(newExp);
                 char.exp = newExp;
                 props.onChange(char);
             } else {
