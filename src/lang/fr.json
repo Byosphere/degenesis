@@ -16,7 +16,7 @@
         "armors": "Armures",
         "equipment": "Équipement",
         "items": "Objets",
-        "bagof": "Inventaire de {who}",
+        "bagof": "Chercher dans l'inventaire de {who}",
         "money": "{money} lettres de Change",
         "save": "Sauvegarder",
         "wrongpassword": "Mauvais identifiant ou mot de passe.",
