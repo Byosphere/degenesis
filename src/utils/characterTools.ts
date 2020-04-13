@@ -156,3 +156,15 @@ export function getSkillXpCost(skillId: number, attribute: Attribute, behavior: 
     }
     return (attribute.skills.find((skill) => skill.id === skillId).value + 1) * cost;
 }
+
+export function getCharacterHealth(character: Character): number {
+    return (getTraumaMax(character) + getBlessuresMax(character)) - (character.blessures + character.trauma);
+}
+
+export function getInitiative(character: Character): number {
+    return character.attributes[4].base + character.attributes[4].skills[2].value;
+}
+
+export function canFight(character: Character): boolean {
+    return character.ego < getEgoMax(character) && getCharacterHealth(character) > 0;
+}

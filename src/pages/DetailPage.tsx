@@ -28,6 +28,7 @@ export default function DetailPage(props: Props) {
     const [dialogOpen, setDialogOpen] = useState<string>('');
     const { setExp } = useContext(HeaderContext);
     const { setSnackbar } = useContext(SnackbarContext);
+    const [step, setStep] = useState<number>(0);
 
     useEffect(() => {
         setExp(character.exp);
@@ -91,7 +92,7 @@ export default function DetailPage(props: Props) {
             {tab === 1 && <InventoryPage char={character} onChange={handleChange} />}
             {tab === 2 && <PotentialsPage char={character} onChange={handleChange} />}
             {tab === 3 && <NotesPage char={character} onChange={handleChange} />}
-            {tab === 4 && <BattlePage char={character} />}
+            {tab === 4 && <BattlePage char={character} onChange={handleChange} step={step} setStep={setStep} />}
             <Navigator currentTab={tab} onTabChange={(event, value) => setTab(value)} />
             <IconButton
                 style={{

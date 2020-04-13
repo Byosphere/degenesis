@@ -95,3 +95,25 @@ p.card-overtitle {
   margin-bottom: 0px;
   border-bottom: none;
 }
+
+.chip-modifier.positiv {
+  margin-right: 2px;
+  display: inline-flex;
+  background-color: #4caf50;
+}
+
+.chip-modifier.positiv>div:first-child {
+  background-color: #388e3c;
+  color: white;
+}
+
+.chip-modifier.negativ>div:first-child {
+  background-color: #9a0036;
+  color: white;
+}
+
+.chip-modifier.negativ {
+  margin-right: 2px;
+  display: inline-flex;
+  background-color: #d50000;
+}

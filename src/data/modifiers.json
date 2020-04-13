@@ -1,0 +1,14 @@
+[
+    {
+        "name": "environment0",
+        "modifier": -1
+    },
+    {
+        "name": "environment1",
+        "modifier": -2
+    },
+    {
+        "name": "environment2",
+        "modifier": -4
+    }
+]
