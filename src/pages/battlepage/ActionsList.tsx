@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Card, List, ListSubheader, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@material-ui/core';
 import { PlayArrow } from '@material-ui/icons';
-import Searchbar from '../../components/Searchbar';
+import Searchbar from '../../components/searchbar/Searchbar';
 
 interface Props {
 
@@ -14,7 +14,7 @@ export default function ActionsList(props: Props) {
     return (
         <>
             <Searchbar
-                style={{ margin: '5px 5px 0 5px' }}
+                // style={{ margin: '5px 5px 0 5px' }}
                 placeholder='Rechercher une action'
                 onFilterChange={(value) => setFilter(value)}
             />

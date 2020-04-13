@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, DialogContentText, TextField, DialogActions, Button, InputAdornment, AppBar, Toolbar, IconButton, Typography, Slide, Divider } from '@material-ui/core';
+import { Dialog, DialogContent, DialogContentText, TextField, DialogActions, Button, InputAdornment, AppBar, Toolbar, IconButton, Typography, Divider } from '@material-ui/core';
 import T from 'i18n-react';
 import { VpnKey, AccountCircle, Dns, Close } from '@material-ui/icons';
 import { Prompt } from 'react-router-dom';
-import { TransitionProps } from '@material-ui/core/transitions/transition';
+import TransitionUp from '../../components/TransitionUp';
+import { useStyles } from './styles';
 
 interface Props {
     open: boolean;
@@ -25,15 +26,9 @@ interface FormErrors {
     serverCode: boolean;
 }
 
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & { children?: React.ReactElement<any, any> },
-    ref: React.Ref<unknown>,
-) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
-
 export default function RegisterModal(props: Props) {
 
+    const classes = useStyles();
     const [registerForm, setRegisterForm] = useState<RegisterForm>({
         pseudo: '',
         password: '',
@@ -66,7 +61,7 @@ export default function RegisterModal(props: Props) {
     }
 
     return (
-        <Dialog open={props.open} onClose={props.onClose} fullScreen TransitionComponent={Transition}>
+        <Dialog open={props.open} onClose={props.onClose} fullScreen TransitionComponent={TransitionUp}>
             {props.open && <Prompt when={true} message={actionOnPrompt} />}
             <AppBar>
                 <Toolbar>
@@ -78,7 +73,7 @@ export default function RegisterModal(props: Props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <DialogContent style={{ marginTop: '56px' }}>
+            <DialogContent className={classes.dialogContent}>
                 <DialogContentText>
                     {T.translate('connect.registertext')}
                 </DialogContentText>
@@ -87,7 +82,7 @@ export default function RegisterModal(props: Props) {
                     label={T.translate('connect.pseudo')}
                     variant="outlined"
                     fullWidth
-                    style={{ marginBottom: '24px', marginTop: '16px' }}
+                    className={classes.dialogPseudo}
                     onChange={(event) => setRegisterForm({ ...registerForm, pseudo: event.target.value })}
                     InputProps={{
                         startAdornment: (
@@ -103,7 +98,7 @@ export default function RegisterModal(props: Props) {
                     label={T.translate('connect.password')}
                     variant="outlined"
                     fullWidth
-                    style={{ marginBottom: '24px' }}
+                    className={classes.dialogMargin}
                     type='password'
                     onChange={(event) => setRegisterForm({ ...registerForm, password: event.target.value })}
                     InputProps={{
@@ -120,7 +115,7 @@ export default function RegisterModal(props: Props) {
                     label={T.translate('connect.passwordconfirm')}
                     variant="outlined"
                     fullWidth
-                    style={{ marginBottom: '24px' }}
+                    className={classes.dialogMargin}
                     type='password'
                     onChange={(event) => setRegisterForm({ ...registerForm, passwordConfirm: event.target.value })}
                     InputProps={{
@@ -133,12 +128,12 @@ export default function RegisterModal(props: Props) {
                     helperText={errors.passwordConfirm ? T.translate('connect.passworderror') : ''}
                     error={errors.passwordConfirm}
                 />
-                <Divider style={{ marginBottom: '24px' }} />
+                <Divider className={classes.dialogMargin} />
                 <TextField
                     label={T.translate('connect.servercode')}
                     variant="outlined"
                     fullWidth
-                    style={{ marginBottom: '24px' }}
+                    className={classes.dialogMargin}
                     type='password'
                     onChange={(event) => setRegisterForm({ ...registerForm, serverCode: event.target.value })}
                     InputProps={{

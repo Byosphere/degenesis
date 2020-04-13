@@ -3,6 +3,7 @@ import { ListItem, ListItemAvatar, Avatar, ListItemText } from '@material-ui/cor
 import { CULTES, CULTURES, CONCEPTS } from '../../constants';
 import T from 'i18n-react';
 import { Character } from '../../models/Character';
+import { useStyles } from './styles';
 
 interface Props {
     char: Character;
@@ -12,24 +13,15 @@ interface Props {
 export default function CharacterItem(props: Props) {
 
     const { char } = props;
+    const classes = useStyles({ char });
 
     return (
-        <ListItem
-            button
-            style={{
-                backgroundImage: 'url(images/cultes/' + CULTES[char.culte].img + ')',
-                backgroundSize: 'cover',
-                backgroundRepeat: 'no-repeat',
-                backgroundPosition: '160px center',
-                margin: '5px 0'
-            }}
-            onClick={() => props.onSelectCharacter(char._id)}
-        >
+        <ListItem button className={classes.characterItem} onClick={() => props.onSelectCharacter(char._id)}>
             <ListItemAvatar>
                 <Avatar alt={char.name} src={"images/cultures/" + CULTURES[char.culture].img} />
             </ListItemAvatar>
             <ListItemText
-                style={{ background: 'rgba(255, 255, 255, 0.3)', marginRight: '50px' }}
+                className={classes.listText}
                 primary={char.name}
                 secondary={
                     T.translate('cultes.' + CULTES[char.culte].name) + ' - ' +

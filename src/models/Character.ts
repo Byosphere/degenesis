@@ -36,6 +36,11 @@ export interface Origin {
     value: number;
 }
 
+export interface Pet {
+    species: string;
+    name: string;
+}
+
 export interface Character {
     _id?: string;
     name: string;
@@ -60,5 +65,6 @@ export interface Character {
     belief: 'volonte' | 'foi';
     behavior: 'pulsions' | 'concentration';
     exp: number;
-    origins: Origin[]
+    origins: Origin[];
+    pet: Pet;
 }

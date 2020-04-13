@@ -4,11 +4,11 @@ import { getUserToken } from './utils/StorageManager';
 import Loader from './components/Loader';
 import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync, updateCharacterAsync } from './utils/fetchers';
 import User from './models/User';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Header from './components/Header';
-import HomePage from './pages/HomePage';
+import HomePage from './pages/homepage/HomePage';
 import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
-import DetailPage from './pages/DetailPage';
+import DetailPage from './pages/detailpage/DetailPage';
 import ConnectPage from './pages/connectpage/ConnectPage';
 import { Character } from './models/Character';
 import CustomSnackbar from './components/CustomSnackbar';
@@ -27,7 +27,6 @@ interface Snackbar {
 export default function App() {
 
     const token = getUserToken();
-
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [user, setUser] = useState<User>(null);
     const [characters, setCharacters] = useState<Character[]>([]);
@@ -117,15 +116,7 @@ export default function App() {
     }, [token]);
 
     if (isLoading) {
-        return <div className="App">
-            <Loader />
-        </div>;
-    } else if (!user) {
-        return <div className="App">
-            <HashRouter basename='/'>
-                <ConnectPage onConnect={(user) => setUser(user)} />
-            </HashRouter>
-        </div>;
+        return <Loader />;
     } else {
         return (
             <div className="App">
@@ -136,6 +127,7 @@ export default function App() {
                                 <Header title={headerTitle} exp={exp} onAddXp={handleAddXp} />
                                 <div className="app-content">
                                     <Switch>
+                                        {!user ? <Redirect from='/' exact to='/connect' /> : <Redirect from='/connect' exact to='/' />}
                                         <Route path='/' exact>
                                             <HomePage
                                                 characters={characters}
@@ -143,6 +135,9 @@ export default function App() {
                                                 onDisconnect={() => setUser(null)}
                                                 onUpload={() => setOpen(true)}
                                             />
+                                        </Route>
+                                        <Route path="/connect" exact>
+                                            <ConnectPage onConnect={(user) => setUser(user)} />
                                         </Route>
                                         <Route path="/create" exact>
                                             <CharacterBuilder onCreateCharacter={handleCreateCharacter} />
@@ -155,12 +150,12 @@ export default function App() {
                                         </Route>
                                     </Switch>
                                 </div>
-                                {snackbar && <CustomSnackbar {...snackbar} setSnackbar={setSnackbar} />}
                                 <UploadManager
                                     open={open}
                                     onClose={() => setOpen(false)}
                                     onSave={handleCreateCharacter}
                                 />
+                                {snackbar && <CustomSnackbar {...snackbar} setSnackbar={setSnackbar} />}
                             </HashRouter>
                         </SnackbarContext.Provider>
                     </HeaderContext.Provider>

@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Loader from '../../components/Loader';
-import { Card, CardContent, TextField, Button, Snackbar } from '@material-ui/core';
+import { Card, CardContent, TextField, Button } from '@material-ui/core';
 import T from 'i18n-react';
 import { userConnect, registerUser } from '../../utils/fetchers';
 import { saveUserToken } from '../../utils/StorageManager';
-import { Error } from '@material-ui/icons';
 import User from '../../models/User';
 import RegisterModal, { RegisterForm } from './RegisterModal';
+import { useStyles } from './styles';
+import { SnackbarContext } from '../../App';
 
 interface Props {
     onConnect: (user: User) => void;
@@ -19,14 +20,16 @@ interface FormLogin {
 
 export default function ConnectPage(props: Props) {
 
+    const classes = useStyles();
     const [loading, setLoading] = useState<boolean>(false);
     const [form, setForm] = useState<FormLogin>({ name: '', password: '' });
-    const [errorMessage, setErrorMessage] = useState<string>('');
-    const [snackOpen, setSnackOpen] = useState<boolean>(false);
     const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
+    const { setSnackbar } = useContext(SnackbarContext);
 
     async function handleConnect() {
         setLoading(true);
+        setError(false);
         try {
             const { data } = await userConnect(form.name, form.password);
             if (data && data.token) {
@@ -34,20 +37,19 @@ export default function ConnectPage(props: Props) {
                 props.onConnect(data.user);
             }
         } catch (err) {
-            setErrorMessage(T.translate('generic.wrongpassword') as string);
-            setSnackOpen(true);
+            setSnackbar({
+                type: 'error',
+                message: T.translate('generic.wrongpassword')
+            });
+            setError(true);
             setLoading(false);
         }
-    }
-
-    function handleClose(event: React.SyntheticEvent<any, Event>, reason: string) {
-        if (reason === 'clickaway') return;
-        setSnackOpen(false);
     }
 
     async function handleRegister(form: RegisterForm) {
         setModalOpen(false);
         setLoading(true);
+        setError(false);
         try {
             const { data } = await registerUser(form);
             if (data && data.token) {
@@ -55,8 +57,11 @@ export default function ConnectPage(props: Props) {
                 props.onConnect(data.user);
             }
         } catch (error) {
-            setErrorMessage(error.message);
-            setSnackOpen(true);
+            setSnackbar({
+                type: 'error',
+                message: error.message
+            });
+            setError(true);
             setLoading(false);
         }
     }
@@ -64,20 +69,20 @@ export default function ConnectPage(props: Props) {
     if (loading) return <Loader />;
 
     return (
-        <Card style={{ flex: 1, display: "flex", flexDirection: "column", alignItems: 'center', paddingTop: '10%' }}>
-            <figure style={{ textAlign: 'center', marginBottom: '16px', marginTop: '32px' }}>
+        <Card className={classes.mainCard}>
+            <figure className={classes.figure}>
                 <img src='./images/degenesis.png' alt='degenesis' />
-                <figcaption style={{ opacity: 0.8 }}>- Unofficial Player App -</figcaption>
+                <figcaption className={classes.figcaption}>- Unofficial Player App -</figcaption>
             </figure>
-            <CardContent style={{ flex: 1, display: 'flex', alignItems: 'center', textAlign: 'center' }}>
+            <CardContent className={classes.cardContent}>
                 <section>
                     <TextField
                         label={T.translate('connect.pseudo')}
                         variant="outlined"
                         fullWidth
-                        style={{ marginBottom: '16px' }}
+                        className={classes.pseudo}
                         onChange={(event: any) => setForm({ ...form, name: event.target.value })}
-                        error={!!errorMessage}
+                        error={error}
                         autoFocus
                     />
                     <TextField
@@ -86,12 +91,12 @@ export default function ConnectPage(props: Props) {
                         variant="outlined"
                         fullWidth
                         onChange={(event: any) => setForm({ ...form, password: event.target.value })}
-                        error={!!errorMessage}
+                        error={error}
                     />
                     <Button
                         color="secondary"
                         variant='outlined'
-                        style={{ marginTop: '32px', marginRight: '8px' }}
+                        className={classes.connect}
                         onClick={handleConnect}
                         disabled={!form.name || !form.password}
                     >
@@ -100,22 +105,13 @@ export default function ConnectPage(props: Props) {
                     <Button
                         color="primary"
                         variant='outlined'
-                        style={{ marginTop: '32px', marginLeft: '8px' }}
+                        className={classes.register}
                         onClick={() => setModalOpen(true)}
                     >
                         {T.translate('connect.register')}
                     </Button>
                 </section>
             </CardContent>
-            <Snackbar
-                open={snackOpen}
-                autoHideDuration={6000}
-                onClose={handleClose}
-                message={<span style={{ display: 'flex', alignItems: 'center' }}>
-                    <Error style={{ marginRight: '8px' }} />{errorMessage}
-                </span>}
-                classes={{ root: 'error-snackbar' }}
-            />
             <RegisterModal
                 open={modalOpen}
                 onSend={handleRegister}

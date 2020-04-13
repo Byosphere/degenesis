@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Item, Character } from '../../models/Character';
+import { Item, Character, Pet } from '../../models/Character';
 import T from 'i18n-react';
-import { Card, CardHeader, Avatar, IconButton, CardContent, List, ListSubheader, Divider, Dialog, Slide } from '@material-ui/core';
+import { Card, Avatar, IconButton, CardContent, List, ListSubheader, Divider, Dialog, Slide, Badge, Typography } from '@material-ui/core';
 import { HeaderContext } from '../../App';
-import { CardTravel, SwapVerticalCircle, Add } from '@material-ui/icons';
+import { CardTravel, Add, DonutSmall, Money, Pets } from '@material-ui/icons';
 import ItemDisplay from './ItemDisplay';
 import AddItemDialog from './AddItemDialog';
 import MoneyDialog from './MoneyDialog';
 import Empty from '../../components/Empty';
 import { TransitionProps } from '@material-ui/core/transitions/transition';
 import FloatingAction from '../../components/FloatingAction';
-import Searchbar from '../../components/Searchbar';
+import Searchbar from '../../components/searchbar/Searchbar';
+import { useStyles } from './styles';
+import PetDialog from './PetDialog';
 
 
 interface Props {
@@ -28,7 +30,9 @@ const Transition = React.forwardRef(function Transition(
 export default function InventoryPage(props: Props) {
 
     const { char } = props;
+    const classes = useStyles();
     const [moneyModalOpen, setMoneyModalOpen] = useState<boolean>(false);
+    const [petModalOpen, setPetModalOpen] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
     const [filter, setFilter] = useState<string>('');
     const { setHeaderTitle } = useContext(HeaderContext);
@@ -73,47 +77,69 @@ export default function InventoryPage(props: Props) {
         props.onChange(char);
     }
 
+    function handleChangePet(pet: Pet) {
+        char.pet = pet;
+        setPetModalOpen(false);
+        props.onChange(char);
+    }
+
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: 'calc(100% - 10px)', margin: '5px' }}>
+        <div className={classes.container}>
             <Card>
-                <CardHeader
-                    avatar={
-                        <Avatar color='primary'>
+                <IconButton className={classes.headButton}>
+                    <Badge
+                        overlap='rectangle'
+                        badgeContent={totalWeight + 'g'}
+                        color='secondary'
+                    >
+                        <Avatar variant='rounded' color='primary' className={classes.avatar}>
                             <CardTravel />
                         </Avatar>
-                    }
-                    title={T.translate('generic.money', { money: char.money })}
-                    subheader={T.translate('generic.totalweight', { weight: totalWeight })}
-                    action={
-                        <IconButton color='secondary' onClick={() => setMoneyModalOpen(true)}>
-                            <SwapVerticalCircle />
-                        </IconButton>
-                    }
-                />
+                    </Badge>
+                </IconButton>
+                <IconButton className={classes.headButton} onClick={() => setMoneyModalOpen(true)}>
+                    <Badge
+                        overlap='rectangle'
+                        classes={{ badge: classes.customBadge }}
+                        badgeContent={<>
+                            {char.money > 99999 ? '99999+' : char.money}
+                            <DonutSmall />
+                        </>}
+                        color='secondary'
+                    >
+                        <Avatar variant='rounded' color='primary' className={classes.avatar}>
+                            <Money />
+                        </Avatar>
+                    </Badge>
+                </IconButton>
+                <div className={classes.pets} onClick={() => setPetModalOpen(true)}>
+                    <Pets />
+                    <Typography>{char.pet ? char.pet.name + '(' + char.pet.species + ')' : '-'}</Typography>
+                </div>
             </Card>
             <Searchbar
                 placeholder={T.translate('generic.bagof', { who: char.name }) as string}
-                style={{ marginTop: '5px' }}
+                className={classes.searchbar}
                 onFilterChange={(value) => setFilter(value)}
             />
-            <Card style={{ flex: 1, marginTop: '5px', overflow: 'auto' }}>
+            <Card className={classes.cardList}>
                 <CardContent>
-                    <List subheader={<ListSubheader style={{ background: 'white' }}>{T.translate('generic.weapons')}</ListSubheader>} >
+                    <List subheader={<ListSubheader className={classes.subHeader}>{T.translate('generic.weapons')}</ListSubheader>} >
                         {!weapons.length && <Empty />}
                         {weapons.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
                     </List>
                     <Divider />
-                    <List subheader={<ListSubheader style={{ background: 'white' }}>{T.translate('generic.armors')}</ListSubheader>} >
+                    <List subheader={<ListSubheader className={classes.subHeader}>{T.translate('generic.armors')}</ListSubheader>} >
                         {!armors.length && <Empty />}
                         {armors.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
                     </List>
                     <Divider />
-                    <List subheader={<ListSubheader style={{ background: 'white' }}>{T.translate('generic.equipment')}</ListSubheader>} >
+                    <List subheader={<ListSubheader className={classes.subHeader}>{T.translate('generic.equipment')}</ListSubheader>} >
                         {!equipment.length && <Empty />}
                         {equipment.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
                     </List>
                     <Divider />
-                    <List subheader={<ListSubheader style={{ background: 'white' }}>{T.translate('generic.items')}</ListSubheader>} >
+                    <List subheader={<ListSubheader className={classes.subHeader}>{T.translate('generic.items')}</ListSubheader>} >
                         {!items.length && <Empty />}
                         {items.map((item, key) => <ItemDisplay onDelete={handleDelete} item={item} key={key} />)}
                     </List>
@@ -136,6 +162,17 @@ export default function InventoryPage(props: Props) {
                         money={char.money}
                         onClose={() => setMoneyModalOpen(false)}
                         onValidate={handleChangeMoney}
+                    />
+                </Dialog>
+                <Dialog
+                    open={moneyModalOpen}
+                    onClose={() => setMoneyModalOpen(false)}
+                >
+                    <PetDialog
+                        open={moneyModalOpen}
+                        pet={char.pet}
+                        onClose={() => setMoneyModalOpen(false)}
+                        onValidate={handleChangePet}
                     />
                 </Dialog>
             </Card>

@@ -124,7 +124,8 @@ export function getNewCharacter(): Character {
         blessures: 0,
         trauma: 0,
         exp: 0,
-        origins: JSON.parse(JSON.stringify(baseOrigins))
+        origins: JSON.parse(JSON.stringify(baseOrigins)),
+        pet: undefined
     };
 }
 

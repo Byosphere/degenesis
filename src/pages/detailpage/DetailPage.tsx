@@ -1,16 +1,17 @@
 import React, { useState, useMemo, useEffect, useContext } from 'react';
 import { useParams, Prompt, useHistory, Redirect } from 'react-router-dom';
-import Navigator from '../components/navigator/Navigator';
-import NotesPage from './NotesPage';
-import InventoryPage from './inventorypage/InventoryPage';
-import { Character } from '../models/Character';
-import PotentialsPage from './potentialspage/PotentialsPage';
-import StatsPage from './statspage/StatsPage';
+import Navigator from '../../components/navigator/Navigator';
+import NotesPage from '../notespage/NotesPage';
+import InventoryPage from '../inventorypage/InventoryPage';
+import { Character } from '../../models/Character';
+import PotentialsPage from '../potentialspage/PotentialsPage';
+import StatsPage from '../statspage/StatsPage';
 import { CircularProgress, Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, IconButton, Badge } from '@material-ui/core';
 import { Save } from '@material-ui/icons';
 import T from 'i18n-react';
-import { HeaderContext, SnackbarContext } from '../App';
-import BattlePage from './battlepage/BattlePage';
+import { HeaderContext, SnackbarContext } from '../../App';
+import BattlePage from '../battlepage/BattlePage';
+import { useStyles } from './styles';
 
 interface Props {
     onSaveCharacter: (character: Character) => Promise<boolean>;
@@ -20,7 +21,7 @@ interface Props {
 export default function DetailPage(props: Props) {
     const { id } = useParams();
     const history = useHistory();
-    const [tab, setTab] = useState<number>(0);
+    const [tab, setTab] = useState<number>(1); //TODO
     const [dirty, setDirty] = useState<boolean>(false);
     const selectedCharacter = useMemo(() => props.characters.find((char) => char._id === id), [id, props.characters]);
     const [character, setCharacter] = useState<Character>(JSON.parse(JSON.stringify(selectedCharacter)));
@@ -29,6 +30,7 @@ export default function DetailPage(props: Props) {
     const { setExp } = useContext(HeaderContext);
     const { setSnackbar } = useContext(SnackbarContext);
     const [step, setStep] = useState<number>(0);
+    const classes = useStyles({ disabled, dirty });
 
     useEffect(() => {
         setExp(character.exp);
@@ -78,7 +80,10 @@ export default function DetailPage(props: Props) {
                 message: T.translate('generic.charactersaved') as string
             });
         } else {
-            // TODO
+            setSnackbar({
+                type: 'error',
+                message: T.translate('generic.error') as string
+            });
             setDisabled(false);
         }
     }
@@ -86,31 +91,23 @@ export default function DetailPage(props: Props) {
     if (!id) return <Redirect to={'/'} />;
 
     return (
-        <div style={{ height: 'calc(100% - 57px)', overflowY: 'auto' }}>
+        <div className={classes.container}>
             <Prompt when={dirty} message={actionOnPrompt} />
+
             {tab === 0 && <StatsPage char={character} onChange={handleChange} />}
             {tab === 1 && <InventoryPage char={character} onChange={handleChange} />}
             {tab === 2 && <PotentialsPage char={character} onChange={handleChange} />}
             {tab === 3 && <NotesPage char={character} onChange={handleChange} />}
             {tab === 4 && <BattlePage char={character} onChange={handleChange} step={step} setStep={setStep} />}
+
             <Navigator currentTab={tab} onTabChange={(event, value) => setTab(value)} />
-            <IconButton
-                style={{
-                    position: 'absolute',
-                    right: '4px',
-                    top: '4px',
-                    zIndex: 1200,
-                    pointerEvents: disabled ? 'none' : 'initial',
-                    color: 'white',
-                    opacity: (!dirty) ? 0.4 : 1
-                }}
-                disabled={disabled || !dirty}
-                onClick={handleClick}
-            >
+
+            <IconButton className={classes.saveButton} disabled={disabled || !dirty} onClick={handleClick}>
                 <Badge color="secondary" invisible={!dirty || disabled} variant="dot">
-                    {disabled ? <CircularProgress disableShrink size={24} style={{ color: 'white' }} /> : <Save />}
+                    {disabled ? <CircularProgress disableShrink size={24} className={classes.progress} /> : <Save />}
                 </Badge>
             </IconButton>
+
             <Dialog
                 disableBackdropClick
                 disableEscapeKeyDown

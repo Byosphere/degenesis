@@ -2,11 +2,11 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Card, MobileStepper, Button, CardActions, Dialog, DialogTitle, DialogActions, Divider } from '@material-ui/core';
 import { KeyboardArrowRight, KeyboardArrowLeft } from '@material-ui/icons';
 import SwipeableViews from 'react-swipeable-views';
-import { NOTES_MAX } from '../constants';
+import { NOTES_MAX } from '../../constants';
 import T from 'i18n-react';
-import Note from '../components/Note';
-import { HeaderContext } from '../App';
-import { Character } from '../models/Character';
+import Note from '../../components/Note';
+import { HeaderContext } from '../../App';
+import { Character } from '../../models/Character';
 import { Prompt } from 'react-router-dom';
 
 interface Props {

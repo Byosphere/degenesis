@@ -3,12 +3,13 @@ import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemTex
 import { useHistory, Prompt } from 'react-router-dom';
 import { Add, Delete, Settings } from '@material-ui/icons';
 import T from 'i18n-react';
-import CharacterItem from '../components/home/CharacterItem';
+import CharacterItem from './CharacterItem';
 import SwipeableViews from 'react-swipeable-views';
-import SettingsMenu from '../components/home/SettingsMenu';
-import { UserContext } from '../App';
-import { Character } from '../models/Character';
-import { CHAR_MAX } from '../constants';
+import SettingsMenu from './SettingsMenu';
+import { UserContext } from '../../App';
+import { Character } from '../../models/Character';
+import { CHAR_MAX } from '../../constants';
+import { useStyles } from './styles';
 
 interface Props {
     onDisconnect: () => void;
@@ -19,6 +20,7 @@ interface Props {
 
 export default function HomePage(props: Props) {
     const { user } = useContext(UserContext);
+    const classes = useStyles();
     const [open, setOpen] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const history = useHistory();
@@ -65,23 +67,19 @@ export default function HomePage(props: Props) {
     }
 
     return (
-        <Card style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-            <CardMedia
-                image="images/logo.png"
-                title="logo"
-                style={{ height: '200px' }}
-            />
-            <CardContent style={{ flex: 1, height: 'calc(100% - 300px)' }} >
+        <Card className={classes.card}>
+            <CardMedia image="images/logo.png" title="logo" />
+            <CardContent className={classes.cardContent} >
                 <List
+                    className={classes.mainList}
                     component="nav"
                     disablePadding
                     subheader={
-                        <ListSubheader style={{ background: 'white' }} component="div">
+                        <ListSubheader component="div" className={classes.subHeader}>
                             {T.translate('generic.heroslist')}
-                            <span style={{ float: 'right' }}>{props.characters.length}/{CHAR_MAX}</span>
+                            <span>{props.characters.length}/{CHAR_MAX}</span>
                         </ListSubheader>
                     }
-                    style={{ height: 'calc(100% - 64px)', overflowY: 'auto' }}
                 >
                     {!disabled && props.characters.map((char: Character, charIndex: number) => (
                         <SwipeableViews
@@ -90,9 +88,9 @@ export default function HomePage(props: Props) {
                             onChangeIndex={(tabIndex) => onTabChange(tabIndex, charIndex)}
                             resistance
                         >
-                            <ListItem style={{ background: '#F44336', margin: '5px 0', height: 'calc(100% - 10px)', color: 'white', flexDirection: 'row-reverse' }}>
+                            <ListItem className={classes.listItem}>
                                 <ListItemIcon>
-                                    <Delete style={{ color: 'white' }} />
+                                    <Delete />
                                 </ListItemIcon>
                             </ListItem>
                             <CharacterItem char={char} onSelectCharacter={(id) => history.push('/detail/' + id)} />
@@ -112,8 +110,8 @@ export default function HomePage(props: Props) {
                     </ListItem>
                 </List>
             </CardContent>
-            <IconButton onClick={(event) => setAnchorEl(event.currentTarget)} style={{ position: 'absolute', top: '3px', right: '3px' }}>
-                <Settings style={{ color: 'white' }} />
+            <IconButton onClick={(event) => setAnchorEl(event.currentTarget)} className={classes.settingsMenu}>
+                <Settings />
             </IconButton>
             <SettingsMenu
                 accountName={user.pseudo}

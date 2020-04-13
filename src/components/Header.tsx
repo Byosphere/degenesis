@@ -50,7 +50,7 @@ export default function Header(props: Props) {
         return false;
     }
 
-    if (location.pathname === '/') {
+    if (location.pathname === '/' || location.pathname === '/connect') {
         return null;
     } else {
         return (

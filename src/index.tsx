@@ -1,25 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import T from 'i18n-react';
-import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import { CssBaseline } from '@material-ui/core';
 import { LANG } from './constants';
 import { setLang, getLang } from './utils/StorageManager';
+import theme from './theme';
 
-const theme = createMuiTheme({
-    palette: {
-        primary: {
-            main: '#555'
-        },
-        secondary: {
-            main: '#d50000'
-        }
-    }
-});
 const lang = getLang();
 const defaultLang = 'fr';
 

@@ -5,6 +5,7 @@ import { getLang, setLang, disconnect } from '../../utils/StorageManager';
 import T from 'i18n-react';
 import { Language, ExpandLess, ExpandMore, Android, Email, CardMembership, PowerSettingsNew, CloudUpload } from '@material-ui/icons';
 import packageJson from '../../../package.json';
+import { useStyles } from './styles';
 
 interface Props {
     anchorEl: Element;
@@ -14,14 +15,11 @@ interface Props {
     onUpload: () => void;
 }
 
-interface State {
-    langExpand: boolean;
-}
-
 export default function SettingsMenu(props: Props) {
 
     const lang = getLang();
     const [expanded, setExpanded] = useState<boolean>(false);
+    const classes = useStyles();
 
     function handleDisconnect() {
         disconnect();
@@ -30,7 +28,7 @@ export default function SettingsMenu(props: Props) {
 
     return (
         <Menu
-            id="lang-menu"
+            classes={{ paper: classes.menu }}
             anchorEl={props.anchorEl}
             keepMounted
             open={Boolean(props.anchorEl)}
@@ -40,7 +38,7 @@ export default function SettingsMenu(props: Props) {
                 component="nav"
                 aria-labelledby="settings"
                 subheader={
-                    <ListSubheader component="div" style={{ backgroundColor: 'white' }}>
+                    <ListSubheader component="div" className={classes.subHeader}>
                         {T.translate('settings.settings')}
                     </ListSubheader>
                 }
@@ -50,9 +48,9 @@ export default function SettingsMenu(props: Props) {
                         <Language />
                     </ListItemIcon>
                     <ListItemText primary={T.translate('settings.language')} secondary={T.translate('lang.' + lang)} />
-                    {expanded ? <ExpandLess style={{ marginLeft: '16px' }} /> : <ExpandMore style={{ marginLeft: '16px' }} />}
+                    {expanded ? <ExpandLess className={classes.secondaryAction} /> : <ExpandMore className={classes.secondaryAction} />}
                 </ListItem>
-                <Collapse in={expanded} timeout="auto" unmountOnExit style={{ margin: '0 16px' }}>
+                <Collapse in={expanded} timeout="auto" unmountOnExit className={classes.collapse}>
                     <List component="div">
                         {Object.keys(LANG).map((value, index) => (
                             <ListItem
@@ -75,7 +73,6 @@ export default function SettingsMenu(props: Props) {
                         secondary={T.translate('settings.importsub')}
                     />
                 </ListItem>
-                <Divider />
                 <ListItem>
                     <ListItemIcon>
                         <Email />
@@ -106,7 +103,7 @@ export default function SettingsMenu(props: Props) {
                         secondary={T.translate('settings.currentaccount', { name: props.accountName })}
                     />
                 </ListItem>
-                <Divider style={{ marginBottom: '10px' }} />
+                <Divider className={classes.divider} />
                 <ListItem style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
                     <ListItemText secondary='This is a fan App, Degenesis belongs' />
                     <ListItemText secondary='to SixMoreVodka - All Rights Reserved' />
