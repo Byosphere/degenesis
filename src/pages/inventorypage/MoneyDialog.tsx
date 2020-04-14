@@ -67,6 +67,7 @@ export default function MoneyDialog(props: Props) {
                         shrink: true,
                     }}
                     margin='normal'
+                    variant='outlined'
                     InputProps={{
                         startAdornment: <InputAdornment position="start">
                             <DonutSmall fontSize='small' />
