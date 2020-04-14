@@ -36,7 +36,7 @@ export default function MoneyDialog(props: Props) {
     return (
         <>
             {props.open && <Prompt when={true} message={actionOnPrompt} />}
-            <DialogTitle id="form-dialog-title">{T.translate('inventory.moneyedit')}</DialogTitle>
+            <DialogTitle>{T.translate('inventory.moneyedit')}</DialogTitle>
             <DialogContent>
                 <RadioGroup
                     aria-label="add_remove"
@@ -59,8 +59,7 @@ export default function MoneyDialog(props: Props) {
                     />
                 </RadioGroup>
                 <TextField
-                    id="money-number"
-                    label="Valeur"
+                    label={T.translate('generic.amount')}
                     value={value}
                     onChange={(event) => setValue(event.target.value)}
                     type="number"

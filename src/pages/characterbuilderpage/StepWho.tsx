@@ -3,6 +3,7 @@ import { TextField, FormControl, InputLabel, Select, Input, MenuItem, InputAdorn
 import { SEX } from '../../constants';
 import T from 'i18n-react';
 import { Character } from '../../models/Character';
+import { useStyles } from './styles';
 
 interface Props {
     newCharacter: Character;
@@ -13,10 +14,11 @@ interface Props {
 export default function StepWho(props: Props) {
 
     const { newCharacter, onChange, buttons } = props;
+    const classes = useStyles();
 
     return (
         <>
-            <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>{T.translate('create.whodesc')}</Typography>
+            <Typography className={classes.detailTypo} component='p'>{T.translate('create.whodesc')}</Typography>
             <TextField
                 name='name'
                 label={T.translate('generic.name')}
@@ -29,7 +31,7 @@ export default function StepWho(props: Props) {
                 onChange={onChange}
                 required
             />
-            <div style={{ display: 'flex' }}>
+            <div className={classes.containerLast}>
                 <TextField
                     name='age'
                     label={T.translate('generic.age')}
@@ -38,12 +40,11 @@ export default function StepWho(props: Props) {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    style={{ flex: 1, marginRight: '8px' }}
                     value={newCharacter.age || ''}
                     onChange={onChange}
                     required
                 />
-                <FormControl margin='dense' style={{ flex: 1, marginLeft: '8px' }}>
+                <FormControl margin='dense'>
                     <InputLabel shrink htmlFor="sex">
                         {T.translate('generic.sex')}
                     </InputLabel>
@@ -61,7 +62,7 @@ export default function StepWho(props: Props) {
                     </Select>
                 </FormControl>
             </div>
-            <div style={{ display: 'flex' }}>
+            <div className={classes.containerLast}>
                 <TextField
                     name='weight'
                     label={T.translate('generic.weight') as string}
@@ -73,7 +74,6 @@ export default function StepWho(props: Props) {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    style={{ flex: 1, marginRight: '8px' }}
                     value={newCharacter.weight || ''}
                     onChange={onChange}
                     required
@@ -90,7 +90,6 @@ export default function StepWho(props: Props) {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    style={{ flex: 1, marginLeft: '8px' }}
                     value={newCharacter.size || ''}
                     onChange={onChange}
                     required

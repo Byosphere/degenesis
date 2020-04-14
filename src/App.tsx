@@ -6,7 +6,7 @@ import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync, 
 import User from './models/User';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
 import HomePage from './pages/homepage/HomePage';
-import CharacterBuilder from './components/characterBuilder/CharacterBuilder';
+import CharacterBuilder from './pages/characterbuilderpage/CharacterBuilder';
 import DetailPage from './pages/detailpage/DetailPage';
 import ConnectPage from './pages/connectpage/ConnectPage';
 import { Character } from './models/Character';

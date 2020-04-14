@@ -1,14 +1,14 @@
 import React, { useState, useContext } from 'react'
 import { ExpansionPanel, ExpansionPanelSummary, ExpansionPanelDetails, Dialog, DialogTitle, DialogActions, Button, DialogContent, DialogContentText } from '@material-ui/core';
 import { ExpandMore, LooksTwo, LooksOne, Looks3, Looks4, Looks5, Looks6 } from '@material-ui/icons';
-import { ATTRIBUTES, SKILLS } from '../constants';
-import { Skill, Attribute, Character } from '../models/Character';
+import { ATTRIBUTES, SKILLS } from '../../constants';
+import { Skill, Attribute, Character } from '../../models/Character';
 import T from 'i18n-react';
 import { Prompt } from 'react-router-dom';
-import AttributeJauge from './AttributeJauge';
-import { getSkillXpCost, getAttributeXpCost } from '../utils/characterTools';
-import { SnackbarContext } from '../App';
-import { HeaderContext } from '../pages/detailpage/DetailPage';
+import AttributeJauge from '../../components/attributejauge/AttributeJauge';
+import { getSkillXpCost, getAttributeXpCost } from '../../utils/characterTools';
+import { SnackbarContext } from '../../App';
+import { HeaderContext } from '../detailpage/DetailPage';
 
 interface Props {
     char: Character;

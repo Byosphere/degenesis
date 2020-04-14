@@ -4,7 +4,8 @@ import { ExpandMore } from '@material-ui/icons';
 import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
 import T from 'i18n-react';
 import { Potential } from '../../models/Character';
-import AttributeJauge from '../../components/AttributeJauge';
+import AttributeJauge from '../../components/attributejauge/AttributeJauge';
+import { useStyles } from './styles';
 
 interface Props {
     potential: Potential;
@@ -15,9 +16,10 @@ interface Props {
 export default function PotentialDisplay(props: Props) {
 
     const { potential } = props;
+    const classes = useStyles();
 
     return (
-        <ExpansionPanel key={potential.id} style={{ marginBottom: '5px' }}>
+        <ExpansionPanel key={potential.id} className={classes.card}>
             <ExpansionPanelSummary
                 expandIcon={<ExpandMore />}
             >

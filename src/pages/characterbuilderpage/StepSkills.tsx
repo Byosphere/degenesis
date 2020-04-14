@@ -3,8 +3,9 @@ import { Skill, Character } from '../../models/Character';
 import T from 'i18n-react';
 import { Typography, List, ListSubheader, Snackbar, Button } from '@material-ui/core';
 import { SKILLS, ATTRIBUTES } from '../../constants';
-import AttributeRepartitor from '../attributeRepartitor/AttributeRepartitor';
+import AttributeRepartitor from './AttributeRepartitor';
 import { Warning } from '@material-ui/icons';
+import { useStyles } from './styles';
 
 interface Props {
     newCharacter: Character;
@@ -17,12 +18,13 @@ interface Props {
 export default function StepSkills(props: Props) {
 
     const { newCharacter, onChange, buttons, skillPoints } = props;
+    const classes = useStyles();
 
     return (
         <>
             <Typography variant='body2'>{T.translate('create.skillsdesc')}</Typography>
             <Snackbar
-                style={{ opacity: 0.9 }}
+                className={classes.skillSnackbar}
                 anchorOrigin={{
                     vertical: 'bottom',
                     horizontal: 'left',
@@ -32,16 +34,14 @@ export default function StepSkills(props: Props) {
                     'aria-describedby': 'message-id',
                 }}
                 message={
-                    <span style={{ display: 'flex', alignItems: 'center' }}>
-                        <Warning style={{ marginRight: '10px' }} />
-                        {T.translate('create.skillsLeft', { num: skillPoints })}
+                    <span className={classes.message}>
+                        <Warning /> {T.translate('create.skillsLeft', { num: skillPoints })}
                     </span>
                 }
                 action={[
                     <Button
                         key="undo"
                         size="small"
-                        style={{ color: 'white' }}
                         onClick={props.onReset}
                     >
                         {T.translate('generic.reset')}
@@ -53,7 +53,7 @@ export default function StepSkills(props: Props) {
                     return (
                         <List
                             key={attributeId}
-                            style={{ border: '1px solid rgba(0,0,0,0.2)', borderRadius: '10px', paddingBottom: '0', marginBottom: '8px' }}
+                            className={classes.skillList}
                             subheader={
                                 <ListSubheader component="div">
                                     {T.translate('attributes.' + ATTRIBUTES[attributeId] + '.name')}
@@ -84,7 +84,6 @@ export default function StepSkills(props: Props) {
                     );
                 })}
             </List>
-
             {buttons}
         </>
     );

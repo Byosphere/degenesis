@@ -3,7 +3,7 @@ import { Attribute, Character } from '../../models/Character';
 import T from 'i18n-react';
 import { Typography, List } from '@material-ui/core';
 import { ATTRIBUTES } from '../../constants';
-import AttributeRepartitor from '../attributeRepartitor/AttributeRepartitor';
+import AttributeRepartitor from './AttributeRepartitor';
 
 interface Props {
     newCharacter: Character;

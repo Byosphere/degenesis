@@ -2,18 +2,20 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Character, Potential, Origin } from '../../models/Character';
 import { Typography, Dialog, DialogContentText, DialogTitle, DialogContent, DialogActions, Button, ExpansionPanel, ExpansionPanelSummary, Avatar, ExpansionPanelDetails, Card, CardContent } from '@material-ui/core';
 import T from 'i18n-react';
-import Empty from '../../components/Empty';
+import Empty from '../../components/empty/Empty';
 import PotentialDisplay from './PotentialDisplay';
 import { Add, ExpandMore } from '@material-ui/icons';
 import PotentialsDialog from './PotentialsDialog';
 import { SnackbarContext } from '../../App';
-import FloatingAction from '../../components/FloatingAction';
+import FloatingAction from '../../components/floatingaction/FloatingAction';
 import { getPotentialXpCost } from '../../utils/characterTools';
 import { POTENTIALS, GENERIC_POTENTIALS, CULTES, CULTURES, CONCEPTS } from '../../constants';
 import { Prompt } from 'react-router-dom';
-import AttributeJauge from '../../components/AttributeJauge';
+import AttributeJauge from '../../components/attributejauge/AttributeJauge';
 import CardOverTitle from '../../components/cardovertitle/CardOverTitle';
 import { HeaderContext } from '../detailpage/DetailPage';
+import { useStyles } from './styles';
+import ShortDivider from '../../components/shortdivider/ShortDivider';
 
 interface Props {
     char: Character;
@@ -28,6 +30,7 @@ export default function PotentialsPage(props: Props) {
     const [openXp, setOpenXp] = useState<boolean>(false);
     const [potential, setPotential] = useState<Potential>(undefined);
     const { setSnackbar } = useContext(SnackbarContext);
+    const classes = useStyles();
 
     function handleDeletePotential(group: number, id: number) {
         let potentialIndex = props.char.potentials.findIndex((p) => p.id === id && p.group === group);
@@ -80,9 +83,9 @@ export default function PotentialsPage(props: Props) {
     }
 
     return (
-        <div style={{ margin: '5px' }}>
+        <div className={classes.container}>
             <CardOverTitle title={T.translate('generic.origins') as string} />
-            <Card style={{ marginBottom: '5px' }}>
+            <Card className={classes.card}>
                 <CardContent>
                     {char.origins.map((origin: Origin) => (
                         <AttributeJauge
@@ -106,35 +109,35 @@ export default function PotentialsPage(props: Props) {
                     onUpgradePotential={handleOpenXpDialog}
                 />
             ))}
-            <span className='stats-bottom'></span>
-            <ExpansionPanel style={{ marginBottom: '5px' }}>
+            <ShortDivider />
+            <ExpansionPanel className={classes.card}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                     <Avatar alt={CULTES[char.culte].name} src={"images/cultes/" + CULTES[char.culte].img} />
-                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('cultes.' + CULTES[char.culte].name)}</Typography>
+                    <Typography className={classes.typography}>{T.translate('cultes.' + CULTES[char.culte].name)}</Typography>
                 </ExpansionPanelSummary>
-                <ExpansionPanelDetails>
+                <ExpansionPanelDetails className={classes.expansionDetail}>
                     {T.translate('cultes.' + CULTES[char.culte].desc)}
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <ExpansionPanel style={{ marginBottom: '5px' }}>
+            <ExpansionPanel className={classes.card}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                     <Avatar alt={CULTURES[char.culture].name} src={"images/cultures/" + CULTURES[char.culture].img} />
-                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('cultures.' + CULTURES[char.culture].name)}</Typography>
+                    <Typography className={classes.typography}>{T.translate('cultures.' + CULTURES[char.culture].name)}</Typography>
                 </ExpansionPanelSummary>
-                <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
+                <ExpansionPanelDetails className={classes.expansionDetail}>
                     {T.translate('cultures.' + CULTURES[char.culture].desc)}
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <ExpansionPanel style={{ marginBottom: '5px' }}>
+            <ExpansionPanel className={classes.card}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                     <Avatar alt={CONCEPTS[char.concept].name} src={"images/concepts/" + CONCEPTS[char.concept].img} />
-                    <Typography style={{ alignSelf: 'center', marginLeft: '16px' }}>{T.translate('concepts.' + CONCEPTS[char.concept].name)}</Typography>
+                    <Typography className={classes.typography}>{T.translate('concepts.' + CONCEPTS[char.concept].name)}</Typography>
                 </ExpansionPanelSummary>
-                <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
+                <ExpansionPanelDetails className={classes.expansionDetail}>
                     {T.translate('concepts.' + CONCEPTS[char.concept].desc)}
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <span className='stats-bottom'></span>
+            <ShortDivider />
             <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
             <PotentialsDialog
                 open={open}

@@ -1,29 +1,30 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Character, Attribute } from '../../models/Character';
-import { RANGS, CULTES, CULTURES, SEX, CONCEPTS } from '../../constants';
+import { RANGS, CULTES, CULTURES, SEX, CONCEPTS, STORY_LENGTH } from '../../constants';
 import T from 'i18n-react';
 import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Info, Edit, ExpandLess, ExpandMore, Lock, LockOpen } from '@material-ui/icons';
 import { getBlessuresMax, getEgoMax, getSporulationMax, getTraumaMax } from '../../utils/characterTools';
 import Trauma from './Trauma';
-import AttributePanel from '../../components/AttributePanel';
+import AttributePanel from './AttributePanel';
 import CharacterEditDialog, { EditFormValues } from './CharacterEditDialog';
 import { Prompt } from 'react-router-dom';
-import FloatingAction from '../../components/FloatingAction';
+import FloatingAction from '../../components/floatingaction/FloatingAction';
 import InteractiveJauge from '../../components/InteractiveJauge';
 import CardOverTitle from '../../components/cardovertitle/CardOverTitle';
 import { HeaderContext } from '../detailpage/DetailPage';
+import { useStyles } from './styles';
+import ShortDivider from '../../components/shortdivider/ShortDivider';
 
 interface Props {
     char: Character;
     onChange: (char: Character) => void;
 }
 
-const STORY_LENGTH: number = 200;
-
 export default function StatsPage(props: Props) {
 
     const { char } = props;
+    const classes = useStyles();
     const rankDesc = T.translate('rangs.' + RANGS[char.culte][char.rang] + '.desc');
     const { setHeaderTitle } = useContext(HeaderContext);
     const [showRank, setShowRank] = useState<boolean>(false);
@@ -64,15 +65,15 @@ export default function StatsPage(props: Props) {
     }
 
     return (
-        <div style={{ margin: '5px' }}>
+        <div className={classes.container}>
             <Card style={{ position: 'relative' }}>
                 <CardMedia
                     image={"images/cultes/" + CULTES[char.culte].img}
                     title="Paella dish"
-                    style={{ height: '100px' }}
+                    className={classes.cardMedia}
                 />
                 <Chip
-                    style={{ position: 'absolute', top: '8px', left: '8px', background: 'rgba(255,255,255,0.7)' }}
+                    className={classes.rankChip}
                     label={T.translate('rangs.' + RANGS[char.culte][char.rang] + '.name')}
                     variant="outlined"
                     deleteIcon={<Info />}
@@ -104,16 +105,14 @@ export default function StatsPage(props: Props) {
                         }
                     </Typography>
                 </CardContent>
-                {char.story.length > STORY_LENGTH &&
-                    <CardContent style={{ display: 'flex', justifyContent: 'flex-end', paddingTop: '0' }}>
-                        <IconButton onClick={() => setExpanded(!expanded)}>
-                            {expanded ? <ExpandLess /> : <ExpandMore />}
-                        </IconButton>
-                    </CardContent>
-                }
+                {char.story.length > STORY_LENGTH && <CardContent className={classes.storyContent}>
+                    <IconButton onClick={() => setExpanded(!expanded)}>
+                        {expanded ? <ExpandLess /> : <ExpandMore />}
+                    </IconButton>
+                </CardContent>}
             </Card>
             <CardOverTitle title={T.translate('generic.health')} />
-            <Card style={{ margin: '5px 0' }}>
+            <Card>
                 <CardContent>
                     <InteractiveJauge
                         label='blessures'
@@ -137,7 +136,7 @@ export default function StatsPage(props: Props) {
                         <Typography component='div' variant='caption'>
                             {T.translate('generic.trauma') + ' (' + char.trauma + '/' + getTraumaMax(char) + ') :'}
                         </Typography>
-                        <div style={{ marginTop: '-4px' }}>
+                        <div className={classes.trauma}>
                             <Trauma
                                 char={props.char}
                                 onClick={handleTrauma}
@@ -150,7 +149,7 @@ export default function StatsPage(props: Props) {
                 title={
                     <>
                         {T.translate('generic.attributes')}
-                        <span style={{ float: 'right' }} onClick={() => setLock(!lock)}>
+                        <span className={classes.lock} onClick={() => setLock(!lock)}>
                             {lock ? <Lock fontSize='small' /> : <LockOpen fontSize='small' />}
                         </span>
                     </>
@@ -167,7 +166,7 @@ export default function StatsPage(props: Props) {
                     locked={lock}
                 />
             ))}
-            <span className='stats-bottom'></span>
+            <ShortDivider />
             <CharacterEditDialog
                 char={char}
                 open={open}

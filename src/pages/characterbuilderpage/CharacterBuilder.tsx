@@ -15,6 +15,7 @@ import StepBelief from './StepBelief';
 import StepPotentials from './StepPotentials';
 import StepLast from './StepLast';
 import { getNewCharacter, updateAttributes } from '../../utils/characterTools';
+import { useStyles } from './styles';
 
 interface Props {
     onCreateCharacter: (char: Character) => void;
@@ -22,10 +23,11 @@ interface Props {
 
 export default function CharacterBuilder(props: Props) {
 
-    const [step, setStep] = useState<number>(0);
+    const [step, setStep] = useState<number>(0); // TODO
     const [character, setCharacter] = useState<Character>(getNewCharacter());
     const [attributePoints, setAttributePoints] = useState<number>(BASE_ATTRIBUTES);
     const [skillPoints, setSkillPoints] = useState<number>(BASE_SKILLS);
+    const classes = useStyles();
     const history = useHistory();
 
     function handleSelectAttribute(field: string, value: string) {
@@ -41,10 +43,13 @@ export default function CharacterBuilder(props: Props) {
 
     function displayLabel(title: any, validElement: any, currentStep: number): JSX.Element {
         return (
-            <StepLabel classes={{ labelContainer: 'create-step-label' }}>
+            <StepLabel classes={{ label: classes.stepLabel }}>
                 {title}
-                {step >= currentStep + 1 &&
-                    <Chip label={validElement} color="secondary" icon={<Done />} />}
+                {step >= currentStep + 1 && <Chip
+                    label={validElement}
+                    color="secondary"
+                    icon={<Done />}
+                />}
             </StepLabel>
         );
     }
@@ -84,16 +89,14 @@ export default function CharacterBuilder(props: Props) {
 
     function displayControls(disableNext: boolean, enablePrev: boolean, isLast?: boolean): JSX.Element {
         return (
-            <div style={{ display: 'flex', justifyContent: "space-between" }}>
+            <div className={classes.controls}>
                 {enablePrev && <Button
-                    style={{ marginTop: '16px' }}
                     color='primary'
                     onClick={() => onStepChange('backward')}
                 >
                     {T.translate('generic.prev')}
                 </Button>}
                 <Button
-                    style={{ marginTop: '16px' }}
                     variant='contained'
                     color='secondary'
                     onClick={isLast ? handleCreate : () => onStepChange('forward')}
@@ -160,8 +163,8 @@ export default function CharacterBuilder(props: Props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <div style={{ margin: '54px 5px 5px 5px', flex: 1 }}>
-                <Card style={{ flex: 1, display: "flex", flexDirection: "column", overflowY: 'auto', minHeight: 'calc(100% - 46px)' }}>
+            <div className={classes.container}>
+                <Card>
                     <Stepper activeStep={step} orientation="vertical">
                         <Step>
                             {displayLabel(T.translate('create.who'), character.name, 0)}

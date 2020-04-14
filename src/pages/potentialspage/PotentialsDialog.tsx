@@ -1,11 +1,12 @@
 import React from 'react';
-import { Dialog, AppBar, Toolbar, IconButton, Typography, DialogContent, List, ListSubheader, ListItem, ListItemText, Slide } from '@material-ui/core';
+import { Dialog, AppBar, Toolbar, IconButton, Typography, DialogContent, List, ListSubheader, ListItem, ListItemText } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
 import T from 'i18n-react';
-import { TransitionProps } from '@material-ui/core/transitions/transition';
 import { Character } from '../../models/Character';
 import { Prompt } from 'react-router-dom';
+import { useStyles } from './styles';
+import TransitionUp from '../../components/TransitionUp';
 
 interface Props {
     open: boolean;
@@ -14,14 +15,9 @@ interface Props {
     onClick: (key: number, type: number) => void;
 }
 
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & { children?: React.ReactElement<any, any> },
-    ref: React.Ref<unknown>,
-) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
-
 export default function PotentialsDialog(props: Props) {
+
+    const classes = useStyles();
 
     function actionOnPrompt(location): boolean {
         props.onClose();
@@ -33,7 +29,7 @@ export default function PotentialsDialog(props: Props) {
             open={props.open}
             onClose={props.onClose}
             fullScreen
-            TransitionComponent={Transition}
+            TransitionComponent={TransitionUp}
         >
             {props.open && <Prompt when={true} message={actionOnPrompt} />}
             <AppBar>
@@ -46,13 +42,13 @@ export default function PotentialsDialog(props: Props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <DialogContent style={{ marginTop: '56px', paddingTop: 0 }}>
+            <DialogContent className={classes.dialogContent}>
                 <List
                     dense
                     component="div"
                     role="list"
                     subheader={
-                        <ListSubheader component="div" style={{ background: 'white' }}>
+                        <ListSubheader component="div" className={classes.listSubHeader}>
                             {T.translate('generic.potential1')}
                         </ListSubheader>
                     }
@@ -77,7 +73,7 @@ export default function PotentialsDialog(props: Props) {
                     component="div"
                     role="list"
                     subheader={
-                        <ListSubheader component="div" style={{ background: 'white' }}>
+                        <ListSubheader component="div" className={classes.listSubHeader}>
                             {T.translate('generic.potential0')}
                         </ListSubheader>
                     } >

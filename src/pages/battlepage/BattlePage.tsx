@@ -3,7 +3,7 @@ import { Character } from '../../models/Character';
 import T from 'i18n-react';
 import { AppBar, Toolbar, IconButton, Badge, Avatar, Fab, Zoom, Slide, Divider, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button } from '@material-ui/core';
 import { PlayArrow, FlipCameraAndroid, Block, ExitToApp } from '@material-ui/icons';
-import FloatingAction from '../../components/FloatingAction';
+import FloatingAction from '../../components/floatingaction/FloatingAction';
 import { getCharacterHealth, getEgoMax, canFight } from '../../utils/characterTools';
 import SetInitiativePanel from './SetInitiativePanel';
 import ActionsList from './ActionsList';
@@ -126,12 +126,12 @@ export default function BattlePage(props: Props) {
             {step === 2 && <ActionsList />}
             {step === 1 && <SetInitiativePanel char={char} onClose={handleClose} onCancel={handleCancel} />}
             {step > 0 && <FloatingAction
-                style={{ bottom: '16px', right: '88px' }}
+                // style={{ bottom: '16px', right: '88px' }}
                 onClick={() => setOpen(true)}
                 icon={<ExitToApp />}
             />}
             {step > 0 && <FloatingAction
-                style={{ bottom: '16px' }}
+                // style={{ bottom: '16px' }}
                 onClick={goToNextRound}
                 icon={<Badge badgeContent={round} color='primary' anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
                     <FlipCameraAndroid />

@@ -1,4 +1,7 @@
-.App, html, body, #root {
+.App,
+html,
+body,
+#root {
   height: 100%;
 }
 
@@ -11,11 +14,11 @@
   height: 100%;
 }
 
-.react-swipeable-view-container>div {
+.react-swipeable-view-container > div {
   min-height: 100%;
 }
 
-.textfield-fullheight>div {
+.textfield-fullheight > div {
   height: 100%;
 }
 
@@ -24,33 +27,17 @@
   overflow-y: auto !important;
 }
 
-.create-step-label>span {
+.create-step-label > span {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.stats-bottom {
-  display: block;
-  height: 44px;
-  position: relative;
-}
-
-.stats-bottom::after {
-  content: "";
-  width: 50%;
-  height: 1px;
-  background-color: rgba(0, 0, 0, 0.16);
-  position: absolute;
-  top: 50%;
-  left: 25%;
-}
-
-.error-snackbar>div {
+.error-snackbar > div {
   background-color: #d32f2f;
 }
 
-.success-snackbar>div {
+.success-snackbar > div {
   background-color: #4caf50;
 }
 
@@ -59,39 +46,18 @@
   height: 100% !important;
 }
 
-.attribute-jauge {
-  width: 100%;
-  align-items: center;
-  padding-left: 16px;
-  position: relative;
-  margin-bottom: 8px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
-}
-
-.attribute-jauge:last-child {
-  border-bottom: none;
-  margin-bottom: 0px;
-}
-
-.attribute-jauge.attribute {
-  background-color: #444;
-  margin-right: 10px;
-  margin-bottom: 0px;
-  border-bottom: none;
-}
-
 .chip-modifier.positiv {
   margin-right: 2px;
   display: inline-flex;
   background-color: #4caf50;
 }
 
-.chip-modifier.positiv>div:first-child {
+.chip-modifier.positiv > div:first-child {
   background-color: #388e3c;
   color: white;
 }
 
-.chip-modifier.negativ>div:first-child {
+.chip-modifier.negativ > div:first-child {
   background-color: #9a0036;
   color: white;
 }

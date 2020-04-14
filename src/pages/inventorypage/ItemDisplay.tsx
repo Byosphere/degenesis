@@ -3,7 +3,7 @@ import T from 'i18n-react';
 import { Item } from '../../models/Character';
 import { ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Chip, ExpansionPanelActions, Button, Divider, Dialog, DialogTitle, DialogActions } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
-import Empty from '../../components/Empty';
+import Empty from '../../components/empty/Empty';
 import { useStyles } from './styles';
 import { Prompt } from 'react-router-dom';
 

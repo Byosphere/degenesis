@@ -6,7 +6,7 @@ import { CardTravel, Add, DonutSmall, Money, Pets, Clear } from '@material-ui/ic
 import ItemDisplay from './ItemDisplay';
 import AddItemDialog from './AddItemDialog';
 import MoneyDialog from './MoneyDialog';
-import FloatingAction from '../../components/FloatingAction';
+import FloatingAction from '../../components/floatingaction/FloatingAction';
 import Searchbar from '../../components/searchbar/Searchbar';
 import { useStyles } from './styles';
 import PetDialog from './PetDialog';

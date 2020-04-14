@@ -56,7 +56,7 @@ export const useStyles = makeStyles({
     },
     cardList: {
         flex: 1,
-        marginTop: '5px',
+        marginTop: theme.spacing(0.5),
         overflow: 'auto'
     },
     subHeader: {

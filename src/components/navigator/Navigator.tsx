@@ -1,8 +1,8 @@
 import React from 'react';
-import './style.css';
 import { BottomNavigation, BottomNavigationAction } from '@material-ui/core';
 import { Note, HowToReg, WifiTethering, BusinessCenter, Whatshot } from '@material-ui/icons';
 import T from 'i18n-react';
+import { useStyles } from './styles';
 
 interface Props {
     currentTab: number;
@@ -10,8 +10,11 @@ interface Props {
 }
 
 export default function Navigator(props: Props) {
+
+    const classes = useStyles();
+
     return (
-        <div className='bottom-navigator'>
+        <div className={classes.bottomNavigator}>
             <BottomNavigation
                 value={props.currentTab}
                 onChange={props.onTabChange}

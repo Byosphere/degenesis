@@ -5,6 +5,7 @@ import { Culte } from '../../models/Data';
 import T from 'i18n-react';
 import { DonutSmall } from '@material-ui/icons';
 import { Character } from '../../models/Character';
+import { useStyles } from './styles';
 
 interface Props {
     newCharacter: Character;
@@ -14,10 +15,11 @@ interface Props {
 
 export default function StepCulte(props: Props) {
     const { newCharacter, onChange, buttons } = props;
+    const classes = useStyles();
 
     return (
         <>
-            <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+            <Typography className={classes.detailTypo} component='p'>
                 {T.translate('create.cultedesc', { who: newCharacter.name })}
             </Typography>
             <FormControl fullWidth margin='dense'>
@@ -40,21 +42,21 @@ export default function StepCulte(props: Props) {
                     ))}
                 </Select>
             </FormControl>
-            {typeof newCharacter.culte === 'number' && <div style={{ margin: '16px 0' }}>
+            {typeof newCharacter.culte === 'number' && <div className={classes.cContainer}>
                 <CardMedia
                     image={"images/cultes/" + CULTES[newCharacter.culte].img}
                     title={CULTES[newCharacter.culte].name}
-                    style={{ height: '100px' }}
+                    className={classes.cardMedia}
                 />
                 <CardContent>
-                    <Typography variant='body2' component='p' style={{ marginBottom: "8px" }}>
+                    <Typography variant='body2' component='p' className={classes.bottomP}>
                         {T.translate('cultes.' + CULTES[newCharacter.culte].desc)}
                     </Typography>
-                    <Typography variant='body2' style={{ display: 'flex', alignItems: 'center', fontStyle: 'italic' }}>
-                        <DonutSmall fontSize='small' style={{ marginRight: '5px' }} />
+                    <Typography variant='body2' className={classes.money}>
+                        <DonutSmall fontSize='small' />
                         {T.translate('generic.money', { money: MONEY[newCharacter.culte] * 2 })}
                     </Typography>
-                    <Typography variant='body2' component='p' style={{ marginTop: '5px' }}>
+                    <Typography variant='body2' component='p' className={classes.topP}>
                         {T.translate('create.bonus.skills')}
                     </Typography>
                     <Typography variant='body2' component='p'>

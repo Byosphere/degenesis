@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { CardContent, TextField } from '@material-ui/core';
 import T from 'i18n-react';
-import { Character } from '../models/Character';
+import { Character } from '../../models/Character';
+import { useStyles } from './styles';
 
 interface Props {
     noteId: number;
@@ -11,6 +12,7 @@ interface Props {
 export default function Note(props: Props) {
 
     const [note, setNote] = useState<string>(props.char.notes[props.noteId]);
+    const classes = useStyles();
 
     function handleChange(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>) {
         let char = props.char;
@@ -19,14 +21,13 @@ export default function Note(props: Props) {
     }
 
     return (
-        <CardContent style={{ height: '100%', paddingTop: '0px' }}>
+        <CardContent className={classes.note}>
             <TextField
                 label={T.translate('navigator.notes')}
                 multiline
                 margin="normal"
                 variant="outlined"
                 fullWidth
-                style={{ height: '100%' }}
                 classes={{
                     root: "textfield-fullheight"
                 }}

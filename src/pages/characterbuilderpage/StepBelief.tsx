@@ -3,6 +3,7 @@ import { Typography, Chip, Divider } from '@material-ui/core';
 import T from 'i18n-react';
 import { KeyboardArrowRight } from '@material-ui/icons';
 import { Character } from '../../models/Character';
+import { useStyles } from './styles';
 
 interface Props {
     newCharacter: Character;
@@ -13,18 +14,18 @@ interface Props {
 export default function StepBelief(props: Props) {
 
     const { newCharacter, onChange, buttons } = props;
+    const classes = useStyles();
 
     return (
         <>
-            <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+            <Typography className={classes.detailTypo} component='p'>
                 {T.translate('create.beliefdesc', { who: newCharacter.name })}
             </Typography>
-            <div style={{ margin: '10px 0', display: 'flex', alignItems: 'center' }}>
+            <div className={classes.beliefDiv}>
                 <KeyboardArrowRight />
                 <Chip
                     color={newCharacter.belief === 'foi' ? 'secondary' : 'default'}
                     label={'(' + T.translate('attributes.psyche.short') + ') ' + T.translate('skills.foi')}
-                    style={{ marginRight: '5px' }}
                     onClick={() => onChange('belief', 'foi')}
                 />
                 <Chip
@@ -34,13 +35,12 @@ export default function StepBelief(props: Props) {
                 />
             </div>
             <Typography variant='body2'>{newCharacter.belief ? T.translate('create.' + newCharacter.belief) : ''}</Typography>
-            <Divider variant="middle" style={{ margin: '16px 0' }} />
-            <div style={{ marginBottom: '10px', display: 'flex', alignItems: 'center' }}>
+            <Divider variant="middle" className={classes.dividerBelief} />
+            <div className={classes.beliefDiv}>
                 <KeyboardArrowRight />
                 <Chip
                     color={newCharacter.behavior === 'concentration' ? 'secondary' : 'default'}
                     label={'(' + T.translate('attributes.intellect.short') + ') ' + T.translate('skills.concentration')}
-                    style={{ marginRight: '5px' }}
                     onClick={() => onChange('behavior', 'concentration')}
 
                 />

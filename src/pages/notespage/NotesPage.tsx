@@ -4,10 +4,11 @@ import { KeyboardArrowRight, KeyboardArrowLeft } from '@material-ui/icons';
 import SwipeableViews from 'react-swipeable-views';
 import { NOTES_MAX } from '../../constants';
 import T from 'i18n-react';
-import Note from '../../components/Note';
+import Note from './Note';
 import { Character } from '../../models/Character';
 import { Prompt } from 'react-router-dom';
 import { HeaderContext } from '../detailpage/DetailPage';
+import { useStyles } from './styles';
 
 interface Props {
     char: Character;
@@ -16,6 +17,7 @@ interface Props {
 
 export default function NotesPage(props: Props) {
 
+    const classes = useStyles();
     const [step, setStep] = useState<number>(0);
     const [open, setOpen] = useState<boolean>(false);
     const { setHeaderTitle } = useContext(HeaderContext);
@@ -46,23 +48,19 @@ export default function NotesPage(props: Props) {
     }
 
     return (
-        <div style={{ height: '100%', padding: '5px' }}>
-            <Card style={{
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-                height: '100%'
-            }}>
+        <div className={classes.container}>
+            <Card className={classes.card}>
                 <SwipeableViews
                     index={step}
                     onChangeIndex={setStep}
                     resistance
-                    style={{ flex: 1 }}
+                    className={classes.swipeableViews}
                 >
                     {notes.map((text, id) => (
                         <Note key={id} noteId={id} char={props.char} />
                     ))}
                 </SwipeableViews>
+                <Divider />
                 <MobileStepper
                     variant="dots"
                     position='static'
@@ -90,7 +88,7 @@ export default function NotesPage(props: Props) {
                     }
                 />
                 <Divider />
-                <CardActions style={{ justifyContent: 'space-around', marginBottom: '8px' }} >
+                <CardActions className={classes.cardActions}>
                     <Button
                         color='primary'
                         onClick={handleAdd}

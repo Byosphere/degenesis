@@ -3,6 +3,7 @@ import T from 'i18n-react';
 import { List, ListSubheader, ListItem, ListItemIcon, Checkbox, ListItemText, Typography } from '@material-ui/core';
 import { POTENTIALS, GENERIC_POTENTIALS } from '../../constants';
 import { Character } from '../../models/Character';
+import { useStyles } from './styles';
 
 interface Props {
     newCharacter: Character;
@@ -13,10 +14,11 @@ interface Props {
 export default function StepPotentials(props: Props) {
 
     const { newCharacter, onToggle, buttons } = props;
+    const classes = useStyles();
 
     return (
         <>
-            <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+            <Typography className={classes.detailTypo} component='p'>
                 {T.translate('create.potentialsdesc', { num: Math.abs(newCharacter.potentials.length - 2) })}
             </Typography>
             <List

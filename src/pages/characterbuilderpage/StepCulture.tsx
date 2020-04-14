@@ -4,6 +4,7 @@ import { CULTURES } from '../../constants';
 import { Culture } from '../../models/Data';
 import T from 'i18n-react';
 import { Character } from '../../models/Character';
+import { useStyles } from './styles';
 
 interface Props {
     newCharacter: Character;
@@ -14,11 +15,12 @@ interface Props {
 export default function StepCulture(props: Props) {
 
     const { newCharacter, onChange, buttons } = props;
+    const classes = useStyles();
     let skills = [];
 
     return (
         <>
-            <Typography style={{ fontSize: '0.9rem', opacity: 0.8, marginBottom: '10px' }} component='p'>
+            <Typography className={classes.detailTypo} component='p'>
                 {T.translate('create.culturedesc', { who: newCharacter.name })}
             </Typography>
             <FormControl fullWidth margin='dense'>
@@ -42,11 +44,11 @@ export default function StepCulture(props: Props) {
                 </Select>
             </FormControl>
             {
-                typeof newCharacter.culture === 'number' && <div style={{ margin: '16px 0' }}>
+                typeof newCharacter.culture === 'number' && <div className={classes.cContainer}>
                     <Typography variant="button">
                         {T.translate('cultures.' + CULTURES[newCharacter.culture].name)}
                     </Typography>
-                    <Typography variant='body2' component='p' style={{ marginBottom: "8px" }}>
+                    <Typography variant='body2' component='p' className={classes.bottomP}>
                         {T.translate('cultures.' + CULTURES[newCharacter.culture].desc)}
                     </Typography>
                     <Grid container spacing={2} alignItems='center'>
@@ -70,10 +72,10 @@ export default function StepCulture(props: Props) {
                                 })}
                                 </i>
                             </Typography>
-                            <Typography variant='body2' component='p' style={{ marginTop: '5px' }}>
+                            <Typography variant='body2' component='p' className={classes.topP}>
                                 {T.translate('create.bonus.skills')}
                             </Typography>
-                            <ul style={{ margin: 0, paddingLeft: '15px' }}>
+                            <ul className={classes.skills}>
                                 {skills}
                             </ul>
                         </Grid>
@@ -81,7 +83,7 @@ export default function StepCulture(props: Props) {
                             <CardMedia
                                 image={"images/cultures/" + CULTURES[newCharacter.culture].img}
                                 title={CULTURES[newCharacter.culture].name}
-                                style={{ height: '100px' }}
+                                className={classes.cardMedia}
                             />
                         </Grid>
                     </Grid>

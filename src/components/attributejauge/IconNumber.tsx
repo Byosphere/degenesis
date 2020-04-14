@@ -1,22 +1,18 @@
 import React from 'react';
 import { Backspace, BackspaceOutlined, LooksOne, LooksOneOutlined, LooksTwo, Looks3, LooksTwoOutlined, Looks3Outlined, Looks4, Looks4Outlined, Looks5, Looks5Outlined, Looks6, Looks6Outlined } from '@material-ui/icons';
+import { useStyles } from './styles';
 
 interface Props {
     num?: number;
     active?: boolean;
-    disabled?: boolean;
     onClick: (num: number) => void;
     locked?: boolean;
 }
 
 export default function IconNumber(props: Props) {
 
-    const { num, active, disabled, locked } = props;
-    const style: React.CSSProperties = {
-        marginRight: '3px',
-        opacity: disabled ? 0.4 : 1,
-        pointerEvents: disabled ? 'none' : 'initial'
-    };
+    const { num, active, locked } = props;
+    const classes = useStyles();
 
     function onClick(event: React.MouseEvent<any>) {
         if (locked) return;
@@ -24,7 +20,7 @@ export default function IconNumber(props: Props) {
         props.onClick(num);
     }
 
-    const itemProps = { style, onClick };
+    const itemProps = { className: classes.iconNumber, onClick };
 
     switch (num) {
         case 0:

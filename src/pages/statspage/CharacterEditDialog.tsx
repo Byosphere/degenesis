@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Dialog, DialogContent, TextField, FormControl, InputLabel, Select, MenuItem, InputAdornment, DialogActions, Button, Slide, AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { Dialog, DialogContent, TextField, FormControl, InputLabel, Select, MenuItem, InputAdornment, DialogActions, Button, AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
 import { SEX, RANGS } from '../../constants';
 import T from 'i18n-react';
 import { Character } from '../../models/Character';
 import { Prompt } from 'react-router-dom';
-import { TransitionProps } from '@material-ui/core/transitions/transition';
 import { Close } from '@material-ui/icons';
+import TransitionUp from '../../components/TransitionUp';
+import { useStyles } from './styles';
 
 interface Props {
     open: boolean;
@@ -34,16 +35,10 @@ interface FormErrors {
     story: string;
 }
 
-const Transition = React.forwardRef(function Transition(
-    props: TransitionProps & { children?: React.ReactElement<any, any> },
-    ref: React.Ref<unknown>,
-) {
-    return <Slide direction="up" ref={ref} {...props} />;
-});
-
 export default function CharacterEditDialog(props: Props) {
 
     const { open, char } = props;
+    const classes = useStyles();
     const [formValues, setFormValues] = useState<EditFormValues>({
         name: char.name,
         age: char.age,
@@ -94,7 +89,7 @@ export default function CharacterEditDialog(props: Props) {
             open={open}
             onClose={props.onClose}
             fullScreen
-            TransitionComponent={Transition}
+            TransitionComponent={TransitionUp}
         >
             {open && <Prompt when={true} message={actionOnPrompt} />}
             <AppBar>
@@ -107,7 +102,7 @@ export default function CharacterEditDialog(props: Props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <DialogContent style={{ marginTop: '56px', display: 'flex', flexDirection: 'column', paddingTop: '24px' }}>
+            <DialogContent className={classes.dialogContent}>
                 <TextField
                     name='name'
                     label={T.translate('generic.name')}
@@ -122,7 +117,7 @@ export default function CharacterEditDialog(props: Props) {
                     error={Boolean(errors.name)}
                     helperText={errors.name}
                 />
-                <div style={{ display: 'flex', marginTop: '16px' }}>
+                <div className={classes.div}>
                     <TextField
                         name='age'
                         label={T.translate('generic.age')}
@@ -131,7 +126,7 @@ export default function CharacterEditDialog(props: Props) {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        style={{ flex: 1, marginRight: '8px' }}
+                        className={classes.textfieldRight}
                         value={formValues.age}
                         onChange={(event) => handleChange(event, 'age')}
                         required
@@ -140,7 +135,7 @@ export default function CharacterEditDialog(props: Props) {
                     />
                     <FormControl
                         variant='outlined'
-                        style={{ flex: 1, marginLeft: '8px' }}
+                        className={classes.textfieldLeft}
                     >
                         <InputLabel shrink htmlFor="sex">
                             {T.translate('generic.sex')}
@@ -165,7 +160,7 @@ export default function CharacterEditDialog(props: Props) {
                         </Select>
                     </FormControl>
                 </div>
-                <div style={{ display: 'flex', marginTop: '16px' }}>
+                <div className={classes.div}>
                     <TextField
                         name='weight'
                         label={T.translate('generic.weight')}
@@ -177,7 +172,7 @@ export default function CharacterEditDialog(props: Props) {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        style={{ flex: 1, marginRight: '8px' }}
+                        className={classes.textfieldRight}
                         value={formValues.weight}
                         onChange={(event) => handleChange(event, 'weight')}
                         required
@@ -195,7 +190,7 @@ export default function CharacterEditDialog(props: Props) {
                         InputLabelProps={{
                             shrink: true,
                         }}
-                        style={{ flex: 1, marginLeft: '8px' }}
+                        className={classes.textfieldLeft}
                         value={formValues.size}
                         onChange={(event) => handleChange(event, 'size')}
                         required
@@ -203,7 +198,7 @@ export default function CharacterEditDialog(props: Props) {
                         helperText={errors.size}
                     />
                 </div>
-                <FormControl fullWidth variant='outlined' style={{ marginTop: '16px' }}>
+                <FormControl fullWidth variant='outlined'>
                     <InputLabel shrink htmlFor="rang">
                         {T.translate('generic.rang')}
                     </InputLabel>
@@ -237,7 +232,7 @@ export default function CharacterEditDialog(props: Props) {
                     required
                     error={Boolean(errors.story)}
                     helperText={errors.story}
-                    style={{ marginTop: '16px', flexGrow: 1 }}
+                    className={classes.textfieldTop}
                     classes={{
                         root: "textfield-fullheight"
                     }}
