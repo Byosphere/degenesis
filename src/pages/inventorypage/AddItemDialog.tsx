@@ -5,6 +5,7 @@ import { GROUPS } from '../../constants';
 import T from 'i18n-react';
 import { Item } from '../../models/Character';
 import { Prompt } from 'react-router-dom';
+import { useStyles } from './styles';
 
 interface Props {
     open: boolean;
@@ -13,6 +14,8 @@ interface Props {
 }
 
 export default function AddItemDialog(props: Props) {
+
+    const classes = useStyles();
 
     const [item, setItem] = useState<Item>({
         id: 0,
@@ -52,7 +55,7 @@ export default function AddItemDialog(props: Props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <DialogContent style={{ marginTop: '56px' }}>
+            <DialogContent className={classes.dialogContent}>
                 <DialogContentText>{T.translate('inventory.additemdesc')}</DialogContentText>
                 <TextField
                     name="name"

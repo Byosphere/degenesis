@@ -1,7 +1,4 @@
-.App,
-html,
-body,
-#root {
+.App, html, body, #root {
   height: 100%;
 }
 
@@ -10,54 +7,18 @@ body,
   flex-direction: column;
 }
 
-.react-swipeable-view-container {
-  height: 100%;
-}
-
-.react-swipeable-view-container > div {
-  min-height: 100%;
-}
-
-.textfield-fullheight > div {
-  height: 100%;
-}
-
-.textfield-fullheight textarea {
-  height: 100% !important;
-  overflow-y: auto !important;
-}
-
-.create-step-label > span {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.error-snackbar > div {
-  background-color: #d32f2f;
-}
-
-.success-snackbar > div {
-  background-color: #4caf50;
-}
-
-.navigator-divider {
-  width: 1px;
-  height: 100% !important;
-}
-
 .chip-modifier.positiv {
   margin-right: 2px;
   display: inline-flex;
   background-color: #4caf50;
 }
 
-.chip-modifier.positiv > div:first-child {
+.chip-modifier.positiv>div:first-child {
   background-color: #388e3c;
   color: white;
 }
 
-.chip-modifier.negativ > div:first-child {
+.chip-modifier.negativ>div:first-child {
   background-color: #9a0036;
   color: white;
 }

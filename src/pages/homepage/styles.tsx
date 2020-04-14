@@ -70,5 +70,9 @@ export const useStyles = makeStyles({
     },
     divider: {
         marginBottom: theme.spacing(1)
+    },
+    bottomList: {
+        flexDirection: 'column',
+        alignItems: 'flex-start'
     }
 });

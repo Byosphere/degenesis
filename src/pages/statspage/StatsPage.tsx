@@ -10,7 +10,7 @@ import AttributePanel from './AttributePanel';
 import CharacterEditDialog, { EditFormValues } from './CharacterEditDialog';
 import { Prompt } from 'react-router-dom';
 import FloatingAction from '../../components/floatingaction/FloatingAction';
-import InteractiveJauge from '../../components/InteractiveJauge';
+import InteractiveJauge from './InteractiveJauge';
 import CardOverTitle from '../../components/cardovertitle/CardOverTitle';
 import { HeaderContext } from '../detailpage/DetailPage';
 import { useStyles } from './styles';
@@ -66,7 +66,7 @@ export default function StatsPage(props: Props) {
 
     return (
         <div className={classes.container}>
-            <Card style={{ position: 'relative' }}>
+            <Card>
                 <CardMedia
                     image={"images/cultes/" + CULTES[char.culte].img}
                     title="Paella dish"

@@ -45,7 +45,7 @@ export default function Header(props: Props) {
                         <ArrowBack />
                     </IconButton>
                     <Divider className={classes.divider1} orientation="vertical" flexItem />
-                    <Typography variant='body1' component='h1' style={{ flexGrow: 1, textAlign: 'center' }}>
+                    <Typography variant='body1' component='h1' className={classes.title}>
                         {props.title}
                     </Typography>
                     <Divider className={classes.divider2} orientation="vertical" flexItem />

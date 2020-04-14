@@ -9,5 +9,9 @@ export const useStyles = makeStyles({
     },
     input: {
         flex: 1
+    },
+    search: {
+        marginRight: theme.spacing(2),
+        opacity: 0.5
     }
 });

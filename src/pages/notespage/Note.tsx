@@ -29,7 +29,7 @@ export default function Note(props: Props) {
                 variant="outlined"
                 fullWidth
                 classes={{
-                    root: "textfield-fullheight"
+                    root: classes.fullHeight
                 }}
                 InputLabelProps={{
                     shrink: true,

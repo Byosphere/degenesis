@@ -3,9 +3,10 @@ import { Dialog, AppBar, Toolbar, IconButton, Typography, DialogContent, DialogA
 import { Prompt } from 'react-router-dom';
 import { Close } from '@material-ui/icons';
 import T from 'i18n-react';
-import { Character } from '../models/Character';
-import { getNewCharacter } from '../utils/characterTools';
+import { Character } from '../../models/Character';
+import { getNewCharacter } from '../../utils/characterTools';
 import { TransitionProps } from '@material-ui/core/transitions/transition';
+import { useStyles } from './styles';
 
 interface Props {
     open: boolean;
@@ -24,6 +25,7 @@ export default function UploadManager(props: Props) {
 
     const [character, setCharacter] = useState<string>(JSON.stringify(getNewCharacter(), undefined, 4));
     const [error, setError] = useState<string>('');
+    const classes = useStyles();
 
     function actionOnPrompt() {
         props.onClose();
@@ -58,7 +60,7 @@ export default function UploadManager(props: Props) {
                     </Typography>
                 </Toolbar>
             </AppBar>
-            <DialogContent style={{ marginTop: '56px', display: 'flex', flexDirection: 'column' }}>
+            <DialogContent className={classes.dialogContent}>
                 <TextField
                     autoFocus
                     label='json'
@@ -66,10 +68,7 @@ export default function UploadManager(props: Props) {
                     margin="normal"
                     variant="outlined"
                     fullWidth
-                    style={{ flexGrow: 1 }}
-                    classes={{
-                        root: "textfield-fullheight"
-                    }}
+                    classes={{ root: classes.fullHeight }}
                     InputLabelProps={{
                         shrink: true,
                     }}

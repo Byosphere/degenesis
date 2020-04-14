@@ -104,7 +104,7 @@ export default function SettingsMenu(props: Props) {
                     />
                 </ListItem>
                 <Divider className={classes.divider} />
-                <ListItem style={{ flexDirection: 'column', alignItems: 'flex-start' }}>
+                <ListItem className={classes.bottomList}>
                     <ListItemText secondary='This is a fan App, Degenesis belongs' />
                     <ListItemText secondary='to SixMoreVodka - All Rights Reserved' />
                 </ListItem>

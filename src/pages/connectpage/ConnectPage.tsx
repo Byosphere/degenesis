@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import Loader from '../../components/Loader';
+import Loader from '../../components/loader/Loader';
 import { Card, CardContent, TextField, Button } from '@material-ui/core';
 import T from 'i18n-react';
 import { userConnect, registerUser } from '../../utils/fetchers';

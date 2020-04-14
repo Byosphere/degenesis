@@ -78,5 +78,8 @@ export const useStyles = makeStyles({
     },
     textfield: {
         marginBottom: theme.spacing(2)
+    },
+    dialogContent: {
+        marginTop: '56px'
     }
 });

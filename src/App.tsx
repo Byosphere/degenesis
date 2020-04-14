@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from 'react';
 import './App.css';
 import { getUserToken } from './utils/StorageManager';
-import Loader from './components/Loader';
+import Loader from './components/loader/Loader';
 import { getUser, getCharactersAsync, deleteCharacterAsync, saveCharacterAsync, updateCharacterAsync } from './utils/fetchers';
 import User from './models/User';
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom';
@@ -10,8 +10,8 @@ import CharacterBuilder from './pages/characterbuilderpage/CharacterBuilder';
 import DetailPage from './pages/detailpage/DetailPage';
 import ConnectPage from './pages/connectpage/ConnectPage';
 import { Character } from './models/Character';
-import CustomSnackbar from './components/CustomSnackbar';
-import UploadManager from './components/UploadManager';
+import CustomSnackbar from './components/customsnackbar/CustomSnackbar';
+import UploadManager from './components/uploadmanager/UploadManager';
 import T from 'i18n-react';
 
 export const UserContext = createContext(null);

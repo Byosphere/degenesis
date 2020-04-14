@@ -33,5 +33,9 @@ export const useStyles = makeStyles({
         pointerEvents: (props: Props) => props.disabled ? 'none' : 'initial',
         color: 'white',
         opacity: (props: Props) => props.dirty ? 1 : 0.4
+    },
+    title: {
+        flexGrow: 1,
+        textAlign: 'center'
     }
 });

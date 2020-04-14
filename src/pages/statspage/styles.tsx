@@ -3,7 +3,10 @@ import theme from "../../theme";
 
 export const useStyles = makeStyles({
     container: {
-        margin: theme.spacing(0.5)
+        margin: theme.spacing(0.5),
+        '&>div:first-child': {
+            position: 'relative'
+        }
     },
     cardMedia: {
         height: '100px'
@@ -39,7 +42,6 @@ export const useStyles = makeStyles({
     },
     textfieldTop: {
         marginTop: theme.spacing(2),
-        flexGrow: 1
     },
     formControl: {
         marginTop: theme.spacing(2)
@@ -52,5 +54,33 @@ export const useStyles = makeStyles({
     },
     traumaButton: {
         padding: theme.spacing(0.5)
+    },
+    fullHeight: {
+        flexGrow: 1,
+        marginTop: theme.spacing(2),
+        '&>div': {
+            height: '100%'
+        },
+        '& textarea': {
+            height: '100% !important',
+            overflowY: 'auto !important'
+        }
+    },
+    expansion: {
+        marginBottom: theme.spacing(0.5)
+    },
+    expansionDetail: {
+        flexDirection: 'column'
+    },
+    jaugeIcon: {
+        margin: 0
+    },
+    jaugeContainer: {
+        marginBottom: theme.spacing(1),
+        display: 'flex',
+        justifyContent: 'space-between',
+        '& svg': {
+            color: 'rgb(68, 68, 68)'
+        }
     }
 });

@@ -9,6 +9,7 @@ import AttributeJauge from '../../components/attributejauge/AttributeJauge';
 import { getSkillXpCost, getAttributeXpCost } from '../../utils/characterTools';
 import { SnackbarContext } from '../../App';
 import { HeaderContext } from '../detailpage/DetailPage';
+import { useStyles } from './styles';
 
 interface Props {
     char: Character;
@@ -30,6 +31,7 @@ export default function AttributePanel(props: Props) {
     const [edit, setEdit] = useState<any>(null);
     const { xp, setXp } = useContext(HeaderContext);
     const { setSnackbar } = useContext(SnackbarContext);
+    const classes = useStyles();
 
     function actionOnPrompt() {
         if (!rollInProgress) {
@@ -125,7 +127,7 @@ export default function AttributePanel(props: Props) {
             <ExpansionPanel
                 expanded={expanded}
                 onChange={() => setExpanded(!expanded)}
-                style={{ marginBottom: '5px' }}
+                className={classes.expansion}
                 TransitionProps={{ unmountOnExit: true }}
             >
                 <ExpansionPanelSummary
@@ -141,7 +143,7 @@ export default function AttributePanel(props: Props) {
                         locked={props.locked}
                     />
                 </ExpansionPanelSummary>
-                <ExpansionPanelDetails style={{ flexDirection: 'column' }}>
+                <ExpansionPanelDetails className={classes.expansionDetail}>
                     {attribute.skills.map((skill: Skill) => (
                         <AttributeJauge
                             key={skill.id}

@@ -198,7 +198,7 @@ export default function CharacterEditDialog(props: Props) {
                         helperText={errors.size}
                     />
                 </div>
-                <FormControl fullWidth variant='outlined'>
+                <FormControl fullWidth variant='outlined' className={classes.textfieldTop}>
                     <InputLabel shrink htmlFor="rang">
                         {T.translate('generic.rang')}
                     </InputLabel>
@@ -232,9 +232,8 @@ export default function CharacterEditDialog(props: Props) {
                     required
                     error={Boolean(errors.story)}
                     helperText={errors.story}
-                    className={classes.textfieldTop}
                     classes={{
-                        root: "textfield-fullheight"
+                        root: classes.fullHeight
                     }}
                 />
             </DialogContent>

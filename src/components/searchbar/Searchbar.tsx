@@ -15,7 +15,7 @@ export default function Searchbar(props: Props) {
 
     return (
         <Paper component="form" className={classes.searchbar + ' ' + props.className}>
-            <Search style={{ marginRight: '16px', opacity: 0.5 }} />
+            <Search className={classes.search} />
             <InputBase
                 placeholder={props.placeholder}
                 className={classes.input}
