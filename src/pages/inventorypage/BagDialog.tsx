@@ -28,11 +28,8 @@ export default function BagDialog(props: Props) {
     return (
         <>
             {open && <Prompt when={true} message={actionOnPrompt} />}
-            <DialogTitle>{T.translate('inventory.bagdialog')}</DialogTitle>
+            <DialogTitle>{T.translate('inventory.bagsize')}</DialogTitle>
             <DialogContent>
-                <DialogContentText>
-                    {T.translate('inventory.bagsize')}
-                </DialogContentText>
                 <div className={classes.iconList}>
                     <IconButton onClick={() => props.onValidate(BAG_SIZES[0])}>
                         <Badge
