@@ -13,7 +13,11 @@ export const useStyles = makeStyles({
         height: '100%'
     },
     swipeableViews: {
-        flex: 1
+        flex: 1,
+        height: '100%',
+        '&>div': {
+            height: '100%'
+        }
     },
     cardActions: {
         justifyContent: 'space-around',
