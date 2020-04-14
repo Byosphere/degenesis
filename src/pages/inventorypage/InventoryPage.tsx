@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Item, Character, Pet } from '../../models/Character';
 import T from 'i18n-react';
-import { Card, Avatar, IconButton, Dialog, Badge, Typography } from '@material-ui/core';
+import { Card, Avatar, IconButton, Dialog, Badge, Typography, Chip } from '@material-ui/core';
 import { CardTravel, Add, DonutSmall, Money, Pets, Clear } from '@material-ui/icons';
 import ItemDisplay from './ItemDisplay';
 import AddItemDialog from './AddItemDialog';
@@ -12,6 +12,11 @@ import { useStyles } from './styles';
 import PetDialog from './PetDialog';
 import TransitionUp from '../../components/TransitionUp';
 import { HeaderContext } from '../detailpage/DetailPage';
+import BagDialog from './BagDialog';
+import ShortDivider from '../../components/shortdivider/ShortDivider';
+import { getCharacterBagSize, getAttSkill } from '../../utils/characterTools';
+import { BAG_SIZES } from '../../constants';
+import { SnackbarContext } from '../../App';
 
 
 interface Props {
@@ -25,9 +30,12 @@ export default function InventoryPage(props: Props) {
     const classes = useStyles();
     const [moneyModalOpen, setMoneyModalOpen] = useState<boolean>(false);
     const [petModalOpen, setPetModalOpen] = useState<boolean>(false);
+    const [bagModalOpen, setBagModalOpen] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
+    const [editItem, setEditItem] = useState<Item>(null);
     const [filter, setFilter] = useState<string>('');
     const { setHeaderTitle } = useContext(HeaderContext);
+    const { setSnackbar } = useContext(SnackbarContext);
     const weapons = searchFilter(char.inventory.filter(item => item.group === 0));
     const armors = searchFilter(char.inventory.filter(item => item.group === 1));
     const equipment = searchFilter(char.inventory.filter(item => item.group === 2));
@@ -53,14 +61,28 @@ export default function InventoryPage(props: Props) {
     }
 
     function handleSave(item: Item) {
-        let id = 1;
-        let func = (item: Item) => item.id === id;
-        while (char.inventory.find(func)) {
-            id++;
+        if ((totalWeight + item.weight) / 1000 > getCharacterBagSize(char)) {
+            setOpen(false);
+            setSnackbar({
+                type: 'error',
+                message: 'Ton sac est plein!'
+            });
+        } else if (item.id) {
+            let index = char.inventory.findIndex((i) => i.id === item.id);
+            char.inventory[index] = { ...item };
+            setEditItem(null);
+            setOpen(false);
+            props.onChange(char);
+        } else {
+            let id = 1;
+            let func = (item: Item) => item.id === id;
+            while (char.inventory.find(func)) {
+                id++;
+            }
+            char.inventory.push({ ...item, id });
+            setOpen(false);
+            props.onChange(char);
         }
-        char.inventory.push({ ...item, id });
-        setOpen(false);
-        props.onChange(char);
     }
 
     function handleChangeMoney(value: number) {
@@ -81,17 +103,29 @@ export default function InventoryPage(props: Props) {
         props.onChange(char);
     }
 
+    function handleChangeBagSize(size: number) {
+        char.bagsize = size;
+        setBagModalOpen(false);
+        props.onChange(char);
+    }
+
+    function handleEdit(item: Item) {
+        setEditItem(item);
+        setOpen(true);
+    }
+
     return (
         <div className={classes.container}>
             <Card>
-                <IconButton className={classes.headButton}>
+                <IconButton className={classes.headButton} onClick={() => setBagModalOpen(true)}>
                     <Badge
                         overlap='rectangle'
-                        badgeContent={totalWeight + 'g'}
+                        badgeContent={getCharacterBagSize(char) + ' kg'}
                         color='secondary'
+                        className={classes.badge}
                     >
                         <Avatar variant='rounded' color='primary' className={classes.avatar}>
-                            <CardTravel />
+                            <CardTravel fontSize={char.bagsize === BAG_SIZES[0] ? 'small' : char.bagsize === BAG_SIZES[1] ? 'default' : 'large'} />
                         </Avatar>
                     </Badge>
                 </IconButton>
@@ -100,7 +134,7 @@ export default function InventoryPage(props: Props) {
                         overlap='rectangle'
                         classes={{ badge: classes.customBadge }}
                         badgeContent={<>
-                            {char.money > 99999 ? '99999+' : char.money}
+                            {char.money > 99999 ? '99999+' : Intl.NumberFormat().format(char.money)}
                             <DonutSmall />
                         </>}
                         color='secondary'
@@ -124,11 +158,13 @@ export default function InventoryPage(props: Props) {
                 onFilterChange={(value) => setFilter(value)}
             />
             <div className={classes.cardList}>
-                <ItemDisplay title={T.translate('generic.weapons') as string} onDelete={handleDelete} items={weapons} />
-                <ItemDisplay title={T.translate('generic.armors') as string} onDelete={handleDelete} items={armors} />
-                <ItemDisplay title={T.translate('generic.equipment') as string} onDelete={handleDelete} items={equipment} />
-                <ItemDisplay title={T.translate('generic.items') as string} onDelete={handleDelete} items={items} />
+                <ItemDisplay title={T.translate('generic.weapons') as string} onDelete={handleDelete} items={weapons} onEdit={handleEdit} />
+                <ItemDisplay title={T.translate('generic.armors') as string} onDelete={handleDelete} items={armors} onEdit={handleEdit} />
+                <ItemDisplay title={T.translate('generic.equipment') as string} onDelete={handleDelete} items={equipment} onEdit={handleEdit} />
+                <ItemDisplay title={T.translate('generic.items') as string} onDelete={handleDelete} items={items} onEdit={handleEdit} />
+                <ShortDivider />
             </div>
+            <Chip label={T.translate('inventory.totalweight', { weight: totalWeight / 1000 })} className={classes.weightSize} />
             <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
             <Dialog
                 open={open}
@@ -136,7 +172,7 @@ export default function InventoryPage(props: Props) {
                 fullScreen
                 TransitionComponent={TransitionUp}
             >
-                <AddItemDialog open={open} onSave={handleSave} onClose={() => setOpen(false)} />
+                <AddItemDialog item={editItem} open={open} onSave={handleSave} onClose={() => setOpen(false)} />
             </Dialog>
             <Dialog
                 open={moneyModalOpen}
@@ -158,6 +194,19 @@ export default function InventoryPage(props: Props) {
                     pet={char.pet}
                     onClose={() => setPetModalOpen(false)}
                     onValidate={handleChangePet}
+                />
+            </Dialog>
+            <Dialog
+                open={bagModalOpen}
+                onClose={() => setBagModalOpen(false)}
+            >
+                <BagDialog
+                    open={bagModalOpen}
+                    bagsize={char.bagsize}
+                    weight={char.weight}
+                    force={getAttSkill(char, 0, 2)}
+                    onClose={() => setBagModalOpen(false)}
+                    onValidate={handleChangeBagSize}
                 />
             </Dialog>
         </div>

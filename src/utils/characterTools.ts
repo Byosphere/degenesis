@@ -1,5 +1,5 @@
 import { Character, Attribute, Skill, Potential } from "../models/Character";
-import { SKILLS, ATTRIBUTES, CULTURES, CULTES, CONCEPTS } from "../constants";
+import { SKILLS, ATTRIBUTES, CULTURES, CULTES, CONCEPTS, BAG_SIZES } from "../constants";
 import baseAttributes from '../data/attributes.json';
 import baseOrigins from '../data/origins.json';
 
@@ -125,7 +125,8 @@ export function getNewCharacter(): Character {
         trauma: 0,
         exp: 0,
         origins: JSON.parse(JSON.stringify(baseOrigins)),
-        pet: undefined
+        pet: undefined,
+        bagsize: BAG_SIZES[1]
     };
 }
 
@@ -168,4 +169,13 @@ export function getInitiative(character: Character): number {
 
 export function canFight(character: Character): boolean {
     return character.ego < getEgoMax(character) && getCharacterHealth(character) > 0;
+}
+
+export function getCharacterBagSize(character: Character): number {
+    const percent = getAttSkill(character, 0, 2) + character.bagsize;
+    return (percent * character.weight) / 100;
+}
+
+export function getAttSkill(character: Character, attId: number, skillId: number) {
+    return character.attributes[attId].base + character.attributes[attId].skills[skillId].value;
 }

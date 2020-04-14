@@ -12,7 +12,10 @@ export const useStyles = makeStyles({
         }
     },
     headButton: {
-        marginRight: theme.spacing(2)
+        marginRight: theme.spacing(2),
+    },
+    badge: {
+        whiteSpace: 'nowrap'
     },
     searchbar: {
         marginTop: theme.spacing(0.5)
@@ -57,7 +60,8 @@ export const useStyles = makeStyles({
     cardList: {
         flex: 1,
         marginTop: theme.spacing(0.5),
-        overflow: 'auto'
+        overflow: 'auto',
+        padding: theme.spacing(0.5) + 'px ' + theme.spacing(2) + 'px'
     },
     subHeader: {
         background: 'white'
@@ -81,5 +85,15 @@ export const useStyles = makeStyles({
     },
     dialogContent: {
         marginTop: '56px'
+    },
+    weightSize: {
+        position: "fixed",
+        right: theme.spacing(1),
+        top: '196px'
+    },
+    iconList: {
+        display: 'flex',
+        justifyContent: 'center',
+        marginBottom: theme.spacing(2)
     }
 });

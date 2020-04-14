@@ -52,7 +52,6 @@
         "attack": "Attaque",
         "defense": "Défense",
         "dices": "Dés",
-        "totalweight": "Poids total {weight}g",
         "incorrectvalue": "Valeur incorrecte.",
         "amount": "Montant",
         "s": "cm",
@@ -192,7 +191,11 @@
         "petdialog": "Animal de compagnie",
         "petname": "Nom de l'animal",
         "species": "Espèce",
-        "notempty": "Le champ ne doit pas être vide."
+        "notempty": "Le champ ne doit pas être vide.",
+        "totalweight": "Total : {weight} kg",
+        "bagsize": "Taille du Sac :",
+        "bagsizeoperation": "({bagsize}% + {attribute}+{skill}({force})%) de {weight}kg",
+        "grams": "grammes"
     },
     "potential": {
         "new": "Apprendre un nouveau potentiel",

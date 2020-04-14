@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { FormGroup, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button, DialogTitle, Divider } from '@material-ui/core';
+import React, { useState } from 'react';
+import { FormGroup, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button, DialogTitle } from '@material-ui/core';
 import { Info, Casino, AddCircle } from '@material-ui/icons';
 import T from 'i18n-react';
 import { Prompt } from 'react-router-dom';

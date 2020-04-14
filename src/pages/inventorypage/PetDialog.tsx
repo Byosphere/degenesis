@@ -14,9 +14,10 @@ interface Props {
 
 export default function PetDialog(props: Props) {
 
-    const [name, setName] = useState<string>('');
+    const { pet } = props;
+    const [name, setName] = useState<string>(pet ? pet.name : '');
     const classes = useStyles();
-    const [species, setSpecies] = useState<string>('');
+    const [species, setSpecies] = useState<string>(pet ? pet.species : '');
     const [errors, setErrors] = useState<string[]>(['', '']);
 
     function actionOnPrompt() {

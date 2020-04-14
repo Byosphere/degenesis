@@ -28,8 +28,7 @@
     "react-router-dom": "5.1.2",
     "react-swipeable-views": "0.13.9",
     "@types/react-router-dom": "5.1.4",
-    "@types/react-swipeable-views": "0.13.0",
-    "typescript-eslint": "^0.0.1-alpha.0"
+    "@types/react-swipeable-views": "0.13.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -11,6 +11,7 @@ interface Props {
     title: string;
     items: Item[];
     onDelete: (id: number) => void;
+    onEdit: (item: Item) => void;
 }
 
 export default function ItemDisplay(props: Props) {
@@ -59,7 +60,7 @@ export default function ItemDisplay(props: Props) {
                     </ExpansionPanelDetails>
                     <Divider />
                     <ExpansionPanelActions>
-                        <Button size="small">{T.translate('generic.edit')}</Button>
+                        <Button size="small" onClick={() => props.onEdit(item)}>{T.translate('generic.edit')}</Button>
                         <Button size="small" color="secondary" onClick={() => openDelete(item)}>
                             {T.translate('generic.delete')}
                         </Button>

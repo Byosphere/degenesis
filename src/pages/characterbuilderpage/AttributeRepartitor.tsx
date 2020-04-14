@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react';
 import { ListItem, ListItemText } from '@material-ui/core';
 import { LooksOne, LooksTwo, Looks3, Looks4, Looks5, Looks6, LooksOneOutlined, LooksTwoOutlined, Looks3Outlined, Looks4Outlined, Looks5Outlined, Looks6Outlined, Backspace, BackspaceOutlined } from '@material-ui/icons';
 import T from 'i18n-react';

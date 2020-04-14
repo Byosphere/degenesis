@@ -67,4 +67,5 @@ export interface Character {
     exp: number;
     origins: Origin[];
     pet: Pet;
+    bagsize: number;
 }

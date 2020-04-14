@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, DialogContent, DialogContentText, TextField, FormControl, InputLabel, Select, Input, MenuItem, DialogActions, Button } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, DialogContent, DialogContentText, TextField, FormControl, InputLabel, Select, MenuItem, DialogActions, Button, InputAdornment } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { GROUPS } from '../../constants';
 import T from 'i18n-react';
@@ -9,6 +9,7 @@ import { useStyles } from './styles';
 
 interface Props {
     open: boolean;
+    item?: Item;
     onSave: (item: Item) => void;
     onClose: () => void;
 }
@@ -16,15 +17,15 @@ interface Props {
 export default function AddItemDialog(props: Props) {
 
     const classes = useStyles();
-
-    const [item, setItem] = useState<Item>({
+    const emptyItem = {
         id: 0,
         name: '',
         group: 0,
         desc: '',
         weight: 0,
         tech: 0
-    });
+    }
+    const [item, setItem] = useState<Item>(props.item || emptyItem);
 
     function verifyItem(): boolean {
         if (!item.name || !item.desc || !item.weight) return true;
@@ -64,14 +65,17 @@ export default function AddItemDialog(props: Props) {
                     onChange={onChange}
                     margin="normal"
                     fullWidth
+                    variant='outlined'
                 />
-                <FormControl fullWidth margin='normal'>
-                    <InputLabel htmlFor="group">{T.translate('inventory.type')}</InputLabel>
+                <FormControl fullWidth margin='normal' variant='outlined'>
+                    <InputLabel variant='outlined' htmlFor="group">{T.translate('inventory.type')}</InputLabel>
                     <Select
-                        input={<Input name="group" fullWidth />}
+                        name='group'
                         fullWidth
+                        label={T.translate('inventory.type')}
                         value={item.group}
                         onChange={onChange}
+                        variant='outlined'
                     >
                         {GROUPS.map((group: string, key) => (
                             <MenuItem key={key} value={key}>
@@ -83,11 +87,15 @@ export default function AddItemDialog(props: Props) {
                 <TextField
                     name="weight"
                     label={T.translate('inventory.weight')}
-                    value={item.weight}
+                    value={item.weight || ''}
                     onChange={onChange}
                     type='number'
                     margin="normal"
                     fullWidth
+                    variant='outlined'
+                    InputProps={{
+                        endAdornment: <InputAdornment position="end">{T.translate('inventory.grams')}</InputAdornment>
+                    }}
                 />
                 <TextField
                     name="desc"
@@ -98,11 +106,12 @@ export default function AddItemDialog(props: Props) {
                     fullWidth
                     multiline
                     rows={10}
+                    variant='outlined'
                 />
             </DialogContent>
             <DialogActions>
                 <Button color='primary' onClick={props.onClose}>{T.translate('generic.cancel')}</Button>
-                <Button color='secondary' disabled={verifyItem()} onClick={() => props.onSave(item)}>{T.translate('generic.add')}</Button>
+                <Button color='secondary' disabled={verifyItem()} onClick={() => props.onSave(item)}>{T.translate('generic.save')}</Button>
             </DialogActions>
         </>
     );
