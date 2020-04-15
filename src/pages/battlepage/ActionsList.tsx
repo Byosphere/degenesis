@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Card, List, ListSubheader, ListItem, ListItemText, ListItemSecondaryAction, IconButton } from '@material-ui/core';
 import { PlayArrow } from '@material-ui/icons';
 import Searchbar from '../../components/searchbar/Searchbar';
+import { useStyles } from './styles';
 
 interface Props {
 
@@ -10,11 +11,12 @@ interface Props {
 export default function ActionsList(props: Props) {
 
     const [filter, setFilter] = useState<string>('');
+    const classes = useStyles();
 
     return (
         <>
             <Searchbar
-                // style={{ margin: '5px 5px 0 5px' }}
+                className={classes.searchbar}
                 placeholder='Rechercher une action'
                 onFilterChange={(value) => setFilter(value)}
             />
@@ -99,6 +101,23 @@ export default function ActionsList(props: Props) {
                         <ListSubheader component="div" style={{ backgroundColor: 'white' }}>
                             Soigner
                     </ListSubheader>
+                    }
+                >
+                    <ListItem button>
+                        <ListItemText primary='Coup physique' />
+                        <ListItemSecondaryAction>
+                            <IconButton edge="end" aria-label="comments">
+                                <PlayArrow />
+                            </IconButton>
+                        </ListItemSecondaryAction>
+                    </ListItem>
+                </List>
+                <List
+                    component="nav"
+                    subheader={
+                        <ListSubheader component="div" style={{ backgroundColor: 'white' }}>
+                            Potentiels
+                        </ListSubheader>
                     }
                 >
                     <ListItem button>

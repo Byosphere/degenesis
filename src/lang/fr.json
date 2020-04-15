@@ -223,6 +223,15 @@
         "upgrade": "Voulez-vous dépenser *{cost} points* d'expérience pour augmenter *{name}* ?",
         "upgradetitle": "Amélioration d'un potentiel"
     },
+    "battle": {
+        "fight": "Engager le combat",
+        "tooweak": "Trop faible pour se battre",
+        "topbar": {
+            "health": "Santé",
+            "ego": "Ego",
+            "action": "Act."
+        }
+    },
     "origins": {
         "allies": {
             "name": "Alliés",

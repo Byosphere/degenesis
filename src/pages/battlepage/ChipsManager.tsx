@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Chip, Avatar } from '@material-ui/core'
 import { Add } from '@material-ui/icons'
 import T from 'i18n-react';
+import { useStyles } from './styles';
 
 export interface ChipModifier {
     name: string;
@@ -18,6 +19,7 @@ export default function ChipsManager(props: Props) {
 
     const { trauma, usedEgo } = props;
     const [chips, setChips] = useState<ChipModifier[]>([]);
+    const classes = useStyles();
 
     useEffect(() => {
         let initialChips = [];
@@ -32,7 +34,7 @@ export default function ChipsManager(props: Props) {
     }
 
     return (
-        <span style={{ margin: '5px 5px 0 5px', display: 'flex' }}>
+        <span className={classes.chipManager}>
             <span style={{ flex: 1, overflowX: 'auto', display: 'flex', marginRight: '8px', borderRight: '1px solid rgba(0,0,0,0.12)' }}>
                 {chips.map((chip: ChipModifier, key: number) => (
                     <Chip

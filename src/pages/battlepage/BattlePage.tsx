@@ -10,6 +10,7 @@ import ActionsList from './ActionsList';
 import ChipsManager from './ChipsManager';
 import { Prompt } from 'react-router-dom';
 import { HeaderContext } from '../detailpage/DetailPage';
+import { useStyles } from './styles';
 
 interface Props {
     char: Character;
@@ -19,7 +20,6 @@ interface Props {
 }
 
 interface InfoButtonProps {
-    style: React.CSSProperties;
     title: string;
     value: any;
 }
@@ -32,6 +32,7 @@ export default function BattlePage(props: Props) {
     const [round, setRound] = useState<number>(1);
     const [usedEgo, setUsedEgo] = useState<number>(0);
     const [open, setOpen] = useState<boolean>(false);
+    const classes = useStyles();
 
     useEffect(() => {
         setHeaderTitle(T.translate('navigator.battle') as string);
@@ -39,15 +40,15 @@ export default function BattlePage(props: Props) {
 
     function BattleFab() {
         return (
-            <div style={{ position: 'absolute', width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <div className={classes.battleFab}>
                 <Zoom in={step === 0 && canFight(char)} unmountOnExit>
-                    <Fab style={{ paddingLeft: '24px' }} color='secondary' variant='extended' onClick={() => setStep(1)}>
-                        Engager le combat <PlayArrow style={{ marginLeft: '16px' }} />
+                    <Fab color='secondary' variant='extended' onClick={() => setStep(1)}>
+                        {T.translate('battle.fight')} <PlayArrow />
                     </Fab>
                 </Zoom>
                 <Zoom in={step === 0 && !canFight(char)} unmountOnExit>
-                    <Fab style={{ paddingRight: '24px' }} color='secondary' variant='extended'>
-                        <Block style={{ marginRight: '16px' }} /> Trop faible pour se battre
+                    <Fab color='secondary' variant='extended'>
+                        {T.translate('battle.tooweak')} <Block />
                     </Fab>
                 </Zoom>
             </div>
@@ -56,9 +57,9 @@ export default function BattlePage(props: Props) {
 
     function InfoButton(props: InfoButtonProps) {
         return (
-            <IconButton size="small" style={props.style}>
+            <IconButton size="small">
                 <Badge badgeContent={props.title} color='primary' anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-                    <Avatar variant="rounded" style={{ width: '34px', height: '34px', backgroundColor: '#fafafa', color: 'black' }}>{props.value}</Avatar>
+                    <Avatar variant="rounded" className={classes.infoButton}>{props.value}</Avatar>
                 </Badge>
             </IconButton>
         );
@@ -95,27 +96,18 @@ export default function BattlePage(props: Props) {
     }
 
     return (
-        <div
-            style={{
-                width: '100%',
-                height: '100%',
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-                overflow: 'hidden'
-            }}
-        >
+        <div className={classes.container}>
             <BattleFab />
             <Slide direction="down" in={step >= 1} mountOnEnter unmountOnExit>
-                <AppBar elevation={1} position='relative' style={{ borderTop: '1px solid rgba(0, 0, 0, 0.12)' }}>
+                <AppBar elevation={1} position='relative' className={classes.topBar}>
                     <Toolbar>
-                        <InfoButton title='Santé' style={{ marginRight: '20px' }} value={getCharacterHealth(char)} />
+                        <InfoButton title={T.translate('battle.topbar.health') as string} value={getCharacterHealth(char)} />
                         <Divider orientation='vertical' flexItem />
-                        <InfoButton title='Ego' style={{ margin: '0 20px' }} value={getEgoMax(char) - char.ego} />
+                        <InfoButton title={T.translate('battle.topbar.ego') as string} value={getEgoMax(char) - char.ego} />
                         <Divider orientation='vertical' flexItem />
-                        <InfoButton title='Act.' style={{ margin: '0 20px' }} value={actions} />
+                        <InfoButton title={T.translate('battle.topbar.action') as string} value={actions} />
                         <Divider orientation='vertical' flexItem />
-                        <div style={{ flex: 1, textAlign: 'center' }}>
+                        <div className={classes.topText}>
                             {step === 1 && <>Lancer d'initiative...</>}
                             {step === 2 && <>Choix d'actions...</>}
                         </div>
