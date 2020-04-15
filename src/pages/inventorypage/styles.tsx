@@ -36,7 +36,7 @@ export const useStyles = makeStyles({
     },
     pets: {
         flex: 1,
-        margin: '12px ' + theme.spacing(2) + 'px',
+        margin: '12px 12px 12px ' + theme.spacing(2) + 'px',
         backgroundColor: '#444',
         borderRadius: '4px',
         display: 'flex',
@@ -95,11 +95,13 @@ export const useStyles = makeStyles({
     weightSize: {
         position: "fixed",
         right: theme.spacing(1),
-        top: '184px'
+        top: '184px',
+        borderRadius: theme.spacing(0.5)
     },
     iconList: {
         display: 'flex',
         justifyContent: 'center',
-        marginBottom: theme.spacing(2)
+        marginBottom: theme.spacing(2),
+        marginTop: theme.spacing(2)
     }
 });

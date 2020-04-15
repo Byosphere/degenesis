@@ -195,7 +195,8 @@
         "totalweight": "Total : {weight} kg",
         "bagsize": "Taille du Sac :",
         "bagsizeoperation": "({bagsize}% + {attribute}+{skill}({force})%) de {weight}kg",
-        "grams": "grammes"
+        "grams": "grammes",
+        "bagsizetext": "La taille du sac influence sur le nombre d'éléments qui peuvent être transportés. La capacité totale de transport du personnage est dépendant de son gabarit (poids) et peut être augmenté grâce à sa force (PHY+Force)"
     },
     "stats": {
         "blessures": {
