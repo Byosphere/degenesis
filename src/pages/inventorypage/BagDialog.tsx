@@ -15,7 +15,7 @@ interface Props {
 
 export default function BagDialog(props: Props) {
 
-    const { open } = props;
+    const { open, bagsize } = props;
     const classes = useStyles();
 
     function actionOnPrompt() {
@@ -33,12 +33,12 @@ export default function BagDialog(props: Props) {
                     <Typography variant='caption'>{T.translate('inventory.bagsize')}</Typography>
                 </DialogContentText>
                 <div className={classes.iconList}>
-                    <IconButton onClick={() => props.onValidate(0)}>
+                    <IconButton className={!bagsize ? classes.selected : ''} onClick={() => props.onValidate(0)}>
                         <Avatar variant='rounded' className={classes.avatar}>
                             <Remove fontSize="small" />
                         </Avatar>
                     </IconButton>
-                    <IconButton onClick={() => props.onValidate(BAG_SIZES[0])}>
+                    <IconButton className={bagsize === BAG_SIZES[0] ? classes.selected : ''} onClick={() => props.onValidate(BAG_SIZES[0])}>
                         <Badge
                             overlap='rectangle'
                             badgeContent={BAG_SIZES[0]}
@@ -49,7 +49,7 @@ export default function BagDialog(props: Props) {
                             </Avatar>
                         </Badge>
                     </IconButton>
-                    <IconButton onClick={() => props.onValidate(BAG_SIZES[1])}>
+                    <IconButton className={bagsize === BAG_SIZES[1] ? classes.selected : ''} onClick={() => props.onValidate(BAG_SIZES[1])}>
                         <Badge
                             overlap='rectangle'
                             badgeContent={BAG_SIZES[1]}
@@ -60,7 +60,7 @@ export default function BagDialog(props: Props) {
                             </Avatar>
                         </Badge>
                     </IconButton>
-                    <IconButton onClick={() => props.onValidate(BAG_SIZES[2])}>
+                    <IconButton className={bagsize === BAG_SIZES[2] ? classes.selected : ''} onClick={() => props.onValidate(BAG_SIZES[2])}>
                         <Badge
                             overlap='rectangle'
                             badgeContent={BAG_SIZES[2]}

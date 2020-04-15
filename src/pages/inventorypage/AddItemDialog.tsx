@@ -28,7 +28,7 @@ export default function AddItemDialog(props: Props) {
     const [item, setItem] = useState<Item>(props.item || emptyItem);
 
     function verifyItem(): boolean {
-        if (!item.name || !item.desc || !item.weight) return true;
+        if (!item.name || !item.desc) return true;
         return false;
     }
 

@@ -110,5 +110,11 @@ export const useStyles = makeStyles({
         '&>span:first-child': {
             color: 'rgba(0, 0, 0, 0.54)'
         }
+    },
+    selected: {
+        '&>span:first-child': {
+            borderBottom: '2px solid red',
+            paddingBottom: theme.spacing(0.5)
+        }
     }
 });
