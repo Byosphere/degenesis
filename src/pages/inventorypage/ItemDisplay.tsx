@@ -41,7 +41,7 @@ export default function ItemDisplay(props: Props) {
             <Chip label={title} className={classes.cardOverTitle} />
             {!items.length && <Empty />}
             {items.map((item, key) => (
-                <ExpansionPanel key={key} TransitionProps={{ unmountOnExit: true }}>
+                <ExpansionPanel classes={{root: classes.itemPanel}} key={key} TransitionProps={{ unmountOnExit: true }}>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMore />}
                         classes={{ content: classes.expansionPanel }}

@@ -36,14 +36,14 @@ export const useStyles = makeStyles({
     },
     pets: {
         flex: 1,
-        margin: '12px',
+        margin: '12px ' + theme.spacing(2) + 'px',
         backgroundColor: '#444',
         borderRadius: '4px',
         display: 'flex',
         alignItems: 'center',
         color: 'white',
         '& svg': {
-            margin: '12px'
+            margin: theme.spacing(1)
         },
         '& p': {
             flex: 1,
@@ -71,13 +71,19 @@ export const useStyles = makeStyles({
         margin: theme.spacing(1),
         position: 'sticky',
         zIndex: 5,
-        backgroundColor: '#dcdcdc'
+        backgroundColor: 'white'
     },
     expansionPanel: {
         justifyContent: 'space-between',
         textTransform: 'capitalize',
         '& span': {
             opacity: 0.6
+        }
+    },
+    itemPanel: {
+        boxShadow: 'none',
+        '&:before': {
+            backgroundColor: 'transparent'
         }
     },
     textfield: {
@@ -89,7 +95,7 @@ export const useStyles = makeStyles({
     weightSize: {
         position: "fixed",
         right: theme.spacing(1),
-        top: '196px'
+        top: '184px'
     },
     iconList: {
         display: 'flex',

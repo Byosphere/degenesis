@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Item, Character, Pet } from '../../models/Character';
 import T from 'i18n-react';
-import { Card, Avatar, IconButton, Dialog, Badge, Typography, Chip } from '@material-ui/core';
+import { Card, Avatar, IconButton, Dialog, Badge, Typography, Chip, Divider } from '@material-ui/core';
 import { CardTravel, Add, DonutSmall, Money, Pets, Clear } from '@material-ui/icons';
 import ItemDisplay from './ItemDisplay';
 import AddItemDialog from './AddItemDialog';
@@ -147,8 +147,8 @@ export default function InventoryPage(props: Props) {
                 <div className={classes.pets} onClick={() => setPetModalOpen(true)}>
                     <Pets />
                     <Typography>{char.pet ? char.pet.name + ' (' + char.pet.species + ')' : '-'}</Typography>
-                    <IconButton className={classes.clearPet} disabled={!char.pet} onClick={removePet}>
-                        <Clear />
+                    <IconButton size='small' className={classes.clearPet} disabled={!char.pet} onClick={removePet}>
+                        <Clear fontSize='small' />
                     </IconButton>
                 </div>
             </Card>
@@ -157,13 +157,15 @@ export default function InventoryPage(props: Props) {
                 className={classes.searchbar}
                 onFilterChange={(value) => setFilter(value)}
             />
-            <div className={classes.cardList}>
+            <Card className={classes.cardList}>
                 <ItemDisplay title={T.translate('generic.weapons') as string} onDelete={handleDelete} items={weapons} onEdit={handleEdit} />
+                <Divider />
                 <ItemDisplay title={T.translate('generic.armors') as string} onDelete={handleDelete} items={armors} onEdit={handleEdit} />
+                <Divider />
                 <ItemDisplay title={T.translate('generic.equipment') as string} onDelete={handleDelete} items={equipment} onEdit={handleEdit} />
+                <Divider />
                 <ItemDisplay title={T.translate('generic.items') as string} onDelete={handleDelete} items={items} onEdit={handleEdit} />
-                <ShortDivider />
-            </div>
+            </Card>
             <Chip label={T.translate('inventory.totalweight', { weight: totalWeight / 1000 })} className={classes.weightSize} />
             <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
             <Dialog
