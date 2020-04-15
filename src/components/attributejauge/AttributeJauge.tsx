@@ -63,7 +63,7 @@ export default function AttributeJauge(props: Props) {
     }
 
     return (
-        <FormGroup row className={classes.attributeJauge}>
+        <FormGroup row className={classes.attributeJauge + ' ' + classes.lastAttribute}>
             {attribute && <IconButton
                 size='small'
                 className={classes.infoButton}

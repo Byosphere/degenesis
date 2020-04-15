@@ -46,14 +46,16 @@ export const useStyles = makeStyles({
     formControl: {
         marginTop: theme.spacing(2)
     },
-    trauma: {
-        marginTop: -theme.spacing(0.5)
+    traumaContainer: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
     },
     lock: {
         float: 'right'
     },
     traumaButton: {
-        padding: theme.spacing(0.5)
+        padding: '2px'
     },
     fullHeight: {
         flexGrow: 1,
@@ -77,10 +79,15 @@ export const useStyles = makeStyles({
     },
     jaugeContainer: {
         marginBottom: theme.spacing(1),
+        alignItems: 'center',
         display: 'flex',
         justifyContent: 'space-between',
-        '& svg': {
-            color: 'rgb(68, 68, 68)'
-        }
+        paddingBottom: theme.spacing(1),
+        borderBottom: '1px solid rgba(0,0,0,0.16)'
+    },
+    infoButton: {
+        borderLeft: '1px solid rgba(0,0,0,0.16)',
+        paddingLeft: theme.spacing(1.5),
+        paddingRight: theme.spacing(0.5)
     }
 });

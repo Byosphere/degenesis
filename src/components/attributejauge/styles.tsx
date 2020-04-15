@@ -16,23 +16,24 @@ export const useStyles = makeStyles({
         position: 'relative',
         marginBottom: props.attribute ? 0 : theme.spacing(1),
         borderBottom: props.attribute ? 'none' : '1px solid rgba(0, 0, 0, 0.16)',
-        color: props.attribute ? '#FFF' : 'rgba(0, 0, 0, 0.54)',
+        color: props.attribute ? '#FFF' : '#555',
         paddingTop: (!props.potential && !props.attribute) ? theme.spacing(1) : '',
-        // opacity: props.disabled ? 0.4 : 1,
         pointerEvents: props.disabled ? 'none' : 'initial',
         backgroundColor: props.attribute ? '#444' : '',
-        marginRight: props.attribute ? theme.spacing(1) : '',
+        marginRight: props.attribute ? theme.spacing(1) : ''
+    }),
+    lastAttribute: {
         '&:last-child': {
             borderBottom: 'none',
             marginBottom: 0,
         }
-    }),
+    },
     infoButton: {
         position: 'absolute',
         left: '-18px',
         top: '6px',
         padding: '1px',
-        background: 'white',
+        background: 'white !important',
         color: '#444'
     },
     addButton: (props: Props) => ({

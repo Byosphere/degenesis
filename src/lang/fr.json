@@ -197,6 +197,24 @@
         "bagsizeoperation": "({bagsize}% + {attribute}+{skill}({force})%) de {weight}kg",
         "grams": "grammes"
     },
+    "stats": {
+        "blessures": {
+            "label": "Blessures",
+            "desc": "L'indicateur de blessures atteste de l'état de santé physique du personnage. Une fois le maximum atteint, il commence à subir des traumatismes. *PHY+Résistance x 2*"
+        },
+        "ego": {
+            "label": "Ego",
+            "desc": "L'égo correspond à la force mentale du personnage. Elle peut être dépensée pour améliorer ses chances. Chaque jour, un point d'égo doit être récupéré automatiquement s'il n'est pas au maximum. *INT+Concentration x 2* ou *INS+Pulsions x 2*"
+        },
+        "sporulation": {
+            "label": "Sporulations",
+            "desc": "Cette ligne indique le seuil de tolérance de l'organisme avant que le personnage ne devienne un Léperos. *PSY+Foi x 2* ou *PSY+Volonté x 2*"
+        },
+        "trauma": {
+            "label": "Traumatismes",
+            "desc": "Quand le personnage est à bout de forces, que les blessures dépassent le seuil du supportable, le personnage subit un traumatisme. *PHY+PSY*"
+        }
+    },
     "potential": {
         "new": "Apprendre un nouveau potentiel",
         "add": "Sélectionner un potentiel",

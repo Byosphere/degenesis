@@ -115,34 +115,32 @@ export default function StatsPage(props: Props) {
             <Card>
                 <CardContent>
                     <InteractiveJauge
-                        label='blessures'
+                        label={T.translate('stats.blessures.label') as string}
+                        desc={T.translate('stats.blessures.desc') as string}
                         currentValue={char.blessures}
                         maximum={getBlessuresMax(char)}
                         onChange={handleChange}
                     />
                     <InteractiveJauge
-                        label='ego'
+                        label={T.translate('stats.ego.label') as string}
+                        desc={T.translate('stats.ego.desc') as string}
                         currentValue={char.ego}
                         maximum={getEgoMax(char)}
                         onChange={handleChange}
                     />
                     <InteractiveJauge
-                        label='sporulation'
+                        label={T.translate('stats.sporulation.label') as string}
+                        desc={T.translate('stats.sporulation.desc') as string}
                         currentValue={char.sporulation}
                         maximum={getSporulationMax(char)}
                         onChange={handleChange}
                     />
-                    <div>
-                        <Typography component='div' variant='caption'>
-                            {T.translate('generic.trauma') + ' (' + char.trauma + '/' + getTraumaMax(char) + ') :'}
-                        </Typography>
-                        <div className={classes.trauma}>
-                            <Trauma
-                                char={props.char}
-                                onClick={handleTrauma}
-                            />
-                        </div>
-                    </div>
+                    <Trauma
+                        label={T.translate('stats.trauma.label') as string}
+                        desc={T.translate('stats.trauma.desc') as string}
+                        char={props.char}
+                        onClick={handleTrauma}
+                    />
                 </CardContent>
             </Card>
             <CardOverTitle
