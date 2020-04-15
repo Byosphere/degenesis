@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Item, Character, Pet } from '../../models/Character';
 import T from 'i18n-react';
-import { Card, Avatar, IconButton, Dialog, Badge, Typography, Chip, Divider } from '@material-ui/core';
-import { CardTravel, Add, DonutSmall, Money, Pets, Clear } from '@material-ui/icons';
+import { Card, Avatar, IconButton, Dialog, Badge, Typography, Divider } from '@material-ui/core';
+import { CardTravel, Add, DonutSmall, Money, Pets, Clear, Remove } from '@material-ui/icons';
 import ItemDisplay from './ItemDisplay';
 import AddItemDialog from './AddItemDialog';
 import MoneyDialog from './MoneyDialog';
@@ -13,10 +13,8 @@ import PetDialog from './PetDialog';
 import TransitionUp from '../../components/TransitionUp';
 import { HeaderContext } from '../detailpage/DetailPage';
 import BagDialog from './BagDialog';
-import { getCharacterBagSize, getAttSkill } from '../../utils/characterTools';
+import { getAttSkill } from '../../utils/characterTools';
 import { BAG_SIZES } from '../../constants';
-import { SnackbarContext } from '../../App';
-
 
 interface Props {
     char: Character;
@@ -34,7 +32,6 @@ export default function InventoryPage(props: Props) {
     const [editItem, setEditItem] = useState<Item>(null);
     const [filter, setFilter] = useState<string>('');
     const { setHeaderTitle } = useContext(HeaderContext);
-    const { setSnackbar } = useContext(SnackbarContext);
     const weapons = searchFilter(char.inventory.filter(item => item.group === 0));
     const armors = searchFilter(char.inventory.filter(item => item.group === 1));
     const equipment = searchFilter(char.inventory.filter(item => item.group === 2));
@@ -60,13 +57,7 @@ export default function InventoryPage(props: Props) {
     }
 
     function handleSave(item: Item) {
-        if ((totalWeight + item.weight) / 1000 > getCharacterBagSize(char)) {
-            setOpen(false);
-            setSnackbar({
-                type: 'error',
-                message: 'Ton sac est plein!'
-            });
-        } else if (item.id) {
+        if (item.id) {
             let index = char.inventory.findIndex((i) => i.id === item.id);
             char.inventory[index] = { ...item };
             setEditItem(null);
@@ -119,12 +110,16 @@ export default function InventoryPage(props: Props) {
                 <IconButton className={classes.headButton} onClick={() => setBagModalOpen(true)}>
                     <Badge
                         overlap='rectangle'
-                        badgeContent={getCharacterBagSize(char) + ' kg'}
+                        badgeContent={totalWeight + '/' + (getAttSkill(char, 0, 2) + char.bagsize)}
                         color='secondary'
                         className={classes.badge}
                     >
                         <Avatar variant='rounded' color='primary' className={classes.avatar}>
-                            <CardTravel fontSize={char.bagsize === BAG_SIZES[0] ? 'small' : char.bagsize === BAG_SIZES[1] ? 'default' : 'large'} />
+                            {!char.bagsize && <Remove />}
+                            {!!char.bagsize && <CardTravel
+                                fontSize={char.bagsize === BAG_SIZES[0] ? 'small' : char.bagsize === BAG_SIZES[1] ? 'default' : 'large'}
+                            />}
+
                         </Avatar>
                     </Badge>
                 </IconButton>
@@ -165,7 +160,6 @@ export default function InventoryPage(props: Props) {
                 <Divider />
                 <ItemDisplay title={T.translate('generic.items') as string} onDelete={handleDelete} items={items} onEdit={handleEdit} />
             </Card>
-            <Chip label={T.translate('inventory.totalweight', { weight: totalWeight / 1000 })} className={classes.weightSize} />
             <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
             <Dialog
                 open={open}
@@ -204,8 +198,6 @@ export default function InventoryPage(props: Props) {
                 <BagDialog
                     open={bagModalOpen}
                     bagsize={char.bagsize}
-                    weight={char.weight}
-                    force={getAttSkill(char, 0, 2)}
                     onClose={() => setBagModalOpen(false)}
                     onValidate={handleChangeBagSize}
                 />

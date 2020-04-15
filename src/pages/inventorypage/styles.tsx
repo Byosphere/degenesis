@@ -103,5 +103,12 @@ export const useStyles = makeStyles({
         justifyContent: 'center',
         marginBottom: theme.spacing(2),
         marginTop: theme.spacing(2)
+    },
+    slider: {
+        padding: theme.spacing(1),
+        margin: 0,
+        '&>span:first-child': {
+            color: 'rgba(0, 0, 0, 0.54)'
+        }
     }
 });

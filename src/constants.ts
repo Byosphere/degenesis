@@ -12,7 +12,7 @@ export const BASE_SKILLS = 28;
 export const LOCALSTORAGE_NAME = 'degenesisapp';
 export const CHAR_MAX = 10;
 export const STORY_LENGTH: number = 200;
-export const BAG_SIZES: number[] = [4, 10, 16];
+export const BAG_SIZES: number[] = [2, 6, 8];
 
 export const CULTES: Culte[] = cultes;
 export const CULTURES: Culture[] = cultures;

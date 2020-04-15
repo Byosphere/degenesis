@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, DialogContent, DialogContentText, TextField, FormControl, InputLabel, Select, MenuItem, DialogActions, Button, InputAdornment } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, DialogContent, DialogContentText, TextField, FormControl, InputLabel, Select, MenuItem, DialogActions, Button, Slider } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { GROUPS } from '../../constants';
 import T from 'i18n-react';
@@ -34,13 +34,19 @@ export default function AddItemDialog(props: Props) {
 
     function onChange(event: React.ChangeEvent<{ name?: string; value: unknown; }>) {
         let newItem = item;
-        newItem[event.target.name] = event.target.name === 'weight' ? parseInt(event.target.value as string) : event.target.value;
+        newItem[event.target.name] = event.target.value;
         setItem({ ...newItem });
     }
 
     function actionOnPrompt() {
         props.onClose();
         return false;
+    }
+
+    function onChangeSlider(value: number) {
+        let newItem = item;
+        newItem.weight = value;
+        setItem({ ...newItem });
     }
 
     return (
@@ -84,19 +90,19 @@ export default function AddItemDialog(props: Props) {
                         ))}
                     </Select>
                 </FormControl>
-                <TextField
-                    name="weight"
-                    label={T.translate('inventory.weight')}
-                    value={item.weight || ''}
-                    onChange={onChange}
-                    type='number'
-                    margin="normal"
-                    fullWidth
-                    variant='outlined'
-                    InputProps={{
-                        endAdornment: <InputAdornment position="end">{T.translate('inventory.grams')}</InputAdornment>
-                    }}
-                />
+                <FormControl className={classes.slider} fullWidth margin='normal' variant='outlined'>
+                    <Typography variant='caption'>{T.translate('inventory.weight')}</Typography>
+                    <Slider
+                        name='weight'
+                        defaultValue={0}
+                        valueLabelDisplay="auto"
+                        step={1}
+                        marks={[0, 1, 2, 3, 4, 5, 6].map((i) => ({ value: i, label: i }))}
+                        min={0}
+                        max={6}
+                        onChange={(event, value: number) => onChangeSlider(value)}
+                    />
+                </FormControl>
                 <TextField
                     name="desc"
                     label={T.translate('inventory.desc')}

@@ -41,14 +41,14 @@ export default function ItemDisplay(props: Props) {
             <Chip label={title} className={classes.cardOverTitle} />
             {!items.length && <Empty />}
             {items.map((item, key) => (
-                <ExpansionPanel classes={{root: classes.itemPanel}} key={key} TransitionProps={{ unmountOnExit: true }}>
+                <ExpansionPanel classes={{ root: classes.itemPanel }} key={key} TransitionProps={{ unmountOnExit: true }}>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMore />}
                         classes={{ content: classes.expansionPanel }}
                     >
                         <Typography>{item.name}</Typography>
                         <span>
-                            <Typography>{item.weight}g</Typography>
+                            <Typography>enc. {item.weight}</Typography>
                             {item.degats && <Typography>{item.degats}</Typography>}
                             {item.defense && <Typography>{item.defense}</Typography>}
                         </span>

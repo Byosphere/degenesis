@@ -171,11 +171,6 @@ export function canFight(character: Character): boolean {
     return character.ego < getEgoMax(character) && getCharacterHealth(character) > 0;
 }
 
-export function getCharacterBagSize(character: Character): number {
-    const percent = getAttSkill(character, 0, 2) + character.bagsize;
-    return (percent * character.weight) / 100;
-}
-
 export function getAttSkill(character: Character, attId: number, skillId: number) {
     return character.attributes[attId].base + character.attributes[attId].skills[skillId].value;
 }
