@@ -44,8 +44,7 @@ export const MONEY = [
 export const GROUPS = [
     'arme',
     'armure',
-    'equipement',
-    'keyitem'
+    'equipement'
 ];
 
 export const ATTRIBUTES = [

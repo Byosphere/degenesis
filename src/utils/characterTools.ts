@@ -174,3 +174,9 @@ export function canFight(character: Character): boolean {
 export function getAttSkill(character: Character, attId: number, skillId: number) {
     return character.attributes[attId].base + character.attributes[attId].skills[skillId].value;
 }
+
+export function calculateDegats(value: string, char: Character) {
+    // eslint-disable-next-line no-eval
+    let result = eval(value.replace(/f|F/, getAttSkill(char, 0, 2).toString()).replace(/[^-()\d/*+.]/g, ''));
+    return Math.round(parseInt(result));
+}

@@ -152,13 +152,13 @@ export default function InventoryPage(props: Props) {
                 onFilterChange={(value) => setFilter(value)}
             />
             <Card className={classes.cardList}>
-                <ItemDisplay title={T.translate('generic.weapons') as string} onDelete={handleDelete} items={weapons} onEdit={handleEdit} />
+                <ItemDisplay title={T.translate('generic.weapons') as string} char={char} onDelete={handleDelete} items={weapons} onEdit={handleEdit} />
                 <Divider />
-                <ItemDisplay title={T.translate('generic.armors') as string} onDelete={handleDelete} items={armors} onEdit={handleEdit} />
+                <ItemDisplay title={T.translate('generic.armors') as string} char={char} onDelete={handleDelete} items={armors} onEdit={handleEdit} />
                 <Divider />
-                <ItemDisplay title={T.translate('generic.equipment') as string} onDelete={handleDelete} items={equipment} onEdit={handleEdit} />
+                <ItemDisplay title={T.translate('generic.equipment') as string} char={char} onDelete={handleDelete} items={equipment} onEdit={handleEdit} />
                 <Divider />
-                <ItemDisplay title={T.translate('generic.items') as string} onDelete={handleDelete} items={items} onEdit={handleEdit} />
+                <ItemDisplay title={T.translate('generic.items') as string} char={char} onDelete={handleDelete} items={items} onEdit={handleEdit} />
             </Card>
             <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
             <Dialog
@@ -167,7 +167,7 @@ export default function InventoryPage(props: Props) {
                 fullScreen
                 TransitionComponent={TransitionUp}
             >
-                <AddItemDialog item={editItem} open={open} onSave={handleSave} onClose={() => setOpen(false)} />
+                <AddItemDialog item={editItem} open={open} onSave={handleSave} onClose={() => { setOpen(false); setEditItem(null); }} />
             </Dialog>
             <Dialog
                 open={moneyModalOpen}

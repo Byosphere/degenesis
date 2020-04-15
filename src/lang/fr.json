@@ -185,7 +185,8 @@
         "additem": "Ajouter un Objet",
         "additemdesc": "Renseignez les informations du nouvel objet à ajouter à l'inventaire.",
         "type": "Type d'objet",
-        "desc": "Description",
+        "desc": "Propriétés",
+        "defense": "Protection",
         "name": "Intitulé",
         "moneyedit": "Lettres de change",
         "removeitem": "Êtes-vous sûr de vouloir retirer {what} de l'inventaire ?",
@@ -197,7 +198,12 @@
         "encombrement": "Encombrement",
         "bagsize": "Taille du sac",
         "grams": "grammes",
-        "bagsizetext": "L'encombrement d'un personnage influence sa capacité à se déplacer et à se battre. Son encombrement maximal est égal à *PHY+Force*. Il peut être augmenté grâce à un sac à dos, mais attention *le sac à dos ne compte pas pendant les combat* ! "
+        "bagsizetext": "L'encombrement d'un personnage influence sa capacité à se déplacer et à se battre. Son encombrement maximal est égal à *PHY+Force*. Il peut être augmenté grâce à un sac à dos, mais attention *le sac à dos ne compte pas pendant les combat* ! ",
+        "value": "{value} LC",
+        "degats": "Dégâts",
+        "maniement": "Maniement",
+        "range": "Portée",
+        "cost": "Coût"
     },
     "stats": {
         "blessures": {

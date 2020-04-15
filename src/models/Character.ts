@@ -27,7 +27,9 @@ export interface Item {
     tech: number;
     defense?: number;
     degats?: string;
-    title?: string;
+    mani?: number;
+    range?: number;
+    value: number;
 }
 
 export interface Origin {

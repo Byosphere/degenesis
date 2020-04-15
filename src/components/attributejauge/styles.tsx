@@ -41,7 +41,7 @@ export const useStyles = makeStyles({
         right: '-10px',
         top: '-10px',
         padding: '1px',
-        background: 'white',
+        background: 'white !important',
         color: props.value === 6 ? '' : '#444',
     }),
     label1: {

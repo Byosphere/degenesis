@@ -74,7 +74,6 @@ export const useStyles = makeStyles({
         backgroundColor: 'white'
     },
     expansionPanel: {
-        justifyContent: 'space-between',
         textTransform: 'capitalize',
         '& span': {
             opacity: 0.6
@@ -82,8 +81,25 @@ export const useStyles = makeStyles({
     },
     itemPanel: {
         boxShadow: 'none',
+        border: '1px solid rgba(0,0,0,0.15)',
+        marginBottom: theme.spacing(0.5),
+        borderRadius: theme.spacing(0.5),
         '&:before': {
             backgroundColor: 'transparent'
+        },
+        '&>div': {
+            paddingLeft: theme.spacing(2),
+        },
+        '& section': {
+            flex: 1,
+            height: '100%',
+            paddingLeft: theme.spacing(2),
+            borderLeft: '1px solid rgba(0,0,0,0.15)',
+        },
+        '& section:first-child': {
+            borderLeft: 'none',
+            paddingRight: theme.spacing(1),
+            paddingLeft: 0
         }
     },
     textfield: {
@@ -115,6 +131,29 @@ export const useStyles = makeStyles({
         '&>span:first-child': {
             borderBottom: '2px solid red',
             paddingBottom: theme.spacing(0.5)
+        }
+    },
+    miniAvatar: {
+        width: theme.spacing(3),
+        height: theme.spacing(3),
+        marginRight: theme.spacing(2),
+        backgroundColor: '#444'
+    },
+    valueChip: {
+        position: 'absolute',
+        top: theme.spacing(1),
+        right: '64px'
+    },
+    formSection: {
+        display: 'flex',
+        '&>div': {
+            flex: 1
+        },
+        '&>div:first-child': {
+            marginRight: theme.spacing(1)
+        },
+        '&>div:last-child': {
+            marginLeft: theme.spacing(1)
         }
     }
 });

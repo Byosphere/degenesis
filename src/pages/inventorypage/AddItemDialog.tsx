@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { AppBar, Toolbar, IconButton, Typography, DialogContent, DialogContentText, TextField, FormControl, InputLabel, Select, MenuItem, DialogActions, Button, Slider } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Typography, DialogContent, DialogContentText, TextField, FormControl, InputLabel, Select, MenuItem, DialogActions, Button, Slider, InputAdornment } from '@material-ui/core';
 import { Close } from '@material-ui/icons';
 import { GROUPS } from '../../constants';
 import T from 'i18n-react';
@@ -20,21 +20,28 @@ export default function AddItemDialog(props: Props) {
     const emptyItem = {
         id: 0,
         name: '',
-        group: 0,
+        group: -1,
         desc: '',
         weight: 0,
-        tech: 0
+        tech: 0,
+        value: 0
     }
     const [item, setItem] = useState<Item>(props.item || emptyItem);
 
     function verifyItem(): boolean {
-        if (!item.name || !item.desc) return true;
+        if (!item.name || !item.desc || item.group < 0) return true;
         return false;
     }
 
-    function onChange(event: React.ChangeEvent<{ name?: string; value: unknown; }>) {
+    function onChange(event: React.ChangeEvent<{ name?: string; value: string; }>) {
         let newItem = item;
         newItem[event.target.name] = event.target.value;
+        setItem({ ...newItem });
+    }
+
+    function onChangeNumber(event: React.ChangeEvent<{ name?: string; value: string; }>) {
+        let newItem = item;
+        newItem[event.target.name] = parseInt(event.target.value);
         setItem({ ...newItem });
     }
 
@@ -47,6 +54,73 @@ export default function AddItemDialog(props: Props) {
         let newItem = item;
         newItem.weight = value;
         setItem({ ...newItem });
+    }
+
+    function getSpecificFields() {
+        switch (item.group) {
+            case 0:
+                return (
+                    <section className={classes.formSection}>
+                        <TextField
+                            name="degats"
+                            label={T.translate('inventory.degats')}
+                            value={item.degats}
+                            onChange={onChange}
+                            margin="normal"
+                            variant='outlined'
+                        />
+                        <TextField
+                            name="mani"
+                            label={T.translate('inventory.maniement')}
+                            value={item.mani}
+                            onChange={onChangeNumber}
+                            margin="normal"
+                            variant='outlined'
+                            type='number'
+                            InputProps={{
+                                endAdornment: <InputAdornment position='end'>D</InputAdornment>
+                            }}
+                        />
+                        <TextField
+                            name="range"
+                            label={T.translate('inventory.range')}
+                            value={item.range}
+                            onChange={onChangeNumber}
+                            margin="normal"
+                            variant='outlined'
+                            type='number'
+                        />
+                    </section>
+                );
+            case 1:
+                return (
+                    <section className={classes.formSection}>
+                        <TextField
+                            name="defense"
+                            label={T.translate('inventory.defense')}
+                            value={item.defense}
+                            onChange={onChangeNumber}
+                            margin="normal"
+                            variant='outlined'
+                            type='number'
+                        />
+                        <TextField
+                            name="mani"
+                            label={T.translate('inventory.maniement')}
+                            value={item.mani}
+                            onChange={onChangeNumber}
+                            margin="normal"
+                            variant='outlined'
+                            type='number'
+                            InputProps={{
+                                endAdornment: <InputAdornment position='end'>D</InputAdornment>
+                            }}
+                        />
+                    </section>
+                );
+            default:
+                return null;
+        }
     }
 
     return (
@@ -83,6 +157,9 @@ export default function AddItemDialog(props: Props) {
                         onChange={onChange}
                         variant='outlined'
                     >
+                        <MenuItem value={-1}>
+                            {T.translate('generic.none')}
+                        </MenuItem>
                         {GROUPS.map((group: string, key) => (
                             <MenuItem key={key} value={key}>
                                 {T.translate('inventory.' + group)}
@@ -90,6 +167,19 @@ export default function AddItemDialog(props: Props) {
                         ))}
                     </Select>
                 </FormControl>
+                <TextField
+                    name="value"
+                    label={T.translate('inventory.cost')}
+                    value={item.value || ''}
+                    onChange={onChangeNumber}
+                    margin="normal"
+                    fullWidth
+                    variant='outlined'
+                    type='number'
+                    InputProps={{
+                        endAdornment: <InputAdornment position='end'>{T.translate('inventory.value')}</InputAdornment>
+                    }}
+                />
                 <FormControl className={classes.slider} fullWidth margin='normal' variant='outlined'>
                     <Typography variant='caption'>{T.translate('inventory.weight')}</Typography>
                     <Slider
@@ -103,6 +193,7 @@ export default function AddItemDialog(props: Props) {
                         onChange={(event, value: number) => onChangeSlider(value)}
                     />
                 </FormControl>
+                {getSpecificFields()}
                 <TextField
                     name="desc"
                     label={T.translate('inventory.desc')}
@@ -111,7 +202,7 @@ export default function AddItemDialog(props: Props) {
                     margin="normal"
                     fullWidth
                     multiline
-                    rows={10}
+                    rows={5}
                     variant='outlined'
                 />
             </DialogContent>
