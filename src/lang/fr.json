@@ -81,7 +81,7 @@
         "addnote": "Ajouter une page",
         "deletenote": "Supprimer la page",
         "invalidfield": "Champ invalide",
-        "rolldicequestion": "Effectuer un jet de *{attribute}* ({anum}) + *{skill}* ({snum}) ?",
+        "rolldicequestion": "Effectuer un jet de *{attribute}*({anum}) + *{skill}*({snum}) ?",
         "diceroll": "Jet de dés",
         "ldc": "LC",
         "origins": "Origines",

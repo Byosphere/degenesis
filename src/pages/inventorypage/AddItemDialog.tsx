@@ -94,7 +94,7 @@ export default function AddItemDialog(props: Props) {
                     <Typography variant='caption'>{T.translate('inventory.weight')}</Typography>
                     <Slider
                         name='weight'
-                        defaultValue={0}
+                        value={item.weight}
                         valueLabelDisplay="auto"
                         step={1}
                         marks={[0, 1, 2, 3, 4, 5, 6].map((i) => ({ value: i, label: i }))}

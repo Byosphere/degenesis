@@ -167,7 +167,7 @@ export default function AttributePanel(props: Props) {
                 <DialogContent>
                     <DialogContentText component='div'>
                         {T.translate('generic.rolldicequestion', {
-                            attribute: T.translate('attributes.' + ATTRIBUTES[attribute.id] + '.name'),
+                            attribute: (T.translate('attributes.' + ATTRIBUTES[attribute.id] + '.name') as string).toUpperCase().slice(0, 3),
                             anum: attribute.base,
                             skill: skill ? T.translate('skills.' + SKILLS[attribute.id][skill.id]) : '',
                             snum: skill ? skill.value : 0

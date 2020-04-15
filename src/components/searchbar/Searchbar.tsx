@@ -19,7 +19,7 @@ export default function Searchbar(props: Props) {
             <InputBase
                 placeholder={props.placeholder}
                 className={classes.input}
-                onChange={(event) => props.onFilterChange && props.onFilterChange(event.target.value)}
+                onChange={(event) => props.onFilterChange && props.onFilterChange(event.target.value.toLowerCase())}
             />
         </Paper>
     );
