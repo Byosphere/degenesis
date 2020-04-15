@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Typography, IconButton, Divider, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions, Button } from '@material-ui/core';
-import { TurnedIn, TurnedInNot, Close, CheckBoxOutlineBlank, IndeterminateCheckBox, CancelPresentation, Backspace, Info } from '@material-ui/icons';
+import { Typography, IconButton, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions, Button } from '@material-ui/core';
+import { CheckBoxOutlineBlank, IndeterminateCheckBox, Backspace, Info } from '@material-ui/icons';
 import T from 'i18n-react';
 import { useStyles } from './styles';
 import { Prompt } from 'react-router-dom';
@@ -10,7 +10,7 @@ interface Props {
     desc: string;
     currentValue: number;
     maximum: number;
-    onChange?: (field: string, newValue: number) => void;
+    onChange?: (newValue: number) => void;
 }
 
 export default function InteractiveJauge(props: Props) {
@@ -22,8 +22,8 @@ export default function InteractiveJauge(props: Props) {
 
     for (let i = 1; i <= maximum; i++) {
         const icon = i <= currentValue ?
-            <IndeterminateCheckBox className={classes.jaugeIcon} key={i} color='primary' onClick={() => onChange(label, i)} /> :
-            <CheckBoxOutlineBlank className={classes.jaugeIcon} key={i} color='primary' onClick={() => onChange(label, i)} />
+            <IndeterminateCheckBox className={classes.jaugeIcon} key={i} color='primary' onClick={() => onChange(i)} /> :
+            <CheckBoxOutlineBlank className={classes.jaugeIcon} key={i} color='primary' onClick={() => onChange(i)} />
         icons.push(icon);
     }
 
@@ -39,7 +39,7 @@ export default function InteractiveJauge(props: Props) {
                     {label + ' (' + currentValue + '/' + maximum + ') :'}
                 </Typography>
                 <div>
-                    <Backspace className={classes.jaugeIcon} key={0} color='primary' onClick={() => onChange(label, 0)} />
+                    <Backspace className={classes.jaugeIcon} key={0} color='primary' onClick={() => onChange(0)} />
                     {icons}
                 </div>
             </div>

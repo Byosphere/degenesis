@@ -4,7 +4,7 @@ import { RANGS, CULTES, CULTURES, SEX, CONCEPTS, STORY_LENGTH } from '../../cons
 import T from 'i18n-react';
 import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Info, Edit, ExpandLess, ExpandMore, Lock, LockOpen } from '@material-ui/icons';
-import { getBlessuresMax, getEgoMax, getSporulationMax, getTraumaMax } from '../../utils/characterTools';
+import { getBlessuresMax, getEgoMax, getSporulationMax } from '../../utils/characterTools';
 import Trauma from './Trauma';
 import AttributePanel from './AttributePanel';
 import CharacterEditDialog, { EditFormValues } from './CharacterEditDialog';
@@ -119,21 +119,21 @@ export default function StatsPage(props: Props) {
                         desc={T.translate('stats.blessures.desc') as string}
                         currentValue={char.blessures}
                         maximum={getBlessuresMax(char)}
-                        onChange={handleChange}
+                        onChange={(value) => handleChange('blessures', value)}
                     />
                     <InteractiveJauge
                         label={T.translate('stats.ego.label') as string}
                         desc={T.translate('stats.ego.desc') as string}
                         currentValue={char.ego}
                         maximum={getEgoMax(char)}
-                        onChange={handleChange}
+                        onChange={(value) => handleChange('ego', value)}
                     />
                     <InteractiveJauge
                         label={T.translate('stats.sporulation.label') as string}
                         desc={T.translate('stats.sporulation.desc') as string}
                         currentValue={char.sporulation}
                         maximum={getSporulationMax(char)}
-                        onChange={handleChange}
+                        onChange={(value) => handleChange('sporulation', value)}
                     />
                     <Trauma
                         label={T.translate('stats.trauma.label') as string}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IconButton, Typography, Dialog, DialogContent, DialogTitle, DialogContentText, DialogActions, Button } from '@material-ui/core';
-import { Clear, OfflineBolt, OfflineBoltOutlined, Cancel, Info } from '@material-ui/icons';
+import { OfflineBolt, OfflineBoltOutlined, Cancel, Info } from '@material-ui/icons';
 import { getTraumaMax } from '../../utils/characterTools';
 import { Character } from '../../models/Character';
 import { useStyles } from './styles';
