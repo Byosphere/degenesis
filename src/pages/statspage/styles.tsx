@@ -89,5 +89,9 @@ export const useStyles = makeStyles({
         borderLeft: '1px solid rgba(0,0,0,0.16)',
         paddingLeft: theme.spacing(1.5),
         paddingRight: theme.spacing(0.5)
+    },
+    cardContent: {
+        paddingTop: 0,
+        paddingBottom: theme.spacing(2) + 'px !important'
     }
 });

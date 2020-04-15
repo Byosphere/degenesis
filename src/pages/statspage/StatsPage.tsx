@@ -1,8 +1,8 @@
 import React, { useEffect, useContext, useState } from 'react';
 import { Character, Attribute } from '../../models/Character';
-import { RANGS, CULTES, CULTURES, SEX, CONCEPTS, STORY_LENGTH } from '../../constants';
+import { RANGS, CULTES, SEX, STORY_LENGTH } from '../../constants';
 import T from 'i18n-react';
-import { Card, CardMedia, Chip, CardHeader, Avatar, IconButton, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
+import { Card, CardMedia, Chip, CardHeader, IconButton, CardContent, Typography, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@material-ui/core';
 import { Info, Edit, ExpandLess, ExpandMore, Lock, LockOpen } from '@material-ui/icons';
 import { getBlessuresMax, getEgoMax, getSporulationMax } from '../../utils/characterTools';
 import Trauma from './Trauma';
@@ -80,28 +80,19 @@ export default function StatsPage(props: Props) {
                     onDelete={rankDesc ? () => setShowRank(true) : null}
                 />
                 <CardHeader
-                    avatar={
-                        <Avatar alt={CULTURES[char.culture].name} src={"images/cultures/" + CULTURES[char.culture].img} />
-                    }
-                    title={char.name + ' (' + T.translate('sex.' + SEX[char.sex]) + ')'}
+                    title={char.name}
                     subheader={
-                        T.translate('cultes.' + CULTES[char.culte].name) + ' - ' +
-                        T.translate('cultures.' + CULTURES[char.culture].name) + ' - ' +
-                        T.translate('concepts.' + CONCEPTS[char.concept].name)
+                        T.translate('sex.' + SEX[char.sex]) + ' | ' +
+                        char.size + ' ' + T.translate('generic.s') + ' | ' +
+                        char.weight + ' ' + T.translate('generic.w') + ' | ' +
+                        char.age + ' ' + T.translate('generic.y')
                     }
                 />
-                <CardContent>
-                    <Typography variant="caption" component='p'>
-                        {
-                            char.size + ' ' + T.translate('generic.s') + ' | ' +
-                            char.weight + ' ' + T.translate('generic.w') + ' | ' +
-                            char.age + ' ' + T.translate('generic.y')
-                        }
-                    </Typography>
+                <CardContent classes={{ root: classes.cardContent }}>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {char.story.length > STORY_LENGTH && !expanded ?
-                            char.story.substr(0, 200) + '[...]' :
-                            char.story
+                            <span>{char.story.substr(0, 200) + '[...]'}</span> :
+                            <span>{char.story}</span>
                         }
                     </Typography>
                 </CardContent>

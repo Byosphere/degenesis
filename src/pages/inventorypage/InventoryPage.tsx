@@ -13,7 +13,6 @@ import PetDialog from './PetDialog';
 import TransitionUp from '../../components/TransitionUp';
 import { HeaderContext } from '../detailpage/DetailPage';
 import BagDialog from './BagDialog';
-import ShortDivider from '../../components/shortdivider/ShortDivider';
 import { getCharacterBagSize, getAttSkill } from '../../utils/characterTools';
 import { BAG_SIZES } from '../../constants';
 import { SnackbarContext } from '../../App';
