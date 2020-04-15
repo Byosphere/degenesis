@@ -84,6 +84,16 @@ export default function PotentialsPage(props: Props) {
 
     return (
         <div className={classes.container}>
+            <CardOverTitle title={T.translate('generic.potentials') as string} />
+            {!char.potentials.length && <Empty />}
+            {char.potentials.map((potential: Potential, key: number) => (
+                <PotentialDisplay
+                    key={key}
+                    potential={potential}
+                    onDeletePotential={handleDeletePotential}
+                    onUpgradePotential={handleOpenXpDialog}
+                />
+            ))}
             <CardOverTitle title={T.translate('generic.origins') as string} />
             <Card className={classes.card}>
                 <CardContent>
@@ -99,17 +109,7 @@ export default function PotentialsPage(props: Props) {
                     ))}
                 </CardContent>
             </Card>
-            <CardOverTitle title={T.translate('generic.potentials') as string} />
-            {!char.potentials.length && <Empty />}
-            {char.potentials.map((potential: Potential, key: number) => (
-                <PotentialDisplay
-                    key={key}
-                    potential={potential}
-                    onDeletePotential={handleDeletePotential}
-                    onUpgradePotential={handleOpenXpDialog}
-                />
-            ))}
-            <ShortDivider />
+            <CardOverTitle title={T.translate('generic.status') as string} />
             <ExpansionPanel className={classes.card}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                     <Avatar alt={CULTES[char.culte].name} src={"images/cultes/" + CULTES[char.culte].img} />
