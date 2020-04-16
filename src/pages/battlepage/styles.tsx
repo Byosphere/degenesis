@@ -49,5 +49,12 @@ export const useStyles = makeStyles({
         height: '34px',
         backgroundColor: '#fafafa',
         color: 'black'
+    },
+    nextRound: {
+        bottom: theme.spacing(2)
+    },
+    quit: {
+        bottom: theme.spacing(2),
+        right: '88px'
     }
 });

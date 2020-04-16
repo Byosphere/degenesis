@@ -77,7 +77,7 @@ export default function ItemDisplay(props: Props) {
                         <section>
                             <Typography variant='caption' component='p'>{T.translate('inventory.desc')} :</Typography>
                             <Typography variant='body2'>
-                                {item.desc}
+                                {item.desc || T.translate('inventory.noproperties')}
                             </Typography>
                         </section>
                         {specificSection(item)}

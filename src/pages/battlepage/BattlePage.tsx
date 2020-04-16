@@ -118,12 +118,12 @@ export default function BattlePage(props: Props) {
             {step === 2 && <ActionsList />}
             {step === 1 && <SetInitiativePanel char={char} onClose={handleClose} onCancel={handleCancel} />}
             {step > 0 && <FloatingAction
-                // style={{ bottom: '16px', right: '88px' }}
+                classes={classes.quit}
                 onClick={() => setOpen(true)}
                 icon={<ExitToApp />}
             />}
             {step > 0 && <FloatingAction
-                // style={{ bottom: '16px' }}
+                classes={classes.nextRound}
                 onClick={goToNextRound}
                 icon={<Badge badgeContent={round} color='primary' anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
                     <FlipCameraAndroid />

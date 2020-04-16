@@ -29,7 +29,7 @@ export default function AddItemDialog(props: Props) {
     const [item, setItem] = useState<Item>(props.item || emptyItem);
 
     function verifyItem(): boolean {
-        if (!item.name || !item.desc || item.group < 0) return true;
+        if (!item.name || item.group < 0) return true;
         return false;
     }
 

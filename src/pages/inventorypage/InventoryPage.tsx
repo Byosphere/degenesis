@@ -15,6 +15,7 @@ import { HeaderContext } from '../detailpage/DetailPage';
 import BagDialog from './BagDialog';
 import { getAttSkill } from '../../utils/characterTools';
 import { BAG_SIZES } from '../../constants';
+import CardOverTitle from '../../components/cardovertitle/CardOverTitle';
 
 interface Props {
     char: Character;
@@ -146,8 +147,9 @@ export default function InventoryPage(props: Props) {
                     </IconButton>
                 </div>
             </Card>
+            <CardOverTitle title={T.translate('inventory.bagof', { who: char.name })} />
             <Searchbar
-                placeholder={T.translate('generic.bagof', { who: char.name }) as string}
+                placeholder={T.translate('generic.search') as string}
                 className={classes.searchbar}
                 onFilterChange={(value) => setFilter(value)}
             />
@@ -157,8 +159,6 @@ export default function InventoryPage(props: Props) {
                 <ItemDisplay title={T.translate('generic.armors') as string} char={char} onDelete={handleDelete} items={armors} onEdit={handleEdit} />
                 <Divider />
                 <ItemDisplay title={T.translate('generic.equipment') as string} char={char} onDelete={handleDelete} items={equipment} onEdit={handleEdit} />
-                <Divider />
-                <ItemDisplay title={T.translate('generic.items') as string} char={char} onDelete={handleDelete} items={items} onEdit={handleEdit} />
             </Card>
             <FloatingAction onClick={() => setOpen(true)} icon={<Add />} />
             <Dialog

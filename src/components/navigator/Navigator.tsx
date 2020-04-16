@@ -22,8 +22,8 @@ export default function Navigator(props: Props) {
                 <BottomNavigationAction label={T.translate('navigator.stats')} icon={<HowToReg />} />
                 <BottomNavigationAction label={T.translate('navigator.inventory')} icon={<BusinessCenter />} />
                 <BottomNavigationAction label={T.translate('navigator.legacy')} icon={<WifiTethering />} />
-                <BottomNavigationAction label={T.translate('navigator.notes')} icon={<Note />} />
                 <BottomNavigationAction label={T.translate('navigator.battle')} icon={<Whatshot />} />
+                <BottomNavigationAction label={T.translate('navigator.notes')} icon={<Note />} />
             </BottomNavigation>
         </div>
     );

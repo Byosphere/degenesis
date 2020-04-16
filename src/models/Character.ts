@@ -16,13 +16,14 @@ export interface Potential {
     id: number;
     level: number;
     group: number;
+    actif?: boolean;
 }
 
 export interface Item {
     id: number;
     name: string;
     group: number;
-    desc: string;
+    desc?: string;
     weight: number;
     tech: number;
     defense?: number;

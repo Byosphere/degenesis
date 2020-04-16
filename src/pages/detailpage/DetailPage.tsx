@@ -106,8 +106,8 @@ export default function DetailPage(props: Props) {
                 {tab === 0 && <StatsPage char={character} onChange={handleChange} />}
                 {tab === 1 && <InventoryPage char={character} onChange={handleChange} />}
                 {tab === 2 && <PotentialsPage char={character} onChange={handleChange} />}
-                {tab === 3 && <NotesPage char={character} onChange={handleChange} />}
-                {tab === 4 && <BattlePage char={character} onChange={handleChange} step={step} setStep={setStep} />}
+                {tab === 3 && <BattlePage char={character} onChange={handleChange} step={step} setStep={setStep} />}
+                {tab === 4 && <NotesPage char={character} onChange={handleChange} />}
 
                 <Navigator currentTab={tab} onTabChange={(event, value) => setTab(value)} />
 

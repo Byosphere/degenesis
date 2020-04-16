@@ -17,7 +17,7 @@
         "armors": "Armures",
         "equipment": "Équipement",
         "items": "Objets",
-        "bagof": "Chercher dans l'inventaire de {who}",
+        "search": "Rechercher",
         "money": "{money} lettres de Change",
         "save": "Sauvegarder",
         "wrongpassword": "Mauvais identifiant ou mot de passe.",
@@ -177,6 +177,7 @@
         "pulsions": "Les *pulsions* du personnages lui permettent d'agir vite et parfois sans réfléchir à une situation. Pour le meilleur ou pour le pire."
     },
     "inventory": {
+        "bagof": "Inventaire de {who}",
         "arme": "Arme",
         "armure": "Armure",
         "equipement": "Équipement",
@@ -203,7 +204,8 @@
         "degats": "Dégâts",
         "maniement": "Maniement",
         "range": "Portée",
-        "cost": "Coût"
+        "cost": "Coût",
+        "noproperties": "Aucune"
     },
     "stats": {
         "blessures": {
