@@ -36,7 +36,7 @@ export default function InventoryPage(props: Props) {
     const weapons = searchFilter(char.inventory.filter(item => item.group === 0));
     const armors = searchFilter(char.inventory.filter(item => item.group === 1));
     const equipment = searchFilter(char.inventory.filter(item => item.group === 2));
-    const items = searchFilter(char.inventory.filter(item => item.group === 3));
+
     let totalWeight = 0;
     char.inventory.forEach((item: Item) => {
         totalWeight += item.weight;

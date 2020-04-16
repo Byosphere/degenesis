@@ -74,6 +74,7 @@
         "additem": "Ajouter un objet à l'inventaire",
         "levelup": "Améliorer le potentiel",
         "validate": "Valider",
+        "bonusmalus": "Bonus/Malus",
         "add": "Ajouter",
         "managemoney": "Gestion de l'argent",
         "newcharacter": "Créer un nouveau personnage",
@@ -81,7 +82,7 @@
         "addnote": "Ajouter une page",
         "deletenote": "Supprimer la page",
         "invalidfield": "Champ invalide",
-        "rolldicequestion": "Effectuer un jet de *{attribute}*({anum}) + *{skill}*({snum}) ?",
+        "rolldicequestion": "*{attribute}*({anum}) + *{skill}*({snum})",
         "diceroll": "Jet de dés",
         "ldc": "LC",
         "origins": "Origines",
@@ -197,7 +198,7 @@
         "notempty": "Le champ ne doit pas être vide.",
         "totalweight": "Encombrement total : {weight}",
         "encombrement": "Encombrement",
-        "bagsize": "Taille du sac",
+        "bagsize": "Taille du sac : {name}",
         "grams": "grammes",
         "bagsizetext": "L'encombrement d'un personnage influence sa capacité à se déplacer et à se battre. Son encombrement maximal est égal à *PHY+Force*. Il peut être augmenté grâce à un sac à dos, mais attention *le sac à dos ne compte pas pendant les combat* ! ",
         "value": "{value} LC",
@@ -205,7 +206,13 @@
         "maniement": "Maniement",
         "range": "Portée",
         "cost": "Coût",
-        "noproperties": "Aucune"
+        "noproperties": "Aucune",
+        "bag": {
+            "none": "Pas de sac",
+            "small": "Petit sac ou sacoche",
+            "medium": "Sac à dos",
+            "big": "Sac de voyage"
+        } 
     },
     "stats": {
         "blessures": {

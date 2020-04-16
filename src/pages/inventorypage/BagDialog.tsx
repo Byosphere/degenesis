@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Prompt } from 'react-router-dom'
-import { DialogTitle, DialogContent, DialogContentText, IconButton, Avatar, Badge, Typography } from '@material-ui/core';
+import { DialogTitle, DialogContent, DialogContentText, IconButton, Avatar, Badge, Typography, DialogActions, Button } from '@material-ui/core';
 import T from 'i18n-react';
 import { CardTravel, Remove } from '@material-ui/icons';
 import { useStyles } from './styles';
@@ -16,11 +16,25 @@ interface Props {
 export default function BagDialog(props: Props) {
 
     const { open, bagsize } = props;
+    const [selection, setSelection] = useState<number>(bagsize);
     const classes = useStyles();
 
     function actionOnPrompt() {
         props.onClose();
         return false;
+    }
+
+    function getBagName() {
+        switch (selection) {
+            case 0:
+                return T.translate('inventory.bag.none');
+            case BAG_SIZES[0]:
+                return T.translate('inventory.bag.small');
+            case BAG_SIZES[1]:
+                return T.translate('inventory.bag.medium');
+            case BAG_SIZES[2]:
+                return T.translate('inventory.bag.big');
+        }
     }
 
     return (
@@ -30,15 +44,15 @@ export default function BagDialog(props: Props) {
             <DialogContent>
                 <DialogContentText>{T.translate('inventory.bagsizetext')}</DialogContentText>
                 <DialogContentText>
-                    <Typography variant='caption'>{T.translate('inventory.bagsize')}</Typography>
+                    <Typography variant='caption'>{T.translate('inventory.bagsize', { name: getBagName() })}</Typography>
                 </DialogContentText>
                 <div className={classes.iconList}>
-                    <IconButton className={!bagsize ? classes.selected : ''} onClick={() => props.onValidate(0)}>
+                    <IconButton className={!selection ? classes.selected : ''} onClick={() => setSelection(0)}>
                         <Avatar variant='rounded' className={classes.avatar}>
                             <Remove fontSize="small" />
                         </Avatar>
                     </IconButton>
-                    <IconButton className={bagsize === BAG_SIZES[0] ? classes.selected : ''} onClick={() => props.onValidate(BAG_SIZES[0])}>
+                    <IconButton className={selection === BAG_SIZES[0] ? classes.selected : ''} onClick={() => setSelection(BAG_SIZES[0])}>
                         <Badge
                             overlap='rectangle'
                             badgeContent={BAG_SIZES[0]}
@@ -49,7 +63,7 @@ export default function BagDialog(props: Props) {
                             </Avatar>
                         </Badge>
                     </IconButton>
-                    <IconButton className={bagsize === BAG_SIZES[1] ? classes.selected : ''} onClick={() => props.onValidate(BAG_SIZES[1])}>
+                    <IconButton className={selection === BAG_SIZES[1] ? classes.selected : ''} onClick={() => setSelection(BAG_SIZES[1])}>
                         <Badge
                             overlap='rectangle'
                             badgeContent={BAG_SIZES[1]}
@@ -60,7 +74,7 @@ export default function BagDialog(props: Props) {
                             </Avatar>
                         </Badge>
                     </IconButton>
-                    <IconButton className={bagsize === BAG_SIZES[2] ? classes.selected : ''} onClick={() => props.onValidate(BAG_SIZES[2])}>
+                    <IconButton className={selection === BAG_SIZES[2] ? classes.selected : ''} onClick={() => setSelection(BAG_SIZES[2])}>
                         <Badge
                             overlap='rectangle'
                             badgeContent={BAG_SIZES[2]}
@@ -73,6 +87,10 @@ export default function BagDialog(props: Props) {
                     </IconButton>
                 </div>
             </DialogContent>
+            <DialogActions>
+                <Button color='primary' onClick={props.onClose}>{T.translate('generic.close')}</Button>
+                <Button color='secondary' onClick={() => props.onValidate(selection)}>{T.translate('generic.save')}</Button>
+            </DialogActions>
         </>
     )
 }

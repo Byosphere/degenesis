@@ -202,7 +202,7 @@ export default function AddItemDialog(props: Props) {
                     margin="normal"
                     fullWidth
                     multiline
-                    rows={5}
+                    className={classes.fullHeight}
                     variant='outlined'
                 />
             </DialogContent>

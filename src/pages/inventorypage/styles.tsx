@@ -74,7 +74,6 @@ export const useStyles = makeStyles({
         backgroundColor: 'white'
     },
     expansionPanel: {
-        textTransform: 'capitalize',
         '& span': {
             opacity: 0.6
         }
@@ -106,7 +105,9 @@ export const useStyles = makeStyles({
         marginBottom: theme.spacing(2)
     },
     dialogContent: {
-        marginTop: '56px'
+        marginTop: '56px',
+        display: 'flex',
+        flexDirection: 'column'
     },
     weightSize: {
         position: "fixed",
@@ -154,6 +155,16 @@ export const useStyles = makeStyles({
         },
         '&>div:last-child': {
             marginLeft: theme.spacing(1)
+        }
+    },
+    fullHeight: {
+        flex: 1,
+        '&>div': {
+            height: '100%'
+        },
+        '&>div textarea': {
+            height: '100% !important',
+            overflowY: 'auto !important'
         }
     }
 });

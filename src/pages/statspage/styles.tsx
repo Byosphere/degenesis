@@ -93,5 +93,8 @@ export const useStyles = makeStyles({
     cardContent: {
         paddingTop: 0,
         paddingBottom: theme.spacing(2) + 'px !important'
+    },
+    diceContent: {
+        marginTop: theme.spacing(2)
     }
 });
