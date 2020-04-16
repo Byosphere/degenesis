@@ -166,5 +166,10 @@ export const useStyles = makeStyles({
             height: '100% !important',
             overflowY: 'auto !important'
         }
+    },
+    malusChip: {
+        position: 'absolute',
+        top: '132px',
+        right: '4px'
     }
 });

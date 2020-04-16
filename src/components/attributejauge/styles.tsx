@@ -42,8 +42,16 @@ export const useStyles = makeStyles({
         top: '-10px',
         padding: '1px',
         background: 'white !important',
-        color: props.value === 6 ? '' : '#444',
+        color: ((props.attribute && props.value === 6) || (props.potential && props.value === 3)) ? '' : '#444',
     }),
+    deleteButton: {
+        position: 'absolute',
+        right: '-10px',
+        top: '24px',
+        padding: '1px',
+        background: 'white !important',
+        color: '#d50000'
+    },
     label1: {
         overflow: 'hidden',
         textOverflow: 'ellipsis',

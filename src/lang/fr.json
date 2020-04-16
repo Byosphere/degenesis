@@ -212,7 +212,8 @@
             "small": "Petit sac ou sacoche",
             "medium": "Sac à dos",
             "big": "Sac de voyage"
-        } 
+        },
+        "maluschip": "{value} dés mouv."
     },
     "stats": {
         "blessures": {

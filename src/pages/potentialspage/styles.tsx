@@ -6,7 +6,8 @@ export const useStyles = makeStyles({
         margin: theme.spacing(0.5)
     },
     card: {
-        marginBottom: theme.spacing(0.5)
+        marginBottom: theme.spacing(0.5),
+        padding: theme.spacing(2) + 'px 24px'
     },
     dialogContent: {
         marginTop: '56px',
@@ -18,6 +19,9 @@ export const useStyles = makeStyles({
     typography: {
         alignSelf: 'center',
         marginLeft: theme.spacing(2)
+    },
+    expansion: {
+        marginBottom: theme.spacing(0.5)
     },
     expansionDetail: {
         flexDirection: 'column'

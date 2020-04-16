@@ -89,6 +89,7 @@ export default function PotentialsPage(props: Props) {
             {char.potentials.map((potential: Potential, key: number) => (
                 <PotentialDisplay
                     key={key}
+                    culte={char.culte}
                     potential={potential}
                     onDeletePotential={handleDeletePotential}
                     onUpgradePotential={handleOpenXpDialog}
@@ -110,7 +111,7 @@ export default function PotentialsPage(props: Props) {
                 </CardContent>
             </Card>
             <CardOverTitle title={T.translate('generic.status') as string} />
-            <ExpansionPanel className={classes.card}>
+            <ExpansionPanel className={classes.expansion}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                     <Avatar alt={CULTES[char.culte].name} src={"images/cultes/" + CULTES[char.culte].img} />
                     <Typography className={classes.typography}>{T.translate('cultes.' + CULTES[char.culte].name)}</Typography>
@@ -119,7 +120,7 @@ export default function PotentialsPage(props: Props) {
                     {T.translate('cultes.' + CULTES[char.culte].desc)}
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <ExpansionPanel className={classes.card}>
+            <ExpansionPanel className={classes.expansion}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                     <Avatar alt={CULTURES[char.culture].name} src={"images/cultures/" + CULTURES[char.culture].img} />
                     <Typography className={classes.typography}>{T.translate('cultures.' + CULTURES[char.culture].name)}</Typography>
@@ -128,7 +129,7 @@ export default function PotentialsPage(props: Props) {
                     {T.translate('cultures.' + CULTURES[char.culture].desc)}
                 </ExpansionPanelDetails>
             </ExpansionPanel>
-            <ExpansionPanel className={classes.card}>
+            <ExpansionPanel className={classes.expansion}>
                 <ExpansionPanelSummary expandIcon={<ExpandMore />}>
                     <Avatar alt={CONCEPTS[char.concept].name} src={"images/concepts/" + CONCEPTS[char.concept].img} />
                     <Typography className={classes.typography}>{T.translate('concepts.' + CONCEPTS[char.concept].name)}</Typography>

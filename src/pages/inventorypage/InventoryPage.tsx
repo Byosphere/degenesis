@@ -1,8 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Item, Character, Pet } from '../../models/Character';
 import T from 'i18n-react';
-import { Card, Avatar, IconButton, Dialog, Badge, Typography, Divider } from '@material-ui/core';
-import { CardTravel, Add, DonutSmall, Money, Pets, Clear, Remove } from '@material-ui/icons';
+import { Card, Avatar, IconButton, Dialog, Badge, Typography, Divider, Chip } from '@material-ui/core';
+import { CardTravel, Add, DonutSmall, Money, Pets, Clear, Remove, Error } from '@material-ui/icons';
 import ItemDisplay from './ItemDisplay';
 import AddItemDialog from './AddItemDialog';
 import MoneyDialog from './MoneyDialog';
@@ -41,6 +41,8 @@ export default function InventoryPage(props: Props) {
     char.inventory.forEach((item: Item) => {
         totalWeight += item.weight;
     });
+
+    const malus = (getAttSkill(char, 0, 2) + char.bagsize) - totalWeight;
 
     useEffect(() => {
         setHeaderTitle(T.translate('navigator.inventory') as string);
@@ -120,7 +122,6 @@ export default function InventoryPage(props: Props) {
                             {!!char.bagsize && <CardTravel
                                 fontSize={char.bagsize === BAG_SIZES[0] ? 'small' : char.bagsize === BAG_SIZES[1] ? 'default' : 'large'}
                             />}
-
                         </Avatar>
                     </Badge>
                 </IconButton>
@@ -147,6 +148,13 @@ export default function InventoryPage(props: Props) {
                     </IconButton>
                 </div>
             </Card>
+            {malus < 0 && <Chip
+                icon={<Error />}
+                className={classes.malusChip}
+                color='secondary'
+                size='small'
+                label={T.translate('inventory.maluschip', { value: malus })}
+            />}
             <CardOverTitle title={T.translate('inventory.bagof', { who: char.name })} />
             <Searchbar
                 placeholder={T.translate('generic.search') as string}

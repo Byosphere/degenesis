@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FormGroup, Typography, IconButton, Dialog, DialogContent, DialogContentText, DialogActions, Button, DialogTitle } from '@material-ui/core';
-import { Info, Casino, AddCircle } from '@material-ui/icons';
+import { Info, Casino, AddCircle, Cancel } from '@material-ui/icons';
 import T from 'i18n-react';
 import { Prompt } from 'react-router-dom';
 import IconNumber from './IconNumber';
@@ -15,6 +15,7 @@ interface Props {
     onRollDice?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
     onEdit?: () => void;
     onClick?: (value: number) => void;
+    onDelete?: () => void;
     locked?: boolean;
     disabled?: boolean;
     origin?: boolean;
@@ -22,9 +23,8 @@ interface Props {
 
 export default function AttributeJauge(props: Props) {
 
-    const { attribute, potential, label, desc, value, onClick, disabled } = props;
+    const { attribute, potential, label, desc, value, onClick, disabled, onDelete } = props;
     const [open, setOpen] = useState<boolean>(false);
-    // const color = useMemo(() => attribute ? '#FFF' : 'rgba(0, 0, 0, 0.54)', [attribute]);
     const classes = useStyles({ attribute, potential, disabled, value });
 
     function handleClick(value: number) {
@@ -78,6 +78,21 @@ export default function AttributeJauge(props: Props) {
                 disabled={value === 6}
             >
                 <AddCircle />
+            </IconButton>}
+            {potential && <IconButton
+                size='small'
+                className={classes.addButton}
+                onClick={handleEdit}
+                disabled={value === 3}
+            >
+                <AddCircle />
+            </IconButton>}
+            {potential && <IconButton
+                size='small'
+                className={classes.deleteButton}
+                onClick={onDelete}
+            >
+                <Cancel />
             </IconButton>}
             {(potential || attribute) && <Typography
                 variant="body1"
