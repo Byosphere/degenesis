@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Slider } from '@material-ui/core';
 import { Character } from '../../models/Character';
 import T from 'i18n-react';
-import { getInitiative } from '../../utils/characterTools';
+import { getInitiative, getEgoMax } from '../../utils/characterTools';
 import { Looks6, LooksOne, LooksTwo, Looks3, Looks4, Looks5 } from '@material-ui/icons';
 import { Prompt } from 'react-router-dom';
+import InteractiveJauge from '../statspage/InteractiveJauge';
 
 interface Props {
     char: Character;
@@ -15,19 +16,10 @@ interface Props {
 export default function SetInitiativePanel(props: Props) {
 
     const { char } = props;
-    const [ego, setEgo] = useState<number>(0);
+    const [ego, setEgo] = useState<number>(char.ego);
     const [actions, setActions] = useState<number>(0);
     const [rollResult, setRollResult] = useState<number[]>([]);
     const [rollInProgress, setRollInProgress] = useState<boolean>(false);
-
-    function setMarks() {
-        const max = (char.ego + 1) > 3 ? char.ego : 3;
-        let marks = [];
-        for (let i = 0; i <= max; i++) {
-            marks.push({ value: i, label: i });
-        }
-        return marks;
-    }
 
     function roll() {
         setRollInProgress(true);
@@ -54,32 +46,36 @@ export default function SetInitiativePanel(props: Props) {
         return false;
     }
 
+    function onEgoChange(value) {
+        if (value === getEgoMax(char)) return;
+        if (value - ego > 3) return;
+        setEgo(value);
+    }
+
     return (
         <Dialog
             open
             onClose={props.onCancel}
         >
             <Prompt when={true} message={actionOnPrompt} />
-            <DialogTitle>Lancer d'initiative</DialogTitle>
+            <DialogTitle>{T.translate('battle.init')}</DialogTitle>
             <DialogContent>
                 <DialogContentText>
-                    L'initiative permet de déterminer le nombre d'action à effectuer par le personnage dans le round à venir ainsi que son ordre de passage.
+                    {T.translate('battle.initinfo')}
                 </DialogContentText>
                 <DialogContentText>
-                    Dépenser de l'égo ?
+                    Dépenser de l'égo ? (3 points max.)
                 </DialogContentText>
-                <Slider
-                    defaultValue={0}
-                    valueLabelDisplay="auto"
-                    step={1}
-                    marks={setMarks()}
-                    min={0}
-                    max={3}
-                    color='secondary'
-                    onChange={(event, value: number) => setEgo(value)}
+                <InteractiveJauge
+                    label={T.translate('stats.ego.label') as string}
+                    desc={T.translate('stats.ego.desc') as string}
+                    currentValue={ego}
+                    fixed={char.ego}
+                    maximum={getEgoMax(char)}
+                    onChange={onEgoChange}
                 />
                 <DialogContentText>
-                    Nombre de dés à lancer : <b>PSY+Réactivité({getInitiative(char)})</b> + <b>Ego({ego})</b>
+                    Nombre de dés à lancer : <b>PSY+Réactivité({getInitiative(char)})</b> + <b>Ego({ego - char.ego})</b>
                 </DialogContentText>
                 <p>
                     {rollResult.map((nb: number, index: number) => {

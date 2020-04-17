@@ -10,19 +10,23 @@ interface Props {
     desc: string;
     currentValue: number;
     maximum: number;
+    fixed?: number;
     onChange?: (newValue: number) => void;
 }
 
 export default function InteractiveJauge(props: Props) {
 
-    const { label, currentValue, maximum, onChange, desc } = props;
+    const { label, currentValue, maximum, onChange, desc, fixed } = props;
     const classes = useStyles();
     const [open, setOpen] = useState<boolean>(false);
     let icons: JSX.Element[] = [];
 
     for (let i = 1; i <= maximum; i++) {
         const icon = i <= currentValue ?
-            <IndeterminateCheckBox className={classes.jaugeIcon} key={i} color='primary' onClick={() => onChange(i)} /> :
+            <IndeterminateCheckBox
+                className={classes.jaugeIcon + ' ' + (i <= fixed ? classes.disabled : '')}
+                color='primary' key={i} onClick={() => onChange(i)}
+            /> :
             <CheckBoxOutlineBlank className={classes.jaugeIcon} key={i} color='primary' onClick={() => onChange(i)} />
         icons.push(icon);
     }
@@ -39,7 +43,11 @@ export default function InteractiveJauge(props: Props) {
                     {label + ' (' + currentValue + '/' + maximum + ') :'}
                 </Typography>
                 <div>
-                    <Backspace className={classes.jaugeIcon} key={0} color='primary' onClick={() => onChange(0)} />
+                    <Backspace
+                        className={classes.jaugeIcon + ' ' + (fixed > 0 ? classes.disabled : '')} key={0}
+                        color='primary'
+                        onClick={() => onChange(0)}
+                    />
                     {icons}
                 </div>
             </div>

@@ -96,5 +96,9 @@ export const useStyles = makeStyles({
     },
     diceContent: {
         marginTop: theme.spacing(2)
+    },
+    disabled: {
+        pointerEvents: 'none',
+        opacity: 0.3
     }
 });

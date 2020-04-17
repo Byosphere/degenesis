@@ -246,7 +246,9 @@
             "health": "Santé",
             "ego": "Ego",
             "action": "Act."
-        }
+        },
+        "init": "Lancer d'initiative",
+        "initinfo": "L'initiative permet de déterminer le nombre d'action à effectuer par le personnage dans le round à venir ainsi que son ordre de passage."
     },
     "origins": {
         "allies": {
