@@ -43,8 +43,8 @@ export default function AttributeRepartitor(props: Props) {
             case 2:
                 return selected ? <LooksTwo /> : <LooksTwoOutlined />;
             case 3:
-                return selected ? <Looks3 color={isNaN(this.props.skillId) ? 'inherit' : 'secondary'} /> :
-                    <Looks3Outlined color={isNaN(this.props.skillId) ? 'inherit' : 'secondary'} />;
+                return selected ? <Looks3 color={isNaN(props.skillId) ? 'inherit' : 'secondary'} /> :
+                    <Looks3Outlined color={isNaN(props.skillId) ? 'inherit' : 'secondary'} />;
             case 4:
                 return selected ? <Looks4 color='secondary' /> : <Looks4Outlined color='secondary' />;
             case 5:
