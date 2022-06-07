@@ -24,8 +24,9 @@
     "typescript": "^4.7.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
+    "serve": "npm install --save serve",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:cordova": "npm run remove:www && react-scripts build && move build www",
