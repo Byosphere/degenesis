@@ -2,12 +2,10 @@
   "name": "degenesis",
   "version": "2.1.0",
   "description": "unofficial degenesis player app",
-  "main": "index.js",
   "repository": "https://github.com/Byosphere/degenesis.git",
   "author": "Yohann Caillon",
   "license": "MIT",
   "private": true,
-  "homepage": ".",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
