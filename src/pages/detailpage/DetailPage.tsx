@@ -6,7 +6,7 @@ import InventoryPage from '../inventorypage/InventoryPage';
 import { Character } from '../../models/Character';
 import PotentialsPage from '../potentialspage/PotentialsPage';
 import StatsPage from '../statspage/StatsPage';
-import { Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle } from '@material-ui/core';
+import { Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, useMediaQuery } from '@material-ui/core';
 import T from 'i18n-react';
 import { SnackbarContext } from '../../App';
 import BattlePage from '../battlepage/BattlePage';
@@ -21,7 +21,7 @@ interface Props {
 export const HeaderContext = createContext(null);
 
 export default function DetailPage(props: Props) {
-    const { id } = useParams();
+    const { id } = useParams<{ id: string }>();
     const history = useHistory();
     const [tab, setTab] = useState<number>(0);
     const [dirty, setDirty] = useState<boolean>(false);
@@ -34,6 +34,7 @@ export default function DetailPage(props: Props) {
     const [headerTitle, setHeaderTitle] = useState<string>('');
     const [xp, setXp] = useState<number>(0);
     const classes = useStyles();
+    const matches = useMediaQuery('(min-width:1000px)');
 
     useEffect(() => {
         setXp(character.exp);
@@ -101,7 +102,7 @@ export default function DetailPage(props: Props) {
     return (
         <HeaderContext.Provider value={{ headerTitle, setHeaderTitle, xp, setXp }}>
             <Header title={headerTitle} exp={xp} onAddXp={handleXpChange} dirty={dirty} disabled={disabled} onSave={handleSave} />
-            <div className={classes.container}>
+            <div className={matches ? classes.containerDesktop : classes.containerMobile}>
                 <Prompt when={dirty} message={actionOnPrompt} />
                 {tab === 0 && <StatsPage char={character} onChange={handleChange} />}
                 {tab === 1 && <InventoryPage char={character} onChange={handleChange} />}

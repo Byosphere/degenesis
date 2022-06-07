@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core";
+import theme from "../../theme";
 
 export const useStyles = makeStyles({
     bottomNavigator: {
@@ -9,5 +10,12 @@ export const useStyles = makeStyles({
         '& .Mui-selected': {
             color: '#d50000 !important'
         }
+    },
+    drawer: {
+        display: 'flex',
+        alignItems: 'center',
+        width: '64px',
+        zIndex: 2,
+        paddingTop: theme.spacing(1) + 64
     }
 });

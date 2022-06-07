@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Menu, List, ListSubheader, ListItem, ListItemIcon, ListItemText, Collapse, Divider } from '@material-ui/core';
+import { Menu, List, ListItem, ListItemIcon, ListItemText, Collapse, Divider } from '@material-ui/core';
 import { LANG } from '../../constants';
 import { getLang, setLang, disconnect } from '../../utils/StorageManager';
 import T from 'i18n-react';
@@ -37,11 +37,6 @@ export default function SettingsMenu(props: Props) {
             <List
                 component="nav"
                 aria-labelledby="settings"
-                subheader={
-                    <ListSubheader component="div" className={classes.subHeader}>
-                        {T.translate('settings.settings')}
-                    </ListSubheader>
-                }
             >
                 <ListItem button onClick={() => setExpanded(!expanded)}>
                     <ListItemIcon>
