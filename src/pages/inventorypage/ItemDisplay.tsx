@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import T from 'i18n-react';
 import { Item, Character } from '../../models/Character';
-import { ExpansionPanel, ExpansionPanelSummary, Typography, ExpansionPanelDetails, Chip, ExpansionPanelActions, Button, Divider, Dialog, DialogTitle, DialogActions, Avatar } from '@material-ui/core';
+import { Accordion, AccordionSummary, Typography, AccordionDetails, Chip, AccordionActions, Button, Divider, Dialog, DialogTitle, DialogActions, Avatar } from '@material-ui/core';
 import { ExpandMore } from '@material-ui/icons';
 import Empty from '../../components/empty/Empty';
 import { useStyles } from './styles';
@@ -67,13 +67,13 @@ export default function ItemDisplay(props: Props) {
             <Chip label={title} className={classes.cardOverTitle} />
             {!items.length && <Empty />}
             {items.map((item, key) => (
-                <ExpansionPanel classes={{ root: classes.itemPanel }} key={key} TransitionProps={{ unmountOnExit: true }}>
-                    <ExpansionPanelSummary expandIcon={<ExpandMore />} classes={{ content: classes.expansionPanel }}>
+                <Accordion classes={{ root: classes.itemPanel }} key={key} TransitionProps={{ unmountOnExit: true }}>
+                    <AccordionSummary expandIcon={<ExpandMore />} classes={{ content: classes.expansionPanel }}>
                         <Avatar classes={{ root: classes.miniAvatar }}>{item.weight}</Avatar>
                         <Typography>{item.name}</Typography>
                         {!!item.value && <Chip label={T.translate('inventory.value', { value: Intl.NumberFormat().format(item.value) })} className={classes.valueChip} />}
-                    </ExpansionPanelSummary>
-                    <ExpansionPanelDetails>
+                    </AccordionSummary>
+                    <AccordionDetails>
                         <section>
                             <Typography variant='caption' component='p'>{T.translate('inventory.desc')} :</Typography>
                             <Typography variant='body2'>
@@ -81,15 +81,15 @@ export default function ItemDisplay(props: Props) {
                             </Typography>
                         </section>
                         {specificSection(item)}
-                    </ExpansionPanelDetails>
+                    </AccordionDetails>
                     <Divider />
-                    <ExpansionPanelActions>
+                    <AccordionActions>
                         <Button size="small" onClick={() => props.onEdit(item)}>{T.translate('generic.edit')}</Button>
                         <Button size="small" color="secondary" onClick={() => openDelete(item)}>
                             {T.translate('generic.delete')}
                         </Button>
-                    </ExpansionPanelActions>
-                </ExpansionPanel>
+                    </AccordionActions>
+                </Accordion>
             ))}
             <Dialog
                 open={open}

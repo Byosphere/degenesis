@@ -54,7 +54,7 @@ export default function BagDialog(props: Props) {
                     </IconButton>
                     <IconButton className={selection === BAG_SIZES[0] ? classes.selected : ''} onClick={() => setSelection(BAG_SIZES[0])}>
                         <Badge
-                            overlap='rectangle'
+                            overlap='rectangular'
                             badgeContent={BAG_SIZES[0]}
                             color='secondary'
                         >
@@ -65,7 +65,7 @@ export default function BagDialog(props: Props) {
                     </IconButton>
                     <IconButton className={selection === BAG_SIZES[1] ? classes.selected : ''} onClick={() => setSelection(BAG_SIZES[1])}>
                         <Badge
-                            overlap='rectangle'
+                            overlap='rectangular'
                             badgeContent={BAG_SIZES[1]}
                             color='secondary'
                         >
@@ -76,7 +76,7 @@ export default function BagDialog(props: Props) {
                     </IconButton>
                     <IconButton className={selection === BAG_SIZES[2] ? classes.selected : ''} onClick={() => setSelection(BAG_SIZES[2])}>
                         <Badge
-                            overlap='rectangle'
+                            overlap='rectangular'
                             badgeContent={BAG_SIZES[2]}
                             color='secondary'
                         >

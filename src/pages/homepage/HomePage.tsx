@@ -20,7 +20,7 @@ interface Props {
 
 export default function HomePage(props: Props) {
     const { user } = useContext(UserContext);
-    const classes = useStyles();
+    const classes = useStyles({ char: undefined });
     const [open, setOpen] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const history = useHistory();

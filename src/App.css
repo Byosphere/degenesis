@@ -1,8 +1,8 @@
-.App, html, body, #root {
+.App, html, body, #root, .router {
   height: 100%;
 }
 
-.App {
+.App, .router {
   display: flex;
   flex-direction: column;
 }
@@ -11,7 +11,7 @@
   .App {
     margin: 0 auto;
     max-width: 1000px;
-  }  
+  } 
 }
 
 .chip-modifier.positiv {

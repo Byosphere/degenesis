@@ -1,6 +1,6 @@
 import React from 'react';
 import { Backspace, BackspaceOutlined, LooksOne, LooksOneOutlined, LooksTwo, Looks3, LooksTwoOutlined, Looks3Outlined, Looks4, Looks4Outlined, Looks5, Looks5Outlined, Looks6, Looks6Outlined } from '@material-ui/icons';
-import { useStyles } from './styles';
+import { makeStyles } from '@material-ui/core';
 
 interface Props {
     num?: number;
@@ -12,7 +12,11 @@ interface Props {
 export default function IconNumber(props: Props) {
 
     const { num, active, locked } = props;
-    const classes = useStyles();
+    const classes = makeStyles({
+        iconNumber: {
+            marginRight: '3px'
+        }
+    });
 
     function onClick(event: React.MouseEvent<any>) {
         if (locked) return;
@@ -20,7 +24,7 @@ export default function IconNumber(props: Props) {
         props.onClick(num);
     }
 
-    const itemProps = { className: classes.iconNumber, onClick };
+    const itemProps = { className: classes['iconNumber'], onClick };
 
     switch (num) {
         case 0:

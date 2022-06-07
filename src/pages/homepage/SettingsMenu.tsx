@@ -19,7 +19,7 @@ export default function SettingsMenu(props: Props) {
 
     const lang = getLang();
     const [expanded, setExpanded] = useState<boolean>(false);
-    const classes = useStyles();
+    const classes = useStyles({ char: undefined });
 
     function handleDisconnect() {
         disconnect();

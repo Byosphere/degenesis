@@ -9,7 +9,7 @@ import StatsPage from '../statspage/StatsPage';
 import { Dialog, DialogContent, DialogActions, Button, DialogContentText, DialogTitle, useMediaQuery } from '@material-ui/core';
 import T from 'i18n-react';
 import { SnackbarContext } from '../../App';
-import BattlePage from '../battlepage/BattlePage';
+// import BattlePage from '../battlepage/BattlePage';
 import { useStyles } from './styles';
 import Header from '../../components/header/Header';
 
@@ -30,7 +30,7 @@ export default function DetailPage(props: Props) {
     const [disabled, setDisabled] = useState<boolean>(false);
     const [dialogOpen, setDialogOpen] = useState<string>('');
     const { setSnackbar } = useContext(SnackbarContext);
-    const [step, setStep] = useState<number>(0);
+    // const [step, setStep] = useState<number>(0);
     const [headerTitle, setHeaderTitle] = useState<string>('');
     const [xp, setXp] = useState<number>(0);
     const classes = useStyles();

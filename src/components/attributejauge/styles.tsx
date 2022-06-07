@@ -86,8 +86,5 @@ export const useStyles = makeStyles({
         '& button:nth-child(2)': {
             margin: '0 8px'
         }
-    },
-    iconNumber: {
-        marginRight: '3px'
     }
 });

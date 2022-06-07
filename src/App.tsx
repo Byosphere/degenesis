@@ -111,35 +111,37 @@ export default function App() {
                 <UserContext.Provider value={{ user, setUser }}>
                     <SnackbarContext.Provider value={{ setSnackbar }}>
                         <HashRouter basename='/'>
-                            <Switch>
-                                {!user ? <Redirect from='/' exact to='/connect' /> : <Redirect from='/connect' exact to='/' />}
-                                <Route path='/' exact>
-                                    <HomePage
-                                        characters={characters}
-                                        onDelete={handleDeleteCharacter}
-                                        onDisconnect={() => setUser(null)}
-                                        onUpload={() => setOpen(true)}
-                                    />
-                                </Route>
-                                <Route path="/connect" exact>
-                                    <ConnectPage onConnect={(user) => setUser(user)} />
-                                </Route>
-                                <Route path="/create" exact>
-                                    <CharacterBuilder onCreateCharacter={handleCreateCharacter} />
-                                </Route>
-                                <Route path="/detail/:id">
-                                    <DetailPage
-                                        onSaveCharacter={handleSaveCharacter}
-                                        characters={characters}
-                                    />
-                                </Route>
-                            </Switch>
-                            <UploadManager
-                                open={open}
-                                onClose={() => setOpen(false)}
-                                onSave={handleCreateCharacter}
-                            />
-                            {snackbar && <CustomSnackbar {...snackbar} setSnackbar={setSnackbar} />}
+                            <div className='router'>
+                                <Switch>
+                                    {!user ? <Redirect from='/' exact to='/connect' /> : <Redirect from='/connect' exact to='/' />}
+                                    <Route path='/' exact>
+                                        <HomePage
+                                            characters={characters}
+                                            onDelete={handleDeleteCharacter}
+                                            onDisconnect={() => setUser(null)}
+                                            onUpload={() => setOpen(true)}
+                                        />
+                                    </Route>
+                                    <Route path="/connect" exact>
+                                        <ConnectPage onConnect={(user) => setUser(user)} />
+                                    </Route>
+                                    <Route path="/create" exact>
+                                        <CharacterBuilder onCreateCharacter={handleCreateCharacter} />
+                                    </Route>
+                                    <Route path="/detail/:id">
+                                        <DetailPage
+                                            onSaveCharacter={handleSaveCharacter}
+                                            characters={characters}
+                                        />
+                                    </Route>
+                                </Switch>
+                                <UploadManager
+                                    open={open}
+                                    onClose={() => setOpen(false)}
+                                    onSave={handleCreateCharacter}
+                                />
+                                {snackbar && <CustomSnackbar {...snackbar} setSnackbar={setSnackbar} />}
+                            </div>
                         </HashRouter>
                     </SnackbarContext.Provider>
                 </UserContext.Provider>

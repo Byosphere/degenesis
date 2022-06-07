@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, Chip, TextField, Avatar, Badge, Typography, InputAdornment, Divider } from '@material-ui/core';
+import { Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions, Button, TextField, Typography, InputAdornment } from '@material-ui/core';
 import { Prompt } from 'react-router-dom';
 import { ATTRIBUTES, SKILLS } from '../../constants';
-import { LooksOne, LooksTwo, Looks3, Looks4, Looks5, Looks6, Add } from '@material-ui/icons';
+import { LooksOne, LooksTwo, Looks3, Looks4, Looks5, Looks6 } from '@material-ui/icons';
 import { Attribute, Skill } from '../../models/Character';
 import T from 'i18n-react';
 import { useStyles } from './styles';

@@ -55,7 +55,7 @@ export default function Header(props: Props) {
                     >
                         <Badge
                             badgeContent={props.exp}
-                            overlap="circle"
+                            overlap="circular"
                             anchorOrigin={{
                                 vertical: 'top',
                                 horizontal: 'right',

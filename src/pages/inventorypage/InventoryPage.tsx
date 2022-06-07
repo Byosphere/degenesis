@@ -112,7 +112,7 @@ export default function InventoryPage(props: Props) {
             <Card>
                 <IconButton className={classes.headButton} onClick={() => setBagModalOpen(true)}>
                     <Badge
-                        overlap='rectangle'
+                        overlap='rectangular'
                         badgeContent={totalWeight + '/' + (getAttSkill(char, 0, 2) + char.bagsize)}
                         color='secondary'
                         className={classes.badge}
@@ -127,7 +127,7 @@ export default function InventoryPage(props: Props) {
                 </IconButton>
                 <IconButton className={classes.headButton} onClick={() => setMoneyModalOpen(true)}>
                     <Badge
-                        overlap='rectangle'
+                        overlap='rectangular'
                         classes={{ badge: classes.customBadge }}
                         badgeContent={<>
                             {char.money > 99999 ? '99999+' : Intl.NumberFormat().format(char.money)}
