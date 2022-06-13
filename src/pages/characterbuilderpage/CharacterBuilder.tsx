@@ -263,7 +263,7 @@ export default function CharacterBuilder(props: Props) {
                         </Step>
                         <Step>
                             {displayLabel(T.translate('create.potentials'), T.translate('generic.selectedpotentials'), 7)}
-                            {character.culte && <StepContent>
+                            {character.culte !== undefined && <StepContent>
                                 <StepPotentials
                                     newCharacter={character}
                                     onToggle={handleToggle}

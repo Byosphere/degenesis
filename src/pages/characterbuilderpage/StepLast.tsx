@@ -73,7 +73,7 @@ export default function StepLast(props: Props) {
                 multiline
                 fullWidth
                 rows={15}
-                rowsMax={30}
+                maxRows={30}
                 value={newCharacter.story}
                 onChange={onChange}
             />
