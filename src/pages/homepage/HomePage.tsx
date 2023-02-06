@@ -20,13 +20,9 @@ export default function HomePage(props: Props) {
     const [open, setOpen] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const history = useHistory();
-    const [tabs, setTabs] = useState<number[]>([]);
+    const [tabs, setTabs] = useState<number[]>(props.characters.map(() => 1));
     const [index, setIndex] = useState<number>(-1);
     const [disabled, setDisabled] = useState<boolean>(false);
-
-    useEffect(() => {
-        setTabs(props.characters.map(() => 1))
-    }, [setTabs, props.characters]);
 
     function onTabChange(tabIndex: number, charIndex: number) {
         setIndex(charIndex);

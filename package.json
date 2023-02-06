@@ -8,6 +8,8 @@
   "private": true,
   "homepage": ".",
   "dependencies": {
+    "@capacitor/android": "^4.6.3",
+    "@capacitor/core": "^4.6.3",
     "@material-ui/core": "^4.12.4",
     "@material-ui/icons": "^4.11.3",
     "@material-ui/styles": "^4.11.5",
@@ -21,7 +23,7 @@
     "react-dom": "^16.13.1",
     "react-router-dom": "5.1.2",
     "react-scripts": "3.4.1",
-    "react-swipeable-views": "0.13.9",
+    "react-swipeable-views": "^0.14.0",
     "typescript": "^4.7.3",
     "uuid": "^9.0.0"
   },
@@ -29,9 +31,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "build:cordova": "npm run remove:www && react-scripts build && move build www",
-    "remove:www": "if exist www rd /s /q www"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,5 +47,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^4.6.3"
   }
 }
