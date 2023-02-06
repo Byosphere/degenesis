@@ -1,25 +1,21 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Card, CardMedia, CardContent, ListItemIcon, List, ListItem, ListItemText, ListSubheader, Divider, Dialog, DialogTitle, DialogActions, Button, IconButton } from '@material-ui/core';
 import { useHistory, Prompt } from 'react-router-dom';
 import { Add, Delete, Settings } from '@material-ui/icons';
 import T from 'i18n-react';
 import CharacterItem from './CharacterItem';
 import SwipeableViews from 'react-swipeable-views';
-import SettingsMenu from './SettingsMenu';
-import { UserContext } from '../../App';
 import { Character } from '../../models/Character';
 import { CHAR_MAX } from '../../constants';
 import { useStyles } from './styles';
 
 interface Props {
-    onDisconnect: () => void;
     characters: Character[];
     onDelete: (charId: string) => Promise<boolean>;
     onUpload: () => void;
 }
 
 export default function HomePage(props: Props) {
-    const { user } = useContext(UserContext);
     const classes = useStyles({ char: undefined });
     const [open, setOpen] = useState<boolean>(false);
     const [anchorEl, setAnchorEl] = useState(null);
@@ -110,16 +106,6 @@ export default function HomePage(props: Props) {
                     </ListItem>
                 </List>
             </CardContent>
-            <IconButton onClick={(event) => setAnchorEl(event.currentTarget)} className={classes.settingsMenu}>
-                <Settings />
-            </IconButton>
-            <SettingsMenu
-                accountName={user.pseudo}
-                anchorEl={anchorEl}
-                onClose={() => setAnchorEl(null)}
-                onUpload={handleUpload}
-                onDisconnect={props.onDisconnect}
-            />
             <Dialog
                 open={open}
                 onClose={handleClose}
